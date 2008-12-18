@@ -1,0 +1,13 @@
+[user]
+	name = David Mohundro
+	email = drmohundro@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[gui]
+	recentrepo = C:/DTCDev/Test/blahhaha
+	recentrepo = C:/DTCDev/Test/Conf.MockUps/ConferenceRoom-BlendCopy-git
+[core]
+[core]
+	editor = vim
