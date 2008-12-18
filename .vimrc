@@ -56,6 +56,7 @@ endif
 
 if has("gui_running")
 	color ir_black
+	"color morning
 else
 	color impact
 endif
@@ -106,6 +107,9 @@ map <C-L> :FuzzyFinderBuffer<Return>
 nnoremap ' `
 nnoremap ` '
 
+map H ^
+map L $
+
 set listchars=tab:>-,trail:.,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
@@ -116,6 +120,16 @@ if has("autocmd")
   \   exe "normal g'\"" |
   \ endif
 endif
+
+" Omnicomplete functions
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 
 " Automatically figure out formatting
 autocmd BufNewFile,BufRead *.vb set ft=vbnet
