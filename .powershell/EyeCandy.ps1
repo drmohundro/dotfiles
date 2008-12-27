@@ -9,26 +9,6 @@ else {
 	$promptForeColor = 'Green'
 }
 
-function prompt {
-	$delim = [ConsoleColor]::DarkCyan
-	$history = [ConsoleColor]::Cyan
-
-	$host.UI.RawUI.ForegroundColor = $foreColor;
-
-	Write-Host ' '
-	Write-Host "$([Environment]::UserName)@$([Environment]::MachineName) " -foregroundColor DarkGreen -noNewLine
-	Write-Host $(Shorten-Path) -foregroundColor DarkYellow
-
-	Write-Host '[' -foregroundColor $delim -noNewline
-	Write-Host ((Get-History -Count 1).Id + 1) -foregroundColor $history -noNewline
-	Write-Host '] ' -foregroundColor $delim -noNewline
-
-	Write-Host "$([char]0xBB)" -foregroundColor $promptForeColor -noNewline
-	' '
-
-	Update-HostTitle
-}
-
 $hostTitle = {
 	if ($IsAdmin) { '(Admin)' }
 	
@@ -62,25 +42,34 @@ function Update-HostTitle {
 }
 
 function Start-EyeCandy {
-	if ($foreColor) {
-		$Host.UI.RawUI.ForegroundColor = $foreColor
-	}
-	
-	if ($backColor) {
-		$Host.UI.RawUI.BackgroundColor = $backColor
+	$isTerminal = ($host.Name -eq 'ConsoleHost')
+	if ($isTerminal) {
+		if ($foreColor) {
+			$Host.UI.RawUI.ForegroundColor = $foreColor
+		}
 		
-		if($Host.Name -eq 'ConsoleHost') {
-			$Host.PrivateData.ErrorBackgroundColor   = $backColor
-			$Host.PrivateData.WarningBackgroundColor = $backColor
-			$Host.PrivateData.DebugBackgroundColor   = $backColor
-			$Host.PrivateData.VerboseBackgroundColor = $backColor
+		if ($backColor) {
+			$Host.UI.RawUI.BackgroundColor = $backColor
+			
+			if($Host.Name -eq 'ConsoleHost') {
+				$Host.PrivateData.ErrorBackgroundColor   = $backColor
+				$Host.PrivateData.WarningBackgroundColor = $backColor
+				$Host.PrivateData.DebugBackgroundColor   = $backColor
+				$Host.PrivateData.VerboseBackgroundColor = $backColor
+			}
 		}
 	}
 
 	if ($DebugPreference -eq 'SilentlyContinue') {
 		Clear-Host
 	}
-	& $Banner | Write-Host -ForegroundColor $foreColor
+
+	if ($isTerminal) {
+		& $Banner | Write-Host -ForegroundColor $foreColor
+	}
+	else {
+		& $Banner | Write-Host
+	}
 
 	Update-HostTitle
 }

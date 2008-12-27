@@ -1,0 +1,70 @@
+$NTIdentity = ([Security.Principal.WindowsIdentity]::GetCurrent())
+$NTPrincipal = (new-object Security.Principal.WindowsPrincipal $NTIdentity)
+$IsAdmin = ($NTPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))	
+
+function Add-ToPath {
+	$args | foreach {
+		# the double foreach's are to handle calls like 'add-topath @(path1, path2) path3
+		$_ | foreach { $env:Path += ";$_" }
+	}
+}
+
+Add-ToPath @(
+	"$env:PscxHome\Scripts"
+)
+
+function Get-AliasShortcut([string]$commandName) {
+	ls Alias: | ?{ $_.Definition -match $commandName }
+}
+
+function ack {
+	cmd /c ack.pl $args
+}
+
+function todo {  
+	c:/cygwin/bin/bash.exe --login -c "todo.sh $args" 
+}
+
+function Start-VisualStudio([string]$path) {
+	& devenv /edit $path
+}
+
+Set-Alias vs Start-VisualStudio
+Set-Alias gas Get-AliasShortcut
+Set-Alias iis "$($env:windir)\system32\inetsrv\iis.msc"
+Set-Alias zip 7z
+Set-Alias which get-command
+Set-Alias e gvim
+
+Add-PSSnapin Pscx
+
+$PscxFileSizeInUnitsPreference = $true
+
+Update-FormatData -PrependPath "$Env:PscxHome\FormatData\FileSystem.ps1xml"
+
+Push-Location (Join-Path $Env:PscxHome 'Profile')
+	#. '.\GenericAliases.ps1'
+	#. '.\GenericFilters.ps1'
+	#. '.\GenericFunctions.ps1'
+	#. '.\PscxAliases.ps1'
+	#. '.\Debug.ps1'
+	. '.\Cd.ps1'
+	#. '.\Dir.ps1'
+	#. '.\RegexLib.ps1'
+Pop-Location
+
+Push-Location $ProfileDir
+	# Bring in env-specific functionality (i.e. work-specific dev stuff, etc.)
+	If (Test-Path ./EnvSpecificProfile.ps1) { . ./EnvSpecificProfile.ps1 }
+
+	if (Test-Path variable:scripts) {
+		Add-ToPath $scripts
+		. vsvars2008.ps1
+	}
+
+	# Bring in prompt and other UI niceties
+	. ./EyeCandy.ps1
+
+	. ./PowerTabInitialization.ps1
+	Update-TypeData ./My.Types.ps1xml
+Pop-Location
