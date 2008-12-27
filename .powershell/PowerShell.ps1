@@ -33,8 +33,9 @@ Set-Alias vs Start-VisualStudio
 Set-Alias gas Get-AliasShortcut
 Set-Alias iis "$($env:windir)\system32\inetsrv\iis.msc"
 Set-Alias zip 7z
-Set-Alias which get-command
+Set-Alias which Get-Command
 Set-Alias e gvim
+Set-Alias less "$Env:PscxHome\Applications\Less-394\less.exe"
 
 Add-PSSnapin Pscx
 
