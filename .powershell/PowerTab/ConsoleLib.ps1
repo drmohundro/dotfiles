@@ -1,3 +1,10 @@
+#  ConsoleLib
+#  Library of Functions for PowerTab
+# 
+# /\/\o\/\/ 2008
+# http://ThePowerShellGuy.com
+#
+
 Function global:Out-ConsoleList {
 
     param($LastWord='',$ReturnWord,[switch]$forceList)
@@ -10,7 +17,7 @@ Function global:Out-ConsoleList {
 
 # Load helper functions
  
-Function new-Box (
+Function New-Box (
   [Drawing.Size]$size,
   $ForegroundColor = $Host.UI.RawUI.ForegroundColor,
   $BackgroundColor = $Host.UI.RawUI.BackgroundColor
@@ -36,7 +43,7 @@ Function new-Box (
     'HorizontalDoubleSingleUp' = ([char]9575).ToString()
 }
  
-$box = new-object object
+$box = New-Object Object
  
 $BoxChars.GetEnumerator() |
   Foreach {
@@ -73,7 +80,7 @@ Function Get-ContentSize ($content){
     [Drawing.Size]"$($max),$($content.Length)"
 }
 
-function get-Position ($X,$Y) {
+function Get-Position ($X,$Y) {
   $WindowPosition  = $host.ui.rawui.windowposition 
   $Position = $WindowPosition
   $Position.X += $X
@@ -107,7 +114,7 @@ Function ConvertTo-BufferCellArray (
 }
 
 
-Function parse-List ($Size) {
+Function Parse-List ($Size) {
 
   $WindowPosition  = $host.UI.rawui.windowposition
   $WindowSize = $Host.UI.RawUI.WindowSize
@@ -120,7 +127,7 @@ Function parse-List ($Size) {
 
   $ListHeight = $Size.Height + 2
 
-  If ( ($CursorOffset -gt $center) -and ($ListHeight -ge $CursorOffsetBottom)  ) {$Placement = 'Above'}
+  if ( ($CursorOffset -gt $center) -and ($ListHeight -ge $CursorOffsetBottom)  ) {$Placement = 'Above'}
   else {$Placement =  'Below'}
 
   Switch ($placement) {
@@ -172,7 +179,7 @@ Function Invoke-ConsoleList  ($content,$Borderfgc,$Borderbgc,$Contentfgc,$Conten
   $content = $content |% {" $_ ".padright($Size.Width + 2)}
   $ListConfig = parse-List $size
   $BoxSize = New-Object drawing.size( $ListConfig.ListWidth  , $ListConfig.ListHeight  )
-  $box = new-Box $BoxSize $Borderfgc $Borderbgc
+  $box = New-Box $BoxSize $Borderfgc $Borderbgc
 
   $Position = get-Position $ListConfig.TopX $ListConfig.topY
   $BoxHandle = Place-Buffer $position $box
@@ -184,17 +191,20 @@ Function Invoke-ConsoleList  ($content,$Borderfgc,$Borderbgc,$Contentfgc,$Conten
   $ContentBuffer = ConvertTo-BufferCellArray @($content)[0..($Listconfig.ListHeight -3 )] $Contentfgc $ContentBgc
   $ContentHandle = Place-Buffer $position $contentBuffer
   $Handle = new-object object
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name Position -value (get-Position $ListConfig.TopX $ListConfig.topY)
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name ListConfig -value $ListConfig
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name ContentSize -value $size
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name BoxSize -value $BoxSize
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name Box -value $BoxHandle
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name Content -value $ContentHandle
+  Add-Member -InputObject $Handle `
+      -MemberType NoteProperty `
+      -Name Position `
+ -value (get-Position $ListConfig.TopX $ListConfig.topY)
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name ListConfig   -value $ListConfig
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name ContentSize  -value $size
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name BoxSize      -value $BoxSize
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name Box          -value $BoxHandle
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name Content      -value $ContentHandle
   Add-Member -InputObject $Handle -MemberType NoteProperty -Name SelectedItem -value 0
   Add-Member -InputObject $Handle -MemberType NoteProperty -Name SelectedLine -value 1
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name Items -value $Content
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name FirstItem -value 0
-  Add-Member -InputObject $Handle -MemberType NoteProperty -Name LastItem -value ($Listconfig.ListHeight -3 )
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name Items        -value $Content
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name FirstItem    -value 0
+  Add-Member -InputObject $Handle -MemberType NoteProperty -Name LastItem     -value ($Listconfig.ListHeight -3 )
   Add-Member -InputObject $Handle -MemberType NoteProperty -Name MaxItems -value $Listconfig.MaxItems
   Add-Member -InputObject $Handle -MemberType ScriptMethod -Name clear -value {$this.box.clear()}
   Add-Member -InputObject $Handle -MemberType ScriptMethod -Name Show -value {
@@ -236,7 +246,7 @@ Function Invoke-ConsoleList  ($content,$Borderfgc,$Borderbgc,$Contentfgc,$Conten
 
     }
 
-Function Move-selection ($count,$noScroll = $false){
+Function Move-Selection ($count,$noScroll = $false){
     $SelectedItem = $ListHandle.SelectedItem
     $line = $listhandle.SelectedLine
     if ($count -eq ([math]::abs($count))) {# Down in list
@@ -306,7 +316,7 @@ Function Move-selection ($count,$noScroll = $false){
         $previewBuffer =  ConvertTo-BufferCellArray "$filter " $FilterColor $Host.UI.RawUI.BackgroundColor
         $preview = Place-Buffer $host.UI.RawUI.CursorPosition $previewBuffer
 
-    Function add-Status {   
+    Function Add-Status {   
 
         $TitleBuffer =  ConvertTo-BufferCellArray " $LastWord" $BorderTextColor $BorderBackColor
         $TitlePosition = $ListHandle.position
@@ -325,7 +335,7 @@ Function Move-selection ($count,$noScroll = $false){
         $StatusHandle = Place-Buffer $StatusPosition $StatusBuffer
 
     }
-    . add-Status 
+    . Add-Status 
 
    # handle selection
 
@@ -449,7 +459,7 @@ Function Move-selection ($count,$noScroll = $false){
                     $linePart = $line.substring(0,$line.Length - $lastword.Length)
 
   if ($script:MessageHandle){$host.ui.rawui.SetBufferContents($MessageHandle.Top,$MessageHandle.Buffer)
-    remove-Variable -Name MessageHandle -Scope script
+    Remove-Variable -Name MessageHandle -Scope script
   }
                     . Tabexpansion ($linePart + @($ListHandle.Items)[$listHandle.SelectedItem ].trim() + '.') (@($ListHandle.Items)[$listHandle.SelectedItem ].trim() + '.') -ForceList
                     $HasChild = $True
@@ -503,7 +513,7 @@ Function Move-selection ($count,$noScroll = $false){
                 break
             }
             {$_ -ge 32 -and $_ -le 190}  { #Char or digit or symbol
-                $filter+=$key.character
+                $filter+=$Key.character
                 $Old = $items.Length
                 $items = $Content -match ([regex]::Escape("$lastword$Filter") +'.*')
                 $new = $items.Length
@@ -534,13 +544,10 @@ Function Move-selection ($count,$noScroll = $false){
     }
     $listHandle.clear()
     if (-not $HasChild){
-    if ($key.VirtualKeyCode -eq 27) {
-		#WriteLine ($host.UI.RawUI.CursorPosition.x -1 ) ($host.UI.RawUI.CursorPosition.y-$host.UI.RawUI.WindowPosition.y) " " $FilterColor $Host.UI.RawUI.BackgroundColor
-        Return "$ReturnWord$filter"
-    }
+        if ($key.VirtualKeyCode -eq 27) {
+		       #WriteLine ($host.UI.RawUI.CursorPosition.x -1 ) ($host.UI.RawUI.CursorPosition.y-$host.UI.RawUI.WindowPosition.y) " " $FilterColor $Host.UI.RawUI.BackgroundColor
+            Return "$ReturnWord$filter"
+        }
     }
 }
 
-
-
-# gcm get-* |% {$_.name} | . Out-ConsoleList get-

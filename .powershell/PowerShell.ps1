@@ -65,6 +65,5 @@ Push-Location $ProfileDir
 	# Bring in prompt and other UI niceties
 	. ./EyeCandy.ps1
 
-	. ./PowerTabInitialization.ps1
 	Update-TypeData ./My.Types.ps1xml
 Pop-Location

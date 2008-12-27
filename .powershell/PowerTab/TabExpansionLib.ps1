@@ -4,93 +4,94 @@
 # 
 # /\/\o\/\/ 2007  
 # http://ThePowerShellGuy.com
-
+#
 # Load forms library when not loaded 
+#
 
-if (-not ([appdomain]::CurrentDomain.getassemblies() |?  {$_.ManifestModule -like "System.Windows.Forms*"})) {[void][System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms")}
+if (-not ([appdomain]::CurrentDomain.getassemblies() |?  {$_.ManifestModule -like "System.Windows.Forms*"})) {[void][System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")}
 
 # Invoker for TabitemSelectors
 
 Function global:Invoke-TabItemSelector ($LastWord,$SelectionHandler = 'Default',$returnWord,[switch]$forceList) {
     Switch ($SelectionHandler) {
       'Default' {$Input}
-      'intellisense'{$Input | Invoke-Intellisense $LastWord}
+      'IntelliSense'{$Input | Invoke-Intellisense $LastWord}
       'ConsoleList'{$Input | Out-ConsoleList $LastWord $returnWord -ForceList:$forceList}
     }
 }
 
 
-Function global:New-tabExpansionDataBase {
-  $global:dsTabExpansion = new-object data.dataset
+Function global:New-TabExpansionDataBase {
+  $global:dsTabExpansion = New-Object data.dataset
 
-  $dtCustom = new-object data.datatable
+  $dtCustom = New-Object data.datatable
   [VOID]($dtCustom.Columns.add('Filter',[string]))
   [VOID]($dtCustom.Columns.add('Text',[string]))
   [VOID]($dtCustom.Columns.add('Type',[string]))
-  $dtCustom.tablename = 'Custom'
+  $dtCustom.Tablename = 'Custom'
   $global:dsTabExpansion.Tables.Add($dtCustom)
 
-  $dtTypes = new-object data.datatable
+  $dtTypes = New-Object data.datatable
   [VOID]($dtTypes.Columns.add('Name',[string]))
   [VOID]($dtTypes.Columns.add('DC',[string]))
   [VOID]($dtTypes.Columns.add('NS',[string]))
-  $dtTypes.tablename = 'Types'
+  $dtTypes.Tablename = 'Types'
   $global:dsTabExpansion.Tables.Add($dtTypes)
 
-  $dtWmi = new-object data.datatable
-  [VOID]($dtWmi.Columns.add('name',[string]))
+  $dtWmi = New-Object data.datatable
+  [VOID]($dtWmi.Columns.add('Name',[string]))
   [VOID]($dtWmi.Columns.add('Description',[string]))
-  $dtWmi.tablename = 'Wmi'
+  $dtWmi.Tablename = 'Wmi'
   $global:dsTabExpansion.Tables.Add($dtWmi)
-
 }
 
-function global:add-tabExpansionEnum ($enum){[enum]::GetNames($enum.trim('[]'))}
+Function global:Add-TabExpansionEnum ($enum){[enum]::GetNames($enum.trim('[]'))}
 
-Function global:Export-tabExpansionDataBase ($filename = $PowerTabConfig.Setup.DatabaseName ,
-                                             $path= $PowerTabConfig.Setup.DatabasePath ,
+Function global:Export-TabExpansionDataBase ($FileName = 'TabExpansion.xml' ,
+                                             $path= $PsScriptRoot ,
                                             [switch]$NoMessage){
-  $global:dsTabExpansion.WriteXml("$path\$fileName")
-  if (-not $nomessage) {Write-host -fore 'Yellow' "Tabexpansion database exported to $path\$fileName"}
+  $global:dsTabExpansion.WriteXml("$path\$FileName")
+  if (-not $nomessage) {Write-Host -fore 'Yellow' "Tabexpansion database exported to $path\$FileName"}
 }
 
-Function global:Export-tabExpansionConfig ($filename = 'PowerTabConfig.xml',$path = $PowerTabConfig.Setup.ConfigurationPath,[switch]$NoMessage){
-  $global:dsTabExpansion.Tables['config'].WriteXml("$path\$fileName")
-  if (-not $nomessage) {Write-host -fore 'Yellow' "Configuration exported to $path\$fileName"}
+Function global:Export-TabExpansionConfig ($FileName = 'PowerTabConfig.xml',$path = $PsScriptRoot,[switch]$NoMessage){
+  $global:dsTabExpansion.Tables['config'].WriteXml("$path\$FileName")
+  if (-not $nomessage) {Write-Host -fore 'Yellow' "Configuration exported to $path\$FileName"}
 }
 
-Function global:Import-tabExpansionConfig ($filename = 'PowerTabConfig.xml',$path = $PowerTabConfig.Setup.ConfigurationPath,[switch]$NoMessage) {
-  if (-not $global:dsTabExpansion){$global:dsTabExpansion = new-object data.dataset}
+Function global:Import-TabExpansionConfig ($FileName = 'PowerTabConfig.xml',$path = $PsScriptRoot,[switch]$NoMessage) {
+  if (-not $global:dsTabExpansion){$global:dsTabExpansion = New-Object data.dataset}
   &{trap{continue}$global:dsTabExpansion.Tables['Config'].Clear()}
-  [void]$global:dsTabExpansion.ReadXml("$path\$fileName",'InferSchema')
-  if (-not $nomessage) {Write-host -fore 'Yellow' "Configuration imported from $path\$fileName"}
+  [void]$global:dsTabExpansion.ReadXml("$path\$FileName",'InferSchema')
+  if (-not $nomessage) {Write-Host -fore 'Yellow' "Configuration imported from $path\$FileName"}
 }
 
-Function global:Import-TabExpansionDataBase($filename = $PowerTabConfig.Setup.DatabaseName ,
-                                            $path= $PowerTabConfig.Setup.DatabasePath ,
+Function global:Import-TabExpansionDataBase($FileName = 'TabExpansion.xml' ,
+                                            $path= $PsScriptRoot ,
                                             [switch]$NoMessage){
   $Confpath = $global:dsTabExpansion.Tables['Config'].select("name = 'ConfigurationPath'")[0].value
-  $global:dsTabExpansion = new-object data.dataset
-  [void]$global:dsTabExpansion.ReadXml("$path\$fileName")
-  if (-not $nomessage) {Write-host -fore 'Yellow' "Tabexpansion database imported from $path\$fileName"}
+  $global:dsTabExpansion = New-Object data.dataset
+  [void]$global:dsTabExpansion.ReadXml("$path\$FileName")
+  if (-not $nomessage) {Write-Host -fore 'Yellow' "Tabexpansion database imported from $path\$FileName"}
   Import-TabExpansionConfig -path $Confpath -nomessage
 }
+
 Function global:Update-TabExpansionTypes {
     $dsTabExpansion.Tables['Types'].clear()
     $assemblies = [appdomain]::CurrentDomain.getassemblies()
-    $assemblies | foreach-object {
+    $assemblies | ForEach-Object {
         $i++; $ass = $_
         [int]$assemblyProgress = ($i * 100) / $assemblies.Length 
-        write-progress "Adding Assembly $($_.getName().name):" "$assemblyProgress" -perc $assemblyProgress
+        Write-Progress "Adding Assembly $($_.getName().Name):" "$assemblyProgress" -perc $assemblyProgress
         trap{$script:types = $ass.GetExportedTypes() | Where {$_.IsPublic -eq $true};continue};$script:types = $_.GetTypes() | Where {$_.IsPublic -eq $true}
         $script:types | Foreach-Object {$j = 0} {
             $j++; 
             if (($j % 200) -eq 0) { 
                 [int]$typeProgress = ($j * 100) / $script:types.Length 
-                write-progress  "Adding types percent complete :" "$typeProgress" -perc $typeProgress -id 1 
+                Write-Progress  "Adding types percent complete :" "$typeProgress" -perc $typeProgress -id 1 
             } 
             $dc = &{trap{Continue;0};$_.fullName.split(".").count - 1} 
-            $ns = $_.namespace 
+            $ns = $_.NameSpace 
             [void]$global:dsTabExpansion.tables['Types'].rows.add("$_",$dc,$ns)
         }
     } 
@@ -101,9 +102,9 @@ Function global:Update-TabExpansionTypes {
     Foreach {$i = 0}{$i++
         if (($i % 500) -eq 0) { 
             [int]$typeProgress = ($i * 100) / $dsTabExpansion.Tables['Types'].rows.count 
-            write-progress  "Adding NameSpaces percent complete :" "$typeProgress" -perc $typeProgress -id 1 
+            Write-Progress  "Adding NameSpaces percent complete :" "$typeProgress" -perc $typeProgress -id 1 
         } 
-        $split = [regex]::Split($_.name,'\.')
+        $split = [regex]::Split($_.Name,'\.')
         if ($split.length -gt 2) {
             0..($split.length - 3) | Foreach {$ofs='.';"$($split[0..($_)])"}
         }
@@ -113,33 +114,34 @@ Function global:Update-TabExpansionTypes {
 
 Function global:Get-Assembly ($PartialName = '') {
   [appdomain]::CurrentDomain.GetAssemblies() |? {$_.FullName -match $PartialName}
-} 
-Function global:add-TabExpansionTypes ([System.Reflection.Assembly]$assembly){
+}
 
-    $assembly | foreach-object {
+Function global:Add-TabExpansionTypes ([System.Reflection.Assembly]$assembly){
+
+    $assembly | ForEach-Object {
         $i++; $ass = $_
         trap{$script:types = $ass.GetExportedTypes() | Where {$_.IsPublic -eq $true};continue};$script:types = $_.GetTypes() | Where {$_.IsPublic -eq $true}
         $script:types | Foreach-Object {$j = 0} {
             $j++; 
             if (($j % 200) -eq 0) { 
                 [int]$typeProgress = ($j * 100) / $script:types.Length 
-                write-progress  "Adding types percent complete :" "$typeProgress" -perc $typeProgress -id 1 
+                Write-Progress  "Adding types percent complete :" "$typeProgress" -perc $typeProgress -id 1 
             } 
-            $dc = &{trap{Continue;0};$_.fullName.split(".").count - 1} 
-            $ns = $_.namespace 
+            $dc = &{trap{Continue;0};$_.FullName.split(".").count - 1} 
+            $ns = $_.NameSpace 
             [void]$global:dsTabExpansion.tables['Types'].rows.add("$_",$dc,$ns)
         }
     } 
 
     # Add NameSpaces Without types
     
-    $NL = $dsTabExpansion.Tables['Types'].select("ns = '$($ass.GetName().name)'") | 
+    $NL = $dsTabExpansion.Tables['Types'].select("ns = '$($ass.GetName().Name)'") | 
     Foreach {$i = 0}{$i++
         if (($i % 500) -eq 0) { 
             [int]$typeProgress = ($i * 100) / $dsTabExpansion.Tables['Types'].rows.count 
-            write-progress  "Adding NameSpaces percent complete :" "$typeProgress" -perc $typeProgress -id 1 
+            Write-Progress  "Adding NameSpaces percent complete :" "$typeProgress" -perc $typeProgress -id 1 
         } 
-        $split = [regex]::Split($_.name,'\.')
+        $split = [regex]::Split($_.Name,'\.')
         if ($split.length -gt 2) {
             0..($split.length - 3) | Foreach {$ofs='.';"$($split[0..($_)])"}
         }
@@ -155,27 +157,27 @@ Function global:Update-TabExpansionWmi {
     
     # Set Enumeration Options 
     
-    $opt = new-object system.management.EnumerationOptions 
+    $opt = New-Object system.management.EnumerationOptions 
     $opt.EnumerateDeep = $True 
     $opt.UseAmendedQualifiers = $true 
     
-    $i = 0 ; write-progress "Adding WMI Classes" "$i"
+    $i = 0 ; Write-Progress "Adding WMI Classes" "$i"
     $WmiClass.psBase.GetSubclasses($opt) | foreach {
-        $i++ ; if ($i%10 -eq 0) {write-progress "Adding WMI Classes" "$i"} 
-        [void]$global:dsTabExpansion.tables['WMI'].rows.add($_.name,($_.psbase.Qualifiers |? {$_.Name -eq 'description'} |% {$_.Value}))
+        $i++ ; if ($i%10 -eq 0) {Write-Progress "Adding WMI Classes" "$i"} 
+        [void]$global:dsTabExpansion.tables['WMI'].rows.add($_.Name,($_.psbase.Qualifiers |? {$_.Name -eq 'Description'} |% {$_.Value}))
     }
-    write-progress "Adding WMI Classes" "$i" -Completed
+    Write-Progress "Adding WMI Classes" "$i" -Completed
 }
 
-Function global:add-tabExpansion ([string]$filter,[string]$Text,[string]$type = 'Custom'){ 
+Function global:Add-TabExpansion ([string]$filter,[string]$Text,[string]$type = 'Custom'){ 
     $global:dsTabExpansion.Tables['Custom'].Rows.Add($filter,$text,$type) 
 }
 
-Function global:Remove-tabExpansion ([string]$filter){ 
+Function global:Remove-TabExpansion ([string]$filter){ 
     $dsTabExpansion.Tables['custom'].select("Filter LIKE '$Filter'") |% {$_.delete()} 
 }
 
-Function global:get-tabExpansion ([string]$filter,$Type = 'Custom'){ 
+Function global:Get-TabExpansion ([string]$filter,$Type = 'Custom'){ 
     if ($type -eq 'Custom'){
       $dsTabExpansion.Tables[$Type].select("Filter LIKE '$Filter'") 
     } Else {
@@ -188,40 +190,44 @@ Function global:Update-TabExpansion {
   Update-TabExpansionTypes
   Update-TabExpansionWmi
 }
-function global:Invoke-TabExpansionEditor {
 
-  $form = new-object "System.Windows.Forms.Form"
-  $form.Size = new-object System.Drawing.Size @(500,300)
-  $form.text = "PowerTab 0.92 PowerShell TabExpansion library"
+Function global:Invoke-TabExpansionEditor {
 
-  $DG = new-object "System.windows.forms.DataGrid"
+  $Form      = New-Object "System.Windows.Forms.Form"
+  $Form.Size = New-Object System.Drawing.Size @(500,300)
+  $Form.Text = "PowerTab 0.99 PowerShell TabExpansion library"
+
+  $DG = New-Object "System.windows.forms.DataGrid"
   $DG.CaptionText = "Custom TabExpansion DataBase Editor"
   $DG.AllowSorting = $True
   $DG.DataSource = $global:dsTabExpansion.psObject.baseobject
   $DG.Dock = [System.Windows.Forms.DockStyle]::Fill
-  $form.Controls.Add($DG)
-  $statusbar = new-object System.Windows.Forms.Statusbar
+  $Form.Controls.Add($DG)
+  $statusbar = New-Object System.Windows.Forms.Statusbar
   $statusbar.text = " /\/\o\/\/ 2007 http://thePowerShellGuy.com"
-  $form.Controls.Add($Statusbar)
+  $Form.Controls.Add($Statusbar)
   #show the Form 
 
-  $Form.Add_Shown({$form.Activate();$dg.Expand(0)})
-  [void]$form.showdialog() 
-}
-Function global:add-TabExpansionComputersNetView {
-  net view |% {if($_ -match '\\\\(.*?) '){$matches[1]}} |% {add-tabExpansion $_ $_ 'Computer'}
+  $Form.Add_Shown({$Form.Activate();$dg.Expand(0)})
+  [void]$Form.showdialog() 
 }
 
-Function global:add-TabExpansionComputersOU ([adsi]$ou){
-  $Ou.psbase.get_children() | select @{e={$_.cn[0]};n='Name'} |% {add-tabExpansion $_.name $_.name 'Computer'}
+Function global:Add-TabExpansionComputersNetView {
+  net view |% {if($_ -match '\\\\(.*?) '){$matches[1]}} |% {Add-TabExpansion $_ $_ 'Computer'}
 }
-Function global:get-TabExpansionCustom {
+
+Function global:Add-TabExpansionComputersOU ([adsi]$ou){
+  $Ou.psbase.get_children() | select @{e={$_.cn[0]};n='Name'} |% {Add-TabExpansion $_.Name $_.Name 'Computer'}
+}
+
+Function global:Get-TabExpansionCustom {
   Write-Host -ForegroundColor 'Yellow' "Current Custom Aliases :"
-  $dsTabExpansion.Tables['Custom'].select("type = 'Custom'") | format-table -auto
+  $dsTabExpansion.Tables['Custom'].select("type = 'Custom'") | Format-Table -auto
 }
-Function global:get-TabExpansionComputer {
+
+Function global:Get-TabExpansionComputer {
   Write-Host -ForegroundColor 'Yellow' "Current Custom Computerlist :"
-  $dsTabExpansion.Tables['Custom'].select("type = 'Computer'") | format-table -auto
+  $dsTabExpansion.Tables['Custom'].select("type = 'Computer'") | Format-Table -auto
 }
 
 Function global:Add-TabExpansionEnumFromLastError ($Name){
@@ -231,13 +237,16 @@ Function global:Add-TabExpansionEnumFromLastError ($Name){
     } else {
         $filter = $matches[1].split('.')[-1]   
     }
-    $matches[2].split(',') |% {add-TabExpansion $filter $_.trim('" ')}
+    $matches[2].split(',') |% {Add-TabExpansion $filter $_.trim('" ')}
 }
 
-Function global:Import-TabExpansiontheme ($path){ 
+Function global:Import-TabExpansionTheme ($path){ 
   $theme = Import-Csv $path
   $PowerTabConfig.Colors.ImportTheme($theme) 
 }
-Function global:Export-TabExpansiontheme ($path){ 
+
+Function global:Export-TabExpansionTheme ($path){ 
   $PowerTabConfig.Colors.ExportTheme() | Export-Csv -noType $path  
 }
+
+

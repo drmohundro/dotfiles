@@ -1,0 +1,68 @@
+# errors 
+
+.net class resolving
+string (path completion 
+
+# Parser
+
+  "CommandArgument" 
+      $lastToken.content -eq '-'
+      $lastToken.content -like "*?``?"
+      $lastToken.content -eq '?'
+      $lastToken.content -match 'win32_.*|cim_.*|MSFT_.*'
+      $lastToken.content -match '^\.\w.*'
+      $lastToken.content -notmatch '\['
+      "Re-invoke"
+  "CommandParameter"
+  "Member"
+      $tokens[$_].Type -eq 'Variable' -or $tokens[$_].Type -eq 'type'
+          $token.content -ne "_"
+      $tokens[$_].Type -eq 'GroupEnd'
+  "Operator"
+      $operator.content -eq "." -or $operator.content -eq "::"
+          $tokens[$_].Type -eq 'type'
+          $tokens[$_].Type -eq 'Variable'
+          $tokens[$_].content -ne "_"
+          $sublevel -eq ""
+       ($tokens[$_].Type -eq 'String'
+       $tokens[$_].Type -eq 'GroupEnd'
+      $lastToken.Content -like '!'
+  "Command"
+      $lastToken.Content -eq ':'
+          $former.type -eq 'Type'
+      $lastToken.Content -like '*!'
+      $lastToken.Content -like "*?`?" -and $former.content -eq "="
+      $lastToken.Content -eq "?" -and $former.content -eq "="
+      $lastToken.Content -match '^\\\\([^\\]+)\\([^\\]*)$'
+      $lastToken.Content -like '$'
+      $lastToken.Content -like '*-*' -or $lastToken.Content -like '*%'
+  "Variable" 
+
+# subfunctions 
+
+
+Resolve-pathCompletions
+
+Resolve-Member
+
+Resolve-ExpressionMembers
+
+Resolve-VariableMembers
+
+Resolve-firstMembers
+
+Resolve-ObjectMembers
+Resolve-TypeMembers
+
+Resolve-Parameters
+
+Resolve-CommandParameters
+Resolve-BaseCommand
+Get-ScriptParameters
+
+# dinsdag updates
+
+1 node niet cluadmin opstarten
+
+patch passive node
+

@@ -3,13 +3,13 @@
   <Config>
     <Category>Global</Category>
     <Name>CustomUserFunction</Name>
-    <Value>write-warning</Value>
+    <Value>Write-Warning</Value>
     <Type>String</Type>
   </Config>
   <Config>
     <Category>Version</Category>
     <Name>Version</Name>
-    <Value>PowerTab version 0.99 Beta 2</Value>
+    <Value>PowerTab version 0.99 RC1</Value>
     <Type>String</Type>
   </Config>
   <Config>
@@ -81,13 +81,13 @@
   <Config>
     <Category>Setup</Category>
     <Name>InstallPath</Name>
-    <Value>C:\Documents and Settings\udmohun\My Documents\WindowsPowerShell\PowerTab</Value>
+    <Value>C:\Powertab</Value>
     <Type>String</Type>
   </Config>
   <Config>
     <Category>Setup</Category>
     <Name>ConfigurationPath</Name>
-    <Value>C:\Documents and Settings\udmohun\My Documents\WindowsPowerShell</Value>
+    <Value>C:\Users\mvanorsouw\Documents\WindowsPowerShell</Value>
     <Type>String</Type>
   </Config>
   <Config>
@@ -99,7 +99,7 @@
   <Config>
     <Category>Setup</Category>
     <Name>DatabasePath</Name>
-    <Value>C:\Documents and Settings\udmohun\My Documents\WindowsPowerShell</Value>
+    <Value>C:\Users\mvanorsouw\Documents\WindowsPowerShell</Value>
     <Type>String</Type>
   </Config>
   <Config>
@@ -147,7 +147,7 @@
   <Config>
     <Category>Global</Category>
     <Name>ShowBanner</Name>
-    <Value>0</Value>
+    <Value>1</Value>
     <Type>bool</Type>
   </Config>
   <Config>
@@ -165,6 +165,12 @@
   <Config>
     <Category>Global</Category>
     <Name>FileSystemExpand</Name>
+    <Value>1</Value>
+    <Type>bool</Type>
+  </Config>
+  <Config>
+    <Category>Global</Category>
+    <Name>FileSystemForceList</Name>
     <Value>1</Value>
     <Type>bool</Type>
   </Config>
