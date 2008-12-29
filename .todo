@@ -3,7 +3,7 @@
 # Your todo.txt directory
 #TODO_DIR="/home/gina/docs/todo"  
 #TODO_DIR="C:/Documents and Settings/gina/My Documents"  
-TODO_DIR="/cygdrive/c/Documents and Settings/udmohun/My Documents/todo"  
+TODO_DIR="/cygdrive/c/Users/David/Documents/todo"  
 
 # Your todo/done/report.txt locations
 TODO_FILE="$TODO_DIR/todo.txt"  
