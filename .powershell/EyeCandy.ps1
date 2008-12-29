@@ -60,7 +60,7 @@ function Start-EyeCandy {
 		}
 	}
 
-	if ($DebugPreference -eq 'SilentlyContinue') {
+	if ($Error.Count -eq 0) {
 		Clear-Host
 	}
 
