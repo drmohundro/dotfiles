@@ -1,0 +1,16 @@
+TODO:
+
+Submit the packages in starter-kit-elpa.el to ELPA.
+
+Greg Newman is working on Python helpers.
+
+maybe include:
+* should yasnippet be included in rinari?
+
+to write/finish:
+* ri
+* submit ruby fixes to flymake
+
+Bug fixes:
+get jabber.el to automatically disconnect when suspending/hibernating (via dbus)
+ruby-compilation.el should auto-kill the buffer on successful test runs; only leave it open on error/fail
