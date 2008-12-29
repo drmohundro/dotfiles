@@ -36,6 +36,7 @@ Set-Alias zip 7z
 Set-Alias which Get-Command
 Set-Alias e gvim
 Set-Alias less "$Env:PscxHome\Applications\Less-394\less.exe"
+Set-Alias grep Select-String
 
 Add-PSSnapin Pscx
 
