@@ -55,7 +55,8 @@ if has("gui_running")
 endif
 
 if has("gui_running")
-	color ir_black
+	"color ir_black
+	color blackboard
 	"color morning
 else
 	color impact
