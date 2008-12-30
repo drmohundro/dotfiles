@@ -27,6 +27,7 @@ syn sync minlines=100
 " Comments and special comment words
 syn keyword ps1CommentTodo TODO FIXME XXX TBD HACK contained
 syn match ps1Comment /#.*/ contains=ps1CommentTodo
+syn region ps1Comment start=/<#/ end=/#>/
 
 " Language keywords and elements
 syn keyword ps1Conditional if else elseif switch
