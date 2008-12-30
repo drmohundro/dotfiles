@@ -2,6 +2,7 @@ $ProfileDir = (split-path $MyInvocation.MyCommand.Path -Parent)
 
 Push-Location $ProfileDir
 	. ./PowerShell.ps1
+	. ./Themes/blackboard.ps1
 Pop-Location
 
 function prompt {

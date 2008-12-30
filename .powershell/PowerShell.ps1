@@ -13,31 +13,6 @@ Add-ToPath @(
 	"$env:PscxHome\Scripts"
 )
 
-function Get-AliasShortcut([string]$commandName) {
-	ls Alias: | ?{ $_.Definition -match $commandName }
-}
-
-function ack {
-	cmd /c ack.pl $args
-}
-
-function todo {  
-	c:/cygwin/bin/bash.exe --login -c "todo.sh $args" 
-}
-
-function Start-VisualStudio([string]$path) {
-	& devenv /edit $path
-}
-
-Set-Alias vs Start-VisualStudio
-Set-Alias gas Get-AliasShortcut
-Set-Alias iis "$($env:windir)\system32\inetsrv\iis.msc"
-Set-Alias zip 7z
-Set-Alias which Get-Command
-Set-Alias e gvim
-Set-Alias less "$Env:PscxHome\Applications\Less-394\less.exe"
-Set-Alias grep Select-String
-
 Add-PSSnapin Pscx
 
 $PscxFileSizeInUnitsPreference = $true
@@ -69,3 +44,38 @@ Push-Location $ProfileDir
 
 	Update-TypeData ./TypeData/System.Type.ps1xml
 Pop-Location
+
+function Get-AliasShortcut([string]$commandName) {
+	ls Alias: | ?{ $_.Definition -match $commandName }
+}
+
+function ack {
+	cmd /c ack.pl $args
+}
+
+function todo {  
+	c:/cygwin/bin/bash.exe --login -c "todo.sh $args" 
+}
+
+function Start-VisualStudio([string]$path) {
+	& devenv /edit $path
+}
+
+function Get-ExceptionForHR([long]$hr = $(throw "Parameter '-hr' (position 1) is required")) {
+	[Runtime.InteropServices.Marshal]::GetExceptionForHR($hr)
+}
+
+function Get-ExceptionForWin32([int]$errnum = $(throw "Parameter '-errnum' (position 1) is required")) {
+	new-object ComponentModel.Win32Exception $errnum
+}
+
+Set-Alias vs Start-VisualStudio
+Set-Alias gas Get-AliasShortcut
+Set-Alias iis "$($env:windir)\system32\inetsrv\iis.msc"
+Set-Alias zip 7z
+Set-Alias which Get-Command
+Set-Alias e gvim
+Set-Alias less "$Env:PscxHome\Applications\Less-394\less.exe"
+Set-Alias grep Select-String
+Set-Alias hrexc Get-ExceptionForHR
+Set-Alias winexc Get-ExceptionForWin32
