@@ -7,10 +7,10 @@ Pop-Location
 
 function prompt {
 	Write-Host ' '
-	Write-Host "$([Environment]::UserName)@$([Environment]::MachineName) " -noNewLine
-	Write-Host $(Shorten-Path)
+	Write-Host "$([Environment]::UserName)@$([Environment]::MachineName) " -foregroundColor Green -noNewLine
+	Write-Host $(Shorten-Path) -foregroundColor DarkYellow
 
-	Write-Host "$([char]0xBB)" -noNewline
+	Write-Host "$([char]0xBB)" -foregroundColor Green -noNewline
 	' '
 
 	Update-HostTitle
