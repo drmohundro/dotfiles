@@ -5,6 +5,8 @@ Push-Location $ProfileDir
 	. ./Themes/blackboard.ps1
 Pop-Location
 
+$psISE.CustomMenu.Submenus.Add("_Clear", {clear}, "Ctrl+L")
+
 function prompt {
 	Write-Host ' '
 	Write-Host "$([Environment]::UserName)@$([Environment]::MachineName) " -foregroundColor Green -noNewLine
