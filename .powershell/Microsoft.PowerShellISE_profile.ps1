@@ -5,7 +5,7 @@ Push-Location $ProfileDir
 	. ./Themes/blackboard.ps1
 Pop-Location
 
-$psISE.CustomMenu.Submenus.Add("_Clear", {clear}, "Ctrl+L")
+$psISE.CustomMenu.Submenus.Add("_Clear", {clear}, "Ctrl+L") | Out-Null
 
 function prompt {
 	Write-Host ' '
