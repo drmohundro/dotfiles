@@ -1,17 +1,20 @@
+# PowerShell ISE version of the VIM blackboard theme at 
+# http://www.vim.org/scripts/script.php?script_id=2280
+
 # fonts
 $psISE.Options.FontName = 'DejaVu Sans Mono'
 $psISE.Options.FontSize = 16
 
 # output pane
-$psISE.Options.OutputPaneBackground = '#FF000000'
-$psISE.Options.OutputPaneTextBackground = '#FF000000'
+$psISE.Options.OutputPaneBackground = '#FF333333'
+$psISE.Options.OutputPaneTextBackground = '#FF333333'
 $psISE.Options.OutputPaneForeground = '#FFFFFFFF'
 
 # command pane
-$psISE.Options.CommandPaneBackground = '#FF000000'
+$psISE.Options.CommandPaneBackground = '#FF333333'
 
 # script pane
-$psISE.Options.ScriptPaneBackground = '#FF000000'
+$psISE.Options.ScriptPaneBackground = '#FF333333'
 
 # tokens
 $psISE.Options.TokenColors['Command'] = '#FFFFFF60'
