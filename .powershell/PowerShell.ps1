@@ -69,6 +69,16 @@ function Get-ExceptionForWin32([int]$errnum = $(throw "Parameter '-errnum' (posi
 	new-object ComponentModel.Win32Exception $errnum
 }
 
+function Elevate-Process
+{
+	$file, [string]$arguments = $args
+	$psi = new-object System.Diagnostics.ProcessStartInfo $file
+	$psi.Arguments = $arguments
+	$psi.Verb = "runas"
+	$psi.WorkingDirectory = Get-Location
+	[System.Diagnostics.Process]::Start($psi)
+}
+
 Set-Alias vs Start-VisualStudio
 Set-Alias gas Get-AliasShortcut
 Set-Alias iis "$($env:windir)\system32\inetsrv\iis.msc"
@@ -79,3 +89,4 @@ Set-Alias less "$Env:PscxHome\Applications\Less-394\less.exe"
 Set-Alias grep Select-String
 Set-Alias hrexc Get-ExceptionForHR
 Set-Alias winexc Get-ExceptionForWin32
+Set-Alias sudo Elevate-Process
