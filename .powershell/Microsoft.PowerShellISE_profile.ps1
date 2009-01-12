@@ -46,5 +46,35 @@ function ISE-ToggleCommenting {
     }
 }
 
-$psISE.CustomMenu.Submenus.Add('Toggle Commenting', {ISE-ToggleCommenting}, "Ctrl+Oem2")
-$psISE.CustomMenu.Submenus.Add("C_lear", {clear}, "Ctrl+L")
+function Set-File {
+    param
+    (
+        [parameter(Mandatory=$true,ValueFromPipeline=$true)]
+        [string]
+        $file
+    )
+
+    $psise.CurrentOpenedRunspace.OpenedFiles.Add($file)
+}
+
+function Insert-Text{
+    param
+    (
+        [parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [string]
+        $text
+    )
+    
+    $currentFilePath = $psise.CurrentOpenedFile.FullPath
+    $currentFile = $psIse.CurrentOpenedRunspace.OpenedFiles | where {$_.FullPath -eq $currentFilePath}
+    $currentFile.Editor.InsertText($text)
+}
+
+function Invoke-CaretLine
+{
+    Invoke-Expression $([Regex]::Split($psISE.CurrentOpenedFile.Editor.text,"`r`n" )[$psISE.CurrentOpenedFile.Editor.caretline-1])
+}
+
+[void]$psISE.CustomMenu.Submenus.Add("Current Line", {Invoke-CaretLine},'F7')
+[void]$psISE.CustomMenu.Submenus.Add('Toggle Commenting', {ISE-ToggleCommenting}, "Ctrl+Oem2")
+[void]$psISE.CustomMenu.Submenus.Add("C_lear", {clear}, "Ctrl+L")
