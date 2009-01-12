@@ -135,6 +135,7 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 " Automatically figure out formatting
 autocmd BufNewFile,BufRead *.vb set ft=vbnet
 autocmd BufNewFile,BufRead *.ps1 set ft=ps1
+autocmd BufNewFile,BufRead *.psm1 set ft=ps1
 autocmd BufNewFile,BufRead *.xaml set ft=xml
 autocmd BufNewFile,BufRead *.config set ft=xml
 autocmd BufNewFile,BufRead *.ps1xml set ft=xml
@@ -153,6 +154,21 @@ set directory=$TEMP,$TMP,.
 " Don't autoindent with XMLEdit enabled
 "
 autocmd BufEnter *.xml setlocal indentexpr=
+
+"
+" Usage - :Shell <command>
+" The result of the command will be put in a new vertical split scratch
+" window.
+"
+command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  botright vnew
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1,a:cmdline)
+  call setline(2,substitute(a:cmdline,'.','=','g'))
+  execute 'silent $read !'.escape(a:cmdline,'%#')
+  1
+endfunction
 
 " 
 " (default with gvim installation on windows)
