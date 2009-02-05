@@ -99,6 +99,9 @@ let mapleader=","
 let g:fuzzy_ignore = "*.log;*.dll;*.pdb;*.exe;*.baml;*.cache;*.suo;**/obj/*;**/bin/Debug/*;_ReSharper*;*.resharper;*.user"
 let g:fuzzy_matching_limit = 70
 
+" ignore ruby warning from LustyExplorer
+let g:LustyExplorerSuppressRubyWarning = 1
+
 " Key mappings
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <C-T> :FuzzyFinderTextMate<Return>
@@ -135,7 +138,6 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 " Automatically figure out formatting
 autocmd BufNewFile,BufRead *.vb set ft=vbnet
 autocmd BufNewFile,BufRead *.ps1 set ft=ps1
-autocmd BufNewFile,BufRead *.psm1 set ft=ps1
 autocmd BufNewFile,BufRead *.xaml set ft=xml
 autocmd BufNewFile,BufRead *.config set ft=xml
 autocmd BufNewFile,BufRead *.ps1xml set ft=xml
