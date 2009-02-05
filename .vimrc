@@ -117,13 +117,11 @@ map L $
 set listchars=tab:>-,trail:.,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
-if has("autocmd")
   " When editing a file, always jump to the last cursor position
   autocmd BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
   \   exe "normal g'\"" |
   \ endif
-endif
 
 " Omnicomplete functions
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -138,11 +136,14 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 " Automatically figure out formatting
 autocmd BufNewFile,BufRead *.vb set ft=vbnet
 autocmd BufNewFile,BufRead *.ps1 set ft=ps1
+autocmd BufNewFile,BufRead *.psm1 set ft=ps1
 autocmd BufNewFile,BufRead *.xaml set ft=xml
 autocmd BufNewFile,BufRead *.config set ft=xml
 autocmd BufNewFile,BufRead *.ps1xml set ft=xml
 autocmd BufNewFile,BufRead *.vbproj set ft=xml
 autocmd BufNewFile,BufRead *.csproj set ft=xml
+" Stop beeping and flashing!
+autocmd VimEnter * set vb t_vb=
 
 "
 " XMLEdit Settings
