@@ -59,7 +59,7 @@ if has("gui_running")
 	color blackboard
 	"color morning
 else
-	color impact
+	color pablo
 endif
 
 set background=dark  " favor dark backgrounds
@@ -101,7 +101,6 @@ let g:fuzzy_matching_limit = 70
 
 " ignore ruby warning from LustyExplorer
 let g:LustyExplorerSuppressRubyWarning = 1
-
 " Key mappings
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <C-T> :FuzzyFinderTextMate<Return>
@@ -117,11 +116,11 @@ map L $
 set listchars=tab:>-,trail:.,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
-  " When editing a file, always jump to the last cursor position
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal g'\"" |
-  \ endif
+" When editing a file, always jump to the last cursor position
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\   exe "normal g'\"" |
+\ endif
 
 " Omnicomplete functions
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -142,6 +141,7 @@ autocmd BufNewFile,BufRead *.config set ft=xml
 autocmd BufNewFile,BufRead *.ps1xml set ft=xml
 autocmd BufNewFile,BufRead *.vbproj set ft=xml
 autocmd BufNewFile,BufRead *.csproj set ft=xml
+
 " Stop beeping and flashing!
 autocmd VimEnter * set vb t_vb=
 
@@ -171,33 +171,4 @@ function! s:RunShellCommand(cmdline)
   call setline(2,substitute(a:cmdline,'.','=','g'))
   execute 'silent $read !'.escape(a:cmdline,'%#')
   1
-endfunction
-
-" 
-" (default with gvim installation on windows)
-" Diff expressions when using vimdiff (vim -d)
-"
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
