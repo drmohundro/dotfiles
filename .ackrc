@@ -1,5 +1,5 @@
 # add new types
---type-set=powershell=.ps1
+--type-set=ps1=.ps1
 --type-set=vb=.vb
 --type-set=proj=.vbproj,.csproj
 --type-set=asp=.asp
