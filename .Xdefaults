@@ -1,0 +1,51 @@
+! ~/.Xdefaults !
+
+!!! rxvt-unicode
+
+!! Colors
+URxvt*cursorColor: #d3d7cf
+URxvt*background: #2e3436
+URxvt*foreground: #eeeeec
+! Black
+URxvt*color0: #2e2326
+URxvt*color8: #555753
+! Red
+URxvt*color1: #CC0000
+URxvt*color9: #ef2929
+! Green
+URxvt*color2: #73d216
+URxvt*color10: #8ae234
+! Yellow
+URxvt*color3: #edd400
+URxvt*color11: #fce94f
+! Blue
+URxvt*color4: #3465a4
+URxvt*color12: #729fcf
+! Magenta
+URxvt*color5: #75507b
+URxvt*color13: #ad7fa8
+! Cyan
+URxvt*color6: #00AAAA
+URxvt*color14: #55FFFF
+! White
+URxvt*color7: #AAAAAA
+URxvt*color15: #FFFFFF
+! Tabs
+URxvt.tabbed.tabbar-fg: 7
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 0
+URxvt.tabbed.tab-bg: 7
+
+!! UI
+URxvt*scrollstyle: plain
+URxvt*scrollBar_right: true
+URxvt*font: xft:Bitstream Vera Sans Mono:size=12
+Urxvt*boldFont: xft:Bitstream Vera Sans Mono:size=12:style=Bold
+
+!! Extensions
+URxvt*perl-ext-common: default,matcher
+URxvt*urlLauncher: firefox
+
+!! Misc.
+URxvt*pointerBlank: True
+

@@ -1,0 +1,29 @@
+#
+# ~/.screenrc
+#
+
+# Do not display the copyright page
+startup_message off 	# default: on
+ 
+# Change the number of scrollback lines
+defscrollback 1000 		# default: 100
+
+# Ensure the default shell is the same as the $SHELL environment variable
+shell -$SHELL
+ 
+# Make navigating between regions easier
+bind s split
+bind j focus down
+bind k focus up
+ 
+# Make resizing regions easier
+bind = resize =
+bind + resize +1
+bind - resize -1
+ 
+# window title
+termcapinfo  * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
+hardstatus string "[%n %t] %h"
+
+# status bar caption
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= %1` %m/%d/%y %C:%s%a"

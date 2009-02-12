@@ -1,21 +1,23 @@
 # set bash vim-support
 # set -o vi
 
-# setup env variables
-export PATH=$PATH:/cygdrive/c/Program\ Files/Git/bin:/cygdrive/c/Utils
+PS1="\\[\\e]0;\\w\\a\\]\\n\\[\\e[32m\\]\\u@\\h \\[\\e[33m\\]\\w\\[\\e[0m\\]\\n\\\$ "
 
+# NOTE - assumes that 'mount -s --change-cygdrive-prefix /' has been run to
+
+# setup env variables
+export PATH=$PATH:/c/Program\ Files/Git/bin:/cygdrive/c/Utils
+export GIT_SSH=/c/Program\ Files/PuTTY/plink.exe
+
+# setup aliases
+alias ls='ls --color'
+alias grep='grep --color'
 alias t='todo.sh'
-alias gitp='ruby /cygdrive/c/DTCDev/Scripts/git-proxy.rb'
+alias less='/c/Program\ Files/Vim/vim72/macros/less.sh'
 
 # bring in completion for todo
 source ~/.bash_completion.d/todo_completer.sh
 complete -F _todo_sh -o default t
-
-# enable color support
-if [ "$TERM" != "dumb" ]; then
-	alias ls='ls --color'
-	alias grep='grep --color'
-fi
 
 # enable programmable completion features
 if [ -f /etc/bash_completion ]; then
