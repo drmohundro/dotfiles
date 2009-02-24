@@ -1,5 +1,5 @@
-# set bash vim-support
-# set -o vi
+set bash vim-support
+set -o vi
 
 PS1="\\[\\e]0;\\w\\a\\]\\n\\[\\e[32m\\]\\u@\\h \\[\\e[33m\\]\\w\\[\\e[0m\\]\\n\\\$ "
 
