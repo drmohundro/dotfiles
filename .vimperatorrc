@@ -1,12 +1,16 @@
-" display the menu, but not the toolbar
+" display menu
 set guioptions=m
 
-" highlight searches
-set hlsearch
-
-" undo stupid changes to backspace key
+" undo backspace key mappings
 map <BS> <Esc>:back<cr>
 map <S-BS> <Esc>:forward<cr>
 
-" disable bell
+" stop beeping
 set visualbell
+
+" highlight matches
+set hlsearch
+
+" default to pass-through behavior for GMail and Google Reader
+:autocmd LocationChange .* :js modes.passAllKeys = /mail\.google\.com/.test(buffer.URL)
+:autocmd LocationChange .* :js modes.passAllKeys = /www\.google\.com\/reader\/view/.test(buffer.URL)
