@@ -1,0 +1,25 @@
+# see /etc/X11/system.XWinrc for more examples
+
+// Make some menus...
+menu apps {
+	urxvt 	exec 	"urxvt -e bash --login -i"
+	xterm	exec	"xterm"
+}
+
+menu root {
+// Comments fit here, too...
+	"Reload .XWinrc"	RELOAD
+	"Applications"	menu	apps
+	Separator
+}
+
+menu aot {
+	Separator
+	"Always on Top"	alwaysontop
+}
+
+RootMenu root
+
+DefaultSysMenu aot atend
+
+DEBUG "Done parsing the configuration file..."
