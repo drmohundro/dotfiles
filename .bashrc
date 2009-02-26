@@ -11,6 +11,7 @@ export PATH=$PATH:/c/Utils
 # setup aliases
 alias ls='ls --color'
 alias grep='grep --color'
+alias diff='colordiff'
 
 # enable programmable completion features
 if [ -f /etc/bash_completion ]; then
