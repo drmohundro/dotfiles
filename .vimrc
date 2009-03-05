@@ -50,14 +50,13 @@ if has("gui_running")
 	elseif has("gui_win32")
 		"set gfn=Consolas:h13
 		"set gfn=Envy_Code_R:h13
-		set gfn=DejaVu_Sans_Mono:h12:cANSI
+		set gfn=DejaVu_Sans_Mono:h11:cANSI
 	endif
 endif
 
 if has("gui_running")
-	"color ir_black
-	color blackboard
 	"color morning
+	color jellybeans
 else
 	color pablo
 endif
