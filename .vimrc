@@ -109,6 +109,8 @@ map <C-L> :FuzzyFinderBuffer<Return>
 nnoremap ' `
 nnoremap ` '
 
+nnoremap J <C-d>
+nnoremap K <C-u>
 map H ^
 map L $
 

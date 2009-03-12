@@ -629,6 +629,8 @@ function s:SetUpForNewFiletype(filetype, forceReset)
         call s:MapDelimiters('/*','*/')
     elseif a:filetype == "prolog"
         call s:MapDelimitersWithAlternative('%','','/*','*/')
+    elseif a:filetype == "ps1"
+        call s:MapDelimiters('#', '')
     elseif a:filetype == "psf"
         call s:MapDelimiters('#', '')
     elseif a:filetype == "ptcap"
@@ -820,6 +822,8 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype == "uil"
         call s:MapDelimiters('!', '')
     elseif a:filetype == "vb"
+        call s:MapDelimiters("'","")
+    elseif a:filetype == "vbnet"
         call s:MapDelimiters("'","")
     elseif a:filetype == "vcscommit"
         call s:MapDelimiters('','')
