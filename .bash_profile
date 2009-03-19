@@ -1,4 +1,6 @@
-# ~/.bash_profile: executed by bash for login shells.
-
 # include .bashrc
 source ~/.bashrc
+
+# append paths
+export PATH=$PATH:/c/Utils
+export PATH=$PATH:/c/Program\ Files/Beyond\ Compare\ 3

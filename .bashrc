@@ -3,10 +3,9 @@ set -o vi
 
 PS1="\\[\\e]0;\\w\\a\\]\\n\\[\\e[32m\\]\\u@\\h \\[\\e[33m\\]\\w\\[\\e[0m\\]\\n\\\$ "
 
-# NOTE - assumes that 'mount -s --change-cygdrive-prefix /' has been run to
+source /etc/profile
 
-# setup env variables
-export PATH=$PATH:/c/Utils
+# NOTE - assumes that 'mount -s --change-cygdrive-prefix /' has been run to
 
 # setup aliases
 alias ls='ls --color'

@@ -1,3 +1,10 @@
 [user]
 	name = David Mohundro
 	email = drmohundro@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = auto
+[core]
+	editor = vim
