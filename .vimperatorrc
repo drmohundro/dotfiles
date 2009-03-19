@@ -17,7 +17,7 @@ noremap <C-c> <C-v><C-c>
 noremap <C-v> <C-v><C-v> 
 
 " stop beeping and flashing
-set noerrorbell
+set noerrorbells
 set novisualbell
 
 " highlight matches
