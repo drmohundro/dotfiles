@@ -1,5 +1,5 @@
 " display menu
-set guioptions=m
+set guioptions=mB
 
 " use the awesome bar features!
 set wildoptions=auto
