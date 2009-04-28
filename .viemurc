@@ -1,0 +1,4 @@
+map J <C-d>
+map K <C-u>
+map H ^
+map L $
