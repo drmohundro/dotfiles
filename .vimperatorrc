@@ -24,5 +24,4 @@ set novisualbell
 set hlsearch
 
 " default to pass-through behavior for GMail and Google Reader
-autocmd LocationChange .* :js modes.passAllKeys = /mail\.google\.com/.test(buffer.URL)
-autocmd LocationChange .* :js modes.passAllKeys = /www\.google\.com\/reader\/view/.test(buffer.URL)
+autocmd LocationChange .* :js modes.passAllKeys = /(mail\.google\.com)|(www\.google\.com\/reader\/view)/.test(buffer.URL)
