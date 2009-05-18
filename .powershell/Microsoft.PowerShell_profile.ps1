@@ -2,7 +2,6 @@ $ProfileDir = (split-path $MyInvocation.MyCommand.Path -Parent)
 
 Push-Location $ProfileDir
 	. ./PowerShell.ps1
-	Import-Module PowerTab
 Pop-Location
 
 function prompt {

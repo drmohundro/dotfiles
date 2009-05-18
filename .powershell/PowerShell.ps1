@@ -9,26 +9,13 @@ function Add-ToPath {
 	}
 }
 
-Add-ToPath @(
-	"$env:PscxHome\Scripts"
-)
-
 Add-PSSnapin Pscx
-
-$PscxFileSizeInUnitsPreference = $true
-
-Update-FormatData -PrependPath "$Env:PscxHome\FormatData\FileSystem.ps1xml"
-
-Push-Location (Join-Path $Env:PscxHome 'Profile')
-	#. '.\GenericAliases.ps1'
-	#. '.\GenericFilters.ps1'
-	#. '.\GenericFunctions.ps1'
-	#. '.\PscxAliases.ps1'
-	#. '.\Debug.ps1'
-	. '.\Cd.ps1'
-	#. '.\Dir.ps1'
-	#. '.\RegexLib.ps1'
-Pop-Location
+$Pscx:Preferences['TextEditor'] = "gvim.exe"
+$Pscx:Preferences['FileSizeInUnits'] = $true
+$Pscx:Preferences['UpdateFileSystemFormatData'] = $true
+$Pscx:Preferences['DotSource/Cd.ps1'] = $true  
+$Pscx:Preferences["ImportVisualStudioVars"] = $true
+. "$Pscx:ProfileDir\PscxConfig.ps1"
 
 Push-Location $ProfileDir
 	# Bring in env-specific functionality (i.e. work-specific dev stuff, etc.)
@@ -36,7 +23,6 @@ Push-Location $ProfileDir
 
 	if (Test-Path variable:scripts) {
 		Add-ToPath $scripts
-		. vsvars2008.ps1
 	}
 
 	# Bring in prompt and other UI niceties
@@ -53,20 +39,8 @@ function ack {
 	cmd /c ack.pl $args
 }
 
-function todo {  
-	c:/cygwin/bin/bash.exe --login -c "todo.sh $args" 
-}
-
 function Start-VisualStudio([string]$path) {
 	& devenv /edit $path
-}
-
-function Get-ExceptionForHR([long]$hr = $(throw "Parameter '-hr' (position 1) is required")) {
-	[Runtime.InteropServices.Marshal]::GetExceptionForHR($hr)
-}
-
-function Get-ExceptionForWin32([int]$errnum = $(throw "Parameter '-errnum' (position 1) is required")) {
-	new-object ComponentModel.Win32Exception $errnum
 }
 
 function Elevate-Process
@@ -84,9 +58,6 @@ Set-Alias gas Get-AliasShortcut
 Set-Alias iis "$($env:windir)\system32\inetsrv\iis.msc"
 Set-Alias zip 7z
 Set-Alias which Get-Command
-Set-Alias e gvim
 Set-Alias less "$Env:PscxHome\Applications\Less-394\less.exe"
 Set-Alias grep Select-String
-Set-Alias hrexc Get-ExceptionForHR
-Set-Alias winexc Get-ExceptionForWin32
 Set-Alias sudo Elevate-Process

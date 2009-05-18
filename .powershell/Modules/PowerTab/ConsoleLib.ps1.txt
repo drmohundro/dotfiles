@@ -103,7 +103,7 @@ Function ConvertTo-BufferCellArray (
   $BackgroundColor = $Host.UI.RawUI.BackgroundColor
 ){
   $content = $content |% {$_}
-  ,$host.ui.rawui.NewBufferCellArray([string[]]$content,$ForegroundColor,$BackgroundColor) # FIXME: really need that cast?
+  ,$host.ui.rawui.NewBufferCellArray($content,$ForegroundColor,$BackgroundColor)
 }
 
 
@@ -112,7 +112,7 @@ Function parse-List ($Size) {
   $WindowPosition  = $host.UI.rawui.windowposition
   $WindowSize = $Host.UI.RawUI.WindowSize
   $Cursor = $host.UI.RawUI.CursorPosition
-  $Center = [math]::Truncate([float]$WindowSize.Height / 2)
+  $Center = [math]::Truncate($WindowSize.Height / 2)
   $CursorOffset = $Cursor.Y - $WindowPosition.Y
   $CursorOffsetBottom = $WindowSize.Height - $CursorOffset
 
