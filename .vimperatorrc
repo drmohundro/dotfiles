@@ -25,3 +25,6 @@ set hlsearch
 
 " default to pass-through behavior for GMail and Google Reader
 autocmd LocationChange .* :js modes.passAllKeys = /(mail\.google\.com)|(www\.google\.com\/reader\/view)/.test(buffer.URL)
+
+" disable all audible beeps
+javascript liberator.beep = function () { return false; }
