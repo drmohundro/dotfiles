@@ -15,6 +15,7 @@ set number
 set showcmd
 set nowrap
 set diffopt+=iwhite
+set statusline=%f%m%r%h%w\ [%{&ff}]%y\ %=[%l,%v][%p%%]
 set laststatus=2
 set hidden
 set title
@@ -32,6 +33,10 @@ filetype indent on
 
 set incsearch
 set hlsearch
+
+if has("gui_running")
+	set cursorline
+endif
 
 if has("gui_win32")
 	set shell=powershell.exe
@@ -111,6 +116,9 @@ nnoremap ` '
 
 nnoremap J <C-d>
 nnoremap K <C-u>
+
+nnoremap <esc> :noh<return><esc>
+
 map H ^
 map L $
 
