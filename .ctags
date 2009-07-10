@@ -1,7 +1,6 @@
---langdef=vb
---langmap=vb:.vb
---regex-vb=/(Public|Protected|Friend|Private|\b)[ \t]*Sub[ \t]+([a-zA-Z0-9_]+)/\2/s,subroutine/i
---regex-vb=/(Public|Protected|Friend|Private|\b)[ \t]*Function[ \t]+([a-zA-Z0-9_]+)/\2/f,function/i
---regex-vb=/(Public|Protected|Friend|Private|\b)[ \t]*Property[ \t]*(Get|Let|Set)[ \t]+([a-zA-Z0-9_]+)/\3/n,name/i
---regex-vb=/(Public|Protected|Friend|Private|\b)[ \t]*Enum[ \t]+([a-zA-Z0-9_]+)/\2/e,enum/i
-
+--langdef=vbnet
+--langmap=vbnet:.vb
+--regex-vbnet=/(Public|Protected|Friend|Private|\b)[ \t]*Sub[ \t]+([a-zA-Z0-9_]+)/\2/s,subroutine/i
+--regex-vbnet=/(Public|Protected|Friend|Private|\b)[ \t]*Function[ \t]+([a-zA-Z0-9_]+)/\2/f,function/i
+--regex-vbnet=/(Public|Protected|Friend|Private|\b)[ \t]*Property[ \t]*(Get|Let|Set)[ \t]+([a-zA-Z0-9_]+)/\3/n,name/i
+--regex-vbnet=/(Public|Protected|Friend|Private|\b)[ \t]*Enum[ \t]+([a-zA-Z0-9_]+)/\2/e,enum/i

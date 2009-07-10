@@ -105,11 +105,16 @@ let g:fuzzy_matching_limit = 70
 
 " ignore ruby warning from LustyExplorer
 let g:LustyExplorerSuppressRubyWarning = 1
+
 " Key mappings
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+map <leader>t :FuzzyFinderTag<Return>
 map <C-T> :FuzzyFinderTextMate<Return>
 map <C-N> :FuzzyFinderFile<Return>
 map <C-L> :FuzzyFinderBuffer<Return>
+
+" taglist settings
+let tlist_vbnet_settings = 'vbnet;s:subroutine;f:function;n:name;e:enum'
 
 nnoremap ' `
 nnoremap ` '
@@ -159,6 +164,19 @@ autocmd VimEnter * set vb t_vb=
 "
 let xml_use_xhtml = 1
 
+" taglist plugin Settings (from http://dancingpenguinsoflight.com/2009/02/code-navigation-completion-snippets-in-vim/)
+let g:ctags_statusline = 1
+let generate_tags = 1
+let Tlist_Use_Horiz_Window = 0
+nnoremap TT :TlistToggle<CR>
+map <F4> :TlistToggle<CR>
+let Tlist_Use_Right_Window = 1
+let Tlist_Compact_Format = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_File_Fold_Auto_Close = 1
+
+" customize backup directories
 set backupdir=$TEMP,$TMP,.
 set directory=$TEMP,$TMP,.
 
