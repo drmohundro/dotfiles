@@ -2,13 +2,13 @@ $ProfileDir = (split-path $MyInvocation.MyCommand.Path -Parent)
 
 Push-Location $ProfileDir
 	. ./PowerShell.ps1
-	. ./Themes/blackboard.ps1
+#	. ./Themes/blackboard.ps1
 Pop-Location
 
 function prompt {
 	Write-Host ' '
 	Write-Host "$([Environment]::UserName)@$([Environment]::MachineName) " -foregroundColor Green -noNewLine
-	Write-Host $(Shorten-Path) -foregroundColor Yellow
+	Write-Host $(Shorten-Path) -foregroundColor DarkBlue
 
 	Write-Host "$([char]0xBB)" -foregroundColor Green -noNewline
 	' '
@@ -75,6 +75,6 @@ function Invoke-CaretLine
     Invoke-Expression $([Regex]::Split($psISE.CurrentOpenedFile.Editor.text,"`r`n" )[$psISE.CurrentOpenedFile.Editor.caretline-1])
 }
 
-[void]$psISE.CustomMenu.Submenus.Add("Current Line", {Invoke-CaretLine},'F7')
-[void]$psISE.CustomMenu.Submenus.Add('Toggle Commenting', {ISE-ToggleCommenting}, "Ctrl+Oem2")
-[void]$psISE.CustomMenu.Submenus.Add("C_lear", {clear}, "Ctrl+L")
+[void]$psISE.CurrentPowerShellTab.AddOnsMenu.Submenus.Add("Current Line", {Invoke-CaretLine},'F7')
+[void]$psISE.CurrentPowerShellTab.AddOnsMenu.Submenus.Add('Toggle Commenting', {ISE-ToggleCommenting}, "Ctrl+Oem2")
+[void]$psISE.CurrentPowerShellTab.AddOnsMenu.Submenus.Add("C_lear", {clear}, "Ctrl+L")
