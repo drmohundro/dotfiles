@@ -4,9 +4,6 @@
 
 set runtimepath=~/.vim,$VIMRUNTIME,~/.vim/after
 
-source $VIMRUNTIME/mswin.vim
-behave mswin
-
 source $VIMRUNTIME/macros/matchit.vim
 
 set history=100
@@ -20,8 +17,14 @@ set laststatus=2
 set hidden
 set title
 set scrolloff=3
-
+set nrformats=hex
+set splitright
+set splitbelow
+set mouse=a
 set shortmess=atI
+
+" enable 256 color support in the terminal
+set t_Co=256
 
 " intuitive backspacing in insert mode
 set backspace=indent,eol,start 
@@ -121,6 +124,11 @@ nnoremap ` '
 
 nnoremap J <C-d>
 nnoremap K <C-u>
+
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
 
 nnoremap <esc> :noh<return><esc>
 

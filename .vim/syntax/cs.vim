@@ -35,7 +35,7 @@ syn keyword csException			try catch finally throw
 syn keyword csUnspecifiedStatement	as base checked event fixed in is lock
 syn keyword csUnspecifiedStatement      new operator out params ref sizeof
 syn keyword csUnspecifiedStatement      stackalloc this typeof unchecked unsafe
-syn keyword csUnspecifiedStatement      using
+syn keyword csUnspecifiedStatement      using var
 " TODO:
 syn keyword csUnsupportedStatement	get set add remove value
 " TODO:
