@@ -66,23 +66,23 @@ if &background == "dark"
             hi Folded guibg=#4e4e4e guifg=#c0c0c0 gui=none
         endif            
     else
-        hi FoldColumn ctermbg=bg guibg=bg guifg=#9a9fc7 gui=none
-        hi LineNr guifg=#9a9fc7 gui=none
-        hi MoreMsg guibg=bg guifg=#a0a6cb gui=bold
-        hi NonText ctermfg=DarkGray guibg=bg guifg=#9a9fc7 gui=bold
-        hi Pmenu guibg=#7179b0 guifg=#000000 gui=none
-        hi PmenuSbar guibg=#50588f guifg=fg gui=none
-        hi PmenuThumb guibg=#c2c6de guifg=bg gui=none
-        hi SignColumn ctermbg=bg guibg=bg guifg=#9a9fc7 gui=none
-        hi StatusLine ctermbg=LightGray ctermfg=Black guibg=#3f4572 guifg=fg gui=bold
-        hi StatusLineNC ctermbg=DarkGray ctermfg=Black guibg=#2e3252 guifg=fg gui=none
-        hi TabLine guibg=#50588f guifg=fg gui=underline
-        hi TabLineFill guibg=#50588f guifg=fg gui=underline
-        hi VertSplit ctermbg=LightGray ctermfg=Black guibg=#2e3252 guifg=fg gui=none
+        hi FoldColumn ctermbg=bg guibg=bg guifg=#8fa5d1 gui=none
+        hi LineNr guifg=#8fa5d1 gui=none
+        hi MoreMsg guibg=bg guifg=#97abd5 gui=bold
+        hi NonText ctermfg=DarkGray guibg=bg guifg=#8fa5d1 gui=bold
+        hi Pmenu guibg=#6381be guifg=#000000 gui=none
+        hi PmenuSbar guibg=#41609e guifg=fg gui=none
+        hi PmenuThumb guibg=#bdcae3 guifg=bg gui=none
+        hi SignColumn ctermbg=bg guibg=bg guifg=#8fa5d1 gui=none
+        hi StatusLine ctermbg=LightGray ctermfg=Black guibg=#334b7d guifg=fg gui=bold
+        hi StatusLineNC ctermbg=DarkGray ctermfg=Black guibg=#25365a guifg=fg gui=none
+        hi TabLine guibg=#41609e guifg=fg gui=underline
+        hi TabLineFill guibg=#41609e guifg=fg gui=underline
+        hi VertSplit ctermbg=LightGray ctermfg=Black guibg=#25365a guifg=fg gui=none
         if s:moria_fontface == "mixed"
-            hi Folded guibg=#4e4e4e guifg=#c2c6de gui=bold
+            hi Folded guibg=#4e4e4e guifg=#bdcae3 gui=bold
         else
-            hi Folded guibg=#4e4e4e guifg=#c2c6de gui=none
+            hi Folded guibg=#4e4e4e guifg=#bdcae3 gui=none
         endif            
     endif
     hi Cursor guibg=#ffa500 guifg=bg gui=none
@@ -170,20 +170,20 @@ elseif &background == "light"
         hi TabLineFill guibg=#cdcdcd guifg=fg gui=underline
         hi VertSplit ctermbg=LightGray ctermfg=Black guibg=#b0b0b0 guifg=fg gui=none
     else
-        hi FoldColumn ctermbg=bg guibg=bg guifg=#444b7b gui=none
-        hi Folded guibg=#cfcfcf guifg=#2e3252 gui=bold
-        hi LineNr guifg=#444b7b gui=none
-        hi MoreMsg guibg=bg guifg=#383f67 gui=bold
-        hi NonText ctermfg=DarkGray guibg=bg guifg=#444b7b gui=bold
-        hi Pmenu guibg=#7d85b7 guifg=#000000 gui=none
-        hi PmenuSbar guibg=#5a64a5 guifg=fg gui=none
-        hi PmenuThumb guibg=#aeb3d2 guifg=fg gui=none
-        hi SignColumn ctermbg=bg guibg=bg guifg=#444b7b gui=none
-        hi StatusLine ctermbg=Black ctermfg=White guibg=#9a9fc7 guifg=fg gui=bold
-        hi StatusLineNC ctermbg=LightGray ctermfg=Black guibg=#aeb3d2 guifg=fg gui=none
-        hi TabLine guibg=#bec2dc guifg=fg gui=underline
-        hi TabLineFill guibg=#bec2dc guifg=fg gui=underline
-        hi VertSplit ctermbg=LightGray ctermfg=Black guibg=#aeb3d2 guifg=fg gui=none
+        hi FoldColumn ctermbg=bg guibg=bg guifg=#375288 gui=none
+        hi Folded guibg=#cfcfcf guifg=#25365a gui=bold
+        hi LineNr guifg=#375288 gui=none
+        hi MoreMsg guibg=bg guifg=#2f4471 gui=bold
+        hi NonText ctermfg=DarkGray guibg=bg guifg=#375288 gui=bold
+        hi Pmenu guibg=#708bc5 guifg=#000000 gui=none
+        hi PmenuSbar guibg=#4a6db5 guifg=fg gui=none
+        hi PmenuThumb guibg=#a6b7db guifg=fg gui=none
+        hi SignColumn ctermbg=bg guibg=bg guifg=#375288 gui=none
+        hi StatusLine ctermbg=Black ctermfg=White guibg=#8fa5d1 guifg=fg gui=bold
+        hi StatusLineNC ctermbg=LightGray ctermfg=Black guibg=#a6b7db guifg=fg gui=none
+        hi TabLine guibg=#b8c6e2 guifg=fg gui=underline
+        hi TabLineFill guibg=#b8c6e2 guifg=fg gui=underline
+        hi VertSplit ctermbg=LightGray ctermfg=Black guibg=#a6b7db guifg=fg gui=none
     endif
     hi Cursor guibg=#883400 guifg=bg gui=none
     hi DiffAdd guibg=#008b00 guifg=#ffffff gui=none

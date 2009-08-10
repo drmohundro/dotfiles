@@ -1,28 +1,29 @@
 " Vim color file
 " Maintaner: Radu Dineiu <radu.dineiu@gmail.com>
 " URL: http://ld.yi.org/vim/rdark/
-" Last Change: 2006 Dec 23
-" Version: 0.5
+" Last Change: 2007 Jun 23
+" Version: 0.6
 "
 " Features:
 "   - let rdark_current_line = 1 if you want to highlight the current line
 "
 " Changelog:
 "   0.5 - fixed the Pmenu colors
+"   0.6 - added SignColumn colors
 
 set background=dark
 
 hi clear
 if exists("syntax_on")
-	syntax reset
+        syntax reset
 endif
 
 let colors_name = "rdark"
 
 " Current Line
 if exists('rdark_current_line') && rdark_current_line == 1
-	set cursorline
-	hi CursorLine guibg=#191f21
+        set cursorline
+        hi CursorLine guibg=#191f21
 endif
 
 " Default Colors
@@ -44,6 +45,7 @@ hi MoreMsg guifg=#729fcf
 hi Question guifg=#8ae234 gui=none
 hi WildMenu guifg=#eeeeec guibg=#0e1416
 hi LineNr guifg=#3f4b4d guibg=#000000
+hi SignColumn guibg=#1e2426
 
 " Pmenu
 hi Pmenu guibg=#2e3436 guifg=#eeeeec
