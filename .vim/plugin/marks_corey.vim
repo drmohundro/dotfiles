@@ -387,11 +387,6 @@ if !hasmapto('<Plug>Goto_prev_sign')
 endif
 nnoremap <silent> <script> <Plug>Goto_prev_sign :call Goto_prev_sign()<cr>
 
-if !hasmapto('<Plug>Remove_all_signs') 
-  map <unique> <F4> <Plug>Remove_all_signs
-endif
-nnoremap <silent> <script> <Plug>Remove_all_signs :call Remove_all_signs()<cr>
-
 if !hasmapto('<Plug>Move_sign') 
   map <silent> <unique> m. <Plug>Move_sign
 endif

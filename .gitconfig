@@ -8,3 +8,9 @@
 	ui = auto
 [core]
 	editor = vim
+[merge]
+	tool = vimdiff
+[alias]
+	st = status
+	co = checkout
+	ci = commit

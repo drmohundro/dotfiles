@@ -1,31 +1,38 @@
-# enable bash / vim support
+###########################################################
+# GENERAL
+###########################################################
+
 set bash vim-support
 set -o vi
 
-# prompt setup
 PS1="\\[\\e]0;\\w\\a\\]\\n\\[\\e[32m\\]\\u@\\h \\[\\e[33m\\]\\w\\[\\e[0m\\]\\n\\\$ "
 
 source /etc/profile
 
-# shell options
 shopt -s checkwinsize
 
 # NOTE - assumes that 'mount -s --change-cygdrive-prefix /' has been run to
-
-# setup aliases
-alias ls='ls --color'
-alias grep='grep --color'
-alias diff='colordiff'
+export GIT_SSH=/c/Program\ Files/PuTTY/plink.exe
+export SHELL=bash
+export FIND_OPTIONS="-name .git -prune -o -name .hg -prune -o -name *.swp -prune -o -name _ReSharper.* -prune -o"
 
 # enable programmable completion features
 if [ -f /etc/bash_completion ]; then
 	. /etc/bash_completion
 fi
 
-# use vim to view git diffs (see http://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/)
-function git-diff() {
-	git diff --no-ext-diff -w "$@" | vim -R -
-}
+###########################################################
+# ALIASES
+###########################################################
 
-# clear previously set env variable from Windows
-RUBYOPT=''
+for file in $HOME/.bash/aliases/*.sh; do
+	source $file
+done
+
+###########################################################
+# FUNCTIONS
+###########################################################
+
+for file in $HOME/.bash/lib/*.sh; do
+	source $file
+done

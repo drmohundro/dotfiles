@@ -4,8 +4,10 @@
 
 !! Colors
 *cursorColor: #d3d7cf
-*background: #2e3436
-*foreground: #eeeeec
+URxvt*background: #2e3436
+URxvt*foreground: #eeeeec
+Rxvt*background: #2e3436
+Rxvt*foreground: #eeeeec
 ! Black
 *color0: #2e2326
 *color8: #555753
@@ -38,10 +40,9 @@ URxvt.tabbed.tab-fg: 0
 URxvt.tabbed.tab-bg: 7
 
 !! UI
-URxvt*scrollstyle: plain
-URxvt*scrollBar_right: true
-URxvt*font: xft:Bitstream Vera Sans Mono:size=12
-Urxvt*boldFont: xft:Bitstream Vera Sans Mono:size=12:style=Bold
+Rxvt*scrollstyle: plain
+Rxvt*scrollBar_right: true
+Rxvt*font: Droid Sans Mono-20
 
 !! Extensions
 URxvt*perl-ext-common: default,matcher
