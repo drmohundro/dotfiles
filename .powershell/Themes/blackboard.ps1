@@ -2,19 +2,19 @@
 # http://www.vim.org/scripts/script.php?script_id=2280
 
 # fonts
-$psISE.Options.FontName = 'DejaVu Sans Mono'
+$psISE.Options.FontName = 'Consolas'
 $psISE.Options.FontSize = 16
 
 # output pane
-$psISE.Options.OutputPaneBackground = '#FF333333'
-$psISE.Options.OutputPaneTextBackground = '#FF333333'
-$psISE.Options.OutputPaneForeground = '#FFFFFFFF'
+$psISE.Options.OutputPaneBackgroundColor = '#FF2E3436'
+$psISE.Options.OutputPaneTextBackgroundColor = '#FF2E3436'
+$psISE.Options.OutputPaneForegroundColor = '#FFFFFFFF'
 
 # command pane
-$psISE.Options.CommandPaneBackground = '#FF333333'
+$psISE.Options.CommandPaneBackgroundColor = '#FF2E3436'
 
 # script pane
-$psISE.Options.ScriptPaneBackground = '#FF333333'
+$psISE.Options.ScriptPaneBackgroundColor = '#FF2E3436'
 
 # tokens
 $psISE.Options.TokenColors['Command'] = '#FFFFFF60'

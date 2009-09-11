@@ -1,12 +1,10 @@
 if ($IsAdmin -and ([System.Environment]::OSVersion.Version.Major -gt 5)) {
 	$foreColor = 'White'
 	$backColor = 'DarkRed'
-	$promptForeColor = 'Gray'
 }
 else {
 	$foreColor = 'White'
 	$backColor = 'Black'
-	$promptForeColor = 'Green'
 }
 
 $hostTitle = {
@@ -30,10 +28,6 @@ $banner = {
 	else { $user += '.' }
 	
 	$user
-}
-
-function Shorten-Path([string] $path = $pwd) {
-	$path.Replace($HOME, '~')
 }
 
 function Update-HostTitle {

@@ -53,18 +53,14 @@ set showmatch  " show matching braces
 
 if has("gui_running")
 	if has("gui_gtk2")
-		"set gfn=DejuVu\ Sans\ Mono\ 14
 		set gfn=Mono\ 14
 	elseif has("gui_win32")
-		"set gfn=Consolas:h13
-		"set gfn=Envy_Code_R:h13
-		set gfn=DejaVu_Sans_Mono:h11:cANSI
+		set gfn=Consolas:h14
 	endif
 endif
 
 if has("gui_running")
-	"color morning
-	color jellybeans
+	color vilight
 else
 	color pablo
 endif
@@ -110,11 +106,12 @@ let g:fuzzy_matching_limit = 70
 let g:LustyExplorerSuppressRubyWarning = 1
 
 " Key mappings
-map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
-map <leader>t :FuzzyFinderTag<Return>
-map <C-T> :FuzzyFinderTextMate<Return>
-map <C-N> :FuzzyFinderFile<Return>
-map <C-L> :FuzzyFinderBuffer<Return>
+nnoremap <leader>d :NERDTreeToggle<cr>
+map <leader>t :FuzzyFinderTag<CR>
+map <C-T> :FuzzyFinderTextMate<CR>
+map <C-N> :FuzzyFinderFile<CR>
+map <C-L> :FuzzyFinderBuffer<CR>
+nnoremap <C-B> :BufExplorer<CR>
 
 " taglist settings
 let tlist_vbnet_settings = 'vbnet;s:subroutine;f:function;n:name;e:enum'
@@ -130,7 +127,11 @@ nnoremap j gj
 nnoremap gk k
 nnoremap gj j
 
-nnoremap <esc> :noh<return><esc>
+" make Y consistent with C and D
+nnoremap Y y$
+
+" hide highlighting
+nnoremap <esc> :noh<cr><esc>
 
 map H ^
 map L $
@@ -138,11 +139,17 @@ map L $
 set listchars=tab:>-,trail:.,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
-" When editing a file, always jump to the last cursor position
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-\   exe "normal g'\"" |
-\ endif
+"jump to last cursor position when opening a file
+"dont do it when writing a commit log entry
+autocmd BufReadPost * call SetCursorPosition()
+function! SetCursorPosition()
+    if &filetype !~ 'commit\c'
+        if line("'\"") > 0 && line("'\"") <= line("$")
+            exe "normal! g`\""
+            normal! zz
+        endif
+    end
+endfunction
 
 " Omnicomplete functions
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -207,3 +214,29 @@ function! s:RunShellCommand(cmdline)
   execute 'silent $read !'.escape(a:cmdline,'%#')
   1
 endfunction
+
+"snipmate setup
+source ~/.vim/snippets/support_functions.vim
+autocmd vimenter * call s:SetupSnippets()
+function! s:SetupSnippets()
+
+    "if we're in a rails env then read in the rails snippets
+    if filereadable("./config/environment.rb")
+        call ExtractSnips("~/.vim/snippets/ruby-rails", "ruby")
+        call ExtractSnips("~/.vim/snippets/eruby-rails", "eruby")
+    endif
+
+    call ExtractSnips("~/.vim/snippets/html", "eruby")
+    call ExtractSnips("~/.vim/snippets/html", "xhtml")
+    call ExtractSnips("~/.vim/snippets/html", "php")
+endfunction
+
+"visual search mappings
+function! s:VSetSearch()
+    let temp = @@
+    norm! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = temp
+endfunction
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>

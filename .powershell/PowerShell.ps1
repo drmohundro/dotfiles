@@ -2,6 +2,31 @@ $NTIdentity = ([Security.Principal.WindowsIdentity]::GetCurrent())
 $NTPrincipal = (new-object Security.Principal.WindowsPrincipal $NTIdentity)
 $IsAdmin = ($NTPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))	
 
+$global:shortenPathLength = 3
+
+function prompt {
+   $cdelim = [ConsoleColor]::DarkCyan
+   $chost = [ConsoleColor]::Green
+   $cloc = [ConsoleColor]::Cyan
+
+   write-host ' '
+   write-host "$([char]0x0A7) " -n -f $cloc
+   write-host ([Environment]::MachineName) -n -f $chost
+   write-host ' {' -n -f $cdelim
+   write-host (shorten-path (pwd).Path) -n -f $cloc
+   write-host '}' -f $cdelim -n
+   ' '
+} 
+
+function shorten-path([string] $path = $pwd) {
+   $loc = $path.Replace($HOME, '~')
+   # remove prefix for UNC paths
+   $loc = $loc -replace '^[^:]+::', ''
+   # make path shorter like tabs in Vim,
+   # handle paths starting with \\ and . correctly
+   return ($loc -replace "\\(\.?)([^\\]{$shortenPathLength})[^\\]*(?=\\)",'\$1$2')
+} 
+
 function Add-ToPath {
 	$args | foreach {
 		# the double foreach's are to handle calls like 'add-topath @(path1, path2) path3

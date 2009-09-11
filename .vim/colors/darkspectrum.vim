@@ -22,13 +22,13 @@ if version > 580
 endif
 let g:colors_name="darkspectrum"
 
-hi Normal guifg=#efefef guibg=#2A2A2A
+hi Normal guifg=#eeeeec guibg=#2e3436
 
 " highlight groups
 hi Cursor       guibg=#ffffff guifg=#000000
 hi CursorLine   guibg=#000000
 "hi CursorLine  guibg=#3e4446
-hi CursorColumn guibg=#464646
+hi CursorColumn guibg=#3e4446
 
 "hi DiffText     guibg=#4e9a06 guifg=#FFFFFF gui=bold
 "hi DiffChange   guibg=#4e9a06 guifg=#FFFFFF gui=bold
@@ -48,15 +48,15 @@ hi Folded       guibg=#000000 guifg=#FFFFFF gui=bold
 hi vimFold      guibg=#000000 guifg=#FFFFFF gui=bold
 hi FoldColumn   guibg=#000000 guifg=#FFFFFF gui=bold
 
-hi LineNr       guifg=#535353 guibg=#202020
-hi NonText      guifg=#535353 guibg=#202020
-hi Folded       guifg=#535353 guibg=#202020 gui=bold
-hi FoldeColumn  guifg=#535353 guibg=#202020 gui=bold
+hi LineNr       guifg=#555753 guibg=#000000
+hi NonText      guifg=#555753 guibg=#000000
+hi Folded       guifg=#555753 guibg=#000000 gui=bold
+hi FoldeColumn  guifg=#555753 guibg=#000000 gui=bold
 "hi VertSplit   guibg=#ffffff guifg=#ffffff gui=none
+hi VertSplit    guibg=#c0c0c0 guifg=#c0c0c0 gui=none
 
-hi VertSplit    guibg=#3C3C3C guifg=#3C3C3C gui=none
-hi StatusLine   guifg=#FFFFFF guibg=#3C3C3C gui=none
-hi StatusLineNC guifg=#808080 guibg=#3C3C3C gui=none
+hi StatusLine   guifg=#000000 guibg=#ffffff gui=none
+hi StatusLineNC guifg=#000000 guibg=#C0C0C0 gui=none
 
 hi ModeMsg      guifg=#fce94f
 hi MoreMsg      guifg=#fce94f
@@ -71,7 +71,7 @@ hi WarningMsg   guifg=#ef5939
 hi Number       guifg=#fcaf3e
 
 hi MatchParen   guibg=#ad7fa8 guifg=#FFFFFF
-hi Comment      guifg=#8a8a8a
+hi Comment      guifg=#888a85
 hi Constant     guifg=#ef5939 gui=none
 hi String       guifg=#fce94f
 hi Identifier   guifg=#729fcf
@@ -123,8 +123,8 @@ hi link schemeFunc      Statement
 "hi link bashSpecialVariables Constant
 
 " tabs (non gui)
-hi TabLine      guifg=#A3A3A3 guibg=#202020 gui=none
-hi TabLineFill  guifg=#535353 guibg=#202020 gui=none
+hi TabLine      guifg=#AAAAAA guibg=#000000 gui=none
+hi TabLineFill  guifg=#555753 guibg=#000000 gui=none
 hi TabLineSel   guifg=#FFFFFF gui=bold
 "hi TabLineSel  guifg=#FFFFFF guibg=#000000 gui=bold
 " vim: sw=4 ts=4

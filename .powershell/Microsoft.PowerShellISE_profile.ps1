@@ -2,19 +2,8 @@ $ProfileDir = (split-path $MyInvocation.MyCommand.Path -Parent)
 
 Push-Location $ProfileDir
 	. ./PowerShell.ps1
-#	. ./Themes/blackboard.ps1
+	. ./Themes/blackboard.ps1
 Pop-Location
-
-function prompt {
-	Write-Host ' '
-	Write-Host "$([Environment]::UserName)@$([Environment]::MachineName) " -foregroundColor Green -noNewLine
-	Write-Host $(Shorten-Path) -foregroundColor DarkBlue
-
-	Write-Host "$([char]0xBB)" -foregroundColor Green -noNewline
-	' '
-
-	Update-HostTitle
-}
 
 function ISE-CommentSelectedText {
     $text = $psISE.CurrentOpenedFile.Editor.SelectedText

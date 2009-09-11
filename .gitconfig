@@ -14,3 +14,9 @@
 	st = status
 	co = checkout
 	ci = commit
+[diff "ruby"]
+	funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
+[diff "csharp"]
+	funcname = ^ *\\(\\(namespace\\|public\\|protected\\|private\\|internal\\) .*\\)
+[diff "vb"]
+	funcname = ^ *\\(\\(Namespace\\|Public\\|Private\\|Protected\\|Friend\\) .*\\)
