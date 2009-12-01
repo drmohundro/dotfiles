@@ -38,31 +38,23 @@ set incsearch
 set hlsearch
 
 if has("gui_running")
-	set cursorline
-endif
-
-if has("gui_win32")
-	set shell=powershell.exe
-	set shellcmdflag=-noprofile\ -c
-	"set shellcmdflag=-c
-	set shellpipe=>
-	set shellredir=>
+    set cursorline
 endif
 
 set showmatch  " show matching braces
 
 if has("gui_running")
-	if has("gui_gtk2")
-		set gfn=Mono\ 14
-	elseif has("gui_win32")
-		set gfn=Consolas:h14
-	endif
+    if has("gui_gtk2")
+        set gfn=Mono\ 14
+    elseif has("gui_win32")
+        set gfn=Consolas:h14
+    endif
 endif
 
 if has("gui_running")
-	color vilight
+    color vilight
 else
-	color pablo
+    color pablo
 endif
 
 set background=dark  " favor dark backgrounds
@@ -75,15 +67,15 @@ set clipboard=unnamed   " yank to clipboard
 
 " if running gvim, default to a larger window
 if has("gui_running")
-	set lines=48
-	set columns=120
+    set lines=48
+    set columns=120
 
-	set guioptions-=T  " hide toolbar
-	set guioptions-=m  " hide menu
+    set guioptions-=T  " hide toolbar
+    set guioptions-=m  " hide menu
 endif
 
 " spaces instead of tabs
-" set expandtab
+set expandtab
 
 set tabstop=4
 set shiftwidth=4
@@ -104,6 +96,9 @@ let g:fuzzy_matching_limit = 70
 
 " ignore ruby warning from LustyExplorer
 let g:LustyExplorerSuppressRubyWarning = 1
+
+" bump max MRU limit
+let MRU_Max_Entries = 50
 
 " Key mappings
 nnoremap <leader>d :NERDTreeToggle<cr>
@@ -126,9 +121,6 @@ nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
-
-" make Y consistent with C and D
-nnoremap Y y$
 
 " hide highlighting
 nnoremap <esc> :noh<cr><esc>
@@ -195,7 +187,7 @@ let Tlist_File_Fold_Auto_Close = 1
 set backupdir=$TEMP,$TMP,.
 set directory=$TEMP,$TMP,.
 
-" 
+"
 " Don't autoindent with XMLEdit enabled
 "
 autocmd BufEnter *.xml setlocal indentexpr=
