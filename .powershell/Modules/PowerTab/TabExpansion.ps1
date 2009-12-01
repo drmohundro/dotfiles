@@ -34,7 +34,7 @@ function global:TabExpansion {
       $bottom.X += 5 
       $Rectangle = New-Object management.automation.host.rectangle( $Top , $Bottom)
       $OldBuffer = $Host.UI.RawUI.GetBufferContents($rectangle)
-      $message = $host.ui.rawui.NewBufferCellArray([string[]]@('[Tab]'),'Yellow','Blue')
+      $message = $host.ui.rawui.NewBufferCellArray(@('[Tab]'),[consolecolor]::Yellow,[consolecolor]::blue)
       $host.ui.rawui.SetBufferContents($Top,$message)
       $script:MessageHandle = 1 | select @{name='Top';expression={$top}}, @{name='Buffer';expression={,$OldBuffer}}
     }
@@ -150,6 +150,37 @@ function global:TabExpansion {
 $script:TabexpansionHasOutput = $true 
            break; 
         } 
+
+		'git (.*)' {
+			if (Test-Path .git) {
+				# git checkout
+				if ($lastBlock -match 'git checkout'){
+					git branch --no-color | %{ 
+						if ($_ -match "^\*?\s*(.*)"){ $matches[1] } 
+					} | Invoke-TabItemSelector -SelectionHandler $SelectionHandler
+				}
+      
+				# git add
+				elseif ($lastBlock -match 'git add'){
+					git ls-files --modified --other --exclude-standard | 
+						Invoke-TabItemSelector -SelectionHandler $SelectionHandler
+				}
+      
+				# git rm
+				elseif ($lastBlock -match 'git rm'){
+					git status | %{ 
+						if ($_ -match "^#\s+deleted:\s+(\S.+)$"){ 
+							$matches[1] 
+						} 
+					} | Invoke-TabItemSelector  -SelectionHandler $SelectionHandler
+				}
+
+				# standard commands
+				else {
+					$global:dsTabExpansion.Tables['Custom'].select("filter = 'git' AND text like '$($matches[1])*' AND type = 'Custom'") |% {$_.text}  | Invoke-TabItemSelector  -SelectionHandler $SelectionHandler
+				}
+			}
+		}
     }
 
     # evaluate last word 
@@ -599,7 +630,7 @@ $script:TabexpansionHasOutput = $true
 
   trap {
     if ($script:MessageHandle){
-      $message = $host.ui.rawui.NewBufferCellArray([string[]]@('[Err]'),'Yellow','Red')
+      $message = $host.ui.rawui.NewBufferCellArray(@('[Tab]'),[consolecolor]::Yellow,[consolecolor]::red)
       $host.ui.rawui.SetBufferContents($MessageHandle.Top,$message)
       sleep 1
       $host.ui.rawui.SetBufferContents($MessageHandle.Top,$MessageHandle.Buffer)

@@ -4,18 +4,40 @@ $IsAdmin = ($NTPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Admin
 
 $global:shortenPathLength = 3
 
-function prompt {
-   $cdelim = [ConsoleColor]::DarkCyan
-   $chost = [ConsoleColor]::Green
-   $cloc = [ConsoleColor]::Cyan
+# msysgit options - see http://code.google.com/p/msysgit/issues/detail?id=326&q=color&colspec=ID%20Type%20Status%20Priority%20Component%20Owner%20Summary#c5
+$env:LESS = 'FRSX'
+$env:TERM = 'cygwin'
 
-   write-host ' '
-   write-host "$([char]0x0A7) " -n -f $cloc
-   write-host ([Environment]::MachineName) -n -f $chost
-   write-host ' {' -n -f $cdelim
-   write-host (shorten-path (pwd).Path) -n -f $cloc
-   write-host '}' -f $cdelim -n
-   ' '
+function prompt {
+	$chost = [ConsoleColor]::Green
+	$cdelim = [ConsoleColor]::DarkCyan
+	$cloc = [ConsoleColor]::Cyan
+	$cbranch = [ConsoleColor]::Green
+	$cnotstaged = [ConsoleColor]::Yellow
+
+	write-host ' '
+
+	write-host ([Environment]::MachineName) -n -f $chost
+	write-host ' {' -n -f $cdelim
+	write-host (shorten-path (pwd).Path) -n -f $cloc
+	write-host '} ' -n -f $cdelim
+
+	$out = git symbolic-ref HEAD
+	if ($out -ne $null) {
+		$branch = $out.Substring($out.LastIndexOf('/') + 1)
+		$out = git diff-index --name-status HEAD
+		write-host "[$branch" -n -f $cbranch
+		if ($out -ne $null) {
+			write-host "*" -n -f $cnotstaged
+		}
+		write-host "]" -f $cbranch
+	}
+	else {
+		write-host ' '
+	}
+
+	write-host "»" -n -f $cloc
+	' '
 } 
 
 function shorten-path([string] $path = $pwd) {
@@ -53,6 +75,11 @@ Push-Location $ProfileDir
 	# Bring in prompt and other UI niceties
 	. ./EyeCandy.ps1
 
+	./Modules/PowerTab/Init-TabExpansion.ps1 -ConfigurationLocation $(Resolve-Path ./Modules/PowerTab/)
+
+	$PowerTabConfig.DefaultHandler = 'default'
+	$PowerTabConfig.TabActivityIndicator = $false
+
 	Update-TypeData ./TypeData/System.Type.ps1xml
 Pop-Location
 
@@ -86,3 +113,4 @@ Set-Alias which Get-Command
 Set-Alias less "$Env:PscxHome\Applications\Less-394\less.exe"
 Set-Alias grep Select-String
 Set-Alias sudo Elevate-Process
+Set-Alias color Out-ColorMatchInfo
