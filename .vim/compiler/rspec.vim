@@ -1,6 +1,6 @@
 " Vim compiler file
-" Language:		eRuby
-" Maintainer:		Doug Kearns <dougkearns@gmail.com>
+" Language:		RSpec
+" Maintainer:		Tim Pope <vimNOSPAM@tpope.org>
 " URL:			http://vim-ruby.rubyforge.org
 " Anon CVS:		See above site
 " Release Coordinator:	Doug Kearns <dougkearns@gmail.com>
@@ -8,7 +8,7 @@
 if exists("current_compiler")
   finish
 endif
-let current_compiler = "eruby"
+let current_compiler = "rspec"
 
 if exists(":CompilerSet") != 2		" older Vim always used :setlocal
   command -nargs=* CompilerSet setlocal <args>
@@ -17,21 +17,21 @@ endif
 let s:cpo_save = &cpo
 set cpo-=C
 
-if exists("eruby_compiler") && eruby_compiler == "eruby"
-  CompilerSet makeprg=eruby
-else
-  CompilerSet makeprg=erb
-endif
+CompilerSet makeprg=spec
 
 CompilerSet errorformat=
-    \eruby:\ %f:%l:%m,
-    \%+E%f:%l:\ parse\ error,
+    \%+W'%.%#'\ FAILED,
+    \%+I'%.%#'\ FIXED,
+    \%-Cexpected:%.%#,
+    \%-C\ \ \ \ \ got:%.%#,
+    \%E%.%#:in\ `load':\ %f:%l:%m,
+    \%C%f:%l:,
     \%W%f:%l:\ warning:\ %m,
     \%E%f:%l:in\ %*[^:]:\ %m,
     \%E%f:%l:\ %m,
-    \%-C%\tfrom\ %f:%l:in\ %.%#,
     \%-Z%\tfrom\ %f:%l,
-    \%-Z%p^,
+    \%-Z%p^%.%#,
+    \%-C%.%#,
     \%-G%.%#
 
 let &cpo = s:cpo_save

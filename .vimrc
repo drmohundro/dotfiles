@@ -157,6 +157,7 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd BufNewFile,BufRead *.vb set ft=vbnet
 autocmd BufNewFile,BufRead *.ps1 set ft=ps1
 autocmd BufNewFile,BufRead *.psm1 set ft=ps1
+autocmd BufNewFile,BufRead *.psd1 set ft=ps1
 autocmd BufNewFile,BufRead *.xaml set ft=xml
 autocmd BufNewFile,BufRead *.config set ft=xml
 autocmd BufNewFile,BufRead *.ps1xml set ft=xml
