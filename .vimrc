@@ -48,6 +48,8 @@ if has("gui_running")
         set gfn=Mono\ 14
     elseif has("gui_win32")
         set gfn=Consolas:h14
+    else
+        set gfn=Inconsolata:h20
     endif
 endif
 
@@ -102,10 +104,10 @@ let MRU_Max_Entries = 50
 
 " Key mappings
 nnoremap <leader>d :NERDTreeToggle<cr>
-map <leader>t :FuzzyFinderTag<CR>
+map <leader>t :FufTag<CR>
 map <C-T> :FuzzyFinderTextMate<CR>
-map <C-N> :FuzzyFinderFile<CR>
-map <C-L> :FuzzyFinderBuffer<CR>
+map <C-N> :FufFile<CR>
+map <C-L> :FufBuffer<CR>
 nnoremap <C-B> :BufExplorer<CR>
 
 " taglist settings
