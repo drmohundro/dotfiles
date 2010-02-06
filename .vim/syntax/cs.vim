@@ -9,7 +9,7 @@ set cpo&vim
 " type
 syn keyword csType			bool byte char decimal double float
 syn keyword csType                      int long object sbyte short string uint
-syn keyword csType                      ulong ushort void
+syn keyword csType                      ulong ushort var void
 " storage
 syn keyword csStorage			class delegate enum interface namespace
 syn keyword csStorage                   struct
