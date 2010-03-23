@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Types>
+	<Type> 
+        <Name>System.Diagnostics.Process</Name> 
+        <Members> 
+            <ScriptProperty> 
+                <Name>CommandLine</Name> 
+				<GetScriptBlock> 
+                    $id = $this.Id
+                    $result = Get-WmiObject win32_process -Filter "ProcessId = $id"
+                    $result.CommandLine
+				</GetScriptBlock> 
+			</ScriptProperty> 
+		</Members> 
+	</Type>
+</Types>

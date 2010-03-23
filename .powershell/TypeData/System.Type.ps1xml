@@ -8,7 +8,12 @@
 				<GetScriptBlock> 
 					$this.FullName
 					"`nConstructors`n"
-					$this.GetConstructors() | % {"$_"}
+					$this.GetConstructors() | %{ 
+						$out = 'Void .ctor(';
+						$out += ($_.GetParameters() | %{ "$_" }) -Join ", "
+						$out += ')' 
+						$out
+					}
 					"`nMethods`n" 
 					$this | gm -s | ft
 				</GetScriptBlock> 

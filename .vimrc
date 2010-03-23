@@ -54,7 +54,7 @@ if has("gui_running")
 endif
 
 if has("gui_running")
-    color vilight
+    color railscasts
 else
     color pablo
 endif
@@ -148,7 +148,10 @@ endfunction
 " Omnicomplete functions
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html 
+            \ set omnifunc=htmlcomplete#CompleteTags |
+            \ setlocal shiftwidth=2 |
+            \ setlocal tabstop=2
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP

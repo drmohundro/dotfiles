@@ -6,7 +6,7 @@ Push-Location $ProfileDir
 Pop-Location
 
 function ISE-CommentSelectedText {
-    $text = $psISE.CurrentOpenedFile.Editor.SelectedText
+    $text = $psISE.CurrentFile.Editor.SelectedText
     $lines = $text.Split("`n") | %{
         $_ -replace "^", "# "
     }
@@ -14,11 +14,11 @@ function ISE-CommentSelectedText {
         $lines[$lines.count -1] = ""
     }
     $text = [string]::Join("`n", $lines)
-    $psISE.CurrentOpenedFile.Editor.InsertText($text)
+    $psISE.CurrentFile.Editor.InsertText($text)
 }
 
 function ISE-UncommentSelectedText {
-    $text = $psISE.CurrentOpenedFile.Editor.SelectedText
+    $text = $psISE.CurrentFile.Editor.SelectedText
     $lines = $text.Split("`n") | %{
         $_ -replace "^ *# *", ""
     }
@@ -27,7 +27,7 @@ function ISE-UncommentSelectedText {
 }
 
 function ISE-ToggleCommenting {
-    if ($psISE.CurrentOpenedFile.Editor.SelectedText.StartsWith('#')) {
+    if ($psISE.CurrentFile.Editor.SelectedText.StartsWith('#')) {
         ISE-UncommentSelectedText       
     }
     else {

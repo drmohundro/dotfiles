@@ -11,7 +11,6 @@ source /etc/profile
 
 shopt -s checkwinsize
 
-# NOTE - assumes that 'mount -s --change-cygdrive-prefix /' has been run to
 export SHELL=bash
 export FIND_OPTIONS="-name .git -prune -o -name .hg -prune -o -name *.swp -prune -o -name _ReSharper.* -prune -o"
 

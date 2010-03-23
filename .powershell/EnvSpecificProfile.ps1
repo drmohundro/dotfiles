@@ -1,1 +1,0 @@
-$scripts = "c:\Dev\Scripts\"

@@ -22,15 +22,14 @@ function prompt {
 	write-host (shorten-path (pwd).Path) -n -f $cloc
 	write-host '} ' -n -f $cdelim
 
-	$out = git symbolic-ref HEAD
-	if ($out -ne $null) {
-		$branch = $out.Substring($out.LastIndexOf('/') + 1)
-		$out = git diff-index --name-status HEAD
-		write-host "[$branch" -n -f $cbranch
-		if ($out -ne $null) {
-			write-host "*" -n -f $cnotstaged
+    if (((Get-Command python) -ne $null) -and ((Get-Command vcprompt.py) -ne $null)) {
+        if ((Test-Path .svn) -or (Test-Path .git) -or (Test-Path .hg)) {
+            $vc = python "$((Get-Command vcprompt.py).Definition)"
+            write-host $vc -f Gray
 		}
-		write-host "]" -f $cbranch
+        else {
+            write-host ''
+        }
 	}
 	else {
 		write-host ' '
@@ -38,6 +37,8 @@ function prompt {
 
 	write-host "»" -n -f $cloc
 	' '
+
+    $host.UI.RawUI.ForegroundColor = [ConsoleColor]::White
 } 
 
 function shorten-path([string] $path = $pwd) {
@@ -56,21 +57,20 @@ function Add-ToPath {
 	}
 }
 
-Add-PSSnapin Pscx
+Import-Module Pscx -DisableNameChecking
 $Pscx:Preferences['TextEditor'] = "gvim.exe"
 $Pscx:Preferences['FileSizeInUnits'] = $true
-$Pscx:Preferences['UpdateFileSystemFormatData'] = $true
-$Pscx:Preferences['DotSource/Cd.ps1'] = $true  
-$Pscx:Preferences["ImportVisualStudioVars"] = $true
-. "$Pscx:ProfileDir\PscxConfig.ps1"
+
+$vcargs = ?: {$Pscx:Is64BitProcess} {'amd64'} {''}
+$VS90VCVarsBatchFile = "${env:VS90COMNTOOLS}..\..\VC\vcvarsall.bat"
+Invoke-BatchFile $VS90VCVarsBatchFile $vcargs
+
+# override the PSCX cmdlets with the default cmdlet
+Set-Alias Select-Xml Microsoft.PowerShell.Utility\Select-Xml
 
 Push-Location $ProfileDir
 	# Bring in env-specific functionality (i.e. work-specific dev stuff, etc.)
 	If (Test-Path ./EnvSpecificProfile.ps1) { . ./EnvSpecificProfile.ps1 }
-
-	if (Test-Path variable:scripts) {
-		Add-ToPath $scripts
-	}
 
 	# Bring in prompt and other UI niceties
 	. ./EyeCandy.ps1
@@ -81,6 +81,7 @@ Push-Location $ProfileDir
 	$PowerTabConfig.TabActivityIndicator = $false
 
 	Update-TypeData ./TypeData/System.Type.ps1xml
+    Update-TypeData ./TypeData/System.Diagnostics.Process.ps1xml
 Pop-Location
 
 function Get-AliasShortcut([string]$commandName) {
@@ -95,8 +96,7 @@ function Start-VisualStudio([string]$path) {
 	& devenv /edit $path
 }
 
-function Elevate-Process
-{
+function Elevate-Process {
 	$file, [string]$arguments = $args
 	$psi = new-object System.Diagnostics.ProcessStartInfo $file
 	$psi.Arguments = $arguments
@@ -104,6 +104,7 @@ function Elevate-Process
 	$psi.WorkingDirectory = Get-Location
 	[System.Diagnostics.Process]::Start($psi)
 }
+
 
 Set-Alias vs Start-VisualStudio
 Set-Alias gas Get-AliasShortcut
