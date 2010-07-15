@@ -1,73 +1,66 @@
-" Vim indent file
-" Language:	HAML
-" Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Last Change:	2008 Sep 11
+" Vim filetype plugin
+" Language:		Haml
+" Maintainer:		Tim Pope <vimNOSPAM@tpope.info>
 
-if exists("b:did_indent")
-  finish
-endif
-runtime! indent/ruby.vim
-unlet! b:did_indent
-let b:did_indent = 1
-
-setlocal autoindent sw=2 et
-setlocal indentexpr=GetHamlIndent()
-setlocal indentkeys=o,O,*<Return>,},],0),!^F,=end,=else,=elsif,=rescue,=ensure,=when
-
-" Only define the function once.
-if exists("*GetHamlIndent")
+" Only do this when not done yet for this buffer
+if exists("b:did_ftplugin")
   finish
 endif
 
-let s:attributes = '\%({.\{-\}}\|\[.\{-\}\]\)'
-let s:tag = '\%([%.#][[:alnum:]_-]\+\|'.s:attributes.'\)*[<>]*'
+let s:save_cpo = &cpo
+set cpo-=C
 
-if !exists('g:haml_self_closing_tags')
-  let g:haml_self_closing_tags = 'meta|link|img|hr|br'
+" Define some defaults in case the included ftplugins don't set them.
+let s:undo_ftplugin = ""
+let s:browsefilter = "All Files (*.*)\t*.*\n"
+let s:match_words = ""
+
+runtime! ftplugin/html.vim ftplugin/html_*.vim ftplugin/html/*.vim
+unlet! b:did_ftplugin
+
+" Override our defaults if these were set by an included ftplugin.
+if exists("b:undo_ftplugin")
+  let s:undo_ftplugin = b:undo_ftplugin
+  unlet b:undo_ftplugin
+endif
+if exists("b:browsefilter")
+  let s:browsefilter = b:browsefilter
+  unlet b:browsefilter
+endif
+if exists("b:match_words")
+  let s:match_words = b:match_words
+  unlet b:match_words
 endif
 
-function! GetHamlIndent()
-  let lnum = prevnonblank(v:lnum-1)
-  if lnum == 0
-    return 0
-  endif
-  let line = substitute(getline(lnum),'\s\+$','','')
-  let cline = substitute(substitute(getline(v:lnum),'\s\+$','',''),'^\s\+','','')
-  let lastcol = strlen(line)
-  let line = substitute(line,'^\s\+','','')
-  let indent = indent(lnum)
-  let cindent = indent(v:lnum)
-  if cline =~# '\v^-\s*%(elsif|else|when)>'
-    let indent = cindent < indent ? cindent : indent - &sw
-  endif
-  let increase = indent + &sw
-  if indent == indent(lnum)
-    let indent = cindent <= indent ? -1 : increase
-  endif
-  "let indent = indent == indent(lnum) ? -1 : indent
-  "let indent = indent > indent(lnum) + &sw ? indent(lnum) + &sw : indent
+runtime! ftplugin/ruby.vim ftplugin/ruby_*.vim ftplugin/ruby/*.vim
+let b:did_ftplugin = 1
 
-  let group = synIDattr(synID(lnum,lastcol,1),'name')
+" Combine the new set of values with those previously included.
+if exists("b:undo_ftplugin")
+  let s:undo_ftplugin = b:undo_ftplugin . " | " . s:undo_ftplugin
+endif
+if exists ("b:browsefilter")
+  let s:browsefilter = substitute(b:browsefilter,'\cAll Files (\*\.\*)\t\*\.\*\n','','') . s:browsefilter
+endif
+if exists("b:match_words")
+  let s:match_words = b:match_words . ',' . s:match_words
+endif
 
-  if line =~ '^!!!'
-    return indent
-  elseif line =~ '^/\%(\[[^]]*\]\)\=$'
-    return increase
-  elseif line =~ '^:'
-    return increase
-  elseif line =~ '^'.s:tag.'[=~-]\s*\%(\%(if\|else\|elsif\|unless\|case\|when\|while\|until\|for\|begin\|module\|class\|def\)\>\%(.*\<end\>\)\@!\|.*do\%(\s*|[^|]*|\)\=\s*$\)'
-    return increase
-  elseif line == '-#'
-    return increase
-  elseif group =~? '\v^(hamlSelfCloser)$' || line =~? '^%\v%('.g:haml_self_closing_tags.')>'
-    return indent
-  elseif group =~? '\v^%(hamlTag|hamlAttributesDelimiter|hamlObjectDelimiter|hamlClass|hamlId|htmlTagName|htmlSpecialTagName)$'
-    return increase
-  elseif synIDattr(synID(v:lnum,1,1),'name') ==? 'hamlRubyFilter'
-    return GetRubyIndent()
-  else
-    return indent
-  endif
-endfunction
+" Change the browse dialog on Win32 to show mainly Haml-related files
+if has("gui_win32")
+  let b:browsefilter="Haml Files (*.haml)\t*.haml\nSass Files (*.sass)\t*.sass\n" . s:browsefilter
+endif
+
+" Load the combined list of match_words for matchit.vim
+if exists("loaded_matchit")
+  let b:match_words = s:match_words
+endif
+
+setlocal comments= commentstring=-#\ %s
+
+let b:undo_ftplugin = "setl cms< com< "
+      \ " | unlet! b:browsefilter b:match_words | " . s:undo_ftplugin
+
+let &cpo = s:save_cpo
 
 " vim:set sw=2:

@@ -1,240 +1,250 @@
 " Author: David Mohundro <drmohundro@gmail.com>
-" Version: 1.1
+" Version: 1.3
 " Url: http://www.mohundro.com/blog/
+"
+" Notes:
+" Significant portions of this are courtesy of Tim Pope's vim settings from http://git.tpope.net/tpope.git
 
-set runtimepath=~/.vim,$VIMRUNTIME,~/.vim/after
+" Section: Options {{{1
+if has("win32")
+  set runtimepath=~/.vim,$VIMRUNTIME
+end
 
-source $VIMRUNTIME/macros/matchit.vim
+silent! call pathogen#runtime_append_all_bundles()
+" silent! call pathogen#runtime_prepend_subdirectories("~/src/vim/bundle")
 
+set tabstop=2
+set shiftwidth=2
+
+set nocompatible
 set history=100
-set ruler
 set number
-set showcmd
-set nowrap
-set diffopt+=iwhite
-set statusline=%f%m%r%h%w\ [%{&ff}]%y\ %=[%l,%v][%p%%]
-set laststatus=2
-set hidden
-set title
-set scrolloff=3
-set nrformats=hex
-set splitright
-set splitbelow
-set mouse=a
-set shortmess=atI
-
-" enable 256 color support in the terminal
-set t_Co=256
-
-" intuitive backspacing in insert mode
-set backspace=indent,eol,start 
-
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
-
-set incsearch
-set hlsearch
-
-if has("gui_running")
-    set cursorline
-endif
-
-set showmatch  " show matching braces
-
-if has("gui_running")
-    if has("gui_gtk2")
-        set gfn=Mono\ 14
-    elseif has("gui_win32")
-        set gfn=Consolas:h14
-    else
-        set gfn=Inconsolata:h20
-    endif
-endif
-
-if has("gui_running")
-    color railscasts
-else
-    color pablo
-endif
-
-set background=dark  " favor dark backgrounds
-
-" set pretty autocomplete on commands
-set wildmenu
-set wildmode=list:longest
-
-set clipboard=unnamed   " yank to clipboard
-
-" if running gvim, default to a larger window
-if has("gui_running")
-    set lines=48
-    set columns=120
-
-    set guioptions-=T  " hide toolbar
-    set guioptions-=m  " hide menu
-endif
-
-" spaces instead of tabs
-set expandtab
-
-set tabstop=4
-set shiftwidth=4
-
-" be smart with indenting
 set autoindent
-set smartindent
-
-" ignore case when performing searches (unless typed explicitly with mixed case)
+set backspace=indent,eol,start    " intuitive backspaceing
+set showbreak=>\  
+set clipboard=unnamed             " default to the system clipboard
+set display=lastline
+set expandtab
+set hidden
+set hlsearch
+set incsearch
+set laststatus=2
+set listchars=tab:>-,trail:.,eol:$
+set mousemodel=popup
+set scrolloff=3
+set showcmd
+set showmatch
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%{exists('*rails#statusline')?rails#statusline():''}%{exists('*fugitive#statusline')?fugitive#statusline():''}%#ErrorMsg#%{exists('*SyntasticStatuslineFlag')?SyntasticStatuslineFlag():''}%*%=%-16(\ %l,%c-%v\ %)%P
 set ignorecase
 set smartcase
+set smarttab
+set splitbelow
+set splitright
+set spelllang=en_us
+set wildmenu
+set wildmode=list:longest
+set winaltkeys=no
+set foldmethod=marker
+set mouse=a
+set virtualedit=block
+set lines=44
+set columns=126
 
+set t_Co=256                      " enable 256 color support in the terminal
+
+syntax on
+filetype plugin indent on
+
+set backupdir=$TEMP,$TMP,.
+set directory=$TEMP,$TMP,.
+
+" Plugin Options: {{{2
+
+let MRU_Max_Entries = 50
+let NERDTreeWinPos = 'right'
+let xml_use_xhtml = 1
+let xml_use_html = 1
+
+" }}}2
+" }}}1
+" Section: Commands {{{1
+
+if has("eval")
+  command! -bar -nargs=0 -bang Scratch :silent edit<bang> \[Scratch]|set buftype=nofile bufhidden=hide noswapfile buflisted
+  command! -bar -nargs=* -bang -complete=file Rename :
+        \ let v:errmsg = ""|
+        \ saveas<bang> <args>|
+        \ if v:errmsg == ""|
+        \   call delete(expand("#"))|
+        \ endif
+  command! -bar Invert :let &background = (&background=="light"?"dark":"light")
+
+  function! OpenURL(url)
+    if has("win32")
+      exe "!start cmd /cstart /b ".a:url.""
+    elseif $DISPLAY !~ '^\w'
+      exe "silent !sensible-browser \"".a:url."\""
+    else
+      exe "silent !sensible-browser -T \"".a:url."\""
+    endif
+    redraw!
+  endfunction
+  command! -nargs=1 OpenURL :call OpenURL(<q-args>)
+
+  function! Run()
+    let old_makeprg = &makeprg
+    let cmd = matchstr(getline(1),'^#!\zs[^ ]*')
+    if exists("b:run_command")
+      exe b:run_command
+    elseif cmd != '' && executable(cmd)
+      wa
+      let &makeprg = matchstr(getline(1),'^#!\zs.*').' %'
+      make
+    elseif &ft == "mail" || &ft == "text" || &ft == "help" || &ft == "gitcommit"
+      setlocal spell!
+    elseif exists("b:rails_root") && exists(":Rake")
+      wa
+      Rake
+    elseif &ft == "ruby"
+      wa
+      if executable(expand("%:p")) || getline(1) =~ '^#!'
+        compiler ruby
+        let &makeprg = "ruby"
+        make %
+      elseif expand("%:t") =~ '_test\.rb$'
+        compiler rubyunit
+        let &makeprg = "ruby"
+        make %
+      elseif expand("%:t") =~ '_spec\.rb$'
+        compiler ruby
+        let &makeprg = "spec"
+        make %
+      else
+        !irb -r"%:p"
+      endif
+    elseif &ft == "html" || &ft == "xhtml" || &ft == "php" || &ft == "aspvbs" || &ft == "aspperl"
+      wa
+      if !exists("b:url")
+        call OpenURL(expand("%:p"))
+      else
+        call OpenURL(b:url)
+      endif
+    elseif &ft == "vim"
+      wa
+      unlet! g:loaded_{expand("%:t:r")}
+      return 'source %'
+    elseif &ft == "sql"
+      1,$DBExecRangeSQL
+    elseif expand("%:e") == "tex"
+      wa
+      exe "normal :!rubber -f %:r && xdvi %:r >/dev/null 2>/dev/null &\<CR>"
+    else
+      wa
+      if &makeprg =~ "%"
+        make
+      else
+        make %
+      endif
+    endif
+    let &makeprg = old_makeprg
+    return ""
+  endfunction
+  command! -bar Run :execute Run()
+
+  function! s:VSetSearch()
+      let temp = @@
+      norm! gvy
+      let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+      let @@ = temp
+  endfunction
+  vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+  vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+endif
+
+" }}}1
+" Section: Mappings {{{1
 let mapleader=","
 
-" FuzzyFinderTextMate settings
-let g:fuzzy_ignore = "*.log;*.dll;*.pdb;*.exe;*.baml;*.cache;*.suo;**/obj/*;**/bin/Debug/*;_ReSharper*;*.resharper;*.user"
-let g:fuzzy_matching_limit = 70
-
-" ignore ruby warning from LustyExplorer
-let g:LustyExplorerSuppressRubyWarning = 1
-
-" bump max MRU limit
-let MRU_Max_Entries = 50
-
-" Key mappings
-nnoremap <leader>d :NERDTreeToggle<cr>
-map <leader>t :FufTag<CR>
-map <C-T> :FuzzyFinderTextMate<CR>
-map <C-N> :FufFile<CR>
-map <C-L> :FufBuffer<CR>
-nnoremap <C-B> :BufExplorer<CR>
-
-" taglist settings
-let tlist_vbnet_settings = 'vbnet;s:subroutine;f:function;n:name;e:enum'
-
-nnoremap ' `
-nnoremap ` '
+nmap <silent> <leader>s :set nolist!<CR>
 
 nnoremap J <C-d>
+vnoremap J <C-d>
 nnoremap K <C-u>
+vnoremap K <C-u>
 
 nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
 
-" hide highlighting
-nnoremap <esc> :noh<cr><esc>
-
 map H ^
 map L $
 
-set listchars=tab:>-,trail:.,eol:$
-nmap <silent> <leader>s :set nolist!<CR>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 
-"jump to last cursor position when opening a file
-"dont do it when writing a commit log entry
-autocmd BufReadPost * call SetCursorPosition()
-function! SetCursorPosition()
-    if &filetype !~ 'commit\c'
-        if line("'\"") > 0 && line("'\"") <= line("$")
-            exe "normal! g`\""
-            normal! zz
-        endif
-    end
-endfunction
+map \\ <Plug>NERDCommenterInvert
+map <C-l> :FufBuffer<CR>
+map <M-t> :CommandT<CR>
 
-" Omnicomplete functions
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html 
-            \ set omnifunc=htmlcomplete#CompleteTags |
-            \ setlocal shiftwidth=2 |
-            \ setlocal tabstop=2
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-
-" Automatically figure out formatting
-autocmd BufNewFile,BufRead *.vb set ft=vbnet
-autocmd BufNewFile,BufRead *.ps1 set ft=ps1
-autocmd BufNewFile,BufRead *.psm1 set ft=ps1
-autocmd BufNewFile,BufRead *.psd1 set ft=ps1
-autocmd BufNewFile,BufRead *.xaml set ft=xml
-autocmd BufNewFile,BufRead *.config set ft=xml
-autocmd BufNewFile,BufRead *.ps1xml set ft=xml
-autocmd BufNewFile,BufRead *.vbproj set ft=xml
-autocmd BufNewFile,BufRead *.csproj set ft=xml
-
-" Stop beeping and flashing!
-autocmd VimEnter * set vb t_vb=
-
-"
-" XMLEdit Settings
-"
-let xml_use_xhtml = 1
-
-" taglist plugin Settings (from http://dancingpenguinsoflight.com/2009/02/code-navigation-completion-snippets-in-vim/)
-let g:ctags_statusline = 1
-let generate_tags = 1
-let Tlist_Use_Horiz_Window = 0
-nnoremap TT :TlistToggle<CR>
-map <F4> :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
-let Tlist_Compact_Format = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_File_Fold_Auto_Close = 1
+map <F4> :TlistToggle<CR>
 
-" customize backup directories
-set backupdir=$TEMP,$TMP,.
-set directory=$TEMP,$TMP,.
+nnoremap <Esc> :noh<CR><Esc>
+nnoremap <Leader>d :NERDTreeToggle<CR>
+" }}}1
+" Section: Autocommands {{{1
 
-"
-" Don't autoindent with XMLEdit enabled
-"
-autocmd BufEnter *.xml setlocal indentexpr=
+if has("autocmd")
+  autocmd VimEnter * set vb t_vb=        " Stop beeping and flashing!
 
-"
-" Usage - :Shell <command>
-" The result of the command will be put in a new vertical split scratch
-" window.
-"
-command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
-  botright vnew
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  call setline(1,a:cmdline)
-  call setline(2,substitute(a:cmdline,'.','=','g'))
-  execute 'silent $read !'.escape(a:cmdline,'%#')
-  1
-endfunction
+  augroup FTDetect " {{{2
+    autocmd BufNewFile,BufRead *.vb set ft=vbnet
+    autocmd BufNewFile,BufRead *.ps1 set ft=ps1
+    autocmd BufNewFile,BufRead *.psm1 set ft=ps1
+    autocmd BufNewFile,BufRead *.psd1 set ft=ps1
+    autocmd BufNewFile,BufRead *.md,*.markdown set ft=mkd
+    autocmd BufNewFile,BufRead *.json set ft=javascript
+    autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
+  augroup END "}}}2
+  augroup FTOptions " {{{2
+    autocmd FileType c,cpp,cs,java          setlocal ai et sta sw=4 sts=4 ts=4 cin
+    autocmd FileType ps1                    setlocal ai et sta sw=4 sts=4 ts=4 cin cino+=+0 cink-=0#
+    autocmd FileType sql,vbnet              setlocal ai et sta sw=4 sts=4 ts=4
+    autocmd FileType javascript             setlocal ai et sta sw=2 sts=2 ts=2 cin isk+=$
+    autocmd FileType vbnet                  runtime! indent/vb.vim
+  augroup END " }}}2
+endif
 
-"snipmate setup
-source ~/.vim/snippets/support_functions.vim
-autocmd vimenter * call s:SetupSnippets()
-function! s:SetupSnippets()
+" }}}1
+" Section: Visual {{{1
 
-    "if we're in a rails env then read in the rails snippets
-    if filereadable("./config/environment.rb")
-        call ExtractSnips("~/.vim/snippets/ruby-rails", "ruby")
-        call ExtractSnips("~/.vim/snippets/eruby-rails", "eruby")
-    endif
+if has("gui_running")
+  set cursorline
+  color railscasts
 
-    call ExtractSnips("~/.vim/snippets/html", "eruby")
-    call ExtractSnips("~/.vim/snippets/html", "xhtml")
-    call ExtractSnips("~/.vim/snippets/html", "php")
-endfunction
+  set guioptions=egt
 
-"visual search mappings
-function! s:VSetSearch()
-    let temp = @@
-    norm! gvy
-    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@ = temp
-endfunction
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+  if has("mac")
+    set guifont=Inconsolata:h20
+  elseif has("unix")
+    set guifont=Mono\ 14
+  elseif has("win32")
+    set guifont=Consolas:h12
+  endif
+else
+  color pablo
+endif
+
+if (&t_Co > 2 || has("gui_running")) && has("syntax")
+  command! -bar -nargs=0 Bigger  :let &guifont = substitute(&guifont,'\d\+$','\=submatch(0)+1','')
+  command! -bar -nargs=0 Smaller :let &guifont = substitute(&guifont,'\d\+$','\=submatch(0)-1','')
+  noremap <M-,>        :Smaller<CR>
+  noremap <M-.>        :Bigger<CR>
+endif
+
+" }}}1
+
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif

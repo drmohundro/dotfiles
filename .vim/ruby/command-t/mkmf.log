@@ -1,0 +1,10 @@
+have_header: checking for ruby.h... -------------------- yes
+
+"gcc -E -I. -IC:/Ruby187/lib/ruby/1.8/i386-mingw32 -I.    -g -O2 -DFD_SETSIZE=256     conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <ruby.h>
+/* end */
+
+--------------------
+
