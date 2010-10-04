@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/vim-vividchalk"]
 	path = .vim/bundle/vim-vividchalk
 	url = http://github.com/tpope/vim-vividchalk.git
+[submodule ".vim/bundle/vim-railscasts-theme"]
+	path = .vim/bundle/vim-railscasts-theme
+	url = http://github.com/drmohundro/vim-railscasts-theme.git
