@@ -183,7 +183,7 @@ vnoremap <s-tab> <gv
 nnoremap <esc> :noh<cr><esc>
 
 map \\ <plug>NERDCommenterInvert
-"map <c-l> :FufBuffer<cr>
+map <c-l> :FufBuffer<cr>
 "map <m-t> :FuzzyFinderTextMate
 
 "map <f4> :TlistToggle<cr>
@@ -195,7 +195,6 @@ nnoremap <leader>d :NERDTreeToggle<cr>
 
 if has("autocmd")
   autocmd VimEnter * set vb t_vb= " Stop beeping and flashing!
-  autocmd FocusLost * :wa
 
   augroup FTDetect "{{{2
     autocmd BufNewFile,BufRead *.vb set ft=vbnet
@@ -204,6 +203,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.psd1 set ft=ps1
     autocmd BufNewFile,BufRead *.md,*.markdown set ft=markdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
+    autocmd BufNewFile,BufRead *.build set ft=xml
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
   augroup END "}}}2
   augroup FTOptions "{{{2
