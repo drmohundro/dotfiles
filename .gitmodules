@@ -61,3 +61,6 @@
 [submodule ".vim/bundle/gundo.vim"]
 	path = .vim/bundle/gundo.vim
 	url = http://github.com/sjl/gundo.vim.git
+[submodule ".vim/bundle/vimwiki"]
+	path = .vim/bundle/vimwiki
+	url = http://github.com/vim-scripts/vimwiki.git
