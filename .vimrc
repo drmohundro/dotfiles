@@ -153,6 +153,8 @@ if (&t_Co > 2 || has("gui_running")) && has("syntax")
   noremap <M-.> :Bigger<CR>
 endif
 
+command! -bar StripTrailingWhitespace :%s/\s\+$//
+
 " }}}1
 " Section: Mappings {{{1
 
