@@ -67,3 +67,6 @@
 [submodule "vim/bundle/l9"]
 	path = vim/bundle/l9
 	url = https://github.com/vim-scripts/L9.git
+[submodule "vim/bundle/jslint"]
+	path = vim/bundle/jslint
+	url = https://github.com/mattn/jslint.vim.git
