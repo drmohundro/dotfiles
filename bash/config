@@ -1,0 +1,26 @@
+set -o vi
+
+PS1="\n\[$GREEN\]\u@\h\[$NO_COLOR\] \[$YELLOW\]\w\[$NO_COLOR\] \[$CYAN\]\$(vcprompt.py)\[$NO_COLOR\]\n$ "
+
+shopt -s checkwinsize
+
+pdfman() {
+    man -t $1 | open -a /Applications/Preview.app -f
+}
+
+spotlightfile() {
+    mdfind "kMDItemDisplayName == '$@'wc";
+}
+
+spotlightcontent() {
+    mdfind -interpret "$@";
+}
+
+if [ -f /opt/local/etc/bash_completion ]; then
+    . /opt/local/etc/bash_completion
+    source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash   
+fi
+
+source ~/.bash/autojumpconfig
+
+if [[ -s /Users/david/.rvm/scripts/rvm ]] ; then source /Users/david/.rvm/scripts/rvm ; fi

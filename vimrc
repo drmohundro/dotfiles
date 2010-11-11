@@ -48,8 +48,7 @@ set laststatus=2
 set listchars=tab:>-,trail:.,eol:¬
 set mouse=a
 set mousemodel=popup
-"set number
-set relativenumber
+set number
 set scrolloff=3
 set showbreak=>\
 set showcmd

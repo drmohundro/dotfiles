@@ -1,0 +1,15 @@
+case $( uname -s ) in
+    Linux )
+        alias ls='ls --color=auto'
+        ;;
+    Darwin )
+        export LSCOLORS="ExfxcxdxbxEgEdabagacad"
+        alias ls='ls -G'
+        alias vim='mvim -v'
+        alias gvimdiff='mvim -d'
+        ;;
+esac
+
+alias grep='grep --color'
+alias diff=colordiff
+alias git=hub
