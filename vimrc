@@ -12,11 +12,6 @@ end
 
 " }}}1
 
-if has("win32")
-  " let me use ~/.vim on Windows, too
-  set runtimepath=~/.vim,$VIMRUNTIME
-end
-
 filetype off
 silent! call pathogen#runtime_append_all_bundles()
 
