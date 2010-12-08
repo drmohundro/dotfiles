@@ -152,6 +152,16 @@ if (&t_Co > 2 || has("gui_running")) && has("syntax")
   noremap <M-.> :Bigger<CR>
 endif
 
+" In visual mode, search for selected text under cursor
+function! s:VSetSearch()
+    let temp = @@
+    norm! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = temp
+endfunction
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+
 command! -bar StripTrailingWhitespace :%s/\s\+$//
 
 " }}}1
