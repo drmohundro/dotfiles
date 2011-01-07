@@ -149,15 +149,23 @@ endif
 
 " In visual mode, search for selected text under cursor
 function! s:VSetSearch()
-    let temp = @@
-    norm! gvy
-    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@ = temp
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
 endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
 command! -bar StripTrailingWhitespace :%s/\s\+$//
+
+function! AutowrapLines()
+  set textwidth=78
+  set formatoptions=cqt
+  set wrapmargin=0
+endfunction
+
+command! -bar AutowrapLines :execute AutowrapLines()
 
 " }}}1
 " Section: Mappings {{{1
