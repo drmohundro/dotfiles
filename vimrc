@@ -14,6 +14,7 @@ end
 
 filetype off
 silent! call pathogen#runtime_append_all_bundles()
+silent! call pathogen#helptags()
 
 " Section: Options {{{1
 
@@ -59,14 +60,14 @@ set wildmenu
 set wildmode=list:longest
 set winaltkeys=no
 
-"set t_Co=256                      " enable 256 color support in the terminal
-
 set backupdir=$TEMP,$TMP,.
 set directory=$TEMP,$TMP,.
 
 let MRU_Max_Entries = 50
 let NERDTreeWinPos = 'right'
 let Tlist_Use_Right_Window = 1
+
+let g:CSApprox_verbose_level = 0
 
 " }}}1
 " Section: Commands {{{1
@@ -232,10 +233,9 @@ endif
 " }}}1
 " Section: Visual {{{1
 
+color railscasts
 if has("gui_running")
   set cursorline
-  color railscasts
-
   set guioptions=egt
 
   set lines=44
@@ -249,7 +249,9 @@ if has("gui_running")
     set guifont=Inconsolata:h16
   endif
 else
-  color pablo
+  if &t_Co != 256
+    color pablo
+  end
 endif
 
 " }}}1

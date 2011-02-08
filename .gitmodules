@@ -82,3 +82,6 @@
 [submodule "vim/bundle/vim-indent-guides"]
 	path = vim/bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim/bundle/csapprox"]
+	path = vim/bundle/csapprox
+	url = https://github.com/godlygeek/csapprox.git
