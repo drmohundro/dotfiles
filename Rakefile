@@ -32,6 +32,17 @@ task :install do
   end
 end
 
+desc "update all vim bundles to latest from master"
+task :update_bundles do
+  root = Dir.pwd
+  Dir['vim/bundle/*'].each do |bundle|
+    Dir.chdir(bundle)
+    `git co master`
+    `git pull`
+    Dir.chdir(root)
+  end
+end
+
 def replace_file(file)
   FileUtils.rm_rf "#{ENV['HOME']}/.#{file.sub('.erb', '')}"
   link_file(file)

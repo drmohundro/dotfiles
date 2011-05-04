@@ -1,4 +1,4 @@
-set -o vi
+# set -o vi
 
 PS1="\n\[$GREEN\]\u@\h\[$NO_COLOR\] \[$YELLOW\]\w\[$NO_COLOR\] \[$CYAN\]\$(vcprompt.py)\[$NO_COLOR\]\n$ "
 
