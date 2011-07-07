@@ -57,7 +57,7 @@ set splitright
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%{exists('*rails#statusline')?rails#statusline():''}%{exists('*fugitive#statusline')?fugitive#statusline():''}%#ErrorMsg#%{exists('*SyntasticStatuslineFlag')?SyntasticStatuslineFlag():''}%*%=%-16(\ %l,%c-%v\ %)%P
 set virtualedit=block
 set wildmenu
-set wildmode=list:longest
+set wildmode=longest,list
 set winaltkeys=no
 
 set backupdir=$TEMP,$TMP,.
@@ -67,7 +67,11 @@ let MRU_Max_Entries = 50
 let NERDTreeWinPos = 'right'
 let Tlist_Use_Right_Window = 1
 
-let g:CSApprox_verbose_level = 0
+if has("win32")
+  let g:HammerDirectory = 'C:\Temp'
+end
+
+" let g:CSApprox_verbose_level = 0
 
 " }}}1
 " Section: Commands {{{1
@@ -165,8 +169,21 @@ function! AutowrapLines()
   set formatoptions=cqt
   set wrapmargin=0
 endfunction
-
 command! -bar AutowrapLines :execute AutowrapLines()
+
+let g:solarized_style="dark"
+function! ToggleBackground()
+  if (g:solarized_style=="dark")
+    let g:solarized_style="light"
+    colorscheme mac_classic
+    set background=light
+  else
+    let g:solarized_style="dark"
+    colorscheme molokai
+    set background=dark
+  endif
+endfunction
+command! Togbg call ToggleBackground()
 
 " }}}1
 " Section: Mappings {{{1
@@ -201,11 +218,10 @@ map \\ <plug>NERDCommenterInvert
 map <c-l> :FufBuffer<cr>
 "map <m-t> :FuzzyFinderTextMate
 
-"map <f4> :TlistToggle<cr>
+map <F4> :TagbarToggle<cr>
 
 nnoremap <leader>d :NERDTreeToggle<cr>
 
-" }}}1
 " Section: Autocommands {{{1
 
 if has("autocmd")
@@ -228,15 +244,22 @@ if has("autocmd")
     autocmd FileType javascript    setlocal ai et sta sw=2 sts=2 ts=2 cin isk+=$
     autocmd FileType vbnet         runtime! indent/vb.vim
   augroup END "}}}2
+  augroup MYVIMRCHooks "{{{2
+    " via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
+  augroup END "}}}2
 
 endif
 " }}}1
 " Section: Visual {{{1
 
-color railscasts
+set background=dark
+color molokai
 if has("gui_running")
   set cursorline
   set guioptions=egt
+  set guioptions+=c
 
   set lines=44
   set columns=126
@@ -246,7 +269,7 @@ if has("gui_running")
   elseif has("unix")
     set guifont=Mono\ 14
   elseif has("win32")
-    set guifont=Inconsolata:h16
+    set guifont=Envy_Code_R:h11
   endif
 else
   if &t_Co != 256

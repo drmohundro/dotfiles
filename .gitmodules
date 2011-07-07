@@ -133,3 +133,9 @@
 [submodule "vim/bundle/molokai"]
 	path = vim/bundle/molokai
 	url = https://github.com/tomasr/molokai.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "vim/bundle/find-string.vim"]
+	path = vim/bundle/find-string.vim
+	url = https://github.com/drmohundro/find-string.vim.git

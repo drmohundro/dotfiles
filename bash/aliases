@@ -12,4 +12,8 @@ esac
 
 alias grep='grep --color'
 alias diff=colordiff
-alias git=hub
+
+hash hub &>/dev/null
+if [ "$?" -eq "0" ]; then
+  alias git=hub
+fi
