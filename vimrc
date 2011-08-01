@@ -2,16 +2,6 @@
 " Version: 1.4
 " Url: http://www.mohundro.com/blog/
 
-" Section: Hacks/Fixes {{{1
-
-if has("win32")
-  " This fixes an issue that seems to affect win32 machines with Ruby 1.9.1 and
-  " Vim 7.3 related to %PROGRAMFILES%\Vim\vim73\ftplugin\ruby.vim
-  let g:ruby_path = "C:/Ruby191/lib/ruby/gems/1.9.1/gems/builder-2.1.2/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/fakefs-0.2.1/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/gemcutter-0.6.1/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/git-1.2.5/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/jeweler-1.4.0/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/jeweler-1.4.0/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/json_pure-1.4.6/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/json_pure-1.4.6/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/nokogiri-1.4.3.1-x86-mingw32/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/nokogiri-1.4.3.1-x86-mingw32/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.2.1/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rake-0.8.7/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rake-0.8.7/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rdiscount-1.6.5/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rdiscount-1.6.5/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/redgreen-1.2.2/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rspec-1.3.0/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rspec-1.3.0/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rubyforge-2.0.4/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rubyforge-2.0.4/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/test_notifier-0.3.4/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/toto-0.4.6/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/win32console-1.3.0-x86-mingw32/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/win32console-1.3.0-x86-mingw32/ext,C:/Ruby191/lib/ruby/gems/1.9.1/gems/win32console-1.3.0-x86-mingw32/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/ZenTest-4.4.0/bin,C:/Ruby191/lib/ruby/gems/1.9.1/gems/ZenTest-4.4.0/lib,C:/Ruby191/lib/ruby/site_ruby/1.9.1,C:/Ruby191/lib/ruby/site_ruby/1.9.1/i386-msvcrt,C:/Ruby191/lib/ruby/site_ruby,C:/Ruby191/lib/ruby/vendor_ruby/1.9.1,C:/Ruby191/lib/ruby/vendor_ruby/1.9.1/i386-msvcrt,C:/Ruby191/lib/ruby/vendor_ruby,C:/Ruby191/lib/ruby/1.9.1,C:/Ruby191/lib/ruby/1.9.1/i386-mingw32,.,C:/Ruby191/lib/ruby/gems/1.9.1/gems/ZenTest-4.4.0/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/builder-2.1.2/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/fakefs-0.2.1/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/gemcutter-0.6.1/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/git-1.2.5/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/jeweler-1.4.0/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/json_pure-1.4.6/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/nokogiri-1.4.3.1-x86-mingw32/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rake-0.8.7/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rdiscount-1.6.5/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/redgreen-1.2.2/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rspec-1.3.0/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/rubyforge-2.0.4/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/test_notifier-0.3.4/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/toto-0.4.6/lib,C:/Ruby191/lib/ruby/gems/1.9.1/gems/win32console-1.3.0-x86-mingw32/ext,C:/Ruby191/lib/ruby/gems/1.9.1/gems/win32console-1.3.0-x86-mingw32/lib"
-end
-
-" }}}1
-
 filetype off
 silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()

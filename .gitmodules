@@ -139,3 +139,17 @@
 [submodule "vim/bundle/find-string.vim"]
 	path = vim/bundle/find-string.vim
 	url = https://github.com/drmohundro/find-string.vim.git
+[submodule "vim/bundle/conque-shell"]
+	path = vim/bundle/conque-shell
+	url = https://github.com/vim-scripts/Conque-Shell.git
+  ignore = dirty
+[submodule "vim/bundle/detectindent"]
+	path = vim/bundle/detectindent
+	url = https://github.com/ciaranm/detectindent.git
+  ignore = dirty
+[submodule "vim/bundle/vim-coffee-script"]
+	path = vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/bundle/ack"]
+	path = vim/bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
