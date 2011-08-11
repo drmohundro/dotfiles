@@ -114,10 +114,6 @@
 	path = vim/bundle/csapprox
 	url = https://github.com/godlygeek/csapprox.git
   ignore = dirty
-[submodule "vim/bundle/vim-easymotion"]
-	path = vim/bundle/vim-easymotion
-	url = https://github.com/Lokaltog/vim-easymotion.git
-  ignore = dirty
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
