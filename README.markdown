@@ -15,4 +15,4 @@ I also use submodules and pathogen to track various vim bundles so you'll likely
 
 ## Need help?
 
-Visit my [website](http://www.mohundro.com/blog) and shoot me a line.
+Visit my [website](http://mohundro.com/blog) and shoot me a line.
