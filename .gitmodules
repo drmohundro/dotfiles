@@ -74,10 +74,6 @@
 	path = vim/bundle/vim-railscasts-theme
 	url = https://github.com/drmohundro/vim-railscasts-theme.git
   ignore = dirty
-[submodule "vim/bundle/FuzzyFinder"]
-	path = vim/bundle/FuzzyFinder
-	url = https://github.com/vim-scripts/FuzzyFinder.git
-  ignore = dirty
 [submodule "vim/bundle/vimwiki"]
 	path = vim/bundle/vimwiki
 	url = https://github.com/vim-scripts/vimwiki.git
@@ -85,10 +81,6 @@
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
-  ignore = dirty
-[submodule "vim/bundle/l9"]
-	path = vim/bundle/l9
-	url = https://github.com/vim-scripts/L9.git
   ignore = dirty
 [submodule "vim/bundle/jslint"]
 	path = vim/bundle/jslint

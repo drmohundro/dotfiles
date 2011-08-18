@@ -205,8 +205,7 @@ vnoremap <s-tab> <gv
 nnoremap <esc> :noh<cr><esc>
 
 map \\ <plug>NERDCommenterInvert
-map <c-l> :FufBuffer<cr>
-"map <m-t> :FuzzyFinderTextMate
+map <c-l> :CommandTBuffer<cr>
 
 map <F4> :TagbarToggle<cr>
 
@@ -224,6 +223,8 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.psd1 set ft=ps1
     autocmd BufNewFile,BufRead *.md,*.markdown set ft=markdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
+    " TODO: be nice to have razor.vim at some point...
+    autocmd BufNewFile,BufRead *.cshtml set ft=html
     autocmd BufNewFile,BufRead *.build set ft=xml
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
   augroup END "}}}2
