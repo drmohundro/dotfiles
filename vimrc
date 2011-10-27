@@ -51,6 +51,10 @@ set winaltkeys=no
 set backupdir=$TEMP,$TMP,.
 set directory=$TEMP,$TMP,.
 
+set wildignore+=.hg,.git
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.exe,*.dll
+
 let MRU_Max_Entries = 50
 let NERDTreeWinPos = 'right'
 let Tlist_Use_Right_Window = 1
@@ -58,6 +62,8 @@ let Tlist_Use_Right_Window = 1
 if has("win32")
   let g:HammerDirectory = 'C:\Temp'
 end
+
+runtime macros/matchit.vim
 
 " let g:CSApprox_verbose_level = 0
 
