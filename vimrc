@@ -29,7 +29,7 @@ set incsearch
 set hidden
 set history=100
 set laststatus=2
-set listchars=tab:>-,trail:.,eol:¬
+set listchars=tab:>-,trail:·,eol:¬
 set mouse=a
 set mousemodel=popup
 set number
@@ -255,8 +255,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.psd1 set ft=ps1
     autocmd BufNewFile,BufRead *.md,*.markdown set ft=markdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
-    " TODO: be nice to have razor.vim at some point...
-    autocmd BufNewFile,BufRead *.cshtml set ft=html
+    autocmd BufNewFile,BufRead *.cshtml set ft=cshtml
     autocmd BufNewFile,BufRead *.build set ft=xml
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
   augroup END "}}}2
