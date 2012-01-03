@@ -22,7 +22,6 @@ set clipboard=unnamed              " default to the system clipboard
 set encoding=utf-8                 
 set display=lastline
 set foldmethod=marker
-set gdefault                       " when replacing text, global is assumed (i.e. %s/foo/bar/ instead of %s/foo/bar/g)
 set hlsearch
 set ignorecase
 set incsearch
@@ -53,7 +52,7 @@ set directory=$TEMP,$TMP,.
 
 set wildignore+=.hg,.git
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-set wildignore+=*.exe,*.dll
+set wildignore+=*.exe,*.dll,*.pdb
 
 let MRU_Max_Entries = 50
 let NERDTreeWinPos = 'right'
@@ -70,14 +69,12 @@ runtime macros/matchit.vim
 " }}}1
 " Section: Commands {{{1
 
-command! -bar -nargs=0 -bang Scratch :silent edit<bang> \[Scratch]|set buftype=nofile bufhidden=hide noswapfile buflisted
 command! -bar -nargs=* -bang -complete=file Rename :
       \ let v:errmsg = ""|
       \ saveas<bang> <args>|
       \ if v:errmsg == ""|
       \   call delete(expand("#"))|
       \ endif
-command! -bar Invert :let &background = (&background=="light"?"dark":"light")
 
 function! Run()
   let old_makeprg = &makeprg
@@ -250,10 +247,8 @@ if has("autocmd")
 
   augroup FTDetect "{{{2
     autocmd BufNewFile,BufRead *.vb set ft=vbnet
-    autocmd BufNewFile,BufRead *.ps1 set ft=ps1
-    autocmd BufNewFile,BufRead *.psm1 set ft=ps1
-    autocmd BufNewFile,BufRead *.psd1 set ft=ps1
-    autocmd BufNewFile,BufRead *.md,*.markdown set ft=markdown
+    autocmd BufNewFile,BufRead *.{ps1,psm1,psd1} set ft=ps1
+    autocmd BufNewFile,BufRead *.{md,markdown} set ft=markdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
     autocmd BufNewFile,BufRead *.cshtml set ft=cshtml
     autocmd BufNewFile,BufRead *.build set ft=xml
@@ -274,8 +269,8 @@ if has("autocmd")
 
 endif
 " }}}1
-" Section: Visual {{{1
 
+" Section: Visual {{{1
 set background=dark
 color molokai
 if has("gui_running")
