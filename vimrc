@@ -255,6 +255,8 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
   augroup END "}}}2
   augroup FTOptions "{{{2
+    autocmd FileType * IndentDetect
+
     autocmd FileType c,cpp,cs,java setlocal ai et sta sw=4 sts=4 ts=4 cin
     autocmd FileType ps1           setlocal ai et sta sw=4 sts=4 ts=4 cin cino+=+0 cink-=0#
     autocmd FileType sql,vbnet     setlocal ai et sta sw=4 sts=4 ts=4
