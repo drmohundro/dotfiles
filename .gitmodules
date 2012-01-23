@@ -30,10 +30,6 @@
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
   ignore = dirty
-[submodule "vim/bundle/vim-abolish"]
-	path = vim/bundle/vim-abolish
-	url = https://github.com/tpope/vim-abolish.git
-  ignore = dirty
 [submodule "vim/bundle/vim-cucumber"]
 	path = vim/bundle/vim-cucumber
 	url = https://github.com/tpope/vim-cucumber.git
@@ -78,10 +74,6 @@
 	path = vim/bundle/vimwiki
 	url = https://github.com/vim-scripts/vimwiki.git
   ignore = dirty
-[submodule "vim/bundle/gundo"]
-	path = vim/bundle/gundo
-	url = https://github.com/sjl/gundo.vim.git
-  ignore = dirty
 [submodule "vim/bundle/jslint"]
 	path = vim/bundle/jslint
 	url = https://github.com/mattn/jslint.vim.git
@@ -97,10 +89,6 @@
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
-  ignore = dirty
-[submodule "vim/bundle/vim-indent-guides"]
-	path = vim/bundle/vim-indent-guides
-	url = https://github.com/nathanaelkane/vim-indent-guides.git
   ignore = dirty
 [submodule "vim/bundle/csapprox"]
 	path = vim/bundle/csapprox
@@ -127,10 +115,6 @@
 [submodule "vim/bundle/find-string.vim"]
 	path = vim/bundle/find-string.vim
 	url = https://github.com/drmohundro/find-string.vim.git
-[submodule "vim/bundle/conque-shell"]
-	path = vim/bundle/conque-shell
-	url = https://github.com/vim-scripts/Conque-Shell.git
-  ignore = dirty
 [submodule "vim/bundle/detectindent"]
 	path = vim/bundle/detectindent
 	url = https://github.com/ciaranm/detectindent.git
