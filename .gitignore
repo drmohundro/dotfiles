@@ -1,4 +1,3 @@
-.emacs.d/backups
-.emacs.d/places
-.emacs.d/auto-save-list
+*.swp
 .netrwhist
+vim/bundle

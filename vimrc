@@ -2,14 +2,57 @@
 " Version: 1.4
 " Url: http://www.mohundro.com/blog/
 
-call pathogen#infect()
+set nocompatible
+
+" Section: Vundle {{{1
+"if has("win32")
+  set rtp+=~/.vim/bundle/vundle
+"else
+"  set rtp+=~/vimfiles/bundle/vundle
+"end
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'bufexplorer.zip'
+Bundle 'IndexedSearch'
+Bundle 'JavaScript-Indent'
+Bundle 'mru.vim'
+Bundle 'vimwiki'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'ciaranm/detectindent'
+Bundle 'drmohundro/find-string.vim'
+Bundle 'drmohundro/vim-railscasts-theme'
+Bundle 'ervandew/supertab'
+Bundle 'gregsexton/gitv'
+Bundle 'godlygeek/csapprox'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'majutsushi/tagbar'
+Bundle 'mattn/jslint.vim'
+Bundle 'mikewest/vimroom'
+Bundle 'milszs/ack.vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'nelstrom/vim-mac-classic-theme'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'skammer/vim-css-color'
+Bundle 'tomasr/molokai'
+Bundle 'tpope/vim-cucumber'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-vividchalk'
+Bundle 'vim-ruby/vim-ruby'
+" }}}1
 
 " Section: Options {{{1
 
 syntax on
 filetype plugin indent on
-
-set nocompatible
 
 set tabstop=2
 set shiftwidth=2
@@ -239,6 +282,8 @@ map <c-l> :BufExplorer<cr>
 map <F4> :TagbarToggle<cr>
 
 nnoremap <leader>d :NERDTreeToggle<cr>
+
+nnoremap <leader>t :CtrlP<cr>
 
 " Section: Autocommands {{{1
 
