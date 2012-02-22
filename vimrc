@@ -5,11 +5,11 @@
 set nocompatible
 
 " Section: Vundle {{{1
-"if has("win32")
+if has('win32')
+  set rtp+=~/vimfiles/bundle/vundle
+else
   set rtp+=~/.vim/bundle/vundle
-"else
-"  set rtp+=~/vimfiles/bundle/vundle
-"end
+end
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
