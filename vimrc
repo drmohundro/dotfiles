@@ -21,6 +21,7 @@ Bundle 'mru.vim'
 Bundle 'vimwiki'
 
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'chrisbra/NrrwRgn.git'
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
 Bundle 'drmohundro/vim-railscasts-theme'
