@@ -14,42 +14,50 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
+" Section: Vim-Scripts {{{2
 Bundle 'bufexplorer.zip'
 Bundle 'IndexedSearch'
 Bundle 'JavaScript-Indent'
 Bundle 'mru.vim'
 Bundle 'vimwiki'
-
+"}}}2
+" Section: Colors {{{2
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'drmohundro/vim-railscasts-theme'
+Bundle 'nelstrom/vim-mac-classic-theme'
+Bundle 'tomasr/molokai'
+Bundle 'tpope/vim-vividchalk'
+"}}}2
+" Section: Filetypes {{{2
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-cucumber'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails'
+Bundle 'vim-ruby/vim-ruby'
+"}}}2
+" Section: Other {{{2
 Bundle 'chrisbra/NrrwRgn.git'
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
-Bundle 'drmohundro/vim-railscasts-theme'
 Bundle 'ervandew/supertab'
 Bundle 'gregsexton/gitv'
 Bundle 'godlygeek/csapprox'
-Bundle 'kchmck/vim-coffee-script'
+Bundle 'kana/vim-smartinput'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'majutsushi/tagbar'
-Bundle 'mattn/jslint.vim'
 Bundle 'mikewest/vimroom'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
-Bundle 'nelstrom/vim-mac-classic-theme'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'skammer/vim-css-color'
-Bundle 'tomasr/molokai'
-Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'vim-ruby/vim-ruby'
+"}}}2
 " }}}1
 
 " Section: Options {{{1
@@ -87,7 +95,7 @@ set smarttab
 set splitbelow
 set spelllang=en_us
 set splitright
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%{exists('*rails#statusline')?rails#statusline():''}%{exists('*fugitive#statusline')?fugitive#statusline():''}%#ErrorMsg#%{exists('*SyntasticStatuslineFlag')?SyntasticStatuslineFlag():''}%*%=%-16(\ %l,%c-%v\ %)%P
+"set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%{exists('*rails#statusline')?rails#statusline():''}%{exists('*fugitive#statusline')?fugitive#statusline():''}%#ErrorMsg#%{exists('*SyntasticStatuslineFlag')?SyntasticStatuslineFlag():''}%*%=%-16(\ %l,%c-%v\ %)%P
 set virtualedit=block
 set wildmenu
 set wildmode=longest,list
@@ -99,6 +107,7 @@ set directory=$TEMP,$TMP,.
 set wildignore+=.hg,.git
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.exe,*.dll,*.pdb
+set wildignore+=*.suo
 
 let MRU_Max_Entries = 50
 let NERDTreeWinPos = 'right'
@@ -111,6 +120,10 @@ end
 runtime macros/matchit.vim
 
 " let g:CSApprox_verbose_level = 0
+
+let g:ctrlp_root_markers = ['*.sln', '*.csproj']
+
+let g:Powerline_symbols = 'fancy'
 
 " }}}1
 " Section: Commands {{{1
@@ -286,7 +299,7 @@ map <F4> :TagbarToggle<cr>
 
 nnoremap <leader>d :NERDTreeToggle<cr>
 
-nnoremap <leader>t :CtrlP<cr>
+nnoremap <leader>t :CtrlPCurWD<cr>
 
 " Section: Autocommands {{{1
 
