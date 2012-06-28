@@ -29,6 +29,7 @@ Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 "}}}2
 " Section: Filetypes {{{2
+Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
@@ -40,10 +41,8 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'chrisbra/NrrwRgn.git'
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
-Bundle 'ervandew/supertab'
 Bundle 'gregsexton/gitv'
 Bundle 'godlygeek/csapprox'
-Bundle 'kana/vim-smartinput'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'majutsushi/tagbar'
@@ -53,6 +52,8 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
+Bundle 'Shougo/neocomplcache'
+Bundle 'sjl/splice.vim'
 Bundle 'skammer/vim-css-color'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -95,7 +96,6 @@ set smarttab
 set splitbelow
 set spelllang=en_us
 set splitright
-"set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%{exists('*rails#statusline')?rails#statusline():''}%{exists('*fugitive#statusline')?fugitive#statusline():''}%#ErrorMsg#%{exists('*SyntasticStatuslineFlag')?SyntasticStatuslineFlag():''}%*%=%-16(\ %l,%c-%v\ %)%P
 set virtualedit=block
 set wildmenu
 set wildmode=longest,list
@@ -124,6 +124,12 @@ runtime macros/matchit.vim
 let g:ctrlp_root_markers = ['*.sln', '*.csproj']
 
 let g:Powerline_symbols = 'fancy'
+
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
 
 " }}}1
 " Section: Commands {{{1
@@ -236,7 +242,6 @@ endfunction
 command! Togbg call ToggleBackground()
 
 " Set tabstop, softtabstop and shiftwidth to the same value
-command! -nargs=* Stab call Stab()
 function! Stab()
   let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
   if l:tabstop > 0
@@ -246,6 +251,7 @@ function! Stab()
   endif
   call SummarizeTabs()
 endfunction
+command! -nargs=* Stab call Stab()
 
 function! SummarizeTabs()
   try
@@ -262,6 +268,21 @@ function! SummarizeTabs()
     echohl None
   endtry
 endfunction
+
+" toggle relative number
+if exists('&relativenumber')
+  function! ToggleRelativeNumber()
+    if &relativenumber
+      set norelativenumber
+      let &number = b:togglernu_number
+    else
+      let b:togglernu_number = &number
+      set relativenumber
+    endif
+  endfunction
+  "noremap <silent> <Leader>m :<C-U>call <SID>ToggleRelativeNumber()<CR>
+endif
+command! -bar ToggleRelativeNumber :execute ToggleRelativeNumber()
 
 " }}}1
 " Section: Mappings {{{1
@@ -298,8 +319,8 @@ map <c-l> :BufExplorer<cr>
 map <F4> :TagbarToggle<cr>
 
 nnoremap <leader>d :NERDTreeToggle<cr>
-
 nnoremap <leader>t :CtrlPCurWD<cr>
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Section: Autocommands {{{1
 
@@ -349,7 +370,7 @@ if has("gui_running")
   elseif has("unix")
     set guifont=Mono\ 14
   elseif has("win32")
-    set guifont=Envy_Code_R:h11
+    set guifont=Envy_Code_R_for_Powerline:h11
   endif
 else
   if &t_Co != 256
