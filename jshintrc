@@ -1,0 +1,9 @@
+{
+  // see http://www.jshint.com/options/
+  "browser": true,
+  "devel": true,
+  "jquery": true,
+  "predef": [
+    "ko", "_"
+  ]
+}
