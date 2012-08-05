@@ -3,3 +3,4 @@
 --type-set=vb=.vb
 --type-set=proj=.vbproj,.csproj
 --type-set=asp=.asp
+--type-set=markdown=.md,.markdown
