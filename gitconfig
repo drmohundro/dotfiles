@@ -14,7 +14,7 @@
 	st = status
 	co = checkout
 	ci = commit
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%Cblue%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%Cblue%d%Creset %s %Cgreen(%cr)%Creset %Cblue<%an>%Creset' --abbrev-commit --date=relative
 [diff "ruby"]
 	funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
 [diff "csharp"]
