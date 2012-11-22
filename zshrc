@@ -33,5 +33,9 @@ plugins=(git autojump rails ruby rvm npm)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH="/usr/local/bin:$PATH:$HOME/bin:/usr/local/share/npm/bin:/usr/local/share/python"
+ #Customize to your needs...
+PATH=/usr/local/bin:$PATH
+PATH=$PATH:$HOME/bin
+PATH=$PATH:/usr/local/share/npm/bin
+PATH=$PATH:/usr/local/share/python
+PATH=$PATH:$HOME/.rvm/bin
