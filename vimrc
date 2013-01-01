@@ -38,6 +38,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'vim-ruby/vim-ruby'
 "}}}2
 " Section: Other {{{2
+Bundle 'chreekat/vim-paren-crosshairs'
 Bundle 'chrisbra/NrrwRgn.git'
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
