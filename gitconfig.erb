@@ -8,8 +8,24 @@
 	ui = auto
 [core]
 	editor = vim
+<% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
+[diff]
+	tool = bc3
+[difftool]
+	prompt = false
+[difftool "bc3"]
+	cmd = \"c:/program files (x86)/beyond compare 3/bcompare.exe\" \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = bc3
+[mergetool]
+	keepBackup = false
+[mergetool "bc3"]
+	cmd = \"c:/program files (x86)/beyond compare 3/bcompare.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+<% else %>
 [merge]
 	tool = vimdiff
+<% end %>
 [help]
 	autocorrect = 1
 [push]
