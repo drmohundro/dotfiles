@@ -1,3 +1,6 @@
+# This Rakefile is based heavily upon Ryan Bates' Rakefile
+# - see https://github.com/ryanb/dotfiles/blob/master/Rakefile
+
 require 'rake'
 require 'erb'
 
