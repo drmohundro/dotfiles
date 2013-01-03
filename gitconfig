@@ -10,16 +10,42 @@
 	editor = vim
 [merge]
 	tool = vimdiff
-[alias]
-	st = status
-	co = checkout
-	ci = commit
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%Cblue%d%Creset %s %Cgreen(%cr)%Creset %Cblue<%an>%Creset' --abbrev-commit --date=relative
-[diff "ruby"]
-	funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
-[diff "csharp"]
-	funcname = ^ *\\(\\(namespace\\|public\\|protected\\|private\\|internal\\) .*\\)
-[diff "vb"]
-	funcname = ^ *\\(\\(Namespace\\|Public\\|Private\\|Protected\\|Friend\\) .*\\)
 [help]
 	autocorrect = 1
+[push]
+	default = upstream
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff --word-diff
+	dc = diff --cached --word-diff
+	r = reset
+	r1 = reset HEAD^
+	r2 = reset HEAD^^
+	rh = reset --hard
+	rh1 = reset HEAD^ --hard
+	rh2 = reset HEAD^^ --hard
+	sl = stash list
+	sa = stash apply
+	ss = stash save
+	vdf = difftool --dir-diff
+	vdfc = difftool --dir-diff --cached
+
+	# Show files ignored by git:
+	ign = ls-files -o -i --exclude-standard
+
+	# Pretty logs
+	ls = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %C(reset)%s%C(cyan) [%cn]\" --decorate --date=relative  
+	ld = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %C(reset)%s%C(cyan) [%cn]\" --decorate --date=short
+	ll = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %Creset%s%C(cyan) [%cn]\" --decorate --numstat
+	fl = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %C(reset)%s%C(cyan) [%cn]\" --decorate --date=relative #pass a file name here
+	fld = log --word-diff -u #pass a file name here
+
+	# Diff a rev
+	diffr  = "!f() { git diff "$1"^.."$1" --word-diff; }; f"
+	diffrt  = "!f() { git difftool "$1"^.."$1" --word-diff; }; f"
+
+	# List aliases
+	la = "!git config -l | grep alias | cut -c 7-"
