@@ -7,7 +7,11 @@
 	branch = auto
 	ui = auto
 [core]
+<% if RUBY_PLATFORM =~ /darwin/ %>
+	editor = mvim -v
+<% else %>
 	editor = vim
+<% end %>
 <% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
 [diff]
 	tool = bc3
@@ -21,6 +25,20 @@
 	keepBackup = false
 [mergetool "bc3"]
 	cmd = \"c:/program files (x86)/beyond compare 3/bcompare.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+<% elsif RUBY_PLATFORM =~ /darwin/ %>
+[diff]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
+[mergetool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
 <% else %>
 [merge]
