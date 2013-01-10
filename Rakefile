@@ -53,7 +53,7 @@ def link_file(file)
     target = "#{Dir.pwd}/#{file}"
 
     if RUBY_PLATFORM =~ /(win32|mingw32)/
-      mklink_opts = File.directory?(target) ? "/D" : ""
+      mklink_opts = File.directory?(target) ? "/J" : "/H"
 
       link.gsub! '/', "\\"
       target.gsub! '/', "\\"
