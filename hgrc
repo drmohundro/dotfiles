@@ -1,0 +1,29 @@
+[ui]
+username = dmohundro
+merge = beyondcompare3
+
+[color]
+mode = ansi
+
+[extensions]
+mq = 
+transplant = 
+color =
+purge = 
+tpager = ~/dev/oss/tpager/tpager.py
+
+[tortoisehg]
+authorcolor = True
+vdiff = beyondcompare3
+editor = gvim
+
+[pager]
+attend = annotate, cat, diff, export, glog, help, log, qdiff, status, tip
+hg16mode = yes
+pager = C:\Program Files (x86)\git\bin\less.exe -FSRX
+
+[diff]
+git = True
+
+[web]
+cacerts=
