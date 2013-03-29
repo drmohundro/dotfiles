@@ -1,3 +1,4 @@
+<% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
 [ui]
 username = dmohundro
 merge = beyondcompare3
@@ -27,3 +28,21 @@ git = True
 
 [web]
 cacerts=
+<% else %>
+[ui]
+username = dmohundro
+merge = Kaleidoscope
+
+[extensions]
+color =
+hgext.extdiff =
+hggit = ~/dev/oss/hg-git/hggit
+
+[extdiff]
+cmd.ksdiff = /usr/local/bin/ksdiff
+opts.ksdiff = --changeset --wait --filelist
+
+[merge-tools]
+Kaleidoscope.executable = /usr/local/bin/ksdiff
+Kaleidoscope.args = --merge --output $output --base $base -- $local $other
+<% end %>
