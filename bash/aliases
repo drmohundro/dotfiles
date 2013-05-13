@@ -1,5 +1,5 @@
 case $( uname -s ) in
-    Linux | CYGWIN_NT-6.1-WOW64 )
+    Linux | CYGWIN_NT-6.1-WOW64 | MINGW32_NT-6.2 )
         alias ls='ls --color=auto'
         ;;
     Darwin )

@@ -52,6 +52,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'skammer/vim-css-color'
+Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
@@ -70,6 +71,7 @@ set softtabstop=2
 set expandtab
 
 set autoindent
+"set autochdir
 set backspace=indent,eol,start     " intuitive backspacing
 set clipboard=unnamed              " default to the system clipboard
 set encoding=utf-8                 
@@ -92,8 +94,8 @@ set showmatch
 set smartcase
 set smarttab
 set splitbelow
-set spelllang=en_us
 set splitright
+set spelllang=en_us
 set virtualedit=block
 set wildmenu
 set wildmode=longest,list
