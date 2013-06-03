@@ -12,7 +12,11 @@
 <% else %>
 	editor = vim
 <% end %>
+<% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
 	autocrlf = true
+<% else %>
+	autocrlf = input
+<% end %>
 <% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
 [diff]
 	tool = bc3
