@@ -76,11 +76,15 @@
 	ign = ls-files -o -i --exclude-standard
 
 	# Pretty logs
-	ls = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %C(reset)%s%C(cyan) [%cn]\" --decorate --date=relative  
-	ld = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %C(reset)%s%C(cyan) [%cn]\" --decorate --date=short
-	ll = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %Creset%s%C(cyan) [%cn]\" --decorate --numstat
-	fl = log --pretty=format:\"%C(green)%h %ad %C(yellow)%d %C(reset)%s%C(cyan) [%cn]\" --decorate --date=relative #pass a file name here
-	fld = log --word-diff -u #pass a file name here
+	lg1 = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --graph --abbrev-commit --decorate --date=relative  --all
+	lg2 = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(cyan)- %an%C(reset)' --graph --abbrev-commit --decorate  --all
+	lg = !"git lg1"
+
+	ll = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --decorate --numstat
+	fld = log --word-diff -u
+
+	# list colors...
+	#lc = log --pretty=format:'%Credred%Creset %Cgreengreen%Creset %C(Yellow)yellow%Creset %Cblueblue%Creset %C(magenta)magenta%Creset %C(cyan)cyan%Creset %C(white)white%Creset %C(dim white)dim white%Creset %C(bold white)bold white%Creset'
 
 	# Diff a rev
 	diffr  = "!f() { git diff "$1"^.."$1" --word-diff; }; f"
