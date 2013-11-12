@@ -58,6 +58,9 @@ Bundle 'rstacruz/sparkup.git', {'rtp': 'vim/'}
 " Camel case
 Bundle 'vim-scripts/RubySinatra'
 
+" syntax issue #203
+Bundle 'jimenezrick/vimerl'
+
 filetype plugin indent on      " Automatically detect file types.
 
 set wildignore+=doc              " should not break helptags
@@ -70,12 +73,4 @@ set wildignore+=*/.git/*
 
 au VimEnter * BundleInstall
 
-func! s:assert_bundles() abort
-  for b in g:bundles
-    if (!isdirectory(b.path().'/.git/'))
-      throw b.name.' not installed'
-    endif
-  endfor
-endf
-
-call s:assert_bundles()
+" e test/files/erlang.erl

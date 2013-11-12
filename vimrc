@@ -3,15 +3,10 @@
 " Url: http://mohundro.com/blog/
 
 set nocompatible
+filetype off
 
 " Section: Vundle {{{1
-if has('vim_starting')
-  if has('win32')
-    set rtp+=~/vimfiles/bundle/vundle
-  else
-    set rtp+=~/.vim/bundle/vundle
-  end
-end
+set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -211,7 +206,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
   augroup END "}}}2
   augroup FTOptions "{{{2
-    autocmd FileType * IndentDetect
+    autocmd FileType * DetectIndent
 
     autocmd FileType c,cpp,cs,java setlocal ai et sta sw=4 sts=4 ts=4 cin
     autocmd FileType ps1           setlocal ai et sta sw=4 sts=4 ts=4 cin cino+=+0 cink-=0#

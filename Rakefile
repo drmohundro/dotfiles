@@ -58,7 +58,7 @@ def link_file(file)
       link.gsub! '/', "\\"
       target.gsub! '/', "\\"
 
-      link = "#{ENV['HOME']}/vimfiles" if file == 'vim'
+      #link = "#{ENV['HOME']}/vimfiles" if file == 'vim'
 
       system %Q{cmd /c mklink #{mklink_opts} "#{link}" "#{target}"}
     else
