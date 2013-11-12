@@ -1,14 +1,16 @@
-" Author: David Mohundro <drmohundro@gmail.com>
+" Author: David Mohundro <david@mohundro.com>
 " Version: 1.4
-" Url: http://www.mohundro.com/blog/
+" Url: http://mohundro.com/blog/
 
 set nocompatible
 
 " Section: Vundle {{{1
-if has('win32')
-  set rtp+=~/vimfiles/bundle/vundle
-else
-  set rtp+=~/.vim/bundle/vundle
+if has('vim_starting')
+  if has('win32')
+    set rtp+=~/vimfiles/bundle/vundle
+  else
+    set rtp+=~/.vim/bundle/vundle
+  end
 end
 call vundle#rc()
 
@@ -19,32 +21,19 @@ Bundle 'bufexplorer.zip'
 Bundle 'IndexedSearch'
 Bundle 'JavaScript-Indent'
 Bundle 'mru.vim'
-"}}}2
+" }}}2
 " Section: Colors {{{2
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'drmohundro/vim-railscasts-theme'
-Bundle 'nelstrom/vim-mac-classic-theme'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
-"}}}2
-" Section: Filetypes {{{2
-Bundle 'groenewege/vim-less'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rails'
-Bundle 'vim-ruby/vim-ruby'
-"}}}2
-" Section: Other {{{2
+" }}}2
+Bundle 'bling/vim-airline'
 Bundle 'chreekat/vim-paren-crosshairs'
 Bundle 'chrisbra/NrrwRgn.git'
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
 Bundle 'ervandew/supertab'
-Bundle 'godlygeek/csapprox'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
@@ -52,155 +41,104 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'skammer/vim-css-color'
-Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/YouCompleteMe'
-"}}}2
 " }}}1
-
-" Section: Options {{{1
 
 syntax on
 filetype plugin indent on
 
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+" Section: Options {{{1
 
-set autoindent
-"set autochdir
-set backspace=indent,eol,start     " intuitive backspacing
-set clipboard=unnamed              " default to the system clipboard
-set encoding=utf-8                 
-set display=lastline
-set foldmethod=marker
-set hlsearch
-set ignorecase
-set incsearch
-set hidden
-set history=100
-set laststatus=2
-set listchars=tab:>-,trail:Â·,eol:Â¬
-set mouse=a
-set mousemodel=popup
-set number
-set scrolloff=3
+set clipboard=unnamed      " default to system clipboard
+set foldmethod=marker      " fold on markers by default
+set hlsearch               " highlight search results
+set ignorecase             " ignore case when searching
+set number                 " show line numbers
+set relativenumber         " use relative numbers outside of current number
+set smartcase              " override ignore case if searching for mixed case
+set wildmode=longest,list  " list all matches and complete each full match
+
+set tabstop=2           " 2 space tabs
+set shiftwidth=2        " autoindent 2 spaces
+set expandtab           " use spaces instead of tabs
+
+set backupdir=$TEMP,$TMP,.   " where to store backups
+set directory=$TEMP,$TMP,.   " where to store swp files
+
+" TODO: get comments on these or remove them
+set listchars=tab:>-,trail:·,eol:¬
 set showbreak=>\
-set showcmd
-set showmatch
-set smartcase
-set smarttab
-set splitbelow
-set splitright
-set spelllang=en_us
-set virtualedit=block
-set wildmenu
-set wildmode=longest,list
 set winaltkeys=no
-
-set backupdir=$TEMP,$TMP,.
-set directory=$TEMP,$TMP,.
 
 set wildignore+=.hg,.git
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-set wildignore+=*.exe,*.dll,*.pdb
-set wildignore+=*.suo
-
-let MRU_Max_Entries = 50
-let NERDTreeWinPos = 'right'
-let Tlist_Use_Right_Window = 1
-
-if has("win32")
-  let g:HammerDirectory = 'C:\Temp'
-end
-
-runtime macros/matchit.vim
-
-" let g:CSApprox_verbose_level = 0
-
-let g:ctrlp_root_markers = ['*.sln', '*.csproj']
-
-let g:Powerline_symbols = 'fancy'
-
-let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
+set wildignore+=*.exe,*.dll,*.pdb,*.suo
 
 " }}}1
-" Section: Commands {{{1
+" Section: Plugin Options {{{1
 
-command! -bar -nargs=* -bang -complete=file Rename :
-      \ let v:errmsg = ""|
-      \ saveas<bang> <args>|
-      \ if v:errmsg == ""|
-      \   call delete(expand("#"))|
-      \ endif
+" Let SuperTab try to determine best completion based on context, whether
+" <C+X><C+O> or something else.
+let g:SuperTabDefaultCompletionType = "context"
 
-function! Run()
-  let old_makeprg = &makeprg
-  let cmd = matchstr(getline(1),'^#!\zs[^ ]*')
-  if exists("b:run_command")
-    exe b:run_command
-  elseif cmd != '' && executable(cmd)
-    wa
-    let &makeprg = matchstr(getline(1),'^#!\zs.*').' %'
-    make
-  elseif &ft == "mail" || &ft == "text" || &ft == "help" || &ft == "gitcommit"
-    setlocal spell!
-  elseif exists("b:rails_root") && exists(":Rake")
-    wa
-    Rake
-  elseif &ft == "ruby"
-    wa
-    if executable(expand("%:p")) || getline(1) =~ '^#!'
-      compiler ruby
-      let &makeprg = "ruby"
-      make %
-    elseif expand("%:t") =~ '_test\.rb$'
-      compiler rubyunit
-      let &makeprg = "ruby"
-      make %
-    elseif expand("%:t") =~ '_spec\.rb$'
-      compiler ruby
-      let &makeprg = "spec"
-      make %
-    else
-      !irb -r"%:p"
-    endif
-  elseif &ft == "html" || &ft == "xhtml" || &ft == "php" || &ft == "aspvbs" || &ft == "aspperl"
-    wa
-    if !exists("b:url")
-      call OpenURL(expand("%:p"))
-    else
-      call OpenURL(b:url)
-    endif
-  elseif &ft == "vim"
-    wa
-    unlet! g:loaded_{expand("%:t:r")}
-    return 'source %'
-  elseif &ft == "sql"
-    1,$DBExecRangeSQL
-  elseif expand("%:e") == "tex"
-    wa
-    exe "normal :!rubber -f %:r && xdvi %:r >/dev/null 2>/dev/null &\<CR>"
-  else
-    wa
-    if &makeprg =~ "%"
-      make
-    else
-      make %
-    endif
-  endif
-  let &makeprg = old_makeprg
-  return ""
-endfunction
-command! -bar Run :execute Run()
+" use powerline patched fonts
+let g:airline_powerline_fonts = 1
 
+" open NERDTree on right side
+let NERDTreeWinPos = 'right'
+
+" }}}1
+" Section: Mappings {{{1
+
+let mapleader=","
+
+" Toggle showing whitespace or not
+nmap <silent> <leader>s :set nolist!<cr>
+
+nnoremap J <c-d>
+vnoremap J <c-d>
+nnoremap K <c-u>
+vnoremap K <c-u>
+
+" use standard regular expressions instead of out of the box vim
+nnoremap / /\v
+vnoremap / /\v
+
+" up/down work as expected with word wrapping on
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
+" H/L go to beginning/end of line
+map H ^
+map L $
+
+" indent in visual mode with <tab>
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
+
+" hide search highlighting with <esc>
+nnoremap <esc> :nohlsearch<cr><esc>
+
+" toggle commenting with \\
+map \\ <plug>NERDCommenterInvert
+
+" show buffer list
+map <c-l> :BufExplorer<cr>
+
+" show tag bar drawer
+map <F4> :TagbarToggle<cr>
+
+" toggle NERDTree drawer
+nnoremap <leader>d :NERDTreeToggle<cr>
+
+" Section: Functions {{{1
+
+" Increase/decrease the font size
 if (&t_Co > 2 || has("gui_running")) && has("syntax")
   command! -bar -nargs=0 Bigger  :let &guifont = substitute(&guifont,'\d\+$','\=submatch(0)+1','')
   command! -bar -nargs=0 Smaller :let &guifont = substitute(&guifont,'\d\+$','\=submatch(0)-1','')
@@ -220,26 +158,13 @@ vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
 command! -bar StripTrailingWhitespace :%s/\s\+$//
 
+" Autowrap lines around column 80
 function! AutowrapLines()
   set textwidth=78
   set formatoptions=cqt
   set wrapmargin=0
 endfunction
 command! -bar AutowrapLines :execute AutowrapLines()
-
-let g:solarized_style="dark"
-function! ToggleBackground()
-  if (g:solarized_style=="dark")
-    let g:solarized_style="light"
-    colorscheme mac_classic
-    set background=light
-  else
-    let g:solarized_style="dark"
-    colorscheme molokai
-    set background=dark
-  endif
-endfunction
-command! Togbg call ToggleBackground()
 
 " Set tabstop, softtabstop and shiftwidth to the same value
 function! Stab()
@@ -253,6 +178,7 @@ function! Stab()
 endfunction
 command! -nargs=* Stab call Stab()
 
+" Display current tab settings
 function! SummarizeTabs()
   try
     echohl ModeMsg
@@ -269,59 +195,7 @@ function! SummarizeTabs()
   endtry
 endfunction
 
-" toggle relative number
-if exists('&relativenumber')
-  function! ToggleRelativeNumber()
-    if &relativenumber
-      set norelativenumber
-      let &number = b:togglernu_number
-    else
-      let b:togglernu_number = &number
-      set relativenumber
-    endif
-  endfunction
-  "noremap <silent> <Leader>m :<C-U>call <SID>ToggleRelativeNumber()<CR>
-endif
-command! -bar ToggleRelativeNumber :execute ToggleRelativeNumber()
-
 " }}}1
-" Section: Mappings {{{1
-
-let mapleader=","
-
-nmap <silent> <leader>s :set nolist!<cr>
-
-nnoremap J <c-d>
-vnoremap J <c-d>
-nnoremap K <c-u>
-vnoremap K <c-u>
-
-" use standard regular expressions instead of out of the box vim
-nnoremap / /\v
-vnoremap / /\v
-
-nnoremap k gk
-nnoremap j gj
-nnoremap gk k
-nnoremap gj j
-
-map H ^
-map L $
-
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
-
-nnoremap <esc> :noh<cr><esc>
-
-map \\ <plug>NERDCommenterInvert
-map <c-l> :BufExplorer<cr>
-
-map <F4> :TagbarToggle<cr>
-
-nnoremap <leader>d :NERDTreeToggle<cr>
-nnoremap <leader>t :CtrlPCurWD<cr>
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
 " Section: Autocommands {{{1
 
 if has("autocmd")
@@ -350,27 +224,26 @@ if has("autocmd")
     au!
     au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
   augroup END "}}}2
-
 endif
-" }}}1
 
-" Section: Visual {{{1
-set background=dark
+" }}}1
+" Section: GUI {{{1
+
 color molokai
 if has("gui_running")
-  set cursorline
+  set cursorline           " highlight current line
   set guioptions=egt
-  set guioptions+=c
+  set guioptions+=c        " c = console dialogs
 
   set lines=44
   set columns=126
 
   if has("mac")
-    set guifont=Inconsolata:h20
+    set guifont=Inconsolata\ for\ Powerline:h16
   elseif has("unix")
     set guifont=Mono\ 14
   elseif has("win32")
-    set guifont=Envy_Code_R_for_Powerline:h11
+    set guifont=Droid_Sans_Mono_for_Powerline:h11
   endif
 else
   if &t_Co != 256
