@@ -37,5 +37,4 @@ source $ZSH/oh-my-zsh.sh
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/bin
 PATH=$PATH:/usr/local/share/npm/bin
-PATH=$PATH:/usr/local/share/python
 PATH=$PATH:$HOME/.rvm/bin
