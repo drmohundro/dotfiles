@@ -23,7 +23,6 @@ Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 " }}}2
 Bundle 'bling/vim-airline'
-Bundle 'chreekat/vim-paren-crosshairs'
 Bundle 'chrisbra/NrrwRgn.git'
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
@@ -31,7 +30,6 @@ Bundle 'ervandew/supertab'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
-Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
@@ -39,7 +37,12 @@ Bundle 'skammer/vim-css-color'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
-Bundle 'Valloric/YouCompleteMe'
+
+if !has('win32')
+  Bundle 'Valloric/YouCompleteMe'
+else
+  Bundle 'Shougo/neocomplete.vim'
+endif
 " }}}1
 
 syntax on
@@ -84,6 +87,9 @@ let g:airline_powerline_fonts = 1
 
 " open NERDTree on right side
 let NERDTreeWinPos = 'right'
+
+" enable neocomplete
+let g:neocomplete#enable_at_startup = 1
 
 " }}}1
 " Section: Mappings {{{1
