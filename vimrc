@@ -3,6 +3,9 @@
 " Url: http://mohundro.com/blog/
 
 set nocompatible
+if has("win32")
+  set runtimepath=~/.vim,$VIMRUNTIME,~/.vim/after
+end
 filetype off
 
 " Section: Vundle {{{1
@@ -19,21 +22,37 @@ Bundle 'mru.vim'
 " }}}2
 " Section: Colors {{{2
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 " }}}2
+
 Bundle 'bling/vim-airline'
+" use powerline patched fonts
+let g:airline_powerline_fonts = 1
+
 Bundle 'chrisbra/NrrwRgn.git'
+Bundle 'chrisbra/color_highlight'
+" automatic colorization filetypes
+let g:colorizer_auto_filetype='css,html,cshtml'
+
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
 Bundle 'ervandew/supertab'
+" Let SuperTab try to determine best completion based on context, whether
+" <C+X><C+O> or something else.
+let g:SuperTabDefaultCompletionType = "context"
+
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
+Bundle 'pangloss/vim-javascript'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+" open NERDTree on right side
+let NERDTreeWinPos = 'right'
+
 Bundle 'scrooloose/syntastic'
-Bundle 'skammer/vim-css-color'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
@@ -42,6 +61,8 @@ if !has('win32')
   Bundle 'Valloric/YouCompleteMe'
 else
   Bundle 'Shougo/neocomplete.vim'
+  " enable neocomplete
+  let g:neocomplete#enable_at_startup = 1
 endif
 " }}}1
 
@@ -74,22 +95,6 @@ set winaltkeys=no
 set wildignore+=.hg,.git
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.exe,*.dll,*.pdb,*.suo
-
-" }}}1
-" Section: Plugin Options {{{1
-
-" Let SuperTab try to determine best completion based on context, whether
-" <C+X><C+O> or something else.
-let g:SuperTabDefaultCompletionType = "context"
-
-" use powerline patched fonts
-let g:airline_powerline_fonts = 1
-
-" open NERDTree on right side
-let NERDTreeWinPos = 'right'
-
-" enable neocomplete
-let g:neocomplete#enable_at_startup = 1
 
 " }}}1
 " Section: Mappings {{{1
