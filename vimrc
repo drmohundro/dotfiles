@@ -26,6 +26,10 @@ Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 " }}}2
+" Section: FileTypes {{{2
+Bundle 'pangloss/vim-javascript'
+Bundle 'PProvost/vim-ps1'
+" }}}2
 
 Bundle 'bling/vim-airline'
 " use powerline patched fonts
@@ -46,7 +50,6 @@ let g:SuperTabDefaultCompletionType = "context"
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
-Bundle 'pangloss/vim-javascript'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 " open NERDTree on right side
