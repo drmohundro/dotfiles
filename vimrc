@@ -27,6 +27,7 @@ Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 " }}}2
 " Section: FileTypes {{{2
+Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'PProvost/vim-ps1'
 " }}}2
@@ -49,6 +50,7 @@ let g:SuperTabDefaultCompletionType = "context"
 
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
+Bundle 'mattn/emmet-vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
