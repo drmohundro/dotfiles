@@ -10,6 +10,8 @@ ZSH_THEME="terminalparty"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# default to using --smart-case for all searches
+alias ag="ag -S"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -38,3 +40,4 @@ PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/bin
 PATH=$PATH:/usr/local/share/npm/bin
 PATH=$PATH:$HOME/.rvm/bin
+PATH=$PATH:$HOME/.cask/bin
