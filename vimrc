@@ -58,6 +58,7 @@ Bundle 'scrooloose/nerdtree'
 let NERDTreeWinPos = 'right'
 
 Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
