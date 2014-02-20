@@ -22,7 +22,7 @@ Bundle 'mru.vim'
 " }}}2
 " Section: Colors {{{2
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'chriskempson/base16-vim'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 " }}}2
@@ -34,7 +34,9 @@ Bundle 'PProvost/vim-ps1'
 
 Bundle 'bling/vim-airline'
 " use powerline patched fonts
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 Bundle 'chrisbra/NrrwRgn.git'
 Bundle 'chrisbra/color_highlight'
@@ -48,6 +50,8 @@ Bundle 'ervandew/supertab'
 " <C+X><C+O> or something else.
 let g:SuperTabDefaultCompletionType = "context"
 
+Bundle 'itchyny/calendar.vim'
+Bundle 'justinmk/vim-sneak'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
@@ -255,7 +259,7 @@ if has("gui_running")
   elseif has("unix")
     set guifont=Mono\ 14
   elseif has("win32")
-    set guifont=Droid_Sans_Mono_for_Powerline:h11
+    set guifont=Source_Code_Pro:h11
   endif
 else
   if &t_Co != 256
