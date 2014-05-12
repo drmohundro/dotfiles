@@ -57,7 +57,11 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-stand
 
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
-Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
+" Configure ag.vim to use pt.exe instead
+let g:agprg="pt --nogroup"
+let g:agformat="%f:%l:%m"
+
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 " open NERDTree on right side
