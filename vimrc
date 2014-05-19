@@ -53,7 +53,11 @@ let g:SuperTabDefaultCompletionType = "context"
 Bundle 'itchyny/calendar.vim'
 Bundle 'justinmk/vim-sneak'
 Bundle 'kien/ctrlp.vim'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+if has('win32')
+  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . -co --exclude-standard', 'ag %s -l --no-color -g ""']
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'ag %s -l --no-color -g ""']
+end
 
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
@@ -66,12 +70,14 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 " open NERDTree on right side
 let NERDTreeWinPos = 'right'
+let NERDTreeHijackNetrw = 0
 
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-vinegar'
 
 if !has('win32')
   Bundle 'Valloric/YouCompleteMe'
