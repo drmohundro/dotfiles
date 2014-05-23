@@ -98,3 +98,7 @@
 [grep]
 	extendRegexp = true
 	lineNumber = true
+<% if RUBY_PLATFORM =~ /darwin/ %>
+[credential]
+	helper = osxkeychain
+<% end %>
