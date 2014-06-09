@@ -73,6 +73,7 @@ let NERDTreeWinPos = 'right'
 let NERDTreeHijackNetrw = 0
 
 Bundle 'scrooloose/syntastic'
+Bundle 'sheerun/vim-polyglot'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
@@ -267,7 +268,7 @@ if has("gui_running")
   set columns=126
 
   if has("mac")
-    set guifont=Inconsolata\ for\ Powerline:h16
+    set guifont=Source\ Code\ Pro:h14
   elseif has("unix")
     set guifont=Mono\ 14
   elseif has("win32")

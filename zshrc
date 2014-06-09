@@ -36,8 +36,11 @@ plugins=(git autojump rails ruby rvm npm zsh-syntax-highlighting command-not-fou
 source $ZSH/oh-my-zsh.sh
 
  #Customize to your needs...
+export GOPATH=$HOME/.go
+
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/bin
 PATH=$PATH:/usr/local/share/npm/bin
 PATH=$PATH:$HOME/.rvm/bin
 PATH=$PATH:$HOME/.cask/bin
+PATH=$PATH:$GOPATH/bin
