@@ -30,6 +30,7 @@ Bundle 'tpope/vim-vividchalk'
 Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'PProvost/vim-ps1'
+Bundle 'toyamarinyon/vim-swift'
 " }}}2
 
 Bundle 'bling/vim-airline'
@@ -61,6 +62,11 @@ end
 
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
+
+if has('mac')
+  Bundle 'rizzatti/dash.vim'
+end
+
 Bundle 'rking/ag.vim'
 " Configure ag.vim to use pt.exe instead
 let g:agprg="pt --nogroup"
@@ -71,6 +77,9 @@ Bundle 'scrooloose/nerdtree'
 " open NERDTree on right side
 let NERDTreeWinPos = 'right'
 let NERDTreeHijackNetrw = 0
+
+Bundle 'jistr/vim-nerdtree-tabs'
+let g:nerdtree_tabs_open_on_gui_startup = 0
 
 Bundle 'scrooloose/syntastic'
 Bundle 'sheerun/vim-polyglot'
@@ -163,7 +172,7 @@ map <c-l> :BufExplorer<cr>
 map <F4> :TagbarToggle<cr>
 
 " toggle NERDTree drawer
-nnoremap <leader>d :NERDTreeToggle<cr>
+nnoremap <leader>d :NERDTreeTabsToggle<cr>
 
 " Section: Functions {{{1
 
