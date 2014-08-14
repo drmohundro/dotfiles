@@ -30,7 +30,7 @@ Bundle 'tpope/vim-vividchalk'
 Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'PProvost/vim-ps1'
-Bundle 'toyamarinyon/vim-swift'
+Bundle 'Keithbsmiley/swift.vim'
 " }}}2
 
 Bundle 'bling/vim-airline'
