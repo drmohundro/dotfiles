@@ -282,6 +282,7 @@ if has("gui_running")
     set guifont=Mono\ 14
   elseif has("win32")
     set guifont=Source_Code_Pro:h11
+    set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
   endif
 else
   if &t_Co != 256
