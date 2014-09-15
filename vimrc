@@ -15,7 +15,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Section: Vim-Scripts {{{2
-Bundle 'bufexplorer.zip'
 Bundle 'IndexedSearch'
 Bundle 'JavaScript-Indent'
 Bundle 'mru.vim'
@@ -53,6 +52,9 @@ let g:SuperTabDefaultCompletionType = "context"
 
 Bundle 'itchyny/calendar.vim'
 Bundle 'justinmk/vim-sneak'
+Bundle 'jlanzarotta/bufexplorer'
+let g:bufExplorerFindActive = 0
+
 Bundle 'kien/ctrlp.vim'
 if has('win32')
   let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . -co --exclude-standard', 'ag %s -l --no-color -g ""']
