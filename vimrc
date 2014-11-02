@@ -30,6 +30,11 @@ Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Keithbsmiley/swift.vim'
+
+Bundle 'vim-pandoc/vim-pandoc'
+Bundle 'vim-pandoc/vim-pandoc-syntax'
+Bundle 'vim-pandoc/vim-pandoc-after'
+let g:pandoc#after#modules#enabled = ["nrrwrgn", "supertab"]
 " }}}2
 
 Bundle 'bling/vim-airline'
@@ -50,16 +55,15 @@ Bundle 'ervandew/supertab'
 " <C+X><C+O> or something else.
 let g:SuperTabDefaultCompletionType = "context"
 
-Bundle 'itchyny/calendar.vim'
 Bundle 'justinmk/vim-sneak'
 Bundle 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
 
 Bundle 'kien/ctrlp.vim'
 if has('win32')
-  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . -co --exclude-standard', 'ag %s -l --no-color -g ""']
+  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . -co --exclude-standard', 'pt %s -l --no-color -g ""']
 else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'ag %s -l --no-color -g ""']
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'pt %s -l --no-color -g ""']
 end
 
 Bundle 'majutsushi/tagbar'
