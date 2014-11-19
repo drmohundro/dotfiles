@@ -274,6 +274,10 @@ endif
 " Section: GUI {{{1
 
 color molokai
+
+"set background=light
+"color solarized
+
 if has("gui_running")
   set cursorline           " highlight current line
   set guioptions=egt
