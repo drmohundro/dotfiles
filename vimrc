@@ -94,6 +94,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vinegar'
+Bundle 'Yggdroot/indentLine'
 
 if !has('win32')
   Bundle 'Valloric/YouCompleteMe'
