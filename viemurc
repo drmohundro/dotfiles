@@ -1,6 +1,9 @@
 map J <C-d>
 map K <C-u>
-map H ^
-map L $
 
 nnoremap <esc> :noh<return><esc>
+
+nnoremap <c-n> :vsc ReSharper.ReSharper_GotoType<return>
+nnoremap <c-p> :vsc ReSharper.ReSharper_ParameterInfoShow
+nnoremap <c-b> :vcs ReSharper.ReSharper_GotoDeclaration
+nnoremap <c-e> :vcs ReSharper.ReSharper_GotoRecentFiles
