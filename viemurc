@@ -3,7 +3,7 @@ map K <C-u>
 
 nnoremap <esc> :noh<return><esc>
 
-nnoremap <c-n> :vsc ReSharper.ReSharper_GotoType<return>
-nnoremap <c-p> :vsc ReSharper.ReSharper_ParameterInfoShow
-nnoremap <c-b> :vcs ReSharper.ReSharper_GotoDeclaration
-nnoremap <c-e> :vcs ReSharper.ReSharper_GotoRecentFiles
+noremap <c-n> :vsc ReSharper.ReSharper_GotoType<return>
+noremap <c-p> :vsc ReSharper.ReSharper_ParameterInfoShow<return>
+noremap <c-b> :vcs ReSharper.ReSharper_GotoDeclaration<return>
+noremap <c-e> :vcs ReSharper.ReSharper_GotoRecentFiles<return>

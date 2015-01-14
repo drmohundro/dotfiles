@@ -22,15 +22,11 @@
 	tool = bc3
 [difftool]
 	prompt = false
-[difftool "bc3"]
-	cmd = \"c:/program files (x86)/beyond compare 4/bcompare.exe\" \"$LOCAL\" \"$REMOTE\"
 [merge]
-	tool = bc3
+	tool = BeyondCompare4
 [mergetool]
 	keepBackup = false
-[mergetool "bc3"]
-	cmd = \"c:/program files (x86)/beyond compare 4/bcompare.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
-	trustExitCode = true
+
 <% elsif RUBY_PLATFORM =~ /darwin/ %>
 [diff]
 	tool = Kaleidoscope
