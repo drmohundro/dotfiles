@@ -69,6 +69,10 @@ end
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
 
+Bundle 'OmniSharp/omnisharp-vim'
+" also requires syntastic
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
 if has('mac')
   Bundle 'rizzatti/dash.vim'
 end
@@ -90,11 +94,11 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 Bundle 'scrooloose/syntastic'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vinegar'
-Bundle 'Yggdroot/indentLine'
 
 if !has('win32')
   Bundle 'Valloric/YouCompleteMe'
@@ -268,6 +272,11 @@ if has("autocmd")
     " via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
     au!
     au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
+  augroup END "}}}2
+  augroup OmniSharpCommands "{{{2
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+    autocmd FileType cs nnoremap <C-b> :OmniSharpGotoDefinition<cr>
   augroup END "}}}2
 endif
 
