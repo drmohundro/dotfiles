@@ -24,6 +24,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/base16-vim'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
+Bundle 'MaxSt/FlatColor'
 " }}}2
 " Section: FileTypes {{{2
 Bundle 'kongo2002/fsharp-vim'
