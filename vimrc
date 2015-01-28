@@ -22,9 +22,10 @@ Bundle 'mru.vim'
 " Section: Colors {{{2
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/base16-vim'
+Bundle 'jnurmine/Zenburn'
+Bundle 'MaxSt/FlatColor'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
-Bundle 'MaxSt/FlatColor'
 " }}}2
 " Section: FileTypes {{{2
 Bundle 'kongo2002/fsharp-vim'
@@ -284,6 +285,7 @@ endif
 " }}}1
 " Section: GUI {{{1
 
+set background=dark
 color molokai
 
 "set background=light
@@ -306,9 +308,14 @@ if has("gui_running")
     set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
   endif
 else
-  if &t_Co != 256
-    color pablo
-  end
+  if has("win32")
+    " see http://stackoverflow.com/a/14434531/4570
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    color molokai
+  endif
 endif
 
 " }}}1
