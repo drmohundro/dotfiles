@@ -95,6 +95,9 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 
 Bundle 'scrooloose/syntastic'
 Bundle 'sheerun/vim-polyglot'
+Bundle 't9md/vim-choosewin'
+let g:choosewin_overlay_enable = 1
+
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
@@ -183,6 +186,9 @@ map <c-l> :BufExplorer<cr>
 
 " show tag bar drawer
 map <F4> :TagbarToggle<cr>
+
+" choosewin
+nmap <leader>w <Plug>(choosewin)
 
 " toggle NERDTree drawer
 nnoremap <leader>d :NERDTreeTabsToggle<cr>
