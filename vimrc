@@ -61,6 +61,8 @@ Bundle 'justinmk/vim-sneak'
 Bundle 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
 
+Bundle 'junegunn/vim-peekaboo'
+
 Bundle 'ctrlpvim/ctrlp.vim'
 if has('win32')
   let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . -co --exclude-standard', 'pt %s -l --no-color -g ""']
