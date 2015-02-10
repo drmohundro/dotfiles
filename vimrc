@@ -155,13 +155,13 @@ let mapleader=","
 nmap <silent> <leader>s :set nolist!<cr>
 
 nnoremap J <c-d>
-vnoremap J <c-d>
+xnoremap J <c-d>
 nnoremap K <c-u>
-vnoremap K <c-u>
+xnoremap K <c-u>
 
 " use standard regular expressions instead of out of the box vim
 nnoremap / /\v
-vnoremap / /\v
+xnoremap / /\v
 
 " up/down work as expected with word wrapping on
 nnoremap k gk
@@ -174,8 +174,8 @@ map H ^
 map L $
 
 " indent in visual mode with <tab>
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
+xnoremap <tab> >gv
+xnoremap <s-tab> <gv
 
 " hide search highlighting with <esc>
 nnoremap <esc> :nohlsearch<cr><esc>
@@ -212,8 +212,8 @@ function! s:VSetSearch()
   let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
   let @@ = temp
 endfunction
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+xnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+xnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
 command! -bar StripTrailingWhitespace :%s/\s\+$//
 
