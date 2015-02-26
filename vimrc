@@ -32,11 +32,8 @@ Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Keithbsmiley/swift.vim'
-
-Bundle 'vim-pandoc/vim-pandoc'
-Bundle 'vim-pandoc/vim-pandoc-syntax'
-Bundle 'vim-pandoc/vim-pandoc-after'
-let g:pandoc#after#modules#enabled = ["nrrwrgn", "supertab"]
+Bundle 'tpope/vim-markdown'
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
 " }}}2
 
 Bundle 'bling/vim-airline'
