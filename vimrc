@@ -33,6 +33,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Keithbsmiley/swift.vim'
 Bundle 'tpope/vim-markdown'
+Bundle 'vim-ruby/vim-ruby'
 let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
 " }}}2
 
@@ -47,6 +48,8 @@ Bundle 'chrisbra/color_highlight'
 " automatic colorization filetypes
 let g:colorizer_auto_filetype='css,html,cshtml'
 
+Bundle 'chrisbra/vim-diff-enhanced'
+
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
 Bundle 'ervandew/supertab'
@@ -54,6 +57,8 @@ Bundle 'ervandew/supertab'
 " <C+X><C+O> or something else.
 let g:SuperTabDefaultCompletionType = "context"
 
+Bundle 'FelikZ/ctrlp-py-matcher'
+Bundle 'jiangmiao/auto-pairs'
 Bundle 'justinmk/vim-sneak'
 Bundle 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
@@ -62,10 +67,11 @@ Bundle 'junegunn/vim-peekaboo'
 
 Bundle 'ctrlpvim/ctrlp.vim'
 if has('win32')
-  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . -co --exclude-standard', 'pt %s -l --no-color -g ""']
+  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . --cached --exclude-standard', 'pt %s -l --no-color -g ""']
 else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'pt %s -l --no-color -g ""']
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard', 'pt %s -l --no-color -g ""']
 end
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
@@ -100,6 +106,7 @@ let g:choosewin_overlay_enable = 1
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vinegar'
