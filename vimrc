@@ -58,7 +58,6 @@ Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "context"
 
 Bundle 'FelikZ/ctrlp-py-matcher'
-Bundle 'jiangmiao/auto-pairs'
 Bundle 'justinmk/vim-sneak'
 Bundle 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0

@@ -8,8 +8,8 @@ desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   Dir['*'].each do |file|
-    next if %w[Rakefile README.markdown LICENSE].include? file
-    
+    next if %w(Rakefile README.markdown LICENSE).include? file
+
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
         puts "identical ~/.#{file.sub('.erb', '')}"
@@ -53,15 +53,14 @@ def link_file(file)
     target = "#{Dir.pwd}/#{file}"
 
     if RUBY_PLATFORM =~ /(win32|mingw32)/
-      mklink_opts = File.directory?(target) ? "/J" : "/H"
+      mklink_opts = File.directory?(target) ? '/J' : '/H'
 
-      link.gsub! '/', "\\"
-      target.gsub! '/', "\\"
+      link.gsub! '/', '\\'
+      target.gsub! '/', '\\'
 
-      system %Q{cmd /c mklink #{mklink_opts} "#{link}" "#{target}"}
+      system %(cmd /c mklink #{mklink_opts} "#{link}" "#{target}")
     else
-      system %Q{ln -s "#{target}" "#{link}"}
+      system %(ln -s "#{target}" "#{link}")
     end
   end
-
 end
