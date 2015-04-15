@@ -33,8 +33,9 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Keithbsmiley/swift.vim'
 Bundle 'tpope/vim-markdown'
-Bundle 'vim-ruby/vim-ruby'
 let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
+
+Bundle 'vim-ruby/vim-ruby'
 " }}}2
 
 Bundle 'bling/vim-airline'
@@ -267,7 +268,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.vb set ft=vbnet
     autocmd BufNewFile,BufRead *.{ps1,psm1,psd1} set ft=ps1
     autocmd BufNewFile,BufRead *.{md,markdown} set ft=markdown
-    autocmd BufNewFile,BufRead *.json set ft=javascript
+    autocmd BufNewFile,BufRead *.{json,es6} set ft=javascript
     autocmd BufNewFile,BufRead *.cshtml set ft=cshtml
     autocmd BufNewFile,BufRead *.build set ft=xml
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
@@ -278,6 +279,7 @@ if has("autocmd")
     autocmd FileType c,cpp,cs,java setlocal ai et sta sw=4 sts=4 ts=4 cin
     autocmd FileType ps1           setlocal ai et sta sw=4 sts=4 ts=4 cin cino+=+0 cink-=0#
     autocmd FileType sql,vbnet     setlocal ai et sta sw=4 sts=4 ts=4
+    autocmd FileType ruby          setlocal ai et sta sw=2 sts=2 ts=2
     autocmd FileType javascript    setlocal ai et sta sw=2 sts=2 ts=2 cin isk+=$
     autocmd FileType vbnet         runtime! indent/vb.vim
   augroup END "}}}2
@@ -300,7 +302,7 @@ set background=dark
 color molokai
 
 "set background=light
-"color solarized
+"color flatcolor
 
 if has("gui_running")
   set cursorline           " highlight current line
@@ -312,6 +314,7 @@ if has("gui_running")
 
   if has("mac")
     set guifont=Source\ Code\ Pro:h14
+    "set guifont=Source\ Code\ Pro:h20
   elseif has("unix")
     set guifont=Mono\ 14
   elseif has("win32")
