@@ -30,6 +30,7 @@ Bundle 'tpope/vim-vividchalk'
 " Section: FileTypes {{{2
 Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'OrangeT/vim-csharp'
 Bundle 'PProvost/vim-ps1'
 Bundle 'Keithbsmiley/swift.vim'
 Bundle 'tpope/vim-markdown'
@@ -53,6 +54,7 @@ Bundle 'chrisbra/vim-diff-enhanced'
 
 Bundle 'ciaranm/detectindent'
 Bundle 'drmohundro/find-string.vim'
+Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ervandew/supertab'
 " Let SuperTab try to determine best completion based on context, whether
 " <C+X><C+O> or something else.
@@ -269,7 +271,6 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.{ps1,psm1,psd1} set ft=ps1
     autocmd BufNewFile,BufRead *.{md,markdown} set ft=markdown
     autocmd BufNewFile,BufRead *.{json,es6} set ft=javascript
-    autocmd BufNewFile,BufRead *.cshtml set ft=cshtml
     autocmd BufNewFile,BufRead *.build set ft=xml
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
   augroup END "}}}2
