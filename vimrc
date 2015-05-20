@@ -64,6 +64,7 @@ Bundle 'FelikZ/ctrlp-py-matcher'
 Bundle 'justinmk/vim-sneak'
 Bundle 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
+let g:bufExplorerShowNoName = 1
 
 Bundle 'junegunn/vim-peekaboo'
 
