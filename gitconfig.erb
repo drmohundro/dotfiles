@@ -18,6 +18,8 @@
 	autocrlf = input
 <% end %>
 <% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
+[branch]
+	autosetuprebase = always
 [diff]
 	tool = bc3
 [difftool]
