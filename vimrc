@@ -6,13 +6,13 @@ set nocompatible
 if has("win32")
   set runtimepath=~/.vim,$VIMRUNTIME,~/.vim/after
 end
-filetype off
 
 " Section: Vundle {{{1
+filetype off
 set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 
 " Section: Vim-Scripts {{{2
 Bundle 'IndexedSearch'
@@ -122,10 +122,12 @@ else
   " enable neocomplete
   let g:neocomplete#enable_at_startup = 1
 endif
+
+call vundle#end()
+filetype plugin indent on
 " }}}1
 
 syntax on
-filetype plugin indent on
 
 " Section: Options {{{1
 
