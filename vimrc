@@ -67,6 +67,7 @@ let g:bufExplorerFindActive = 0
 let g:bufExplorerShowNoName = 1
 
 Bundle 'junegunn/vim-peekaboo'
+Bundle 'kshenoy/vim-signature'
 
 Bundle 'ctrlpvim/ctrlp.vim'
 if has('win32')
