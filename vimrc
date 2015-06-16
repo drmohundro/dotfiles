@@ -70,9 +70,9 @@ Bundle 'junegunn/vim-peekaboo'
 
 Bundle 'ctrlpvim/ctrlp.vim'
 if has('win32')
-  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . --cached --exclude-standard', 'pt %s -l --no-color -g ""']
+  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . --cached --exclude-standard', 'pt %s -l --nocolor -g ""']
 else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard', 'pt %s -l --no-color -g ""']
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard', 'pt %s -l --nocolor -g ""']
 end
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
