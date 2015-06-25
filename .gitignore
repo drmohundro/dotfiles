@@ -1,3 +1,8 @@
 *.swp
 .netrwhist
 vim/bundle
+
+emacs.d/*
+!emacs.d/init.el
+!emacs.d/Cask
+!emacs.d/lisp

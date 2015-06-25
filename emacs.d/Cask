@@ -1,0 +1,29 @@
+(source gnu)
+(source melpa)
+(source org)
+
+(depends-on "evil-leader")
+(depends-on "evil")
+(depends-on "evil-jumper")
+(depends-on "evil-surround")
+(depends-on "evil-indent-textobject")
+(depends-on "evil-visualstar")
+(depends-on "evil-nerd-commenter")
+(depends-on "evil-matchit")
+
+(depends-on "cask")
+(depends-on "magit")
+
+(depends-on "ag")
+(depends-on "emmet-mode")
+(depends-on "helm")
+(depends-on "helm-projectile")
+(depends-on "projectile")
+
+(depends-on "sublime-themes")
+(depends-on "monokai-theme")
+
+(depends-on "markdown-mode")
+
+(depends-on "powerline")
+(depends-on "powerline-evil")
