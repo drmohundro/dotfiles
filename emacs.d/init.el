@@ -12,6 +12,9 @@
 (setq backup-directory-alist (list (cons "." backup-dir)))
 (setq make-backup-files nil)
 
+; Use spaces instead of tabs
+(setq indent-tabs-mode nil)
+
 ; Use Helm all the time.
 (setq helm-buffers-fuzzy-matching t)
 (helm-mode 1)
@@ -28,16 +31,16 @@
 (if (eq system-type 'windows-nt)
   (progn
     (set-face-attribute 'default nil
-			:family "Office Code Pro"
-			:height 120
-			:weight 'normal
-			:width 'normal))
+                        :family "Office Code Pro"
+                        :height 120
+                        :weight 'normal
+                        :width 'normal))
   (progn
     (set-face-attribute 'default nil
-			:family "Office Code Pro"
-			:height 140
-			:weight 'normal
-			:width 'normal)))
+                        :family "Office Code Pro"
+                        :height 140
+                        :weight 'normal
+                        :width 'normal)))
 
 ; Hide startup screen
 (setq inhibit-startup-screen +1)

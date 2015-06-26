@@ -3,7 +3,8 @@
 (evil-leader/set-leader ",")
 (setq evil-leader/in-all-states 1)
 (evil-leader/set-key
-  "r" 'helm-for-files)
+  "r" 'helm-for-files
+  "s" 'whitespace-mode)
 
 (global-evil-jumper-mode)
 
