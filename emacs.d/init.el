@@ -19,14 +19,25 @@
 ; Use projectile everywhere
 (projectile-global-mode)
 
+; Enable flycheck mode
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;;; GUI
 
 ; Font settings
-(set-face-attribute 'default nil
-                    :family "Office Code Pro"
-                    :height 140
-                    :weight 'normal
-                    :width 'normal)
+(if (eq system-type 'windows-nt)
+  (progn
+    (set-face-attribute 'default nil
+			:family "Office Code Pro"
+			:height 120
+			:weight 'normal
+			:width 'normal))
+  (progn
+    (set-face-attribute 'default nil
+			:family "Office Code Pro"
+			:height 140
+			:weight 'normal
+			:width 'normal)))
 
 ; Hide startup screen
 (setq inhibit-startup-screen +1)

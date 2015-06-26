@@ -3,7 +3,7 @@
 (evil-leader/set-leader ",")
 (setq evil-leader/in-all-states 1)
 (evil-leader/set-key
-  "r" 'helm-recentf)
+  "r" 'helm-for-files)
 
 (global-evil-jumper-mode)
 
@@ -13,6 +13,11 @@
 
 (global-evil-matchit-mode 1)
 
+; page down
+(define-key evil-normal-state-map "J" 'evil-scroll-page-down)
+; page up
+(define-key evil-normal-state-map "K" 'evil-scroll-page-up)
+
 ; I got used to C-q for visual block mode for some reason
 (define-key evil-normal-state-map "\C-q" 'evil-visual-block)
 
@@ -21,10 +26,13 @@
 (define-key evil-normal-state-map "\\\\" 'evilnc-comment-or-uncomment-lines)
 
 ; show buffers
-(define-key evil-normal-state-map "\C-l" 'helm-buffers-list)
+(define-key evil-normal-state-map "\C-l" 'helm-for-files)
 
 ; find files in project
 (define-key evil-normal-state-map "\C-p" 'helm-projectile-find-file)
+
+;;; OmniSharp
+(define-key evil-normal-state-map "\C-b" 'omnisharp-go-to-definition)
 
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.

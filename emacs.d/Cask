@@ -20,10 +20,16 @@
 (depends-on "helm-projectile")
 (depends-on "projectile")
 
+(depends-on "flycheck")
+
 (depends-on "sublime-themes")
 (depends-on "monokai-theme")
 
 (depends-on "markdown-mode")
+(depends-on "csharp-mode")
+(depends-on "powershell")
+
+(depends-on "omnisharp")
 
 (depends-on "powerline")
 (depends-on "powerline-evil")
