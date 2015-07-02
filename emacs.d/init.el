@@ -1,3 +1,9 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Emacs entry point
+
+;;; Code:
+
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
@@ -21,9 +27,14 @@
 
 ; Use projectile everywhere
 (projectile-global-mode)
+(helm-projectile-on)
 
 ; Enable flycheck mode
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+; Faster projectile indexing on Windows
+(when (eq system-type 'windows-nt)
+  (setq projectile-indexing-method 'alien))
 
 ;;; GUI
 
@@ -55,3 +66,6 @@
 
 ; Powerline theme
 (powerline-default-theme)
+
+(provide 'init)
+;;; init.el ends here

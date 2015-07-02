@@ -1,3 +1,9 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Emacs entry point
+
+;;; Code:
+
 (global-evil-leader-mode)
 
 (evil-leader/set-leader ",")
@@ -55,4 +61,4 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 (provide 'init-evil)
-
+;;; init-evil.el ends here

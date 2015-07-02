@@ -1,3 +1,9 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Emacs entry point
+
+;;; Code:
+
 ;;; Stuff for line numbers.
 (defface linum-current
   '((t (:inherit linum :weight bold :underline "#555")))
@@ -34,3 +40,4 @@
 (add-hook 'linum-before-numbering-hook 'my-linum-get-format-string)
 
 (provide 'init-linum)
+;;; init-linum.el ends here
