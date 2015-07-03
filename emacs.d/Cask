@@ -28,6 +28,7 @@
 (depends-on "markdown-mode")
 (depends-on "csharp-mode")
 (depends-on "powershell")
+(depends-on "coffee-mode")
 
 (depends-on "omnisharp")
 
