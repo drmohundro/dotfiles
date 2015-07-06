@@ -38,8 +38,13 @@
 ; find files in project
 (define-key evil-normal-state-map "\C-p" 'helm-projectile-find-file)
 
-;;; OmniSharp
-(define-key evil-normal-state-map "\C-b" 'omnisharp-go-to-definition)
+; Ruby/Robe mode
+(evil-declare-key 'normal robe-mode-map
+  (kbd "\C-b") 'robe-jump)
+
+; Omnisharp/C# mode
+(evil-declare-key 'normal omnisharp-mode-map
+  (kbd "\C-b") 'omnisharp-go-to-definition)
 
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.

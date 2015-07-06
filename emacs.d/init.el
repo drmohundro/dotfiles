@@ -18,6 +18,8 @@
 (setq backup-directory-alist (list (cons "." backup-dir)))
 (setq make-backup-files nil)
 
+(add-to-list 'auto-mode-alist '("Cask\\'" . lisp-mode))
+
 ; Use spaces instead of tabs
 (setq indent-tabs-mode nil)
 
@@ -32,9 +34,30 @@
 ; Enable flycheck mode
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+; Company mode everywhere
+(global-company-mode t)
+(push 'company-robe company-backends)
+
 ; Faster projectile indexing on Windows
 (when (eq system-type 'windows-nt)
   (setq projectile-indexing-method 'alien))
+
+; Highlight matching parens
+(show-paren-mode 1)
+
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+
+;;; Ruby
+
+; Better ruby indentation
+(setq ruby-deep-indent-paren nil)
+
+; Tie robe and ruby-mode together
+(add-hook 'ruby-mode-hook 'robe-mode)
+
+(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+  (rvm-activate-corresponding-ruby))
 
 ;;; GUI
 

@@ -20,16 +20,28 @@
 (depends-on "helm-projectile")
 (depends-on "projectile")
 
+(depends-on "company")
 (depends-on "flycheck")
 
 (depends-on "sublime-themes")
 (depends-on "monokai-theme")
 
 (depends-on "markdown-mode")
-(depends-on "csharp-mode")
 (depends-on "powershell")
 (depends-on "coffee-mode")
+(depends-on "yaml-mode")
 
+; Elixir
+(depends-on "alchemist")
+
+; Ruby/Rails
+(depends-on "inf-ruby")
+(depends-on "projectile-rails")
+(depends-on "robe")
+(depends-on "rvm")
+
+; .NET
+(depends-on "csharp-mode")
 (depends-on "omnisharp")
 
 (depends-on "powerline")
