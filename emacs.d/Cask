@@ -1,7 +1,11 @@
+;;; package management
 (source gnu)
 (source melpa)
 (source org)
 
+(depends-on "cask")
+
+;;; evil packages
 (depends-on "evil-leader")
 (depends-on "evil")
 (depends-on "evil-jumper")
@@ -11,11 +15,11 @@
 (depends-on "evil-nerd-commenter")
 (depends-on "evil-matchit")
 
-(depends-on "cask")
+;;; tools
 (depends-on "magit")
-
 (depends-on "ag")
-(depends-on "emmet-mode")
+(depends-on "pt")
+
 (depends-on "helm")
 (depends-on "helm-projectile")
 (depends-on "projectile")
@@ -23,13 +27,15 @@
 (depends-on "company")
 (depends-on "flycheck")
 
+;;; themes
 (depends-on "sublime-themes")
 (depends-on "monokai-theme")
 
+;;; modes
 (depends-on "markdown-mode")
-(depends-on "powershell")
 (depends-on "coffee-mode")
 (depends-on "yaml-mode")
+(depends-on "vimrc-mode")
 
 ; Elixir
 (depends-on "alchemist")
@@ -43,6 +49,11 @@
 ; .NET
 (depends-on "csharp-mode")
 (depends-on "omnisharp")
+(depends-on "web-mode")
+(depends-on "powershell")
 
+(depends-on "emmet-mode")
+
+;;; powerline
 (depends-on "powerline")
 (depends-on "powerline-evil")
