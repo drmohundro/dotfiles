@@ -21,7 +21,7 @@
 (add-to-list 'auto-mode-alist '("Cask\\'" . lisp-mode))
 
 ; Use spaces instead of tabs
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ; Use Helm all the time.
 (setq helm-buffers-fuzzy-matching t)
