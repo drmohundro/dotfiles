@@ -26,6 +26,7 @@ Bundle 'jnurmine/Zenburn'
 Bundle 'MaxSt/FlatColor'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
+Bundle 'NLKNguyen/papercolor-theme'
 " }}}2
 " Section: FileTypes {{{2
 Bundle 'kongo2002/fsharp-vim'
@@ -307,7 +308,7 @@ set background=dark
 color molokai
 
 "set background=light
-"color flatcolor
+"color PaperColor
 
 if has("gui_running")
   set cursorline           " highlight current line
@@ -324,6 +325,7 @@ if has("gui_running")
     set guifont=Mono\ 14
   elseif has("win32")
     set guifont=Office_Code_Pro:h11
+    "set guifont=Office_Code_Pro:h16
     set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
   endif
 else
