@@ -13,6 +13,7 @@
 
 (require 'init-evil)
 (require 'init-linum)
+(require 'evil-rebellion)
 
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))
