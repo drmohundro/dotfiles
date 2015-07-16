@@ -49,6 +49,9 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
+; cmd-backtick for switching to other windows
+(global-set-key "\M-`" 'other-frame)
+
 ;;; Ruby
 
 ; Better ruby indentation
