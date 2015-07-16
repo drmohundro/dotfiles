@@ -6,3 +6,8 @@ emacs.d/*
 !emacs.d/init.el
 !emacs.d/Cask
 !emacs.d/lisp
+
+config/*
+!config/fish
+config/fish/fish_history
+config/fish/fishd.*
