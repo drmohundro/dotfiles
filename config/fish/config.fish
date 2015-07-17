@@ -1,3 +1,5 @@
+set PATH ~/bin $PATH
+
 # http://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
