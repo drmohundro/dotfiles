@@ -1,4 +1,6 @@
+set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
 set PATH ~/bin $PATH
+set PATH $PATH ~/.cask/bin
 
 # http://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html
 set __fish_git_prompt_showdirtystate 'yes'
