@@ -21,6 +21,9 @@
 
 (add-to-list 'auto-mode-alist '("Cask\\'" . lisp-mode))
 
+(add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+
 ; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 

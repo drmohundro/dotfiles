@@ -34,10 +34,6 @@
   '(progn
      (require 'evil-org-rebellion)))
 
-(eval-after-load 'magit
-  '(progn
-     (require 'evil-magit-rebellion)))
-
 (eval-after-load 'bbdb
   '(progn
      (require 'evil-bbdb-rebellion)))
