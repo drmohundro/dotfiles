@@ -1,6 +1,6 @@
 ;;; package management
-(source gnu)
 (source melpa)
+(source gnu)
 (source org)
 
 (depends-on "cask")
