@@ -34,3 +34,7 @@ end
 function j
   cd (fasd -d -e 'printf %s' "$argv")
 end
+
+if test -e ~/.iterm2_shell_integration.fish
+  source ~/.iterm2_shell_integration.fish
+end
