@@ -24,6 +24,13 @@
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
+; Reload changed files from disk automatically
+(global-auto-revert-mode t)
+
+; Unique buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
 ; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
