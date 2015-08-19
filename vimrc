@@ -32,7 +32,7 @@ Bundle 'NLKNguyen/papercolor-theme'
 Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'OrangeT/vim-csharp'
-Bundle 'PProvost/vim-ps1'
+Bundle 'drmohundro/vim-ps1'
 Bundle 'Keithbsmiley/swift.vim'
 Bundle 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
