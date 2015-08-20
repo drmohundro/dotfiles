@@ -2,6 +2,9 @@
 " Version: 1.4
 " Url: http://mohundro.com/blog/
 
+" this has to be set early so that alt keybindings will work in Windows
+set encoding=utf-8
+
 set nocompatible
 if has("win32")
   set runtimepath=~/.vim,$VIMRUNTIME,~/.vim/after
