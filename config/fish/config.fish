@@ -6,6 +6,9 @@ set PATH $PATH ~/.cask/bin
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
 
+# initialize rvm (uses rvm.fish)
+rvm current 1>/dev/null 2>&1
+
 ### Prompt
 
 function fish_prompt
