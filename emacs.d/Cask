@@ -36,6 +36,7 @@
 (depends-on "coffee-mode")
 (depends-on "yaml-mode")
 (depends-on "vimrc-mode")
+(depends-on "fish-mode")
 
 ; Elixir
 (depends-on "alchemist")
