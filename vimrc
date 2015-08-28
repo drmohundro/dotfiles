@@ -156,9 +156,16 @@ set listchars=tab:>-,trail:·,eol:¬
 set showbreak=>\
 set winaltkeys=no
 
+if !has('win32')
+  " avoid warnings when I'm using fish
+  set shell=bash
+endif
+
 set wildignore+=.hg,.git
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.exe,*.dll,*.pdb,*.suo
+
+let g:netrw_liststyle=1    " default netrw to long style (file size, timestamp, etc.)
 
 " }}}1
 " Section: Mappings {{{1
