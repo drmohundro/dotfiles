@@ -9,6 +9,11 @@ set __fish_git_prompt_char_dirtystate '⚡'
 # initialize rvm (uses rvm.fish)
 rvm current 1>/dev/null 2>&1
 
+# smart cased pt
+function pt
+  command pt --smart-case $argv
+end
+
 ### Prompt
 
 function fish_prompt
