@@ -1,0 +1,25 @@
+set clipboard=unnamed      " defaults to system clipboard
+set hlsearch               " highlight search results
+set ignorecase             " ignore case when searching
+set number                 " show line numbers
+set smartcase              " override ignore case if searching for mixed case
+
+set expandtab           " use spaces instead of tabs
+
+" hide search highlighting with <esc>
+nnoremap <esc> :nohlsearch<cr><esc>
+
+nnoremap J <c-d>
+vnoremap J <c-d>
+nnoremap K <c-u>
+vnoremap K <c-u>
+
+" up/down work as expected with word wrapping on
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
+" indent in visual mode with <tab>
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
