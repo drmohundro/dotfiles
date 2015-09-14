@@ -2,6 +2,11 @@ set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
 set PATH ~/bin $PATH
 set PATH $PATH ~/.cask/bin
 
+if test -e ~/.go
+  set -x GOPATH ~/.go
+  set PATH $PATH $GOPATH/bin
+end
+
 # http://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
