@@ -246,6 +246,12 @@ function! AutowrapLines()
 endfunction
 command! -bar AutowrapLines :execute AutowrapLines()
 
+" Yank current file's path to clipboard
+function! YankCurrentFile()
+  let @* = expand("%:p")
+endfunction
+command! -bar YankCurrentFile :execute YankCurrentFile()
+
 " Set tabstop, softtabstop and shiftwidth to the same value
 function! Stab()
   let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
