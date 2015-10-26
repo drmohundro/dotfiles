@@ -15,6 +15,8 @@
 (require 'init-linum)
 (require 'evil-rebellion)
 
+(require 'vbnet-mode)
+
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))
 (setq make-backup-files nil)
@@ -23,9 +25,13 @@
 
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vb\\'" . vbnet-mode))
 
 ; Reload changed files from disk automatically
 (global-auto-revert-mode t)
+
+; disable bell
+(setq ring-bell-function #'ignore)
 
 ; Unique buffer names
 (require 'uniquify)
