@@ -292,7 +292,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.{ps1,psm1,psd1} set ft=ps1
     autocmd BufNewFile,BufRead *.{md,markdown} set ft=markdown
     autocmd BufNewFile,BufRead *.{json,es6} set ft=javascript
-    autocmd BufNewFile,BufRead *.build set ft=xml
+    autocmd BufNewFile,BufRead *.{build,config} set ft=xml
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
   augroup END "}}}2
   augroup FTOptions "{{{2

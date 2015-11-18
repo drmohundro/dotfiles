@@ -9,6 +9,8 @@
 [core]
 <% if RUBY_PLATFORM =~ /darwin/ %>
 	editor = mvim -v
+<% elsif RUBY_PLATFORM =~ /(win32|mingw32)/ %>
+	editor = 'C:\\Program Files\\Vim\\vim74\\vim.exe'
 <% else %>
 	editor = vim
 <% end %>
