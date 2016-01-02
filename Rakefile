@@ -32,6 +32,9 @@ task :install do
     else
       link_file(file)
     end
+
+    link_file('vim', "#{ENV['HOME']}/.config/nvim")
+    link_file('vimrc', "#{ENV['HOME']}/.config/nvim/init.vim")
   end
 end
 
@@ -40,7 +43,7 @@ def replace_file(file)
   link_file(file)
 end
 
-def link_file(file)
+def link_file(file, link = nil)
   if file =~ /.erb$/
     puts "generating ~/.#{file.sub('.erb', '')}"
     File.open(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"), 'w') do |new_file|
@@ -49,7 +52,7 @@ def link_file(file)
   else
     puts "linking ~/.#{file}"
 
-    link = "#{ENV['HOME']}/.#{file}"
+    link ||= "#{ENV['HOME']}/.#{file}"
     target = "#{Dir.pwd}/#{file}"
 
     if RUBY_PLATFORM =~ /(win32|mingw32)/
