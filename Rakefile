@@ -32,10 +32,10 @@ task :install do
     else
       link_file(file)
     end
-
-    link_file('vim', "#{ENV['HOME']}/.config/nvim")
-    link_file('vimrc', "#{ENV['HOME']}/.config/nvim/init.vim")
   end
+
+  link_file('vim', "#{ENV['HOME']}/.config/nvim")
+  link_file('vimrc', "#{ENV['HOME']}/.config/nvim/init.vim")
 end
 
 def replace_file(file)
