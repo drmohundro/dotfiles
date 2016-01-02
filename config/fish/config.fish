@@ -2,6 +2,7 @@ set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
 set PATH ~/bin $PATH
 set PATH $PATH ~/.cask/bin
 
+# GO setup
 if test -e ~/.go
   set -x GOPATH ~/.go
   set PATH $PATH $GOPATH/bin
@@ -17,6 +18,16 @@ rvm current 1>/dev/null 2>&1
 # smart cased pt
 function pt
   command pt --smart-case $argv
+end
+
+# alias vim to "mvim -v"
+function vim
+  command mvim -v $argv
+end
+
+# Visual Studio Code wrapper
+function code
+  env VSCODE_CWD=(PWD) open -n -b "com.microsoft.VSCode" --args $argv
 end
 
 ### Prompt
@@ -47,6 +58,8 @@ end
 function j
   cd (fasd -d -e 'printf %s' "$argv")
 end
+
+### iTerm 2 shell integration
 
 if test -e ~/.iterm2_shell_integration.fish
   source ~/.iterm2_shell_integration.fish
