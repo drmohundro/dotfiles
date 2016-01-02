@@ -11,3 +11,7 @@ config/*
 !config/fish
 config/fish/fish_history
 config/fish/fishd.*
+
+# neovim symlinked files
+vim/init.vim
+vim/vim
