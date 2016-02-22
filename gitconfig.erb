@@ -1,11 +1,30 @@
 [user]
 	name = David Mohundro
 	email = david@mohundro.com
+
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	ui = auto
+	ui = always
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = cyan
+
 [core]
 <% if RUBY_PLATFORM =~ /darwin/ %>
 	editor = mvim -v
@@ -19,28 +38,32 @@
 <% else %>
 	autocrlf = input
 <% end %>
-<% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
+
 [branch]
 	autosetuprebase = always
+
+<% if RUBY_PLATFORM =~ /(win32|mingw32)/ %>
 [diff]
 	tool = bc
 [difftool]
 	prompt = false
+[difftool "bc"]
+	path = c:/Program Files (x86)/Beyond Compare 4/bcomp.exe
+
 [merge]
 	tool = bc
 [mergetool]
 	keepBackup = false
-[difftool "bc"]
-	path = c:/Program Files (x86)/Beyond Compare 4/bcomp.exe
 [mergetool "bc"]
 	path = c:/Program Files (x86)/Beyond Compare 4/bcomp.exe
 <% elsif RUBY_PLATFORM =~ /darwin/ %>
 [diff]
 	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
 	prompt = false
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
 [merge]
 	tool = Kaleidoscope
 [mergetool]
@@ -52,10 +75,17 @@
 [merge]
 	tool = vimdiff
 <% end %>
+
+[pager]
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
+
 [help]
 	autocorrect = 1
+
 [push]
 	default = upstream
+
 [alias]
 	st = status
 	ci = commit
@@ -63,15 +93,6 @@
 	co = checkout
 	df = diff --word-diff
 	dc = diff --cached --word-diff
-	r = reset
-	r1 = reset HEAD^
-	r2 = reset HEAD^^
-	rh = reset --hard
-	rh1 = reset HEAD^ --hard
-	rh2 = reset HEAD^^ --hard
-	sl = stash list
-	sa = stash apply
-	ss = stash save
 	vdf = difftool --dir-diff
 	vdfc = difftool --dir-diff --cached
 
@@ -86,9 +107,6 @@
 	ll = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --decorate --numstat
 	fld = log --word-diff -u
 
-	# list colors...
-	#lc = log --pretty=format:'%Credred%Creset %Cgreengreen%Creset %C(Yellow)yellow%Creset %Cblueblue%Creset %C(magenta)magenta%Creset %C(cyan)cyan%Creset %C(white)white%Creset %C(dim white)dim white%Creset %C(bold white)bold white%Creset'
-
 	# Diff a rev
 	diffr  = "!f() { git diff "$1"^.."$1" --word-diff; }; f"
 	diffrt  = "!f() { git difftool "$1"^.."$1" --word-diff; }; f"
@@ -98,9 +116,11 @@
 
 	# improved grep display
 	g = grep --break --heading --line-number
+
 [grep]
 	extendRegexp = true
 	lineNumber = true
+
 <% if RUBY_PLATFORM =~ /darwin/ %>
 [credential]
 	helper = osxkeychain
