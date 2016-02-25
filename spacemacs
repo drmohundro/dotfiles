@@ -24,13 +24,15 @@
                                      python
                                      ruby
                                      ruby-on-rails
-                                     rust-mode
+                                     rust
                                      shell-scripts
                                      sql
+                                     swift
                                      themes-megapack
                                      typescript
                                      vinegar
-                                     windows-scripts)
+                                     windows-scripts
+                                     yaml)
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -92,7 +94,7 @@
                                       leuven))
 )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "This is were you can ultimately override default Spacemacs configuration.
 This function is called at the very end of Spacemacs initialization."
 
@@ -143,6 +145,13 @@ This function is called at the very end of Spacemacs initialization."
   ; increase/decrease font size
   (define-key evil-normal-state-map "\M-," 'text-scale-decrease)
   (define-key evil-normal-state-map "\M-." 'text-scale-increase)
+
+  (add-hook
+   'rust-mode-hook
+   'lambda ()
+   (setenv "RUST_SRC_PATH" (substitute-in-file-name "$HOME/dev/rustc-1.6.0/src")))
+
+  (setq-default rust-enable-racer t)
 )
 
 ;; Custom variables
