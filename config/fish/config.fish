@@ -1,8 +1,12 @@
 set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
 set PATH ~/bin $PATH
 set PATH $PATH ~/.cask/bin
+set PATH $PATH ~/.node/bin
 
-# GO setup
+if test -e ~/.cargo
+  set PATH $PATH ~/.cargo/bin
+end
+
 if test -e ~/.go
   set -x GOPATH ~/.go
   set PATH $PATH $GOPATH/bin
