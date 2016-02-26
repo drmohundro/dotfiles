@@ -20,6 +20,7 @@
                                      github
                                      html
                                      javascript
+                                     lua
                                      markdown
                                      python
                                      ruby
