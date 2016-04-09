@@ -34,6 +34,11 @@ function code
   env VSCODE_CWD=(PWD) open -n -b "com.microsoft.VSCode" --args $argv
 end
 
+# bundle exec
+function be
+  bundle exec $argv
+end
+
 ### Prompt
 
 function fish_prompt
