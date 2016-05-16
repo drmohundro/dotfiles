@@ -74,6 +74,10 @@
  ;; specified with an installed package.
  ;; Not used for now.
  dotspacemacs-default-package-repository nil
+
+ ;; "Major mode leader key is a shortcut key which is the equivalent of
+ ;; pressing `<leader> m`. Set it to `nil` to disable it."
+ dotspacemacs-major-mode-leader-key nil
 )
 
 ;; Initialization Hooks
