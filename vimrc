@@ -2,6 +2,8 @@
 " Version: 1.4
 " Url: http://mohundro.com/blog/
 
+scriptencoding utf-8
+
 " this has to be set early so that alt keybindings will work in Windows
 set encoding=utf-8
 
@@ -32,6 +34,7 @@ Bundle 'tpope/vim-vividchalk'
 Bundle 'NLKNguyen/papercolor-theme'
 " }}}2
 " Section: FileTypes {{{2
+Bundle 'dag/vim-fish'
 Bundle 'kongo2002/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'OrangeT/vim-csharp'
@@ -83,10 +86,7 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
-
 Bundle 'OmniSharp/omnisharp-vim'
-" also requires syntastic
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 
 if has('mac')
   Bundle 'rizzatti/dash.vim'
@@ -107,6 +107,24 @@ Bundle 'jistr/vim-nerdtree-tabs'
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
 Bundle 'scrooloose/syntastic'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
 Bundle 'sheerun/vim-polyglot'
 Bundle 't9md/vim-choosewin'
 let g:choosewin_overlay_enable = 1
@@ -119,13 +137,9 @@ Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vinegar'
 
-if !has('win32')
-  Bundle 'Valloric/YouCompleteMe'
-else
-  Bundle 'Shougo/neocomplete.vim'
-  " enable neocomplete
-  let g:neocomplete#enable_at_startup = 1
-endif
+Bundle 'Shougo/neocomplete.vim'
+" enable neocomplete
+let g:neocomplete#enable_at_startup = 1
 
 call vundle#end()
 filetype plugin indent on
@@ -151,8 +165,7 @@ set expandtab           " use spaces instead of tabs
 set backupdir=$TEMP,$TMP,.   " where to store backups
 set directory=$TEMP,$TMP,.   " where to store swp files
 
-" TODO: get comments on these or remove them
-set listchars=tab:>-,trail:�,eol:�
+set listchars=tab:»\ ,trail:·,eol:↲,
 set showbreak=>\
 set winaltkeys=no
 
