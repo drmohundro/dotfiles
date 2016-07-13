@@ -75,6 +75,7 @@ let g:bufExplorerShowNoName = 1
 
 Bundle 'junegunn/vim-peekaboo'
 Bundle 'kshenoy/vim-signature'
+Bundle 'Konfekt/FastFold'
 
 Bundle 'ctrlpvim/ctrlp.vim'
 if has('win32')
@@ -135,6 +136,7 @@ Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vinegar'
