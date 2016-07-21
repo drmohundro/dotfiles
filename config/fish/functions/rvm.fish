@@ -1,21 +1,20 @@
 function rvm --description='Ruby enVironment Manager'
   # run RVM and capture the resulting environment
   set --local env_file (mktemp -t rvm.fish.XXXXXXXXXX)
+  bash -c 'source ~/.rvm/scripts/rvm; rvm "$@"; status=$?; env > "$0"; exit $status' $env_file $argv
 
-  bash -c '[ -e ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm || source /usr/local/rvm/scripts/rvm; rvm "$@"; status=$?; env > "$0"; exit $status' $env_file $argv
-
-  # grep the rvm_* *PATH RUBY_* GEM_* variables from the captured environment
-  # exclude lines with _clr and _debug
-  # apply rvm_* *PATH RUBY_* GEM_* variables from the captured environment
-  and eval (grep '^rvm\|^[^=]*PATH\|^RUBY_\|^GEM_' $env_file |grep -v _clr |grep -v _debug| sed '/^[^=]*PATH/y/:/ /; s/^/set -xg /; s/=/ /; s/$/ ;/; s/(//; s/)//')
+  # apply rvm_* and *PATH variables from the captured environment
+  and eval (grep '^rvm\|^[^=]*PATH\|^GEM_HOME' $env_file | grep -v '_clr=' | sed '/^[^=]*PATH/s/:/" "/g; s/^/set -xg /; s/=/ "/; s/$/" ;/; s/(//; s/)//')
+  # needed under fish >= 2.2.0
+  and set -xg GEM_PATH (echo $GEM_PATH | sed 's/ /:/g')
 
   # clean up
   rm -f $env_file
 end
 
-function __check_rvm --on-variable PWD --description 'Setup rvm on directory change'
-  status --is-command-substitution; and return
-
+function __handle_rvmrc_stuff --on-variable PWD
+  # Source a .rvmrc file in a directory after changing to it, if it exists.
+  # To disable this fature, set rvm_project_rvmrc=0 in $HOME/.rvmrc
   if test "$rvm_project_rvmrc" != 0
     set -l cwd $PWD
     while true
@@ -25,9 +24,9 @@ function __check_rvm --on-variable PWD --description 'Setup rvm on directory cha
         end
         break
       else
-        if begin ; test -s ".rvmrc" ; or test -s ".ruby-version" ; or test -s ".ruby-gemset" ; or test -s ".versions.conf" ; end
-          rvm reload 1> /dev/null 2>&1
-          rvm rvmrc load 1>/dev/null 2>&1
+        if test -e .rvmrc -o -e .ruby-version -o -e .ruby-gemset
+          eval "rvm reload" > /dev/null
+          eval "rvm rvmrc load" >/dev/null
           break
         else
           set cwd (dirname "$cwd")

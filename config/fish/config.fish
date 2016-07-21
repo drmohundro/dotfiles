@@ -17,7 +17,7 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
 
 # initialize rvm (uses rvm.fish)
-rvm current 1>/dev/null 2>&1
+rvm default
 
 # smart cased pt
 function pt
