@@ -19,11 +19,6 @@ set __fish_git_prompt_char_dirtystate '⚡'
 # initialize rvm (uses rvm.fish)
 rvm default
 
-# smart cased pt
-function pt
-  command pt --smart-case $argv
-end
-
 # alias vim to "mvim -v"
 function vim
   command mvim -v $argv
