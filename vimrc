@@ -95,8 +95,8 @@ end
 
 Bundle 'rking/ag.vim'
 " Configure ag.vim to use pt.exe instead
-let g:agprg="pt --nogroup"
-let g:agformat="%f:%l:%m"
+let g:ag_prg="pt --nogroup --nocolor"
+let g:ag_format="%f:%l:%m"
 
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
