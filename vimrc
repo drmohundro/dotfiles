@@ -68,12 +68,16 @@ Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "context"
 
 Bundle 'FelikZ/ctrlp-py-matcher'
+Bundle 'janko-m/vim-test'
 Bundle 'justinmk/vim-sneak'
 Bundle 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
 let g:bufExplorerShowNoName = 1
 
 Bundle 'junegunn/vim-peekaboo'
+Bundle 'kana/vim-textobj-user'
+
+" plugin to place, toggle and display marks
 Bundle 'kshenoy/vim-signature'
 Bundle 'Konfekt/FastFold'
 
@@ -87,6 +91,7 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'OmniSharp/omnisharp-vim'
 
 if has('mac')
@@ -114,6 +119,7 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 
 if !has('win32')
@@ -139,6 +145,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-vinegar'
 
 Bundle 'Shougo/neocomplete.vim'
@@ -337,6 +344,9 @@ endif
 " }}}1
 " Section: GUI {{{1
 
+" enable nice colors in nvim
+set termguicolors
+
 set background=dark
 color molokai
 
@@ -352,7 +362,7 @@ if has("gui_running")
   set columns=126
 
   if has("mac")
-    set guifont=Office\ Code\ Pro:h14
+    set guifont=Office\ Code\ Pro:h16
     "set guifont=Source\ Code\ Pro:h20
   elseif has("unix")
     set guifont=Mono\ 14

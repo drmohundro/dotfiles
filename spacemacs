@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: dotspacemacs -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -78,6 +78,8 @@
  ;; "Major mode leader key is a shortcut key which is the equivalent of
  ;; pressing `<leader> m`. Set it to `nil` to disable it."
  dotspacemacs-major-mode-leader-key nil
+
+ dotspacemacs-additional-packages '(editorconfig)
 )
 
 ;; Initialization Hooks
@@ -132,6 +134,9 @@ This function is called at the very end of Spacemacs initialization."
   ; show buffers
   (define-key evil-normal-state-map "\C-l" 'helm-for-files)
 
+  ; use ctrl-p for search in project
+  (define-key evil-normal-state-map "\C-p" 'helm-projectile-find-file)
+
   ; because Spacemacs uses "SPC" for leader, this is just the shortcut I like
   (define-key evil-normal-state-map ",s" 'whitespace-mode)
   (define-key evil-normal-state-map ",r" 'helm-for-files)
@@ -150,6 +155,13 @@ This function is called at the very end of Spacemacs initialization."
   ; increase/decrease font size
   (define-key evil-normal-state-map "\M-," 'text-scale-decrease)
   (define-key evil-normal-state-map "\M-." 'text-scale-increase)
+
+  ; tabs
+  (setq-default
+   indent-tabs-mode nil
+   tab-width 2
+   js-indent-level 2
+   js2-basic-offset 2)
 
   (add-hook
    'rust-mode-hook
