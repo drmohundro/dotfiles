@@ -12,76 +12,69 @@ if has("win32")
   set runtimepath=~/.vim,$VIMRUNTIME,~/.vim/after
 end
 
-" Section: Vundle {{{1
-filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#begin()
-
-Bundle 'gmarik/Vundle.vim'
+" Section: Vim-Plug {{{1
+call plug#begin('~/.vim/plugged')
 
 " Section: Vim-Scripts {{{2
-Bundle 'IndexedSearch'
-Bundle 'JavaScript-Indent'
-Bundle 'mru.vim'
 " }}}2
 " Section: Colors {{{2
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'chriskempson/base16-vim'
-Bundle 'jnurmine/Zenburn'
-Bundle 'MaxSt/FlatColor'
-Bundle 'tomasr/molokai'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+Plug 'jnurmine/Zenburn'
+Plug 'MaxSt/FlatColor'
+Plug 'tomasr/molokai'
+Plug 'tpope/vim-vividchalk'
+Plug 'NLKNguyen/papercolor-theme'
 " }}}2
 " Section: FileTypes {{{2
-Bundle 'dag/vim-fish'
-Bundle 'kongo2002/fsharp-vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'OrangeT/vim-csharp'
-Bundle 'drmohundro/vim-ps1'
-Bundle 'Keithbsmiley/swift.vim'
-Bundle 'tpope/vim-markdown'
+Plug 'dag/vim-fish'
+Plug 'kongo2002/fsharp-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'OrangeT/vim-csharp'
+Plug 'drmohundro/vim-ps1'
+Plug 'Keithbsmiley/swift.vim'
+Plug 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
 
-Bundle 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby'
 " }}}2
 
-Bundle 'bling/vim-airline'
+Plug 'bling/vim-airline'
 " use powerline patched fonts
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-Bundle 'chrisbra/NrrwRgn.git'
-Bundle 'chrisbra/color_highlight'
+Plug 'chrisbra/NrrwRgn'
+Plug 'chrisbra/color_highlight'
 " automatic colorization filetypes
 let g:colorizer_auto_filetype='css,html,cshtml'
 
-Bundle 'chrisbra/vim-diff-enhanced'
+Plug 'chrisbra/vim-diff-enhanced'
 
-Bundle 'ciaranm/detectindent'
-Bundle 'drmohundro/find-string.vim'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'ervandew/supertab'
+Plug 'ciaranm/detectindent'
+Plug 'drmohundro/find-string.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'
 " Let SuperTab try to determine best completion based on context, whether
 " <C+X><C+O> or something else.
 let g:SuperTabDefaultCompletionType = "context"
 
-Bundle 'FelikZ/ctrlp-py-matcher'
-Bundle 'janko-m/vim-test'
-Bundle 'justinmk/vim-sneak'
-Bundle 'jlanzarotta/bufexplorer'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'janko-m/vim-test'
+Plug 'justinmk/vim-sneak'
+Plug 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
 let g:bufExplorerShowNoName = 1
 
-Bundle 'junegunn/vim-peekaboo'
-Bundle 'kana/vim-textobj-user'
+Plug 'junegunn/vim-peekaboo'
+Plug 'kana/vim-textobj-user'
 
 " plugin to place, toggle and display marks
-Bundle 'kshenoy/vim-signature'
-Bundle 'Konfekt/FastFold'
+Plug 'kshenoy/vim-signature'
+Plug 'Konfekt/FastFold'
 
-Bundle 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 if has('win32')
   let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . --cached --exclude-standard', 'pt %s -l --nocolor -g ""']
 else
@@ -89,30 +82,30 @@ else
 end
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
-Bundle 'majutsushi/tagbar'
-Bundle 'mattn/emmet-vim'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'OmniSharp/omnisharp-vim'
+Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'OmniSharp/omnisharp-vim'
 
 if has('mac')
-  Bundle 'rizzatti/dash.vim'
+  Plug 'rizzatti/dash.vim'
 end
 
-Bundle 'rking/ag.vim'
+Plug 'rking/ag.vim'
 " Configure ag.vim to use pt.exe instead
 let g:ag_prg="pt --nogroup --nocolor"
 let g:ag_format="%f:%l:%m"
 
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 " open NERDTree on right side
 let NERDTreeWinPos = 'right'
 let NERDTreeHijackNetrw = 0
 
-Bundle 'jistr/vim-nerdtree-tabs'
+Plug 'jistr/vim-nerdtree-tabs'
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
-Bundle 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
@@ -134,26 +127,36 @@ highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
-Bundle 'sheerun/vim-polyglot'
-Bundle 't9md/vim-choosewin'
+Plug 'sheerun/vim-polyglot'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim'
+  " enable deoplete
+  let g:deoplete#enable_at_startup = 1
+else
+  Plug 'Shougo/neocomplete.vim'
+  " enable neocomplete
+  let g:neocomplete#enable_at_startup = 1
+end
+
+Plug 't9md/vim-choosewin'
 let g:choosewin_overlay_enable = 1
 
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-vinegar'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 
-Bundle 'Shougo/neocomplete.vim'
-" enable neocomplete
-let g:neocomplete#enable_at_startup = 1
+Plug 'vim-scripts/IndexedSearch'
+Plug 'vim-scripts/JavaScript-Indent'
+Plug 'yegappan/mru'
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 " }}}1
 
 syntax on

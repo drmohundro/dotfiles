@@ -1,6 +1,6 @@
 *.swp
 .netrwhist
-vim/bundle
+vim/plugged
 
 emacs.d/*
 !emacs.d/init.el
