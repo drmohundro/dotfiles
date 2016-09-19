@@ -347,8 +347,10 @@ endif
 " }}}1
 " Section: GUI {{{1
 
-" enable nice colors in nvim
-set termguicolors
+if !has("win32")
+  " enable nice colors in nvim
+  set termguicolors
+end
 
 set background=dark
 color molokai
