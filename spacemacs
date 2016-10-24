@@ -79,6 +79,9 @@
  ;; pressing `<leader> m`. Set it to `nil` to disable it."
  dotspacemacs-major-mode-leader-key nil
 
+ ;; Enable lazy installation of missing features
+ dotspacemacs-enable-lazy-installation 'all
+
  dotspacemacs-additional-packages '(editorconfig)
 )
 
@@ -184,20 +187,22 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-ispell-requires 4 t)
- '(ahs-case-fold-search nil)
- '(ahs-default-range (quote ahs-range-whole-buffer))
- '(ahs-idle-interval 0.25)
+ '(ahs-case-fold-search nil t)
+ '(ahs-default-range (quote ahs-range-whole-buffer) t)
+ '(ahs-idle-interval 0.25 t)
  '(ahs-idle-timer 0 t)
- '(ahs-inhibit-face-list nil)
+ '(ahs-inhibit-face-list nil t)
  '(custom-safe-themes
    (quote
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "0f0087ed1f27aaa8bd4c7e1910a02256facf075182e303adb33db23d1611864b" default)))
+ '(package-selected-packages
+   (quote
+    (pug-mode yapfify uuidgen toc-org tide typescript-mode py-isort pcre2el spinner org org-plus-contrib org-bullets livid-mode skewer-mode simple-httpd live-py-mode link-hint json-mode json-snatcher json-reformat parent-mode request haml-mode gitignore-mode github-search gh marshal logito pcache flycheck-mix flx grizzl eyebrowse evil-visual-mark-mode evil-unimpaired magit-popup evil-ediff anzu highlight dumb-jump diminish darkokai-theme web-completion-data dash-functional tern company-shell column-enforce-mode cargo inf-ruby bind-map bind-key yasnippet packed pythonic s dash pkg-info epl avy async popup zenburn-theme yaml-mode ws-butler web-mode toml-mode tao-theme swift-mode spacemacs-theme spaceline racer rust-mode projectile-rails rake persp-mode organic-green-theme open-junk-file omtose-phellack-theme neotree moe-theme material-theme leuven-theme js2-refactor js2-mode indent-guide help-fns+ helm-themes helm-pydoc helm-projectile helm-descbinds helm-ag gruvbox-theme grandshell-theme google-translate git-link evil-surround evil-search-highlight-persist evil-matchit evil-iedit-state emmet-mode editorconfig darktooth-theme color-theme-sanityinc-tomorrow badwolf-theme ample-theme alchemist ace-link ace-jump-helm-line anaconda-mode smartparens company projectile helm helm-core ht markdown-mode csharp-mode flycheck magit git-commit with-editor hydra f auto-complete package-build which-key evil monokai-theme zonokai-theme zen-and-art-theme window-numbering web-beautify volatile-highlights vi-tilde-fringe use-package undo-tree underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tss tronesque-theme toxi-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme sql-indent spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smooth-scrolling smeargle slim-mode seti-theme scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reverse-theme restart-emacs rbenv rainbow-delimiters railscasts-theme quelpa pyvenv pytest pyenv-mode py-yapf purple-haze-theme professional-theme powershell powerline popwin planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme paradox page-break-lines orgit omnisharp oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme multiple-cursors move-text monochrome-theme molokai-theme mmm-mode minimal-theme markdown-toc majapahit-theme magit-gitflow magit-gh-pulls macrostep lush-theme lua-mode lorem-ipsum linum-relative light-soap-theme less-css-mode js-doc jbeans-theme jazz-theme jade-mode ir-black-theme inkpot-theme info+ inflections iedit ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-swoop helm-mode-manager helm-make helm-gitignore helm-flx helm-css-scss helm-company helm-c-yasnippet hc-zenburn-theme gruber-darker-theme goto-chg gotham-theme golden-ratio github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger gist gh-md gandalf-theme flx-ido flatui-theme flatland-theme fish-mode firebelly-theme fill-column-indicator feature-mode fasd farmhouse-theme fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-numbers evil-nerd-commenter evil-mc evil-magit evil-lisp-state evil-indent-plus evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu espresso-theme emoji-cheat-sheet-plus elixir-mode elisp-slime-nav dracula-theme django-theme define-word darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme company-web company-tern company-statistics company-racer company-quickhelp company-emoji company-anaconda colorsarenice-theme color-theme-sanityinc-solarized coffee-mode clues-theme clean-aindent-mode chruby cherry-blossom-theme busybee-theme bundler buffer-move bubbleberry-theme bracketed-paste birds-of-paradise-plus-theme auto-yasnippet auto-highlight-symbol auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme alect-themes aggressive-indent afternoon-theme adaptive-wrap ace-window ac-ispell)))
  '(paradox-github-token t)
- '(ring-bell-function (quote ignore) t))
+ '(ring-bell-function (quote ignore)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ )
