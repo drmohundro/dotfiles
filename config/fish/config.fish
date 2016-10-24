@@ -15,8 +15,8 @@ end
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
 
-# initialize rvm (uses rvm.fish)
-rvm default
+# source versioning
+source ~/.asdf/asdf.fish
 
 # alias vim to "mvim -v"
 function vim

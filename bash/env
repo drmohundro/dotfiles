@@ -1,5 +1,4 @@
 export PATH=$PATH:~/bin
-export PATH=$PATH:$HOME/.rvm/bin
 export PATH=$PATH:~/.node/bin
 export FIND_OPTIONS="-name .git -prune -o -name .svn -prune -o -name *.swp -prune -o -name _ReSharper.* -prune -o"
 

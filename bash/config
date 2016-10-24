@@ -27,3 +27,5 @@ if [ -f /opt/local/etc/bash_completion ]; then
 fi
 
 source ~/.bash/autojumpconfig
+
+. $HOME/.asdf/asdf.sh

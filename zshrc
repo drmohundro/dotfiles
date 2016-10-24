@@ -31,15 +31,16 @@ alias ag="ag -S"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git autojump rails ruby rvm npm zsh-syntax-highlighting command-not-found)
+plugins=(git autojump rails ruby npm zsh-syntax-highlighting command-not-found)
 
 source $ZSH/oh-my-zsh.sh
+
+. $HOME/.asdf/asdf.sh
 
 # Customize to your needs...
 export GOPATH=$HOME/.go
 
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/bin
-PATH=$PATH:$HOME/.rvm/bin
 PATH=$PATH:$HOME/.node/bin
 PATH=$PATH:$GOPATH/bin
