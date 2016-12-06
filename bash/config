@@ -26,6 +26,8 @@ if [ -f /opt/local/etc/bash_completion ]; then
     source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
 fi
 
-source ~/.bash/autojumpconfig
+j() {
+    cd $(fasd -d -e 'printf %s' "$1")
+}
 
 . $HOME/.asdf/asdf.sh
