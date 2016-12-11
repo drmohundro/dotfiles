@@ -1,6 +1,5 @@
 set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
 set PATH ~/bin $PATH
-set PATH $PATH ~/.node/bin
 
 if test -e ~/.cargo
   set PATH $PATH ~/.cargo/bin
