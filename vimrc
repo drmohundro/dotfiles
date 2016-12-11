@@ -139,11 +139,6 @@ if !has('win32')
   let g:ale_sign_warning = '⚠️'
 end
 
-call airline#parts#define_function('ALE', 'ALEGetStatusLine')
-call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
-
-let g:airline_section_error = airline#section#create_right(['ALE'])
-
 Plug 'yegappan/mru'
 
 call plug#end()
@@ -302,7 +297,7 @@ endfunction
 " Section: Autocommands {{{1
 
 if has('autocmd')
-  augroup AnnoyingBeeping "{{{2
+  augroup Init "{{{2
     autocmd VimEnter * set vb t_vb= " Stop beeping and flashing!
   augroup END "}}}2
 
