@@ -1,4 +1,7 @@
+# use gnu versions of coreutils/findutils
 set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
+set PATH (brew --prefix findutils)/libexec/gnubin $PATH
+
 set PATH ~/bin $PATH
 
 if test -e ~/.cargo
@@ -17,14 +20,12 @@ set __fish_git_prompt_char_dirtystate '⚡'
 # source versioning
 source ~/.asdf/asdf.fish
 
+# add yarn global binaries
+set PATH $PATH (yarn global bin)
+
 # alias vim to "mvim -v"
 function vim
   command mvim -v $argv
-end
-
-# Visual Studio Code wrapper
-function code
-  env VSCODE_CWD=(PWD) open -n -b "com.microsoft.VSCode" --args $argv
 end
 
 # bundle exec

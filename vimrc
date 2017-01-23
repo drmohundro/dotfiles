@@ -320,6 +320,7 @@ if has('autocmd')
     autocmd FileType sql,vbnet     setlocal ai et sta sw=4 sts=4 ts=4
     autocmd FileType ruby          setlocal ai et sta sw=2 sts=2 ts=2
     autocmd FileType javascript    setlocal ai et sta sw=2 sts=2 ts=2 cin isk+=$
+    autocmd FileType javascript    set formatprg=prettier\ --stdin
     autocmd FileType vbnet         runtime! indent/vb.vim
   augroup END "}}}2
   augroup MYVIMRCHooks "{{{2
