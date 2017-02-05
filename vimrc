@@ -41,6 +41,8 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
+Plug 'bogado/file-line'
+
 Plug 'chrisbra/NrrwRgn'
 Plug 'chrisbra/color_highlight'
 " automatic colorization filetypes

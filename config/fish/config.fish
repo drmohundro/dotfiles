@@ -54,8 +54,8 @@ end
 
 ### fasd support
 
-function -e fish_preexec _run_fasd
-  fasd --proc (fasd --sanitize "$argv") > "/dev/null" 2>&1
+function __fasd_run -e fish_preexec
+  command fasd --proc (command fasd --sanitize "$argv" | tr -s ' ' \n) > "/dev/null" 2>&1 &
 end
 
 function j
@@ -67,3 +67,4 @@ end
 if test -e ~/.iterm2_shell_integration.fish
   source ~/.iterm2_shell_integration.fish
 end
+status --is-interactive; and . (swiftenv init -|psub)
