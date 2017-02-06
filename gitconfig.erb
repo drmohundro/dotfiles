@@ -123,9 +123,9 @@
 	g = grep --break --heading --line-number
 
 	# fzf aliases
-	cob = !BRANCH=`git recent | fzf` && git checkout ${BRANCH}
-	db = !BRANCH=`git branch | fzf` && git branch -d ${BRANCH}
-	dbf = !BRANCH=`git branch | fzf` && git branch -D ${BRANCH}
+	cob = !BRANCH=`git recent --no-color | fzf` && git checkout ${BRANCH}
+	db = !BRANCH=`git branch --no-color | fzf` && git branch -d ${BRANCH}
+	dbf = !BRANCH=`git branch --no-color | fzf` && git branch -D ${BRANCH}
 [grep]
 	extendRegexp = true
 	lineNumber = true
