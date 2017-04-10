@@ -1,11 +1,6 @@
 # set -o vi
 
-hash python &>/dev/null
-if [ "$?" -eq "0" ]; then
-    PS1="\n\[$GREEN\]\u@\h\[$NO_COLOR\] \[$YELLOW\]\w\[$NO_COLOR\] \[$CYAN\]\$(vcprompt.py)\[$NO_COLOR\]\n$ "
-else
-    PS1="\n\[$GREEN\]\u@\h\[$NO_COLOR\] \[$YELLOW\]\w\[$NO_COLOR\]\n$ "
-fi
+PS1="\n\[$GREEN\]\u@\h\[$NO_COLOR\] \[$YELLOW\]\w\[$NO_COLOR\]\n$ "
 
 shopt -s checkwinsize
 
