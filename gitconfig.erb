@@ -99,6 +99,7 @@
 	rh = reset --hard
 	vdf = difftool --dir-diff
 	vdfc = difftool --dir-diff --cached
+	untrack = rm --cached
 
 	# Show files ignored by git:
 	ign = ls-files -o -i --exclude-standard
@@ -106,15 +107,8 @@
 	# Pretty logs
 	lg = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --graph --abbrev-commit --decorate --date=relative  --all
 
-	# TODO: can I simplify this with the one above???
-	wow = log --all --graph --decorate --oneline --simplify-by-decoration
-
 	ll = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --decorate --numstat
 	fld = log --word-diff -u
-
-	# Diff a rev
-	diffr  = "!f() { git diff "$1"^.."$1" --word-diff; }; f"
-	diffrt  = "!f() { git difftool "$1"^.."$1" --word-diff; }; f"
 
 	# List aliases
 	la = "!git config -l | grep alias | cut -c 7-"

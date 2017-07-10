@@ -67,4 +67,3 @@ end
 if test -e ~/.iterm2_shell_integration.fish
   source ~/.iterm2_shell_integration.fish
 end
-status --is-interactive; and . (swiftenv init -|psub)
