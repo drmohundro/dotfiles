@@ -1,0 +1,19 @@
+\set QUIET 1
+\pset null '¤'
+
+\set PROMPT1 '%[%033[1m%][%/]%033[0m%]% # '
+\set PROMPT2 '... > '
+
+\timing
+
+\x auto
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE upper
+\unset QUIET
+
+\pset linestyle unicode
+\pset border 2
+
+\set ON_ERROR_ROLLBACK interactive
