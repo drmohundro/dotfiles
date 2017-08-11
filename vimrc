@@ -27,7 +27,7 @@ Plug 'dag/vim-fish'
 Plug 'kongo2002/fsharp-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'OrangeT/vim-csharp'
-Plug 'drmohundro/vim-ps1'
+Plug 'PProvost/vim-ps1'
 Plug 'Keithbsmiley/swift.vim'
 Plug 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
@@ -361,7 +361,7 @@ if has('gui_running')
     set guifont=Mono\ 14
   elseif has('win32')
     "set guifont=Office_Code_Pro:h11
-    set guifont=Office_Code_Pro:h16
+    set guifont=Office_Code_Pro:h12
     set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
   endif
 else
@@ -371,6 +371,8 @@ else
     set t_Co=256
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
+    inoremap <Char-0x07F> <BS>
+    nnoremap <Char-0x07F> <BS>
     color molokai
   endif
 endif

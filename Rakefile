@@ -34,8 +34,17 @@ task :install do
     end
   end
 
-  link_file('vim', "#{ENV['HOME']}/.config/nvim")
-  link_file('vimrc', "#{ENV['HOME']}/.config/nvim/init.vim")
+  link_nvim
+end
+
+def link_nvim
+  if windows?
+    link_file('vim', "#{ENV['LOCALAPPDATA']}/nvim")
+    link_file('vimrc', "#{ENV['LOCALAPPDATA']}/nvim/init.vim")
+  else
+    link_file('vim', "#{ENV['HOME']}/.config/nvim")
+    link_file('vimrc', "#{ENV['HOME']}/.config/nvim/init.vim")
+  end
 end
 
 def replace_file(file)
@@ -55,7 +64,7 @@ def link_file(file, link = nil)
     link ||= "#{ENV['HOME']}/.#{file}"
     target = "#{Dir.pwd}/#{file}"
 
-    if RUBY_PLATFORM =~ /(win32|mingw32)/
+    if windows?
       mklink_opts = File.directory?(target) ? '/J' : ''
 
       link.gsub! '/', '\\'
@@ -66,4 +75,8 @@ def link_file(file, link = nil)
       system %(ln -s "#{target}" "#{link}")
     end
   end
+end
+
+def windows?
+  RUBY_PLATFORM =~ /(win32|mingw32)/
 end
