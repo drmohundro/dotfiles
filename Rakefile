@@ -8,10 +8,10 @@ desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   Dir['*'].each do |file|
-    next if %w(Rakefile README.markdown LICENSE).include? file
+    next if %w[Rakefile README.markdown LICENSE].include?(file)
 
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
-      if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
+      if File.identical?(file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
         puts "identical ~/.#{file.sub('.erb', '')}"
       elsif replace_all
         replace_file(file)
@@ -48,7 +48,7 @@ def link_nvim
 end
 
 def replace_file(file)
-  FileUtils.rm_rf "#{ENV['HOME']}/.#{file.sub('.erb', '')}"
+  FileUtils.rm_rf("#{ENV['HOME']}/.#{file.sub('.erb', '')}")
   link_file(file)
 end
 
@@ -56,7 +56,7 @@ def link_file(file, link = nil)
   if file =~ /.erb$/
     puts "generating ~/.#{file.sub('.erb', '')}"
     File.open(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"), 'w') do |new_file|
-      new_file.write ERB.new(File.read(file)).result(binding)
+      new_file.write(ERB.new(File.read(file)).result(binding))
     end
   else
     puts "linking ~/.#{file}"
@@ -67,8 +67,8 @@ def link_file(file, link = nil)
     if windows?
       mklink_opts = File.directory?(target) ? '/J' : ''
 
-      link.gsub! '/', '\\'
-      target.gsub! '/', '\\'
+      link.tr!('/', '\\')
+      target.tr!('/', '\\')
 
       system %(cmd /c mklink #{mklink_opts} "#{link}" "#{target}")
     else
