@@ -120,6 +120,9 @@
 	cob = !BRANCH=`git recent --no-color | fzf` && git checkout ${BRANCH}
 	db = !BRANCH=`git branch --no-color | fzf` && git branch -d ${BRANCH}
 	dbf = !BRANCH=`git branch --no-color | fzf` && git branch -D ${BRANCH}
+
+	# stash, pull --rebase and stash pop
+	sps = "!git stash && git pull --rebase && git stash pop"
 [grep]
 	extendRegexp = true
 	lineNumber = true
