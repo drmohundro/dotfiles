@@ -4,6 +4,8 @@ set PATH (brew --prefix findutils)/libexec/gnubin $PATH
 
 set PATH ~/bin $PATH
 
+set FZF_DEFAULT_COMMAND 'rg --files --hidden --smartcase --glob "!.git/*"'
+
 if test -e ~/.cargo
   set PATH $PATH ~/.cargo/bin
 end
@@ -11,6 +13,14 @@ end
 if test -e ~/.go
   set -x GOPATH ~/.go
   set PATH $PATH $GOPATH/bin
+end
+
+if test -e ~/Library/Python/3.6/bin
+  set PATH $PATH ~/Library/Python/3.6/bin
+end
+
+if test -e ~/.config/yarn/global/node_modules/.bin
+  set PATH $PATH ~/.config/yarn/global/node_modules/.bin
 end
 
 # http://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html

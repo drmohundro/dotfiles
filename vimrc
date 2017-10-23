@@ -65,6 +65,8 @@ Plug 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
 let g:bufExplorerShowNoName = 1
 
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-textobj-user'
 
@@ -73,11 +75,8 @@ Plug 'kshenoy/vim-signature'
 Plug 'Konfekt/FastFold'
 
 Plug 'ctrlpvim/ctrlp.vim'
-if has('win32')
-  let g:ctrlp_user_command = ['.git', 'cd %s & git ls-files . --cached --exclude-standard', 'pt %s -l --nocolor -g ""']
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard', 'pt %s -l --nocolor -g ""']
-end
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 0
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 Plug 'majutsushi/tagbar'
@@ -88,10 +87,9 @@ if has('mac')
   Plug 'rizzatti/dash.vim'
 end
 
-Plug 'rking/ag.vim'
-" Configure ag.vim to use pt.exe instead
-let g:ag_prg='pt --nogroup --nocolor'
-let g:ag_format='%f:%l:%m'
+Plug 'mileszs/ack.vim'
+" use ripgrep instead
+let g:ackprg = 'rg --vimgrep --smart-case --no-heading'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -178,7 +176,7 @@ if !has('win32')
   set shell=bash
 endif
 
-set wildignore+=.hg,.git
+set wildignore+=.hg,.git,.svn,*.swp
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.exe,*.dll,*.pdb,*.suo
 
@@ -355,8 +353,9 @@ if has('gui_running')
   set columns=126
 
   if has('mac')
-    set guifont=Office\ Code\ Pro:h16
-    "set guifont=Source\ Code\ Pro:h20
+    set macligatures
+    "set guifont=Fira\ Code:h16
+    set guifont=InputMonoNarrow:h16
   elseif has('unix')
     set guifont=Mono\ 14
   elseif has('win32')
