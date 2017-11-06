@@ -227,6 +227,8 @@ nmap <leader>w <Plug>(choosewin)
 " toggle NERDTree drawer
 nnoremap <leader>d :NERDTreeTabsToggle<cr>
 
+map <c-p> :FZF<cr>
+
 " Section: Functions {{{1
 
 " Increase/decrease the font size
