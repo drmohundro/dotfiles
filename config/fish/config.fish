@@ -4,7 +4,7 @@ set PATH (brew --prefix findutils)/libexec/gnubin $PATH
 
 set PATH ~/bin $PATH
 
-set FZF_DEFAULT_COMMAND 'rg --files --hidden --smartcase --glob "!.git/*"'
+set FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*"'
 
 if test -e ~/.cargo
   set PATH $PATH ~/.cargo/bin
@@ -43,6 +43,11 @@ function be
   bundle exec $argv
 end
 
+# smart-cased ripgrep
+function rg
+  command rg --smart-case $argv
+end
+
 ### Prompt
 
 function fish_prompt
@@ -60,16 +65,6 @@ function fish_right_prompt
   set_color green
   echo -n (__fish_git_prompt)
   set_color normal
-end
-
-### fasd support
-
-function __fasd_run -e fish_preexec
-  command fasd --proc (command fasd --sanitize "$argv" | tr -s ' ' \n) > "/dev/null" 2>&1 &
-end
-
-function j
-  cd (fasd -d -e 'printf %s' "$argv")
 end
 
 ### iTerm 2 shell integration

@@ -4,7 +4,9 @@ export PATH=$PATH:~/.cargo/bin
 
 export FIND_OPTIONS="-name .git -prune -o -name .svn -prune -o -name *.swp -prune -o -name _ReSharper.* -prune -o"
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden --smartcase --glob "!.git/*"'
+export EDITOR='nvim'
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 
 # Colors from http://wiki.archlinux.org/index.php/Color_Bash_Prompt
 # misc

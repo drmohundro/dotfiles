@@ -23,7 +23,6 @@ Plug 'tpope/vim-vividchalk'
 Plug 'NLKNguyen/papercolor-theme'
 " }}}2
 " Section: FileTypes {{{2
-Plug 'dag/vim-fish'
 Plug 'kongo2002/fsharp-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'OrangeT/vim-csharp'
@@ -58,14 +57,17 @@ Plug 'ervandew/supertab'
 " <C+X><C+O> or something else.
 let g:SuperTabDefaultCompletionType = 'context'
 
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'janko-m/vim-test'
 Plug 'justinmk/vim-sneak'
 Plug 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
 let g:bufExplorerShowNoName = 1
 
-Plug '/usr/local/opt/fzf'
+if isdirectory($HOME . '/.fzf')
+  Plug '~/.fzf'
+elseif isdirectory('/usr/local/opt/fzf')
+  Plug '/usr/local/opt/fzf'
+end
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-textobj-user'
@@ -73,12 +75,6 @@ Plug 'kana/vim-textobj-user'
 " plugin to place, toggle and display marks
 Plug 'kshenoy/vim-signature'
 Plug 'Konfekt/FastFold'
-
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'nelstrom/vim-textobj-rubyblock'
