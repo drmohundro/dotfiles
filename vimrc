@@ -75,6 +75,7 @@ Plug 'kana/vim-textobj-user'
 " plugin to place, toggle and display marks
 Plug 'kshenoy/vim-signature'
 Plug 'Konfekt/FastFold'
+Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -167,6 +168,10 @@ set listchars=tab:»\ ,trail:·,eol:↲,
 set showbreak=>\
 set winaltkeys=no
 
+if has('nvim')
+  set inccommand=split     " preview replacements commands in a split (and live window)
+end
+
 if !has('win32')
   " avoid warnings when I'm using fish
   set shell=bash
@@ -228,6 +233,10 @@ nmap <leader>w <Plug>(choosewin)
 nnoremap <leader>d :NERDTreeTabsToggle<cr>
 
 map <c-p> :FZF<cr>
+
+if !has('nvim')
+  map y <Plug>(highlightedyank)
+end
 
 " Section: Functions {{{1
 
