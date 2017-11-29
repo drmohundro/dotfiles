@@ -2,6 +2,12 @@ export PATH=$PATH:~/bin
 export PATH=$PATH:~/.node/bin
 export PATH=$PATH:~/.cargo/bin
 
+if hash brew 2>/dev/null; then
+	# use gnu versions
+	export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+	export PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
+fi
+
 export FIND_OPTIONS="-name .git -prune -o -name .svn -prune -o -name *.swp -prune -o -name _ReSharper.* -prune -o"
 
 export EDITOR='nvim'
