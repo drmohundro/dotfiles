@@ -26,11 +26,6 @@ if test -e ~/Library/Python/3.6/bin
   set PATH $PATH ~/Library/Python/3.6/bin
 end
 
-# add yarn global binaries
-if begin; type -q yarn; and test -e (yarn global dir)/node_modules/.bin; end
-  set PATH $PATH (yarn global dir)/node_modules/.bin
-end
-
 # http://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
@@ -38,6 +33,11 @@ set __fish_git_prompt_char_dirtystate '⚡'
 # source versioning
 if test -e ~/.asdf
   source ~/.asdf/asdf.fish
+end
+
+# add yarn global binaries
+if begin; type -q yarn; and test -e (yarn global dir)/node_modules/.bin; end
+  set PATH $PATH (yarn global dir)/node_modules/.bin
 end
 
 # alias vim to "mvim -v"
