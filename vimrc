@@ -15,9 +15,9 @@ call plug#begin('~/.vim/plugged')
 
 " Section: Colors {{{2
 Plug 'altercation/vim-colors-solarized'
+Plug 'challenger-deep-theme/vim'
 Plug 'chriskempson/base16-vim'
 Plug 'jnurmine/Zenburn'
-Plug 'MaxSt/FlatColor'
 Plug 'tomasr/molokai'
 Plug 'tpope/vim-vividchalk'
 Plug 'NLKNguyen/papercolor-theme'
@@ -68,6 +68,7 @@ if isdirectory($HOME . '/.fzf')
 elseif isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf'
 end
+
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-textobj-user'
@@ -379,7 +380,7 @@ if has('gui_running')
     set guifont=Mono\ 14
   elseif has('win32')
     "set guifont=Office_Code_Pro:h11
-    set guifont=Office_Code_Pro:h12
+    set guifont=InputMonoNarrow:h12
     set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
   endif
 else
