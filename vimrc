@@ -57,6 +57,7 @@ Plug 'ervandew/supertab'
 " <C+X><C+O> or something else.
 let g:SuperTabDefaultCompletionType = 'context'
 
+Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
 Plug 'justinmk/vim-sneak'
 Plug 'jlanzarotta/bufexplorer'
@@ -71,6 +72,9 @@ end
 
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 Plug 'kana/vim-textobj-user'
 
 " plugin to place, toggle and display marks
@@ -130,6 +134,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/IndexedSearch'
 Plug 'vim-scripts/JavaScript-Indent'
 
+Plug 'wincent/terminus'
 Plug 'w0rp/ale'
 
 let g:ale_fixers = {
@@ -170,12 +175,12 @@ set relativenumber         " use relative numbers outside of current number
 set smartcase              " override ignore case if searching for mixed case
 set wildmode=longest,list  " list all matches and complete each full match
 
-set tabstop=2           " 2 space tabs
-set shiftwidth=2        " autoindent 2 spaces
-set expandtab           " use spaces instead of tabs
+set tabstop=2              " 2 space tabs
+set shiftwidth=2           " autoindent 2 spaces
+set expandtab              " use spaces instead of tabs
 
-set backupdir=$TEMP,$TMP,.   " where to store backups
-set directory=$TEMP,$TMP,.   " where to store swp files
+set backupdir=$TEMP,$TMP,. " where to store backups
+set directory=$TEMP,$TMP,. " where to store swp files
 
 set listchars=tab:»\ ,trail:·,eol:↲,
 set showbreak=>\
