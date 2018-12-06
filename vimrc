@@ -24,6 +24,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " }}}2
 " Section: FileTypes {{{2
 Plug 'kongo2002/fsharp-vim'
+Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'OrangeT/vim-csharp'
 Plug 'PProvost/vim-ps1'
@@ -46,8 +47,6 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'chrisbra/color_highlight'
 " automatic colorization filetypes
 let g:colorizer_auto_filetype='css,html,cshtml'
-
-Plug 'chrisbra/vim-diff-enhanced'
 
 Plug 'ciaranm/detectindent'
 Plug 'drmohundro/find-string.vim'
@@ -194,6 +193,8 @@ if !has('win32')
   " avoid warnings when I'm using fish
   set shell=bash
 endif
+
+set diffopt+=internal,algorithm:patience
 
 set wildignore+=.hg,.git,.svn,*.swp
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
@@ -348,10 +349,10 @@ if has('autocmd')
     autocmd FileType javascript    set formatprg=prettier\ --stdin
     autocmd FileType vbnet         runtime! indent/vb.vim
   augroup END "}}}2
-  augroup MYVIMRCHooks "{{{2
+  augroup AutoSave "{{{2
+    autocmd!
     " via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
+    autocmd BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
   augroup END "}}}2
 endif
 
@@ -379,8 +380,9 @@ if has('gui_running')
 
   if has('mac')
     set macligatures
-    "set guifont=Fira\ Code:h16
-    set guifont=InputMonoNarrow:h16
+    "set guifont=InputMonoNarrow:h16
+    set guifont=Iosevka:h18
+    "set guifont=Menlo:h20
   elseif has('unix')
     set guifont=Mono\ 14
   elseif has('win32')
