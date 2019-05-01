@@ -359,7 +359,7 @@ endif
 " }}}1
 " Section: GUI {{{1
 
-if !has('win32')
+if !has('win32') || has('nvim')
   " enable nice colors in nvim
   set termguicolors
 end
@@ -380,26 +380,12 @@ if has('gui_running')
 
   if has('mac')
     set macligatures
-    "set guifont=InputMonoNarrow:h16
     set guifont=Iosevka:h18
-    "set guifont=Menlo:h20
   elseif has('unix')
     set guifont=Mono\ 14
   elseif has('win32')
-    "set guifont=Office_Code_Pro:h11
-    set guifont=InputMonoNarrow:h12
+    set guifont=Iosevka:h13
     set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
-  endif
-else
-  if has('win32')
-    " see http://stackoverflow.com/a/14434531/4570
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    inoremap <Char-0x07F> <BS>
-    nnoremap <Char-0x07F> <BS>
-    color molokai
   endif
 endif
 
