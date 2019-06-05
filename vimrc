@@ -182,6 +182,7 @@ set backupdir=$TEMP,$TMP,. " where to store backups
 set directory=$TEMP,$TMP,. " where to store swp files
 
 set listchars=tab:»\ ,trail:·,eol:↲,
+set nomodeline
 set showbreak=>\
 set winaltkeys=no
 
