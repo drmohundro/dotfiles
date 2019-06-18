@@ -58,6 +58,7 @@ let g:SuperTabDefaultCompletionType = 'context'
 
 Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
+Plug 'jceb/vim-orgmode'
 Plug 'justinmk/vim-sneak'
 Plug 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0

@@ -2,6 +2,7 @@
 if type -q brew
   set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
   set PATH (brew --prefix findutils)/libexec/gnubin $PATH
+  set PATH (brew --prefix grep)/libexec/gnubin $PATH
 end
 
 # local binaries
