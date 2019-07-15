@@ -84,11 +84,6 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'nelstrom/vim-textobj-rubyblock'
-
-if has('mac')
-  Plug 'rizzatti/dash.vim'
-end
-
 Plug 'mileszs/ack.vim'
 " use ripgrep instead
 let g:ackprg = 'rg --vimgrep --smart-case --no-heading'
