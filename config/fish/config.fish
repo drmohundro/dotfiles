@@ -1,8 +1,9 @@
 # use gnu versions of coreutils/findutils
 if type -q brew
-  set PATH (brew --prefix coreutils)/libexec/gnubin $PATH
-  set PATH (brew --prefix findutils)/libexec/gnubin $PATH
-  set PATH (brew --prefix grep)/libexec/gnubin $PATH
+  # via `brew --prefix FORMULA`... hardcoding for speed, though
+  set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
+  set PATH /usr/local/opt/findutils/libexec/gnubin $PATH
+  set PATH /usr/local/opt/grep/libexec/gnubin $PATH
 end
 
 # local binaries
@@ -36,9 +37,9 @@ if test -e ~/.asdf
   source ~/.asdf/asdf.fish
 end
 
-# add yarn global binaries
-if begin; type -q yarn; and test -e (yarn global dir)/node_modules/.bin; end
-  set PATH $PATH (yarn global dir)/node_modules/.bin
+# add yarn global binaries (directory comes from `yarn global bin`)
+if begin; type -q yarn; and test -e ~/.config/yarn/global/node_modules/.bin; end
+  set PATH $PATH ~/.config/yarn/global/node_modules/.bin
 end
 
 # alias vim to "mvim -v"
@@ -73,6 +74,11 @@ function fish_right_prompt
   set_color green
   echo -n (__fish_git_prompt)
   set_color normal
+end
+
+# direnv config
+if type -q direnv
+  direnv hook fish | source
 end
 
 ### iTerm 2 shell integration
