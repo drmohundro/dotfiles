@@ -4,16 +4,12 @@
 
 (setq
  doom-font (font-spec :family "Iosevka" :size 16)
- doom-theme 'doom-one-light)
+ doom-theme 'leuven)
 
 ; doom-theme 'doom-molokai)
 
 ; ln -s /Users/david/Library/Mobile\ Documents/iCloud\~com\~appsonthemove\~beorg/Documents/org org
-(setq org-agenda-files
-      (list
-       "~/org/inbox.org"
-       "~/org/notes.org"
-       "~/org/zignyl.org"))
+(setq org-agenda-files '("~/org"))
 
 ; log the time when something is marked done
 (setq org-log-done 'time)
