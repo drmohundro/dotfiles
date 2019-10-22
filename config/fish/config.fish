@@ -10,7 +10,7 @@ end
 set PATH ~/bin $PATH
 
 # tell fzf to use rg to list files
-set FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*"'
+set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*"'
 
 # rust global binaries
 if test -e ~/.cargo
@@ -26,6 +26,12 @@ end
 # Python 3 binaries
 if test -e ~/Library/Python/3.6/bin
   set PATH $PATH ~/Library/Python/3.6/bin
+end
+
+# android tooling
+if test -e ~/Library/Android/sdk
+  set ANDROID_SDK ~/Library/Android/sdk
+  set PATH $PATH ~/Library/Android/sdk/platform-tools
 end
 
 # http://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html
@@ -85,4 +91,9 @@ end
 
 if test -e ~/.iterm2_shell_integration.fish
   source ~/.iterm2_shell_integration.fish
+end
+
+function iterm2_print_user_vars
+  iterm2_set_user_var rubyVersion (ruby -v | awk '{ print $2 }')
+  iterm2_set_user_var nodeVersion (node -v)
 end
