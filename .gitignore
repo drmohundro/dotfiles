@@ -16,3 +16,5 @@ config/fish/fishd.*
 vim/init.vim
 vim/vim
 vim/spell
+
+.DS_Store
