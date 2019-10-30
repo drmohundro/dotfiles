@@ -1,8 +1,8 @@
 " Vim filetype plugin file
-" Language:	html
-" Maintainer:	Dan Sharp <dwsharp at users dot sourceforge dot net>
+" Language:    html
+" Maintainer:    Dan Sharp <dwsharp at users dot sourceforge dot net>
 " Last Changed: 20 Jan 2009
-" URL:		http://dwsharp.users.sourceforge.net/vim/ftplugin
+" URL:        http://dwsharp.users.sourceforge.net/vim/ftplugin
 
 if exists("b:did_ftplugin") | finish | endif
 let b:did_ftplugin = 1
@@ -37,14 +37,14 @@ endif
 " Change the :browse e filter to primarily show HTML-related files.
 if has("gui_win32")
     let  b:browsefilter="HTML Files (*.html,*.htm)\t*.htm;*.html\n" .
-		\	"JavaScript Files (*.js)\t*.js\n" .
-		\	"Cascading StyleSheets (*.css)\t*.css\n" .
-		\	"All Files (*.*)\t*.*\n"
+        \    "JavaScript Files (*.js)\t*.js\n" .
+        \    "Cascading StyleSheets (*.css)\t*.css\n" .
+        \    "All Files (*.*)\t*.*\n"
 endif
 
 " Undo the stuff we changed.
 let b:undo_ftplugin = "setlocal commentstring< matchpairs< omnifunc< comments< formatoptions<" .
-    \	" | unlet! b:match_ignorecase b:match_skip b:match_words b:browsefilter"
+    \    " | unlet! b:match_ignorecase b:match_skip b:match_words b:browsefilter"
 
 " Restore the saved compatibility options.
 let &cpo = s:save_cpo

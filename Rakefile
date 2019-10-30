@@ -1,82 +1,122 @@
-# This Rakefile is based heavily upon Ryan Bates' Rakefile
-# - see https://github.com/ryanb/dotfiles/blob/master/Rakefile
+# frozen_string_literal: true
 
 require 'rake'
-require 'erb'
+require 'yaml'
 
-desc "install the dot files into user's home directory"
-task :install do
-  replace_all = false
+def nvim_home
+  windows? ? "#{ENV['LOCALAPPDATA']}/nvim" : "#{ENV['HOME']}/.config/nvim"
+end
+
+def full_path(file)
+  "#{Dir.pwd}/#{file}"
+end
+
+def default_path(file)
+  [File.join(ENV['HOME'], ".#{file}"), full_path(file)]
+end
+
+def config_check(file, config)
+  if config['windows'][file]
+    [File.expand_path(config['windows'][file]), full_path(file)] if windows?
+  elsif config['macos'][file]
+    [File.expand_path(config['macos'][file]), full_path(file)] if mac?
+  else
+    default_path(file)
+  end
+end
+
+def determine_path(file, config)
+  case file
+  when 'vim'
+    default_path(file)
+    [nvim_home, full_path(file)]
+  when 'vimrc'
+    default_path(file)
+    [File.join(nvim_home, 'init.vim'), full_path(file)]
+  else
+    config_check(file, config)
+  end
+end
+
+def loop_files
+  config = YAML.load_file('overrides.yaml')
+
   Dir['*'].each do |file|
-    next if %w[Rakefile README.markdown LICENSE].include?(file)
+    next if %w[Rakefile README.md LICENSE overrides.yaml].include?(file)
 
-    if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
-      if File.identical?(file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
-        puts "identical ~/.#{file.sub('.erb', '')}"
-      elsif replace_all
-        replace_file(file)
-      else
-        print "overwrite ~/.#{file.sub('.erb', '')}? [ynaq] "
-        case $stdin.gets.chomp
-        when 'a'
-          replace_all = true
-          replace_file(file)
-        when 'y'
-          replace_file(file)
-        when 'q'
-          exit
-        else
-          puts "skipping ~/.#{file.sub('.erb', '')}"
-        end
-      end
-    else
-      link_file(file)
-    end
+    path = determine_path(file, config)
+    yield path if path
   end
-
-  link_nvim
 end
 
-def link_nvim
+def check_dotfiles
+  loop_files do |link, _file|
+    raise DotfileError.new('Link not created', link) unless File.exist?(link)
+    raise DotfileError.new('Not symlink', link) unless File.symlink?(link)
+  end
+
+  true
+end
+
+desc 'check the dotfiles to see if anything is missing'
+task :check do
+  begin
+    check_dotfiles
+    puts '✓'.green
+  rescue DotfileError => e
+    puts "#{'✘'.red} #{e.link} #{e.message}"
+  end
+end
+
+desc "install the dotfiles into user's home directory"
+task :install do
+  loop_files do |link, file|
+    next if File.identical?(link, file)
+
+    link_file(file, link)
+  end
+end
+
+def link_file(file, link)
   if windows?
-    link_file('vim', "#{ENV['LOCALAPPDATA']}/nvim")
-    link_file('vimrc', "#{ENV['LOCALAPPDATA']}/nvim/init.vim")
+    mklink_opts = File.directory?(file) ? '/J' : ''
+
+    link = link.tr('/', '\\')
+    file = file.tr('/', '\\')
+
+    system %(cmd /c mklink #{mklink_opts} "#{link}" "#{file}")
   else
-    link_file('vim', "#{ENV['HOME']}/.config/nvim")
-    link_file('vimrc', "#{ENV['HOME']}/.config/nvim/init.vim")
+    system %(ln -s "#{file}" "#{link}")
   end
-end
 
-def replace_file(file)
-  FileUtils.rm_rf("#{ENV['HOME']}/.#{file.sub('.erb', '')}")
-  link_file(file)
-end
-
-def link_file(file, link = nil)
-  if file =~ /.erb$/
-    puts "generating ~/.#{file.sub('.erb', '')}"
-    File.open(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"), 'w') do |new_file|
-      new_file.write(ERB.new(File.read(file)).result(binding))
-    end
-  else
-    puts "linking ~/.#{file}"
-
-    link ||= "#{ENV['HOME']}/.#{file}"
-    target = "#{Dir.pwd}/#{file}"
-
-    if windows?
-      mklink_opts = File.directory?(target) ? '/J' : ''
-
-      link.tr!('/', '\\')
-      target.tr!('/', '\\')
-
-      system %(cmd /c mklink #{mklink_opts} "#{link}" "#{target}")
-    else
-      system %(ln -s "#{target}" "#{link}")
-    end
-  end
+  puts "#{'✓'.green} #{file} linked to #{link}"
 end
 
 def windows?
-  RUBY_PLATFORM =~ /(win32|mingw32)/
+  RUBY_PLATFORM =~ /win32/
+end
+
+def mac?
+  RUBY_PLATFORM =~ /darwin/
+end
+
+# string helper to get ANSI colors
+class String
+  def red
+    "\e[31m#{self}\e[0m"
+  end
+
+  def green
+    "\e[32m#{self}\e[0m"
+  end
+end
+
+# error for dotfile issues
+class DotfileError < StandardError
+  attr_reader :message, :link
+
+  def initialize(message, link)
+    @message = message
+    @link = link
+  end
 end
