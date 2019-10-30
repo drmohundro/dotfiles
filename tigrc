@@ -1,4 +1,0 @@
-bind main J move-page-down
-bind main K move-page-up
-bind diff J move-page-down
-bind diff K move-page-up
