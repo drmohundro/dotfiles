@@ -1,0 +1,98 @@
+[user]
+  name = David Mohundro
+  email = david@mohundro.com
+
+[color]
+  ui = always
+[color "diff"]
+  meta = yellow bold
+  commit = green bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = cyan
+
+[core]
+  editor = nvim
+  autocrlf = input    # set to true on Windows
+
+[branch]
+  autosetuprebase = always
+
+[diff]
+  tool = bc3
+[difftool]
+  prompt = false
+
+[merge]
+  tool = bc3
+[mergetool]
+  prompt = false
+
+[pager]
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,5 -RFX
+
+[help]
+  autocorrect = 1
+
+[push]
+  default = upstream
+
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+  recent = branch --sort=-committerdate
+  current = rev-parse --abbrev-ref HEAD
+  df = diff --word-diff
+  dc = diff --cached --word-diff
+  r = reset
+  rh = reset --hard
+  vdf = difftool --dir-diff
+  vdfc = difftool --dir-diff --cached
+  untrack = rm --cached
+
+  # Show files ignored by git:
+  ign = ls-files -o -i --exclude-standard
+
+  # Pretty logs
+  lg = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ad)%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --graph --abbrev-commit --decorate --date=human --all
+
+  ll = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ad)%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --decorate --numstat --date=human
+  fld = log --word-diff -u
+
+  # List aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+
+  # improved grep display
+  g = grep --break --heading --line-number
+
+  # fzf aliases
+  cob = !BRANCH=`git recent --no-color | fzf` && git checkout ${BRANCH}
+  db = !BRANCH=`git branch --no-color | fzf` && git branch -d ${BRANCH}
+  dbf = !BRANCH=`git branch --no-color | fzf` && git branch -D ${BRANCH}
+
+  # stash, pull --rebase and stash pop
+  sps = "!git stash && git pull --rebase && git stash pop"
+
+[grep]
+  extendRegexp = true
+  lineNumber = true
+
+[credential]
+  helper = osxkeychaing    # manager on Windows
