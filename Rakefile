@@ -42,7 +42,7 @@ def loop_files
   config = YAML.load_file('overrides.yaml')
 
   Dir['*'].each do |file|
-    next if %w[Rakefile README.markdown LICENSE overrides.yaml].include?(file)
+    next if %w[Rakefile README.md LICENSE overrides.yaml].include?(file)
 
     path = determine_path(file, config)
     yield path if path
