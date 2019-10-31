@@ -117,7 +117,7 @@ end
 
 def log(msg)
   log = "💡 #{msg}"
-  puts "#{log.yellow}"
+  puts log.yellow
 end
 
 # string helper to get ANSI colors
