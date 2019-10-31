@@ -95,4 +95,4 @@
   lineNumber = true
 
 [credential]
-  helper = osxkeychaing    # manager on Windows
+  helper = osxkeychain    # manager on Windows
