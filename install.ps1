@@ -33,7 +33,7 @@ function checkConfig($os, $pathName) {
         if ($config[$os][$pathName] -ne $null) {
             $config[$os][$pathName] | Foreach-Object {
                 [PSObject] @{
-                    Link = Resolve-PathSafe $_
+                    Link = Resolve-PathSafe ([System.Environment]::ExpandEnvironmentVariables($_))
                     Target = Resolve-PathSafe $pathName
                 }
             }
