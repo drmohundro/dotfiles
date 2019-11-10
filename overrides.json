@@ -1,0 +1,37 @@
+{
+  "skip_processing": [
+    "README.md",
+    "LICENSE",
+    "Rakefile",
+    "install.ps1",
+    "overrides.json",
+    "overrides.yaml"
+  ],
+
+  "macos": {
+    "hammerspoon": "~/.hammerspoon",
+    "doom.d": "~/.doom.d",
+    "karabiner.json": "~/.config/karabiner/karabiner.json",
+    "config.fish": "~/.config/fish/config.fish",
+    "vimrc": [
+      "~/.vimrc",
+      "~/.config/nvim/init.vim"
+    ],
+    "vim": [
+      "~/.vim",
+      "~/.config/nvim"
+    ]
+  },
+  "windows": {
+    "vsvimrc": "~/.vsvimrc",
+    "viemurc": "~/.viemurc",
+    "vimrc": [
+      "~/.vimrc",
+      "%LOCALAPPDATA%/nvim/init.vim"
+    ],
+    "vim": [
+      "~/.vim",
+      "%LOCALAPPDATA%/nvim"
+    ]
+  }
+}
