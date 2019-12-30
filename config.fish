@@ -48,6 +48,18 @@ if begin; type -q yarn; and test -e ~/.config/yarn/global/node_modules/.bin; end
   set PATH $PATH ~/.config/yarn/global/node_modules/.bin
 end
 
+# see https://junegunn.kr/2015/03/browsing-git-commits-with-fzf
+function fshow
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "." |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+end
+
 # alias vim to "mvim -v"
 function vim
   command nvim $argv
