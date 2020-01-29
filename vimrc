@@ -1,5 +1,4 @@
 " Author: David Mohundro <david@mohundro.com>
-" Version: 1.4
 " Url: http://mohundro.com/blog/
 
 " this has to be set early so that alt keybindings will work in Windows
@@ -15,24 +14,18 @@ call plug#begin('~/.vim/plugged')
 
 " Section: Colors {{{2
 Plug 'altercation/vim-colors-solarized'
-Plug 'challenger-deep-theme/vim'
-Plug 'chriskempson/base16-vim'
-Plug 'jnurmine/Zenburn'
 Plug 'tomasr/molokai'
 Plug 'tpope/vim-vividchalk'
 Plug 'NLKNguyen/papercolor-theme'
 " }}}2
 " Section: FileTypes {{{2
-Plug 'kongo2002/fsharp-vim'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
+" general
+Plug 'sheerun/vim-polyglot'
+
+" specific
 Plug 'OrangeT/vim-csharp'
-Plug 'PProvost/vim-ps1'
-Plug 'Keithbsmiley/swift.vim'
 Plug 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
-
-Plug 'vim-ruby/vim-ruby'
 " }}}2
 
 Plug 'bling/vim-airline'
@@ -41,24 +34,14 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-Plug 'bogado/file-line'
-
 Plug 'chrisbra/NrrwRgn'
-Plug 'chrisbra/color_highlight'
+
+" use background color for hex colors
+Plug 'chrisbra/Colorizer'
 " automatic colorization filetypes
 let g:colorizer_auto_filetype='css,html,cshtml'
 
-Plug 'ciaranm/detectindent'
-Plug 'drmohundro/find-string.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'ervandew/supertab'
-" Let SuperTab try to determine best completion based on context, whether
-" <C+X><C+O> or something else.
-let g:SuperTabDefaultCompletionType = 'context'
-
-Plug 'godlygeek/tabular'
-Plug 'janko-m/vim-test'
-Plug 'jceb/vim-orgmode'
 Plug 'justinmk/vim-sneak'
 Plug 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
@@ -71,43 +54,28 @@ elseif isdirectory('/usr/local/opt/fzf')
 end
 
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 
-Plug 'kana/vim-textobj-user'
+" show register contents
+Plug 'junegunn/vim-peekaboo'
 
 " plugin to place, toggle and display marks
 Plug 'kshenoy/vim-signature'
-Plug 'Konfekt/FastFold'
+
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
-Plug 'nelstrom/vim-textobj-rubyblock'
+
 Plug 'mileszs/ack.vim'
 " use ripgrep instead
 let g:ackprg = 'rg --vimgrep --smart-case --no-heading'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 " open NERDTree on right side
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeHijackNetrw = 0
-
-Plug 'jistr/vim-nerdtree-tabs'
-let g:nerdtree_tabs_open_on_gui_startup = 0
-
-Plug 'sheerun/vim-polyglot'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim'
-  " enable deoplete
-  let g:deoplete#enable_at_startup = 1
-else
-  Plug 'Shougo/neocomplete.vim'
-  " enable neocomplete
-  let g:neocomplete#enable_at_startup = 1
-end
 
 Plug 't9md/vim-choosewin'
 let g:choosewin_overlay_enable = 1
@@ -127,9 +95,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 Plug 'vim-scripts/IndexedSearch'
-Plug 'vim-scripts/JavaScript-Indent'
 
-Plug 'wincent/terminus'
 Plug 'w0rp/ale'
 
 let g:ale_fixers = {
@@ -164,6 +130,7 @@ syntax on
 set clipboard=unnamed      " default to system clipboard
 set foldmethod=marker      " fold on markers by default
 set hlsearch               " highlight search results
+set hidden
 set ignorecase             " ignore case when searching
 set number                 " show line numbers
 set relativenumber         " use relative numbers outside of current number
@@ -174,8 +141,13 @@ set tabstop=2              " 2 space tabs
 set shiftwidth=2           " autoindent 2 spaces
 set expandtab              " use spaces instead of tabs
 
-set backupdir=$TEMP,$TMP,. " where to store backups
-set directory=$TEMP,$TMP,. " where to store swp files
+set nobackup
+set noswapfile
+
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 set listchars=tab:»\ ,trail:·,eol:↲,
 set nomodeline
@@ -198,6 +170,102 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.exe,*.dll,*.pdb,*.suo
 
 let g:netrw_liststyle=1    " default netrw to long style (file size, timestamp, etc.)
+
+" {{{2 Coc.vim
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use gp for show documentation in preview window
+nnoremap <silent> gp :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` for fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" }}}2
 
 " }}}1
 " Section: Mappings {{{1
@@ -246,7 +314,7 @@ map <F4> :TagbarToggle<cr>
 nmap <leader>w <Plug>(choosewin)
 
 " toggle NERDTree drawer
-nnoremap <leader>d :NERDTreeTabsToggle<cr>
+nnoremap <leader>d :NERDTreeToggle<cr>
 
 map <c-p> :FZF<cr>
 
@@ -322,35 +390,13 @@ endfunction
 " }}}1
 " Section: Autocommands {{{1
 
-if has('autocmd')
-  augroup Init "{{{2
-    autocmd VimEnter * set vb t_vb= " Stop beeping and flashing!
-  augroup END "}}}2
+autocmd VimEnter * set vb t_vb= " Stop beeping and flashing!
 
-  augroup FTDetect "{{{2
-    autocmd BufNewFile,BufRead *.vb set ft=vbnet
-    autocmd BufNewFile,BufRead *.{ps1,psm1,psd1} set ft=ps1
-    autocmd BufNewFile,BufRead *.{md,markdown} set ft=markdown
-    autocmd BufNewFile,BufRead *.{build,config} set ft=xml
-    autocmd BufNewFile,BufRead *.txt,README,INSTALL,TODO if &ft == "" | set ft=text | endif
-  augroup END "}}}2
-  augroup FTOptions "{{{2
-    autocmd FileType * DetectIndent
-
-    autocmd FileType c,cpp,cs,java setlocal ai et sta sw=4 sts=4 ts=4 cin
-    autocmd FileType ps1           setlocal ai et sta sw=4 sts=4 ts=4 cin cino+=+0 cink-=0#
-    autocmd FileType sql,vbnet     setlocal ai et sta sw=4 sts=4 ts=4
-    autocmd FileType ruby          setlocal ai et sta sw=2 sts=2 ts=2
-    autocmd FileType javascript    setlocal ai et sta sw=2 sts=2 ts=2 cin isk+=$
-    autocmd FileType javascript    set formatprg=prettier\ --stdin
-    autocmd FileType vbnet         runtime! indent/vb.vim
-  augroup END "}}}2
-  augroup AutoSave "{{{2
+augroup AutoSave
     autocmd!
     " via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
     autocmd BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
-  augroup END "}}}2
-endif
+augroup END
 
 " }}}1
 " Section: GUI {{{1
