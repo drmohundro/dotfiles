@@ -28,6 +28,10 @@
 [core]
 	editor = nvim
 	autocrlf = input    # set to true on Windows
+	pager = delta --file-style box --hunk-style plain --plus-color="#0c4532" --minus-color="#3e0b11" --theme='Monokai Extended Bright'
+
+[interactive]
+	diffFilter = delta --color-only
 
 [branch]
 	autosetuprebase = always
@@ -41,10 +45,6 @@
 	tool = bc3
 [mergetool]
 	prompt = false
-
-[pager]
-	diff = diff-so-fancy | less --tabs=1,5 -RFX
-	show = diff-so-fancy | less --tabs=1,5 -RFX
 
 [help]
 	autocorrect = 1
