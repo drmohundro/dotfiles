@@ -28,10 +28,30 @@
 [core]
 	editor = nvim
 	autocrlf = input    # set to true on Windows
-	pager = delta --file-style box --hunk-style plain --plus-color="#0c4532" --minus-color="#3e0b11" --theme='Monokai Extended Bright'
+	pager = delta --side-by-side
 
 [interactive]
 	diffFilter = delta --color-only
+
+[delta]
+	features = unobtrusive-line-numbers decorations
+	whitespace-error-style = 22 reverse
+
+[delta "unobtrusive-line-numbers"]
+	line-numbers = true
+	line-numbers-minus-style = "#444444"
+	line-numbers-zero-style = "#444444"
+	line-numbers-plus-style = "#444444"
+	line-numbers-left-format = "{nm:>4}┊"
+	line-numbers-right-format = "{np:>4}│"
+	line-numbers-left-style = blue
+	line-numbers-right-style = blue
+
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+	hunk-header-decoration-style = yellow box
 
 [branch]
 	autosetuprebase = always
