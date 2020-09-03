@@ -1,3 +1,9 @@
+set -x MANPAGER 'nvim +Man!'
+
+if test -e /usr/local/bin
+  set PATH /usr/local/bin $PATH
+end
+
 # use gnu versions of coreutils/findutils
 if type -q brew
   # via `brew --prefix FORMULA`... hardcoding for speed, though
@@ -10,7 +16,11 @@ end
 set PATH ~/bin $PATH
 
 # tell fzf to use rg to list files
-set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*"'
+if type -q fd
+  set -x FZF_DEFAULT_COMMAND 'fd --type f --color=never'
+else
+  set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*"'
+end
 
 # rust global binaries
 if test -e ~/.cargo
@@ -24,8 +34,8 @@ if test -e ~/.go
 end
 
 # Python 3 binaries
-if test -e ~/Library/Python/3.6/bin
-  set PATH $PATH ~/Library/Python/3.6/bin
+if test -e ~/Library/Python/3.8/bin
+  set PATH $PATH ~/Library/Python/3.8/bin
 end
 
 # android tooling
@@ -73,6 +83,10 @@ end
 # smart-cased ripgrep
 function rg
   command rg --smart-case $argv
+end
+
+if type -q exa
+  alias ls "exa --group-directories-first"
 end
 
 ### Prompt

@@ -393,9 +393,9 @@ endfunction
 autocmd VimEnter * set vb t_vb= " Stop beeping and flashing!
 
 augroup AutoSave
-    autocmd!
-    " via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
-    autocmd BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
+  autocmd!
+  " via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
+  autocmd BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC
 augroup END
 
 " }}}1
