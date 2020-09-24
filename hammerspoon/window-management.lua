@@ -2,9 +2,13 @@
 --                         ** Something Global **                       --
 -- -----------------------------------------------------------------------
   -- Comment out this following line if you wish to see animations
+local windowMeta = {}
+window = require "hs.window"
 hs.window.animationDuration = 0
 grid = require "hs.grid"
 grid.setMargins('0, 0')
+
+module = {}
 
 -- Set screen watcher, in case you connect a new monitor, or unplug a monitor
 screens = {}
@@ -51,22 +55,22 @@ function Cell(x, y, w, h)
   return hs.geometry(x, y, w, h)
 end
 
--- Please leave a comment if you have any suggestions
--- I know this looks weird, but it works :C
-current = {}
-function init()
-  current.win = hs.window.focusedWindow()
-  current.scr = hs.window.focusedWindow():screen()
-end
+-- Bind new method to windowMeta
+function windowMeta.new()
+  local self = setmetatable(windowMeta, {
+    -- Treate table like a function
+    -- Event listener when windowMeta() is called
+    __call = function (cls, ...)
+      return cls.new(...)
+    end,
+  })
 
-function current:new()
-  init()
-  o = {}
-  setmetatable(o, self)
-  o.window, o.screen = self.win, self.scr
-  o.screenGrid = grid.getGrid(self.scr)
-  o.windowGrid = grid.get(self.win)
-  return o
+  self.window = window.focusedWindow()
+  self.screen = window.focusedWindow():screen()
+  self.windowGrid = grid.get(self.window)
+  self.screenGrid = grid.getGrid(self.screen)
+
+  return self
 end
 
 -- -----------------------------------------------------------------------
@@ -74,81 +78,80 @@ end
 --            ** Keybinding configurations locate at bottom **          --
 -- -----------------------------------------------------------------------
 
-local function maximizeWindow()
-  local this = current:new()
+module.maximizeWindow = function ()
+  local this = windowMeta.new()
   hs.grid.maximizeWindow(this.window)
 end
 
-local function centerOnScreen()
-  local this = current:new()
+module.centerOnScreen = function ()
+  local this = windowMeta.new()
   this.window:centerOnScreen(this.screen)
 end
 
-local function throwLeft()
-  local this = current:new()
-  this.window:moveOneScreenWest()
+module.throwLeft = function ()
+  local this = windowMeta.new()
+  this.window:moveToScreen(this.screen:toWest())
 end
 
-local function throwRight()
-  local this = current:new()
-  this.window:moveOneScreenEast()
+module.throwRight = function ()
+  local this = windowMeta.new()
+  this.window:moveToScreen(this.screen:toEast())
 end
 
-local function leftHalf()
-  local this = current:new()
+module.leftHalf = function ()
+  local this = windowMeta.new()
   local cell = Cell(0, 0, 0.5 * this.screenGrid.w, this.screenGrid.h)
   grid.set(this.window, cell, this.screen)
-  this.window.setShadows(true)
 end
 
-local function rightHalf()
-  local this = current:new()
+module.rightHalf = function ()
+  local this = windowMeta.new()
   local cell = Cell(0.5 * this.screenGrid.w, 0, 0.5 * this.screenGrid.w, this.screenGrid.h)
   grid.set(this.window, cell, this.screen)
 end
 
 -- Windows-like cycle left
-local function cycleLeft()
-  local this = current:new()
+module.cycleLeft = function ()
+  local this = windowMeta.new()
   -- Check if this window is on left or right
   if this.windowGrid.x == 0 then
-    local currentIndex = hs.fnutils.indexOf(screenArr, current.scr)
+    local currentIndex = hs.fnutils.indexOf(screenArr, this.screen)
     local previousScreen = screenArr[(currentIndex - indexDiff - 1) % #hs.screen.allScreens() + indexDiff]
     this.window:moveToScreen(previousScreen)
-    rightHalf()
+    module.rightHalf()
   else
-    leftHalf()
+    module.leftHalf()
   end
 end
 
 -- Windows-like cycle right
-local function cycleRight()
-  local this = current:new()
+module.cycleRight = function ()
+  local this = windowMeta.new()
   -- Check if this window is on left or right
   if this.windowGrid.x == 0 then
-    rightHalf()
+    module.rightHalf()
   else
-    local currentIndex = hs.fnutils.indexOf(screenArr, current.scr)
+    local currentIndex = hs.fnutils.indexOf(screenArr, this.screen)
     local nextScreen = screenArr[(currentIndex - indexDiff + 1) % #hs.screen.allScreens() + indexDiff]
     this.window:moveToScreen(nextScreen)
-    leftHalf()
+    module.leftHalf()
   end
 end
 
-local function topHalf()
-  local this = current:new()
+module.topHalf = function ()
+  local this = windowMeta.new()
   local cell = Cell(0, 0, this.screenGrid.w, 0.5 * this.screenGrid.h)
   grid.set(this.window, cell, this.screen)
 end
 
-local function bottomHalf()
-  local this = current:new()
+module.bottomHalf = function ()
+  local this = windowMeta.new()
   local cell = Cell(0, 0.5 * this.screenGrid.h, this.screenGrid.w, 0.5 * this.screenGrid.h)
   grid.set(this.window, cell, this.screen)
 end
 
-local function rightToLeft()
-  local this = current:new()
+module.rightToLeft = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x, this.windowGrid.y, this.windowGrid.w - 1, this.windowGrid.h)
   if this.windowGrid.w > 1 then
     grid.set(this.window, cell, this.screen)
@@ -157,8 +160,8 @@ local function rightToLeft()
   end
 end
 
-local function rightToRight()
-  local this = current:new()
+module.rightToRight = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x, this.windowGrid.y, this.windowGrid.w + 1, this.windowGrid.h)
   if this.windowGrid.w < this.screenGrid.w - this.windowGrid.x then
     grid.set(this.window, cell, this.screen)
@@ -167,8 +170,8 @@ local function rightToRight()
   end
 end
 
-local function bottomUp()
-  local this = current:new()
+module.bottomUp = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x, this.windowGrid.y, this.windowGrid.w, this.windowGrid.h - 1)
   if this.windowGrid.h > 1 then
     grid.set(this.window, cell, this.screen)
@@ -177,8 +180,8 @@ local function bottomUp()
   end
 end
 
-local function bottomDown()
-  local this = current:new()
+module.bottomDown = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x, this.windowGrid.y, this.windowGrid.w, this.windowGrid.h + 1)
   if this.windowGrid.h < this.screenGrid.h - this.windowGrid.y then
     grid.set(this.window, cell, this.screen)
@@ -187,8 +190,8 @@ local function bottomDown()
   end
 end
 
-local function leftToLeft()
-  local this = current:new()
+module.leftToLeft = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x - 1, this.windowGrid.y, this.windowGrid.w + 1, this.windowGrid.h)
   if this.windowGrid.x > 0 then
     grid.set(this.window, cell, this.screen)
@@ -197,8 +200,8 @@ local function leftToLeft()
   end
 end
 
-local function leftToRight()
-  local this = current:new()
+module.leftToRight = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x + 1, this.windowGrid.y, this.windowGrid.w - 1, this.windowGrid.h)
   if this.windowGrid.w > 1 then
     grid.set(this.window, cell, this.screen)
@@ -207,8 +210,8 @@ local function leftToRight()
   end
 end
 
-local function topUp()
-  local this = current:new()
+module.topUp = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x, this.windowGrid.y - 1, this.windowGrid.w, this.windowGrid.h + 1)
   if this.windowGrid.y > 0 then
     grid.set(this.window, cell, this.screen)
@@ -217,8 +220,8 @@ local function topUp()
   end
 end
 
-local function topDown()
-  local this = current:new()
+module.topDown = function ()
+  local this = windowMeta.new()
   local cell = Cell(this.windowGrid.x, this.windowGrid.y + 1, this.windowGrid.w, this.windowGrid.h - 1)
   if this.windowGrid.h > 1 then
     grid.set(this.window, cell, this.screen)
@@ -227,54 +230,4 @@ local function topDown()
   end
 end
 
--- -----------------------------------------------------------------------
---                           ** Key Binding **                          --
--- -----------------------------------------------------------------------
-hk = require "hs.hotkey"
--- * Key Binding Utility
---- Bind hotkey for window management.
--- @function windowBind
--- @param {table} hyper - hyper key set
--- @param { ...{key=value} } keyFuncTable - multiple hotkey and function pairs
---   @key {string} hotkey
---   @value {function} callback function
-local function windowBind(hyper, keyFuncTable)
-  for key,fn in pairs(keyFuncTable) do
-    hk.bind(hyper, key, fn)
-  end
-end
-
--- * Move window to screen
-windowBind({"ctrl", "alt"}, {
-  left = throwLeft,
-  right = throwRight
-})
--- * Set Window Position on screen
-windowBind({"ctrl", "alt", "cmd"}, {
-  m = maximizeWindow,    -- ⌃⌥⌘ + M
-  c = centerOnScreen,    -- ⌃⌥⌘ + C
-  left = leftHalf,       -- ⌃⌥⌘ + ←
-  right = rightHalf,     -- ⌃⌥⌘ + →
-  up = topHalf,          -- ⌃⌥⌘ + ↑
-  down = bottomHalf      -- ⌃⌥⌘ + ↓
-})
--- * Set Window Position on screen
-windowBind({"ctrl", "alt", "shift"}, {
-  left = rightToLeft,      -- ⌃⌥⇧ + ←
-  right = rightToRight,    -- ⌃⌥⇧ + →
-  up = bottomUp,           -- ⌃⌥⇧ + ↑
-  down = bottomDown        -- ⌃⌥⇧ + ↓
-})
--- * Set Window Position on screen
-windowBind({"alt", "cmd", "shift"}, {
-  left = leftToLeft,      -- ⌥⌘⇧ + ←
-  right = leftToRight,    -- ⌥⌘⇧ + →
-  up = topUp,             -- ⌥⌘⇧ + ↑
-  down = topDown          -- ⌥⌘⇧ + ↓
-})
-
--- * Windows-like cycle
-windowBind({"ctrl", "alt", "cmd"}, {
-  u = cycleLeft,          -- ⌃⌥⌘ + u
-  i = cycleRight          -- ⌃⌥⌘ + i
-})
+return module
