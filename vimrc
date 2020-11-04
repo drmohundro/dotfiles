@@ -129,6 +129,7 @@ syntax on
 
 set clipboard=unnamed      " default to system clipboard
 set foldmethod=marker      " fold on markers by default
+set foldlevelstart=99      " don't default to open files folded
 set hlsearch               " highlight search results
 set hidden
 set ignorecase             " ignore case when searching
