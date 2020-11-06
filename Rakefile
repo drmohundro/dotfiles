@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake'
-require 'yaml'
+require 'json'
 
 desc 'check the dotfiles to see if anything is missing'
 task :check do
@@ -35,38 +35,45 @@ task :install do
 end
 
 def loop_files(whatif = false)
-  config = YAML.load_file('overrides.yaml')
+  config = JSON.parse(File.read('overrides.json'))
 
   Dir['*'].each do |file|
-    next if %w[Rakefile README.md LICENSE overrides.yaml].include?(file)
+    next if config['skip_processing'].include?(file)
+    next if file.start_with?('.')
 
     path = determine_path(file, config, whatif)
     yield path if path
-    log path if path && whatif
+    log path if path
   end
 end
 
-def config_check(file, config)
-  if config['windows'][file]
-    [File.expand_path(config['windows'][file]), full_path(file)] if windows?
-  elsif config['macos'][file]
-    [File.expand_path(config['macos'][file]), full_path(file)] if mac?
+def config_check(os, file, config)
+  if config[os][file]
+    if config[os][file].kind_of?(Array)
+      config[os][file].each do |item|
+        [File.expand_path(item), full_path(file)]
+      end
+    else
+      [File.expand_path(config[os][file]), full_path(file)]
+    end
   else
     default_path(file)
   end
 end
 
 def determine_path(file, config, whatif = false)
-  log "Checking #{file}..." if whatif
-  case file
-  when 'vim'
-    default_path(file)
-    [nvim_home, full_path(file)]
-  when 'vimrc'
-    default_path(file)
-    [File.join(nvim_home, 'init.vim'), full_path(file)]
+  log "Checking #{file}..."
+
+  if config['windows'][file]
+    if windows?
+      config_check('windows', file, config)
+    end
+  elsif config['macos'][file]
+    if mac?
+      config_check('macos', file, config)
+    end
   else
-    config_check(file, config)
+    default_path(file)
   end
 end
 

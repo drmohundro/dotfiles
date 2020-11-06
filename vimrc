@@ -42,6 +42,10 @@ Plug 'chrisbra/Colorizer'
 let g:colorizer_auto_filetype='css,html,cshtml'
 
 Plug 'editorconfig/editorconfig-vim'
+
+" add in nvim GUI shim support
+Plug 'equalsraf/neovim-gui-shim'
+
 Plug 'justinmk/vim-sneak'
 Plug 'jlanzarotta/bufexplorer'
 let g:bufExplorerFindActive = 0
