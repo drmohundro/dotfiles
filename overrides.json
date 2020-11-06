@@ -22,6 +22,18 @@
       "~/.config/nvim"
     ]
   },
+  "linux": {
+    "doom.d": "~/.doom.d",
+    "config.fish": "~/.config/fish/config.fish",
+    "vimrc": [
+      "~/.vimrc",
+      "~/.config/nvim/init.vim"
+    ],
+    "vim": [
+      "~/.vim",
+      "~/.config/nvim"
+    ]
+  },
   "windows": {
     "vsvimrc": "~/.vsvimrc",
     "viemurc": "~/.viemurc",

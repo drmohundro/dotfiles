@@ -47,11 +47,15 @@ function determinePath($path) {
     $pathName = $path.Name
 
     if ($config['windows'][$pathName] -ne $null) {
-        if ($PSVersionTable.OS -match 'Windows') {
+        if ($IsWindows) {
             checkConfig -os 'windows' -pathName $pathName
         }
     } elseif ($config['macos'][$pathName] -ne $null) {
-        if ($PSVersionTable.OS -match '^Darwin') {
+        if ($IsLinux) {
+            checkConfig -os 'macos' -pathName $pathName
+        }
+    } elseif ($config['linux'][$pathName] -ne $null) {
+        if ($IsMacOS) {
             checkConfig -os 'macos' -pathName $pathName
         }
     } else {
