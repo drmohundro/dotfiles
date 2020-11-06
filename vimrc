@@ -100,16 +100,20 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'vim-scripts/IndexedSearch'
 
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 let g:ale_fixers = {
 \  'javascript': ['prettier'],
+\  'javascriptreact': ['prettier'],
 \  'markdown': ['prettier'],
 \}
 
 let g:ale_linters = {
 \  'javascript': ['eslint'],
+\  'javascriptreact': ['eslint'],
 \}
+
+let g:ale_linter_aliases = {'ps1': 'powershell'}
 
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
@@ -175,6 +179,8 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.exe,*.dll,*.pdb,*.suo
 
 let g:netrw_liststyle=1    " default netrw to long style (file size, timestamp, etc.)
+
+let g:mapleader=','
 
 " {{{2 Coc.vim
 
@@ -250,7 +256,7 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` for fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " Using CocList
 " Show all diagnostics
@@ -274,8 +280,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " }}}1
 " Section: Mappings {{{1
-
-let g:mapleader=','
 
 " Toggle showing whitespace or not
 nmap <silent> <leader>s :set nolist!<cr>
@@ -417,25 +421,7 @@ color molokai
 "set background=light
 "color PaperColor
 
-if has('gui_running')
-  set cursorline           " highlight current line
-  set guioptions=egt
-  set guioptions+=c        " c = console dialogs
-
-  set lines=44
-  set columns=126
-
-  if has('mac')
-    set macligatures
-    set guifont=Iosevka:h18
-  elseif has('unix')
-    set guifont=Mono\ 14
-  elseif has('win32')
-    set guifont=Iosevka:h13
-    set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
-  endif
-endif
-
+" see also ~/.gvimrc
 " }}}1
 
 if filereadable(expand('~/.vimrc.local'))
