@@ -12,9 +12,7 @@ param (
 $config = Get-Content ./overrides.json | ConvertFrom-Json -AsHashtable
 
 function log($msg) {
-    if ($whatIf) {
-        Write-Host "💡 $msg"
-    }
+    Write-Host "💡 $msg"
 }
 
 function Resolve-PathSafe($path) {
@@ -62,6 +60,11 @@ function determinePath($path) {
 }
 
 function linkFile($map) {
+    if (Test-Path $map.Link) {
+        log "Skipping $($map.Link) as it already exists"
+        return
+    }
+
     if ($whatIf) {
         log "Linking $($_.Link) to $($_.Target)"
     } else {

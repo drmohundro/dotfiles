@@ -43,7 +43,7 @@ def loop_files(whatif = false)
 
     path = determine_path(file, config, whatif)
     yield path if path
-    log path if path && whatif
+    log path if path
   end
 end
 
@@ -62,7 +62,7 @@ def config_check(os, file, config)
 end
 
 def determine_path(file, config, whatif = false)
-  log "Checking #{file}..." if whatif
+  log "Checking #{file}..."
 
   if config['windows'][file]
     if windows?
