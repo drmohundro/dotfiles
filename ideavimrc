@@ -1,10 +1,12 @@
-set clipboard=unnamed      " defaults to system clipboard
+set clipboard=ideaput      " defaults to system clipboard
 set hlsearch               " highlight search results
 set ignorecase             " ignore case when searching
 set number                 " show line numbers
 set smartcase              " override ignore case if searching for mixed case
 
 set expandtab           " use spaces instead of tabs
+
+set ideamarks
 
 " hide search highlighting with <esc>
 nnoremap <esc> :nohlsearch<cr><esc>

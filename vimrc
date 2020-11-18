@@ -68,11 +68,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
-
-Plug 'mileszs/ack.vim'
-" use ripgrep instead
-let g:ackprg = 'rg --vimgrep --smart-case --no-heading'
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'scrooloose/nerdcommenter'
@@ -325,7 +320,7 @@ nmap <leader>w <Plug>(choosewin)
 " toggle NERDTree drawer
 nnoremap <leader>d :NERDTreeToggle<cr>
 
-map <c-p> :FZF<cr>
+map <c-p> :Files<cr>
 
 if !has('nvim')
   map y <Plug>(highlightedyank)

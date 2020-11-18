@@ -70,20 +70,9 @@ function fshow
 FZF-EOF"
 end
 
-# alias vim to "mvim -v"
-function vim
-  command nvim $argv
-end
-
-# bundle exec
-function be
-  bundle exec $argv
-end
-
-# smart-cased ripgrep
-function rg
-  command rg --smart-case $argv
-end
+alias vim="nvim"
+alias be="bundle exec"
+alias rg="rg --smart-case"
 
 if type -q exa
   alias ls "exa --group-directories-first"
