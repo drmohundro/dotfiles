@@ -46,18 +46,12 @@ function determinePath($path) {
 
     $pathName = $path.Name
 
-    if ($config['windows'][$pathName] -ne $null) {
-        if ($IsWindows) {
-            checkConfig -os 'windows' -pathName $pathName
-        }
-    } elseif ($config['macos'][$pathName] -ne $null) {
-        if ($IsLinux) {
-            checkConfig -os 'macos' -pathName $pathName
-        }
-    } elseif ($config['linux'][$pathName] -ne $null) {
-        if ($IsMacOS) {
-            checkConfig -os 'macos' -pathName $pathName
-        }
+    if ($config['windows'][$pathName] -ne $null -and $IsWindows) {
+        checkConfig -os 'windows' -pathName $pathName
+    } elseif ($config['macos'][$pathName] -ne $null -and $IsMac) {
+        checkConfig -os 'macos' -pathName $pathName
+    } elseif ($config['linux'][$pathName] -ne $null -and $IsLinux) {
+        checkConfig -os 'linux' -pathName $pathName
     } else {
         defaultPath $pathName
     }
@@ -72,7 +66,7 @@ function linkFile($map) {
     if ($whatIf) {
         log "Linking $($_.Link) to $($_.Target)"
     } else {
-        if ((Get-Item $map.Target) -is [System.IO.DirectoryInfo]) {
+        if ((Get-Item $map.Target) -is [System.IO.DirectoryInfo] -and $IsWindows) {
             New-Item -Path $_.Link -ItemType Junction -Value $_.Target
         } else {
             New-Item -Path $_.Link -ItemType SymbolicLink -Value $_.Target
