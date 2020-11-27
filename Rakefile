@@ -64,14 +64,12 @@ end
 def determine_path(file, config, whatif = false)
   log "Checking #{file}..."
 
-  if config['windows'][file]
-    if windows?
-      config_check('windows', file, config)
-    end
-  elsif config['macos'][file]
-    if mac?
-      config_check('macos', file, config)
-    end
+  if config['windows'][file] && windows?
+    config_check('windows', file, config)
+  elsif config['macos'][file] && mac?
+    config_check('macos', file, config)
+  elsif config['linux'][file] && linux?
+    config_check('linux', file, config)
   else
     default_path(file)
   end
@@ -108,6 +106,10 @@ end
 
 def mac?
   RUBY_PLATFORM =~ /darwin/
+end
+
+def linux?
+  RUBY_PLATFORM =~ /linux/
 end
 
 def nvim_home
