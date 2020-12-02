@@ -76,7 +76,7 @@ alias rg="rg --smart-case"
 
 # default to showing the time for the history entries
 function history
-  builtin history --show-time='%F %T ' $argv | less
+  builtin history --show-time='%F %T ' $argv | less -F
 end
 
 if type -q exa
