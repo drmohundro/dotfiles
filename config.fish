@@ -74,6 +74,11 @@ alias vim="nvim"
 alias be="bundle exec"
 alias rg="rg --smart-case"
 
+# default to showing the time for the history entries
+function history
+  builtin history --show-time='%F %T ' $argv | less
+end
+
 if type -q exa
   alias ls "exa --group-directories-first"
 end
