@@ -23,7 +23,6 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 
 " specific
-Plug 'OrangeT/vim-csharp'
 Plug 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
 " }}}2
@@ -45,6 +44,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 " add in nvim GUI shim support
 Plug 'equalsraf/neovim-gui-shim'
+
+Plug 'godlygeek/tabular'
 
 Plug 'justinmk/vim-sneak'
 Plug 'jlanzarotta/bufexplorer'
@@ -164,7 +165,7 @@ end
 
 if !has('win32')
   " avoid warnings when I'm using fish
-  set shell=bash
+  set shell=zsh
 endif
 
 set diffopt+=internal,algorithm:patience
@@ -389,6 +390,18 @@ function! SummarizeTabs()
   finally
     echohl None
   endtry
+endfunction
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/\\\@<!|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
 endfunction
 
 " }}}1
