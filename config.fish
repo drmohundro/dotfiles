@@ -4,6 +4,14 @@ if test -e /usr/local/bin
   set PATH /usr/local/bin $PATH
 end
 
+if test -e ~/dev/flutter
+  set PATH $PATH ~/dev/flutter/bin
+end
+
+if test -e ~/.dotnet/tools
+  set PATH $PATH ~/.dotnet/tools
+end
+
 # use gnu versions of coreutils/findutils
 if type -q brew
   # via `brew --prefix FORMULA`... hardcoding for speed, though
@@ -34,8 +42,8 @@ if test -e ~/.go
 end
 
 # Python 3 binaries
-if test -e ~/Library/Python/3.8/bin
-  set PATH $PATH ~/Library/Python/3.8/bin
+if test -e ~/Library/Python/3.9/bin
+  set PATH $PATH ~/Library/Python/3.9/bin
 end
 
 # android tooling
@@ -49,7 +57,9 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
 
 # source versioning
-if test -e ~/.asdf
+if type -q brew
+  source /usr/local/opt/asdf/asdf.fish
+else if test -e ~/.asdf
   source ~/.asdf/asdf.fish
 end
 
@@ -79,7 +89,9 @@ function history
   builtin history --show-time='%F %T ' $argv | less -F
 end
 
-if type -q exa
+if type -q lsd
+  alias ls "lsd"
+else if type -q exa
   alias ls "exa --group-directories-first"
 end
 

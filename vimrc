@@ -144,6 +144,7 @@ set wildmode=longest,list  " list all matches and complete each full match
 
 set tabstop=2              " 2 space tabs
 set shiftwidth=2           " autoindent 2 spaces
+set shiftround
 set expandtab              " use spaces instead of tabs
 
 set nobackup
