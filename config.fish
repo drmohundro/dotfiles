@@ -36,9 +36,11 @@ if test -e ~/.cargo
 end
 
 # go global binaries
-if test -e ~/.go
-  set -x GOPATH ~/.go
+if test -e ~/go
+  set -x GOPATH ~/go
+  set -x GOROOT "/usr/local/opt/go/libexec"
   set PATH $PATH $GOPATH/bin
+  set PATH $PATH $GOROOT/bin
 end
 
 # Python 3 binaries
