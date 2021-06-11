@@ -128,6 +128,9 @@ if type -q direnv
   direnv hook fish | source
 end
 
+# zoxide (like autojump/fasd/z)
+zoxide init fish --cmd j --hook pwd | source
+
 ### iTerm 2 shell integration
 
 if test -e ~/.iterm2_shell_integration.fish
