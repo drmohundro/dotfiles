@@ -14,7 +14,7 @@ call plug#begin('~/.vim/plugged')
 
 " Section: Colors {{{2
 Plug 'altercation/vim-colors-solarized'
-Plug 'tomasr/molokai'
+Plug 'fatih/molokai'
 Plug 'tpope/vim-vividchalk'
 Plug 'NLKNguyen/papercolor-theme'
 " }}}2
