@@ -65,7 +65,7 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_char_dirtystate '⚡'
 
 # source versioning
-if type -q brew
+if begin; type -q brew; and test -d /usr/local/opt/asdf/; end
   source /usr/local/opt/asdf/asdf.fish
 else if test -e ~/.asdf
   source ~/.asdf/asdf.fish
