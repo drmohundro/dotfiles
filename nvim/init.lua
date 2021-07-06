@@ -8,8 +8,22 @@ cmd 'packadd paq-nvim' -- load the package manager
 require 'paq-nvim' {
   'savq/paq-nvim';
 
+  { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
+  'nvim-treesitter/playground';
+
   'neovim/nvim-lspconfig';
+
   'hrsh7th/nvim-compe';
+
+  -- dependencies for telescope
+  'nvim-lua/popup.nvim';
+  'nvim-lua/plenary.nvim';
+  -- telescope
+  'nvim-telescope/telescope.nvim';
+
+  'scrooloose/nerdcommenter';
+
+  'tpope/vim-surround';
 
   -- colors
   'fatih/molokai';
@@ -27,6 +41,8 @@ opt.shiftround = true
 opt.expandtab = true
 
 opt.listchars = { tab = '»\t', trail = '·', eol = '↲' }
+
+opt.completeopt = 'menuone,noselect'
 
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
