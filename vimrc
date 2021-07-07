@@ -70,6 +70,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'moll/vim-bbye'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'

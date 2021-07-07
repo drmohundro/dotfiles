@@ -15,6 +15,8 @@ require 'paq-nvim' {
 
   'hrsh7th/nvim-compe';
 
+  'moll/vim-bbye';
+
   -- dependencies for telescope
   'nvim-lua/popup.nvim';
   'nvim-lua/plenary.nvim';
@@ -79,7 +81,7 @@ map('', 'H', '^')
 map('', 'L', '$')
 
 -- clear search highlighting
-map('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true})
+map('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true })
 
 map('', '\\\\', '<plug>NERDCommenterInvert', { noremap = false })
 
