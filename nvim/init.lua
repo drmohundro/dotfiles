@@ -3,35 +3,7 @@ local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
 
-cmd 'packadd paq-nvim' -- load the package manager
-
-require 'paq-nvim' {
-  'savq/paq-nvim';
-
-  { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
-  'nvim-treesitter/playground';
-
-  'neovim/nvim-lspconfig';
-
-  'hrsh7th/nvim-compe';
-
-  'moll/vim-bbye';
-
-  -- dependencies for telescope
-  'nvim-lua/popup.nvim';
-  'nvim-lua/plenary.nvim';
-  -- telescope
-  'nvim-telescope/telescope.nvim';
-
-  'scrooloose/nerdcommenter';
-
-  'tpope/vim-surround';
-
-  -- colors
-  'fatih/molokai';
-  'altercation/vim-colors-solarized';
-  'NLKNguyen/papercolor-theme';
-}
+require('plugins')
 
 g.mapleader = ','
 
