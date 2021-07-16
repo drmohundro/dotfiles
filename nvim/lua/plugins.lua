@@ -6,26 +6,54 @@ local opt = vim.opt  -- to set options
 cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
+  -- plugin management
   use { 'wbthomason/packer.nvim' }
 
+  -- treesitter (LSP)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
   use 'nvim-treesitter/playground'
 
+  -- LSP config
   use 'neovim/nvim-lspconfig'
 
+  -- completion
   use 'hrsh7th/nvim-compe'
 
+  -- footer support
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
+
+  -- close buffers without messing up window layout
   use 'moll/vim-bbye'
 
-  -- dependencies for telescope
-  use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
-  -- telescope
-  use 'nvim-telescope/telescope.nvim'
+  -- s plus motion to jump around
+  use 'justinmk/vim-sneak'
 
+  -- find files, buffers, etc.
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  }
+
+  -- commenting code
   use 'scrooloose/nerdcommenter'
 
+  -- git support
+  use {
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('neogit').setup({})
+    end,
+  }
+
+  -- surround motion
   use 'tpope/vim-surround'
+
+  -- most recently used
+  use 'yegappan/mru'
 
   -- colors
   use 'fatih/molokai'

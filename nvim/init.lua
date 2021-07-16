@@ -9,6 +9,16 @@ require('mappings')
 
 require('treesitter')
 
+require('lualine').setup()
+
+-- via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
+cmd([[
+augroup AutoSave
+  autocmd!
+  autocmd BufWritePost init.lua source $MYVIMRC
+augroup END
+]])
+
 opt.termguicolors = true
 
 opt.background = 'dark'
