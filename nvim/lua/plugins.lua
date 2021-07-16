@@ -49,6 +49,17 @@ return require('packer').startup(function()
     end,
   }
 
+  -- git signs
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('gitsigns').setup()
+    end,
+  }
+
   -- surround motion
   use 'tpope/vim-surround'
 
