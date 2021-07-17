@@ -74,6 +74,9 @@ return require('packer').startup(function()
   -- most recently used
   use 'yegappan/mru'
 
+  -- autoformatter
+  use 'mhartington/formatter.nvim'
+
   -- colors
   use 'fatih/molokai'
   use 'altercation/vim-colors-solarized'
