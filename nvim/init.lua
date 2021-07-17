@@ -7,9 +7,8 @@ require('plugins')
 require('options')
 require('mappings')
 
-require('treesitter')
-
-require('lualine').setup()
+require('config.treesitter')
+require('config.lualine')
 
 -- via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
 cmd([[

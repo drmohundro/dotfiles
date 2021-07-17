@@ -31,6 +31,14 @@ return require('packer').startup(function()
   -- s plus motion to jump around
   use 'justinmk/vim-sneak'
 
+  -- colorizer
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end,
+  }
+
   -- find files, buffers, etc.
   use {
     'nvim-telescope/telescope.nvim',
