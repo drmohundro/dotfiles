@@ -28,6 +28,8 @@ return require('packer').startup(function()
 	-- close buffers without messing up window layout
 	use('moll/vim-bbye')
 
+	use 'editorconfig/editorconfig-vim'
+
 	-- s plus motion to jump around
 	use('justinmk/vim-sneak')
 

@@ -1,4 +1,4 @@
-set clipboard=ideaput      " defaults to system clipboard
+set clipboard=unnamed,ideaput   " defaults to system clipboard
 set hlsearch               " highlight search results
 set ignorecase             " ignore case when searching
 set number                 " show line numbers
