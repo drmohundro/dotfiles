@@ -11,6 +11,9 @@ require('config.treesitter')
 require('config.lualine')
 require('config.formatter')
 
+require('config.lspconfig')
+require('config.compe')
+
 cmd(
   [[
 augroup FormatAutogroup

@@ -26,3 +26,5 @@ opt.winaltkeys = 'no'
 opt.inccommand = 'split'
 
 opt.completeopt = 'menuone,noselect'
+
+g.nvim_tree_side = 'right'

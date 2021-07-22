@@ -35,3 +35,6 @@ map('', '\\\\', '<plug>NERDCommenterInvert', { noremap = false })
 
 map('', '<c-l>', ':Telescope buffers<cr>')
 map('', '<c-p>', ':Telescope find_files<cr>')
+
+-- directory tree
+map('n', '<leader>d', ':NvimTreeToggle<cr>')

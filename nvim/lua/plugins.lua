@@ -25,6 +25,8 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   })
 
+  use('kyazdani42/nvim-tree.lua')
+
   -- close buffers without messing up window layout
   use('moll/vim-bbye')
 
