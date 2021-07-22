@@ -12,13 +12,13 @@ require('config.lualine')
 require('config.formatter')
 
 cmd(
-	[[
+  [[
 augroup FormatAutogroup
   autocmd!
   autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
 augroup END
 ]],
-	true
+  true
 )
 
 -- via http://stackoverflow.com/questions/2400264/is-it-possible-to-apply-vim-configurations-without-restarting/2400289#2400289 and @nelstrom
