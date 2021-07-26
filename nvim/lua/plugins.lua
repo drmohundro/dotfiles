@@ -50,7 +50,7 @@ return require('packer').startup(function()
   })
 
   -- commenting code
-  use('scrooloose/nerdcommenter')
+  use('preservim/nerdcommenter')
 
   -- git support
   use({

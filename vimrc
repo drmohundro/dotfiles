@@ -72,8 +72,8 @@ Plug 'mattn/emmet-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'moll/vim-bbye'
 
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
 " open NERDTree on right side
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeHijackNetrw = 0
