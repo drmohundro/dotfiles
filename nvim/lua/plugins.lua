@@ -25,6 +25,9 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   })
 
+  -- scrollbar in terminal
+  use('dstein64/nvim-scrollview')
+
   -- like nerd tree
   use('kyazdani42/nvim-tree.lua')
 
