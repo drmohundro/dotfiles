@@ -426,6 +426,8 @@ color molokai
 " see also ~/.gvimrc
 " }}}1
 
+highlight Comment cterm=italic gui=italic
+
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif

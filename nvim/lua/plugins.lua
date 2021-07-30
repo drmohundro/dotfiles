@@ -25,6 +25,7 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   })
 
+  -- like nerd tree
   use('kyazdani42/nvim-tree.lua')
 
   -- close buffers without messing up window layout
