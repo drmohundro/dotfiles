@@ -27,4 +27,6 @@ opt.inccommand = 'split'
 
 opt.completeopt = 'menuone,noselect'
 
+opt.mouse = 'a'
+
 g.nvim_tree_side = 'right'

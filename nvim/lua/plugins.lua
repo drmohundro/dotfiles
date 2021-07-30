@@ -81,6 +81,9 @@ return require('packer').startup(function()
   -- autoformatter
   use('mhartington/formatter.nvim')
 
+  -- search for visually selected text
+  use('bronson/vim-visual-star-search')
+
   -- colors
   use('fatih/molokai')
   use('altercation/vim-colors-solarized')
