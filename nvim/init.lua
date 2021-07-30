@@ -13,6 +13,7 @@ require('config.formatter')
 
 require('config.lspconfig')
 require('config.compe')
+require('config.telescope')
 
 cmd(
   [[
