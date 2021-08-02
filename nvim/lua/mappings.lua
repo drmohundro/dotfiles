@@ -11,6 +11,25 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+local wk = require('which-key')
+
+wk.register({
+  f = {
+    '<cmd>Telescope live_grep<cr>',
+    'Live ripgrep search',
+  },
+  r = {
+    '<cmd>Telescope oldfiles<cr>',
+    'Find recently opened files',
+  },
+  d = {
+    '<cmd>NvimTreeToggle<cr>',
+    'Toggle directory tree',
+  },
+}, {
+  prefix = '<leader>',
+})
+
 -- toggle showing whitespace
 map('n', '<leader>s', ':set nolist!<cr>', { silent = true })
 
@@ -35,7 +54,3 @@ map('', '\\\\', '<plug>NERDCommenterInvert', { noremap = false })
 
 map('', '<c-l>', ':Telescope buffers<cr>')
 map('', '<c-p>', ':Telescope find_files<cr>')
-map('', '<leader>f', ':Telescope live_grep<cr>') -- this uses ripgrep if possible
-
--- directory tree
-map('n', '<leader>d', ':NvimTreeToggle<cr>')

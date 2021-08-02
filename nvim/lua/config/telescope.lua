@@ -9,4 +9,9 @@ require('telescope').setup({
       },
     },
   },
+  pickers = {
+    oldfiles = {
+      theme = 'ivy',
+    },
+  },
 })
