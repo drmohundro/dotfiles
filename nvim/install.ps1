@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Language servers
 yarn global add bash-language-server
 yarn global add vscode-css-languageserver-bin
