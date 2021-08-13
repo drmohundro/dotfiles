@@ -29,16 +29,7 @@ return require('packer').startup(function()
   use('dstein64/nvim-scrollview')
 
   -- which key plugin
-  use({
-    'folke/which-key.nvim',
-    config = function()
-      require('which-key').setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
-  })
+  use('folke/which-key.nvim')
 
   -- like nerd tree
   use('kyazdani42/nvim-tree.lua')
@@ -69,6 +60,14 @@ return require('packer').startup(function()
   -- commenting code
   use('preservim/nerdcommenter')
 
+  -- notifications
+  use({
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require('notify')
+    end,
+  })
+
   -- git support
   use({
     'TimUntersberger/neogit',
@@ -88,6 +87,9 @@ return require('packer').startup(function()
       require('gitsigns').setup()
     end,
   })
+
+  -- logging
+  use('tjdevries/vlog.nvim')
 
   -- surround motion
   use('tpope/vim-surround')
