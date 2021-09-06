@@ -27,5 +27,4 @@ augroup END
 
 opt.termguicolors = true
 
-opt.background = 'dark'
-cmd('color molokai')
+require('onedark').setup()
