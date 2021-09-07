@@ -59,6 +59,7 @@ return require('packer').startup(function()
 
   -- commenting code
   use('preservim/nerdcommenter')
+  g.NERDCreateDefaultMappings = 0
 
   -- notifications
   use({
