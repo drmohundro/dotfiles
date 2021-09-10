@@ -10,12 +10,14 @@ end
 require('options')
 require('mappings')
 
-require('config.treesitter')
-require('config.lualine')
-require('config.formatter')
-require('config.lspconfig')
-require('config.compe')
-require('config.telescope')
+if not g.vscode then
+  require('config.treesitter')
+  require('config.lualine')
+  require('config.formatter')
+  require('config.lspconfig')
+  require('config.compe')
+  require('config.telescope')
+end
 
 cmd(
   [[
