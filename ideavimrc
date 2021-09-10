@@ -25,3 +25,8 @@ nnoremap gj j
 " indent in visual mode with <tab>
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
+
+" NOTE: I mapped this one directly in Rider so that it works in the Solution
+" Explorer, too
+" map <C-A-i> <Action>(NewElementSamePlace)
+map <A-i> <Action>(NewElement)

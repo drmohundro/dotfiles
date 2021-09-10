@@ -7,7 +7,7 @@ cmd([[packadd packer.nvim]])
 
 return require('packer').startup(function()
   -- plugin management
-  use({ 'wbthomason/packer.nvim' })
+  use('wbthomason/packer.nvim')
 
   -- treesitter (LSP)
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })

@@ -25,3 +25,7 @@ nnoremap gj j
 " indent in visual mode with <tab>
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
+
+" NOTE: this works well, but it only works in the editor... not in Solution
+" Explorer
+" map <C-A-S-i> :vsc ReSharper.ReSharper_GenerateFileBesides<cr>

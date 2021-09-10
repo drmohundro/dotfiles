@@ -3,14 +3,16 @@ local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
 local opt = vim.opt -- to set options
 
-require('plugins')
+if not g.vscode then
+  require('plugins')
+end
+
 require('options')
 require('mappings')
 
 require('config.treesitter')
 require('config.lualine')
 require('config.formatter')
-
 require('config.lspconfig')
 require('config.compe')
 require('config.telescope')
@@ -25,6 +27,8 @@ augroup END
   true
 )
 
-opt.termguicolors = true
+if not g.vscode then
+  opt.termguicolors = true
 
-require('onedark').setup()
+  require('onedark').setup()
+end
