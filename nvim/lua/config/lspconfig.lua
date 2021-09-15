@@ -1,5 +1,6 @@
--- NOTE: see https://github.com/kabouzeid/nvim-lspinstall#bundled-installers
--- install with :LspInstall
+-- NOTE: see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+-- LSP servers have to be manually installed. There are plugins that will handle this for you,
+-- but the ones I've tried thus far aren't cross platform.
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -86,15 +87,42 @@ local function make_config()
   }
 end
 
+local system_name
+if vim.fn.has('mac') == 1 then
+  system_name = 'macOS'
+elseif vim.fn.has('unix') == 1 then
+  system_name = 'Linux'
+elseif vim.fn.has('win32') == 1 then
+  system_name = 'Windows'
+else
+  print('Unsupported system for sumneko')
+end
+
+local sumneko_root_path = vim.fn.expand('$HOME') .. '/dev/oss/lua-language-server'
+local sumneko_binary = sumneko_root_path .. '/bin/' .. system_name .. '/lua-language-server'
+
+-- TODO: add in other language servers
+-- C# - csharp_ls or omnisharp???
+
 local function setup_servers()
-  require('lspinstall').setup()
+  local servers = {
+    ['angular'] = 'angularls',
+    ['css'] = 'stylelint_lsp',
+    ['html'] = 'html',
+    ['json'] = 'jsonls',
+    ['lua'] = 'sumneko_lua',
+    ['rust'] = 'rust_analyzer',
+    ['sql'] = 'sqlls',
+    ['typescript'] = 'tsserver',
+    ['vue'] = 'vuels',
+    ['yaml'] = 'yamlls',
+  }
 
-  local servers = require('lspinstall').installed_servers()
-
-  for _, server in pairs(servers) do
+  for lang, server in pairs(servers) do
     local config = make_config()
 
-    if server == 'lua' then
+    if lang == 'lua' then
+      config.cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' }
       config.settings = lua_settings
     end
 
@@ -103,9 +131,3 @@ local function setup_servers()
 end
 
 setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require('lspinstall').post_install_hook = function()
-  setup_servers() -- reload installed servers
-  vim.cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
-end
