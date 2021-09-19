@@ -10,7 +10,6 @@
 
   "macos": {
     "hammerspoon": "~/.hammerspoon",
-    "doom.d": "~/.doom.d",
     "karabiner.json": "~/.config/karabiner/karabiner.json",
     "config.fish": "~/.config/fish/config.fish",
     "nvim": [
@@ -24,7 +23,6 @@
     ]
   },
   "linux": {
-    "doom.d": "~/.doom.d",
     "config.fish": "~/.config/fish/config.fish",
     "nvim": [
       "~/.config/nvim"
