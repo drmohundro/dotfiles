@@ -69,6 +69,9 @@ return require('packer').startup(function()
     module_patterns = 'telescope*',
   })
 
+  -- use fzf-native matcher instead
+  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+
   -- commenting code
   use('preservim/nerdcommenter')
   g.NERDCreateDefaultMappings = 0
