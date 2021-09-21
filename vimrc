@@ -24,7 +24,7 @@ Plug 'sheerun/vim-polyglot'
 
 " specific
 Plug 'tpope/vim-markdown'
-let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'ps1', 'cs']
 " }}}2
 
 Plug 'bling/vim-airline'
@@ -32,6 +32,8 @@ Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+Plug 'bronson/vim-visual-star-search'
 
 Plug 'chrisbra/NrrwRgn'
 
@@ -70,9 +72,10 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'moll/vim-bbye'
 
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
 " open NERDTree on right side
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeHijackNetrw = 0
@@ -338,16 +341,6 @@ if (&t_Co > 2 || has('gui_running')) && has('syntax')
   noremap <M-.> :Bigger<CR>
 endif
 
-" In visual mode, search for selected text under cursor
-function! s:VSetSearch()
-  let l:temp = @@
-  norm! gvy
-  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-  let @@ = l:temp
-endfunction
-xnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-xnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
-
 command! -bar StripTrailingWhitespace :%s/\s\+$//
 
 " Autowrap lines around column 80
@@ -432,6 +425,8 @@ color molokai
 
 " see also ~/.gvimrc
 " }}}1
+
+highlight Comment cterm=italic gui=italic
 
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local

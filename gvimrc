@@ -11,6 +11,8 @@ if has('mac')
 elseif has('unix')
   set guifont=Mono\ 14
 elseif has('win32')
-  set guifont=Iosevka:h13
+  set guifont=JetBrains_Mono_NL:h12
   set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
 endif
+
+highlight Comment cterm=italic gui=italic

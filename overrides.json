@@ -10,40 +10,41 @@
 
   "macos": {
     "hammerspoon": "~/.hammerspoon",
-    "doom.d": "~/.doom.d",
     "karabiner.json": "~/.config/karabiner/karabiner.json",
     "config.fish": "~/.config/fish/config.fish",
+    "nvim": [
+      "~/.config/nvim"
+    ],
     "vimrc": [
-      "~/.vimrc",
-      "~/.config/nvim/init.vim"
+      "~/.vimrc"
     ],
     "vim": [
-      "~/.vim",
-      "~/.config/nvim"
+      "~/.vim"
     ]
   },
   "linux": {
-    "doom.d": "~/.doom.d",
     "config.fish": "~/.config/fish/config.fish",
+    "nvim": [
+      "~/.config/nvim"
+    ],
     "vimrc": [
-      "~/.vimrc",
-      "~/.config/nvim/init.vim"
+      "~/.vimrc"
     ],
     "vim": [
-      "~/.vim",
-      "~/.config/nvim"
+      "~/.vim"
     ]
   },
   "windows": {
     "vsvimrc": "~/.vsvimrc",
     "viemurc": "~/.viemurc",
-    "vimrc": [
-      "~/.vimrc",
+    "nvim": [
       "%LOCALAPPDATA%/nvim/init.vim"
     ],
+    "vimrc": [
+      "~/.vimrc"
+    ],
     "vim": [
-      "~/.vim",
-      "%LOCALAPPDATA%/nvim"
+      "~/.vim"
     ]
   }
 }

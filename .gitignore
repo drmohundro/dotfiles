@@ -12,9 +12,7 @@ config/*
 config/fish/fish_history
 config/fish/fishd.*
 
-# neovim symlinked files
-vim/init.vim
-vim/vim
 vim/spell
+nvim/plugin/packer_compiled.lua
 
 .DS_Store
