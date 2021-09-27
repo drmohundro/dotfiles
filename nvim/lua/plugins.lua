@@ -14,6 +14,9 @@ return require('packer').startup(function()
   -- LSP config
   use('neovim/nvim-lspconfig')
 
+  -- show signature while typing
+  use('ray-x/lsp_signature.nvim')
+
   -- completion and snippets
   use({
     'rafamadriz/friendly-snippets',
