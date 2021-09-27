@@ -79,8 +79,14 @@ return require('packer').startup(function()
   use('editorconfig/editorconfig-vim')
 
   -- ident lines
+  use('lukas-reineke/indent-blankline.nvim')
+
+  -- autopairs
   use({
-    'lukas-reineke/indent-blankline.nvim',
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup()
+    end,
   })
 
   -- s plus motion to jump around
