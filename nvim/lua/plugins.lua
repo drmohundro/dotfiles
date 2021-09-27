@@ -78,6 +78,11 @@ return require('packer').startup(function()
 
   use('editorconfig/editorconfig-vim')
 
+  -- ident lines
+  use({
+    'lukas-reineke/indent-blankline.nvim',
+  })
+
   -- s plus motion to jump around
   use('justinmk/vim-sneak')
 
