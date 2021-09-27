@@ -1,7 +1,5 @@
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
-local opt = vim.opt -- to set options
 
 cmd([[packadd packer.nvim]])
 
@@ -16,8 +14,36 @@ return require('packer').startup(function()
   -- LSP config
   use('neovim/nvim-lspconfig')
 
-  -- completion
-  use('hrsh7th/nvim-compe')
+  -- completion and snippets
+  use({
+    'rafamadriz/friendly-snippets',
+    event = 'InsertEnter',
+  })
+
+  use({
+    'hrsh7th/nvim-cmp',
+  })
+
+  use({
+    'L3MON4D3/LuaSnip',
+    wants = 'friendly-snippets',
+  })
+
+  use({
+    'saadparwaiz1/cmp_luasnip',
+  })
+
+  use({
+    'hrsh7th/cmp-nvim-lua',
+  })
+
+  use({
+    'hrsh7th/cmp-nvim-lsp',
+  })
+
+  use({
+    'hrsh7th/cmp-buffer',
+  })
 
   use({
     'folke/trouble.nvim',
@@ -32,8 +58,9 @@ return require('packer').startup(function()
   })
 
   -- footer support
+  -- NOTE: using fork for now - original is hoob3rt/lualine.nvim
   use({
-    'hoob3rt/lualine.nvim',
+    'shadmansaleh/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   })
 

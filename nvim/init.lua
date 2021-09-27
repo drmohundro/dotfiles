@@ -15,7 +15,7 @@ if not g.vscode then
   require('config.lualine')
   require('config.formatter')
   require('config.lspconfig')
-  require('config.compe')
+  require('config.cmp')
   require('config.telescope')
 end
 
