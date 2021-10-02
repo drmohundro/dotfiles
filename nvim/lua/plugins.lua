@@ -17,6 +17,26 @@ return require('packer').startup(function()
   -- show signature while typing
   use('ray-x/lsp_signature.nvim')
 
+  -- buffer/tab line
+  use({
+    'akinsho/bufferline.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('bufferline').setup({
+        options = {
+          offsets = {
+            {
+              filetype = 'NvimTree',
+              text = '',
+              padding = 1,
+              text_align = 'right',
+            },
+          },
+        },
+      })
+    end,
+  })
+
   -- completion and snippets
   use({
     'rafamadriz/friendly-snippets',
@@ -74,7 +94,18 @@ return require('packer').startup(function()
   use('folke/which-key.nvim')
 
   -- like nerd tree
-  use('kyazdani42/nvim-tree.lua')
+  use({
+    'kyazdani42/nvim-tree.lua',
+    cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('nvim-tree').setup({
+        view = {
+          side = 'right',
+        },
+      })
+    end,
+  })
 
   -- close buffers without messing up window layout
   use('moll/vim-bbye')
