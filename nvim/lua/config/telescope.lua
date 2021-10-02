@@ -13,6 +13,9 @@ require('telescope').setup({
     oldfiles = {
       theme = 'ivy',
     },
+    buffers = {
+      sort_lastused = true,
+    },
   },
   extensions = {
     fzf = {
