@@ -1,7 +1,23 @@
-local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
-local opt = vim.opt -- to set options
+
+-- see https://github.com/numToStr/Comment.nvim/issues/14#issuecomment-939230851
+local Ut = require('Comment.utils')
+local Op = require('Comment.opfunc')
+
+function _G.__toggle_visual(vmode)
+  local lcs, rcs = Ut.unwrap_cstr(vim.bo.commentstring)
+  local srow, erow, lines = Ut.get_lines(vmode, Ut.ctype.line)
+
+  Op.linewise({
+    cfg = { padding = true, ignore = nil },
+    cmode = Ut.cmode.toggle,
+    lines = lines,
+    lcs = lcs,
+    rcs = rcs,
+    srow = srow,
+    erow = erow,
+  })
+end
 
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
@@ -51,7 +67,7 @@ if not g.vscode then
     prefix = '<leader>',
   })
 
-  map('', '\\\\', '<plug>NERDCommenterInvert', { noremap = false })
+  map('', '\\\\', '<esc><cmd>lua __toggle_visual(vim.fn.visualmode())<cr>', { silent = true })
 
   map('', '<c-l>', ':Telescope buffers<cr>')
   map('', '<c-p>', ':Telescope find_files<cr>')

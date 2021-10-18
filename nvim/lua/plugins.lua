@@ -145,8 +145,12 @@ return require('packer').startup(function()
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
   -- commenting code
-  use('preservim/nerdcommenter')
-  g.NERDCreateDefaultMappings = 0
+  use({
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end,
+  })
 
   -- notifications
   use({
