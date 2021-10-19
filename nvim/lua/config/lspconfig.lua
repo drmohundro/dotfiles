@@ -1,6 +1,5 @@
 -- NOTE: see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
--- LSP servers have to be manually installed. There are plugins that will handle this for you,
--- but the ones I've tried thus far aren't cross platform.
+-- see also https://github.com/williamboman/nvim-lsp-installer
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -55,28 +54,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- Configure lua language server for neovim development
-local lua_settings = {
-  Lua = {
-    runtime = {
-      -- LuaJIT in the case of Neovim
-      version = 'LuaJIT',
-      path = vim.split(package.path, ';'),
-    },
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = { 'vim' },
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = {
-        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-      },
-    },
-  },
-}
-
 -- config that activates keymaps and enables snippet support
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -89,47 +66,25 @@ local function make_config()
   }
 end
 
-local system_name
-if vim.fn.has('mac') == 1 then
-  system_name = 'macOS'
-elseif vim.fn.has('unix') == 1 then
-  system_name = 'Linux'
-elseif vim.fn.has('win32') == 1 then
-  system_name = 'Windows'
-else
-  print('Unsupported system for sumneko')
-end
+local lsp_installer = require('nvim-lsp-installer')
 
-local sumneko_root_path = vim.fn.expand('$HOME') .. '/dev/oss/lua-language-server'
-local sumneko_binary = sumneko_root_path .. '/bin/' .. system_name .. '/lua-language-server'
+lsp_installer.on_server_ready(function(server)
+  local opts = make_config()
 
--- TODO: add in other language servers
--- C# - csharp_ls or omnisharp???
-
-local function setup_servers()
-  local servers = {
-    ['angular'] = 'angularls',
-    ['css'] = 'stylelint_lsp',
-    ['html'] = 'html',
-    ['json'] = 'jsonls',
-    ['lua'] = 'sumneko_lua',
-    ['rust'] = 'rust_analyzer',
-    ['sql'] = 'sqlls',
-    ['typescript'] = 'tsserver',
-    ['vue'] = 'vuels',
-    ['yaml'] = 'yamlls',
-  }
-
-  for lang, server in pairs(servers) do
-    local config = make_config()
-
-    if lang == 'lua' then
-      config.cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' }
-      config.settings = lua_settings
+  -- (optional) Customize the options passed to the server
+  if server.name == 'eslint' then
+    opts.on_attach = function(client, bufnr)
+      -- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
+      -- the resolved capabilities of the eslint server ourselves!
+      client.resolved_capabilities.document_formatting = true
+      on_attach(client, bufnr)
     end
-
-    require('lspconfig')[server].setup(config)
+    opts.settings = {
+      format = { enable = true }, -- this will enable formatting
+    }
   end
-end
 
-setup_servers()
+  -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
+  server:setup(opts)
+  vim.cmd([[ do User LspAttachBuffers ]])
+end)

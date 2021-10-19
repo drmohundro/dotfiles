@@ -12,7 +12,10 @@ return require('packer').startup(function()
   use('nvim-treesitter/playground')
 
   -- LSP config
-  use('neovim/nvim-lspconfig')
+  use({
+    'neovim/nvim-lspconfig',
+    'williamboman/nvim-lsp-installer',
+  })
 
   -- show signature while typing
   use('ray-x/lsp_signature.nvim')
