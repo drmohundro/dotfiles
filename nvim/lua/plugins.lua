@@ -86,7 +86,7 @@ return require('packer').startup(function()
   -- footer support
   -- NOTE: using fork for now - original is hoob3rt/lualine.nvim
   use({
-    'shadmansaleh/lualine.nvim',
+    'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   })
 
