@@ -15,6 +15,8 @@ require('telescope').setup({
     },
     buffers = {
       sort_lastused = true,
+      sort_mru = true,
+      initial_mode = 'normal',
     },
   },
   extensions = {
