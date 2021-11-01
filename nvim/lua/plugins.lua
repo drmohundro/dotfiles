@@ -20,6 +20,9 @@ return require('packer').startup(function()
   -- show signature while typing
   use('ray-x/lsp_signature.nvim')
 
+  -- faster than built-in filetype.vim (might go to core at some point)
+  use('nathom/filetype.nvim')
+
   -- buffer/tab line
   use({
     'akinsho/bufferline.nvim',
