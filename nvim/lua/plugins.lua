@@ -129,8 +129,8 @@ return require('packer').startup(function()
     end,
   })
 
-  -- s plus motion to jump around
-  use('justinmk/vim-sneak')
+  -- s plus motion to jump around (like vim-sneak)
+  use('ggandor/lightspeed.nvim')
 
   -- colorizer
   use({
