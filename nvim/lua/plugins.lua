@@ -201,6 +201,9 @@ return require('packer').startup(function()
   -- search for visually selected text
   use('bronson/vim-visual-star-search')
 
+  -- rainbow parens
+  use('p00f/nvim-ts-rainbow')
+
   -- colors
   use('fatih/molokai')
   use('altercation/vim-colors-solarized')
