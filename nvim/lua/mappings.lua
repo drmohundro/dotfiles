@@ -48,6 +48,14 @@ map('', 'L', '$')
 map('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true })
 
 if not g.vscode then
+  map('', '\\\\', '<esc><cmd>lua __toggle_visual(vim.fn.visualmode())<cr>', { silent = true })
+
+  map('', '<c-l>', ':Telescope buffers<cr>')
+  map('', '<c-p>', ':Telescope find_files<cr>')
+
+  map('n', '<S-l>', ':BufferLineCycleNext<CR>')
+  map('n', '<S-h>', ':BufferLineCyclePrev<CR>')
+
   local wk = require('which-key')
 
   wk.register({
@@ -56,6 +64,7 @@ if not g.vscode then
 
     d = { '<cmd>NvimTreeToggle<cr>', 'Toggle directory tree' },
 
+    -- Packer
     p = {
       name = 'Packer',
       c = { '<cmd>PackerCompile<cr>', 'Compile' },
@@ -66,6 +75,7 @@ if not g.vscode then
       u = { '<cmd>PackerUpdate<cr>', 'Update' },
     },
 
+    -- Git
     g = {
       name = 'Git',
       j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
@@ -91,15 +101,57 @@ if not g.vscode then
         'Git Diff',
       },
     },
+
+    -- LSP
+    l = {
+      name = 'LSP',
+      a = { "<cmd>lua require('lvim.core.telescope').code_actions()<cr>", 'Code Action' },
+      d = {
+        '<cmd>Telescope lsp_document_diagnostics<cr>',
+        'Document Diagnostics',
+      },
+      w = {
+        '<cmd>Telescope lsp_workspace_diagnostics<cr>',
+        'Workspace Diagnostics',
+      },
+      f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
+      i = { '<cmd>LspInfo<cr>', 'Info' },
+      I = { '<cmd>LspInstallInfo<cr>', 'Installer Info' },
+      j = {
+        '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
+        'Next Diagnostic',
+      },
+      k = {
+        '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
+        'Prev Diagnostic',
+      },
+      l = { '<cmd>lua vim.lsp.codelens.run()<cr>', 'CodeLens Action' },
+      p = {
+        name = 'Peek',
+        d = { "<cmd>lua require('lvim.lsp.peek').Peek('definition')<cr>", 'Definition' },
+        t = { "<cmd>lua require('lvim.lsp.peek').Peek('typeDefinition')<cr>", 'Type Definition' },
+        i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", 'Implementation' },
+      },
+      q = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', 'Quickfix' },
+      r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
+      s = { '<cmd>Telescope lsp_document_symbols<cr>', 'Document Symbols' },
+      S = {
+        '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>',
+        'Workspace Symbols',
+      },
+    },
+
+    -- Trouble toggling
+    t = {
+      name = 'Diagnostics',
+      t = { '<cmd>TroubleToggle<cr>', 'trouble' },
+      w = { '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>', 'workspace' },
+      d = { '<cmd>TroubleToggle lsp_document_diagnostics<cr>', 'document' },
+      q = { '<cmd>TroubleToggle quickfix<cr>', 'quickfix' },
+      l = { '<cmd>TroubleToggle loclist<cr>', 'loclist' },
+      r = { '<cmd>TroubleToggle lsp_references<cr>', 'references' },
+    },
   }, {
     prefix = '<leader>',
   })
-
-  map('', '\\\\', '<esc><cmd>lua __toggle_visual(vim.fn.visualmode())<cr>', { silent = true })
-
-  map('', '<c-l>', ':Telescope buffers<cr>')
-  map('', '<c-p>', ':Telescope find_files<cr>')
-
-  map('n', '<S-l>', ':BufferLineCycleNext<CR>')
-  map('n', '<S-h>', ':BufferLineCyclePrev<CR>')
 end

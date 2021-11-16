@@ -93,6 +93,18 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   })
 
+  -- highlight TODOs
+  use({
+    'folke/todo-comments.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('todo-comments').setup()
+    end,
+  })
+
+  -- pane showing symbols
+  use('simrat39/symbols-outline.nvim')
+
   -- scrollbar in terminal
   use('dstein64/nvim-scrollview')
 
