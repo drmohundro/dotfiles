@@ -98,10 +98,9 @@ function history
   builtin history --show-time='%F %T ' $argv | less -F
 end
 
-if type -q lsd
-  alias ls "lsd"
-else if type -q exa
-  alias ls "exa --group-directories-first"
+if type -q exa
+  alias tree "exa --long --header --git --icons --tree --level=4 -a -I=.git --git-ignore"
+  alias ls "exa --icons --group-directories-first"
 end
 
 ### Prompt
