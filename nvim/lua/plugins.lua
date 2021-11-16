@@ -142,7 +142,14 @@ return require('packer').startup(function()
   })
 
   -- s plus motion to jump around (like vim-sneak)
-  use('ggandor/lightspeed.nvim')
+  use({
+    'ggandor/lightspeed.nvim',
+    config = function()
+      require('lightspeed').setup({
+        instant_repeat_fwd_key = ';',
+      })
+    end,
+  })
 
   -- colorizer
   use({
