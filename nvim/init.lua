@@ -13,7 +13,6 @@ require('mappings')
 if not g.vscode then
   require('config.treesitter')
   require('config.lualine')
-  require('config.formatter')
   require('config.lspconfig')
   require('config.cmp')
   require('config.telescope')
@@ -21,11 +20,6 @@ end
 
 cmd(
   [[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
-augroup END
-
 augroup HighlightYank
   autocmd!
   autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
