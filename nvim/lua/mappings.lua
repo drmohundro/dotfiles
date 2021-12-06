@@ -1,6 +1,7 @@
 local g = vim.g -- a table to access global variables
 
 -- see https://github.com/numToStr/Comment.nvim/issues/14#issuecomment-939230851
+-- visual comment with custom keyboard shortcut
 local Ut = require('Comment.utils')
 local Op = require('Comment.opfunc')
 
@@ -18,6 +19,7 @@ function _G.__toggle_visual(vmode)
     erow = erow,
   })
 end
+-- end visual comment
 
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
@@ -25,6 +27,16 @@ local function map(mode, lhs, rhs, opts)
     options = vim.tbl_extend('force', options, opts)
   end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+function _G.set_terminal_keymaps()
+  local opts = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
 end
 
 -- toggle showing whitespace
@@ -55,6 +67,8 @@ if not g.vscode then
 
   map('n', '<S-l>', ':BufferLineCycleNext<CR>')
   map('n', '<S-h>', ':BufferLineCyclePrev<CR>')
+
+  vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
   local wk = require('which-key')
 
