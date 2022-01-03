@@ -72,16 +72,12 @@ lsp_installer.on_server_ready(function(server)
   local opts = make_config()
 
   -- (optional) Customize the options passed to the server
-  if server.name == 'eslint' then
-    opts.on_attach = function(client, bufnr)
-      -- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
-      -- the resolved capabilities of the eslint server ourselves!
-      client.resolved_capabilities.document_formatting = true
-      on_attach(client, bufnr)
+  if server.name == 'eslint' or server.name == 'tsserver' or server.name == 'stylelint_lsp' then
+    -- this is to avoid LSP formatting conflicts with null-ls... see https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+    opts.on_attach = function(client)
+      client.resolved_capabilities.document_formatting = false
+      client.resolved_capabilities.document_range_formatting = false
     end
-    opts.settings = {
-      format = { enable = true }, -- this will enable formatting
-    }
   end
 
   -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
