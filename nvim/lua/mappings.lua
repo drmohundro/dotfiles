@@ -1,26 +1,5 @@
 local g = vim.g -- a table to access global variables
 
--- see https://github.com/numToStr/Comment.nvim/issues/14#issuecomment-939230851
--- visual comment with custom keyboard shortcut
-local Ut = require('Comment.utils')
-local Op = require('Comment.opfunc')
-
-function _G.__toggle_visual(vmode)
-  local lcs, rcs = Ut.unwrap_cstr(vim.bo.commentstring)
-  local srow, erow, lines = Ut.get_lines(vmode, Ut.ctype.line)
-
-  Op.linewise({
-    cfg = { padding = true, ignore = nil },
-    cmode = Ut.cmode.toggle,
-    lines = lines,
-    lcs = lcs,
-    rcs = rcs,
-    srow = srow,
-    erow = erow,
-  })
-end
--- end visual comment
-
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
   if opts then
@@ -60,7 +39,7 @@ map('', 'L', '$')
 map('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true })
 
 if not g.vscode then
-  map('', '\\\\', '<esc><cmd>lua __toggle_visual(vim.fn.visualmode())<cr>', { silent = true })
+  map('', '\\\\', '<esc><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', { silent = true })
 
   map('', '<c-l>', ':Telescope buffers<cr>')
   map('', '<c-p>', ':Telescope find_files<cr>')
