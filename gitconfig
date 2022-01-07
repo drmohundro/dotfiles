@@ -2,6 +2,14 @@
 	name = David Mohundro
 	email = david@mohundro.com
 
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+	autocrlf = input    # set to true on Windows
+	pager = delta --side-by-side
+
 [color "diff"]
 	meta = yellow bold
 	commit = green bold
@@ -22,11 +30,6 @@
 	added = green
 	changed = yellow
 	untracked = cyan
-
-[core]
-	editor = nvim
-	autocrlf = input    # set to true on Windows
-	pager = delta --side-by-side
 
 [interactive]
 	diffFilter = delta --color-only
