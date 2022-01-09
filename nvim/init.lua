@@ -31,5 +31,5 @@ augroup END
 if not g.vscode then
   opt.termguicolors = true
 
-  require('onedark').setup()
+  require('onedark').load()
 end
