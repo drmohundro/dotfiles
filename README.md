@@ -1,30 +1,29 @@
 # About dotfiles
 
 This is my collection of various config files and options for programs like vim
-or bash (heavy unix focus).
+or fish (heavy unix focus).
 
 ## Installation Instructions
 
 I'm making use of symlinks to point my dotfiles to my actual dev folder - to
-make it easier to configure this, I've based my Rakefile off of what I've seen
-in many other dotfiles. To install, just run:
+make it easier to configure this, I'm using a PowerShell Core (pwsh) script. To
+install, just run:
 
 ```sh
-rake install
+pwsh install.ps1
 ```
 
-To double check your environment, you can run:
+To double check what will happen, you can run:
 
 ```sh
-rake check
+pwsh check.ps1 -whatIf
 ```
 
 ## Overrides
 
-For platform-specific config, you can use the `overrides.yaml` file. See the
+For platform-specific config, you can use the `overrides.json` file. See the
 included version for details.
 
 ## Need help?
 
-Visit my [website](http://mohundro.com/blog) and shoot me a line.
-
+Open an issue or visit my [website](https://mohundro.com/) and shoot me a line.
