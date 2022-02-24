@@ -38,7 +38,11 @@ map('', 'L', '$')
 -- clear search highlighting
 map('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true })
 
-if not g.vscode then
+if g.vscode then
+  -- HACK: get around weird issues with o|O keys in VSCode Neovim... see https://github.com/asvetliakov/vscode-neovim/issues/485#issuecomment-792292205
+  map('n', 'o', "<cmd>call VSCodeNotify('editor.action.insertLineAfter')<cr>i", { silent = true })
+  map('n', 'O', "<cmd>call VSCodeNotify('editor.action.insertLineBefore')<cr>i", { silent = true })
+else
   map('', '\\\\', '<esc><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', { silent = true })
 
   map('', '<c-l>', ':Telescope buffers<cr>')
