@@ -31,5 +31,8 @@ augroup END
 if not g.vscode then
   opt.termguicolors = true
 
-  require('onedark').load()
+  cmd([[colorscheme tokyonight]])
+
+  -- NOTE: to go back to onedark
+  -- require('onedark').load()
 end
