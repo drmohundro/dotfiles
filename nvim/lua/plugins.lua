@@ -17,9 +17,6 @@ return require('packer').startup(function()
     'williamboman/nvim-lsp-installer',
   })
 
-  -- show signature while typing
-  use('ray-x/lsp_signature.nvim')
-
   -- faster than built-in filetype.vim (might go to core at some point)
   use('nathom/filetype.nvim')
 
@@ -49,9 +46,8 @@ return require('packer').startup(function()
     event = 'InsertEnter',
   })
 
-  use({
-    'hrsh7th/nvim-cmp',
-  })
+  use('hrsh7th/nvim-cmp')
+  use('hrsh7th/cmp-nvim-lsp-signature-help')
 
   use({
     'L3MON4D3/LuaSnip',

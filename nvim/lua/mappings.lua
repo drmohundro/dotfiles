@@ -47,6 +47,8 @@ if not g.vscode then
   map('n', '<S-l>', ':BufferLineCycleNext<CR>')
   map('n', '<S-h>', ':BufferLineCyclePrev<CR>')
 
+  map('', '<F4>', ':SymbolsOutline<CR>')
+
   vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
   local wk = require('which-key')
