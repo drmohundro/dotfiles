@@ -241,17 +241,21 @@ return require('packer').startup(function()
     config = function()
       local null_ls = require('null-ls')
 
+      local formatting = null_ls.builtins.formatting
+      local diagnostics = null_ls.builtins.diagnostics
+
       null_ls.setup({
         sources = {
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.rustfmt,
-          null_ls.builtins.formatting.stylelint,
-          null_ls.builtins.formatting.stylua,
+          formatting.prettier,
+          formatting.rustfmt,
+          formatting.stylelint,
+          formatting.stylua,
+          formatting.terraform_fmt,
 
-          null_ls.builtins.diagnostics.cspell,
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.diagnostics.luacheck,
-          null_ls.builtins.diagnostics.proselint,
+          diagnostics.cspell,
+          diagnostics.eslint,
+          diagnostics.luacheck,
+          diagnostics.proselint,
         },
         on_attach = function(client)
           if client.resolved_capabilities.document_formatting then
