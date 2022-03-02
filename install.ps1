@@ -1,11 +1,5 @@
 param (
     [switch]
-    $check,
-
-    [switch]
-    $install,
-
-    [switch]
     $whatIf
 )
 

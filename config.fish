@@ -60,10 +60,6 @@ if test -e ~/Library/Android/sdk
   set -gx PATH $PATH ~/Library/Android/sdk/platform-tools
 end
 
-# http://www.martinklepsch.org/posts/git-prompt-for-fish-shell.html
-set __fish_git_prompt_showdirtystate 'yes'
-set __fish_git_prompt_char_dirtystate '⚡'
-
 # source versioning
 if begin; type -q brew; and test -d /usr/local/opt/asdf/; end
   source /usr/local/opt/asdf/asdf.fish
@@ -103,23 +99,11 @@ if type -q exa
   alias ls "exa --icons --group-directories-first"
 end
 
-### Prompt
-
-function fish_prompt
-  set_color red
-  echo -n "❯"
-  set_color yellow
-  echo -n "❯"
-  set_color green
-  echo -n "❯ "
-end
-
-function fish_right_prompt
-  set_color blue
-  echo -n (prompt_pwd)
-  set_color green
-  echo -n (__fish_git_prompt)
-  set_color normal
+### Prompt using oh-my-posh (ohmyposh.dev)
+if type -q oh-my-posh
+  oh-my-posh --init --shell fish --config ~/dev/dotfiles/oh-my-posh-themes/mo-fish.omp.json | source
+else
+  echo "oh-my-posh wasn't found, using default prompt"
 end
 
 # direnv config
