@@ -5,6 +5,11 @@ if test -e /usr/local/bin
   set -gx PATH /usr/local/bin $PATH
 end
 
+# m1 homebrew installs here instead
+if test -e /opt/homebrew/bin
+  set -gx PATH /opt/homebrew/bin $PATH
+end
+
 if test -e ~/dev/flutter
   set -gx PATH $PATH ~/dev/flutter/bin
 end
@@ -63,6 +68,8 @@ end
 # source versioning
 if begin; type -q brew; and test -d /usr/local/opt/asdf/; end
   source /usr/local/opt/asdf/asdf.fish
+else if begin; type -q brew; and test -d /opt/homebrew/opt/asdf/; end
+  source /opt/homebrew/opt/asdf/asdf.fish
 else if test -e ~/.asdf
   source ~/.asdf/asdf.fish
 end
