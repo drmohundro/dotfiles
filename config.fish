@@ -1,13 +1,16 @@
 set -gx MANPAGER 'nvim +Man!'
 set -gx EDITOR nvim
 
+# avoid the delay of (brew --prefix)
 if test -e /usr/local/bin
-  set -gx PATH /usr/local/bin $PATH
+  set BREW_PREFIX = /usr/local
+  set -gx PATH $BREW_PREFIX/bin $PATH
 end
 
 # m1 homebrew installs here instead
 if test -e /opt/homebrew/bin
-  set -gx PATH /opt/homebrew/bin $PATH
+  set BREW_PREFIX = /opt/homebrew
+  set -gx PATH $BREW_PREFIX/bin $PATH
 end
 
 if test -e ~/dev/flutter
@@ -21,9 +24,9 @@ end
 # use gnu versions of coreutils/findutils
 if type -q brew
   # via `brew --prefix FORMULA`... hardcoding for speed, though
-  set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
-  set -gx PATH /usr/local/opt/findutils/libexec/gnubin $PATH
-  set -gx PATH /usr/local/opt/grep/libexec/gnubin $PATH
+  set -gx PATH $BREW_PREFIX/opt/coreutils/libexec/gnubin $PATH
+  set -gx PATH $BREW_PREFIX/opt/findutils/libexec/gnubin $PATH
+  set -gx PATH $BREW_PREFIX/opt/grep/libexec/gnubin $PATH
 end
 
 # local binaries
