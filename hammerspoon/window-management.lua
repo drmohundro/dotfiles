@@ -58,7 +58,7 @@ end
 -- Bind new method to windowMeta
 function windowMeta.new()
   local self = setmetatable(windowMeta, {
-    -- Treate table like a function
+    -- Treat table like a function
     -- Event listener when windowMeta() is called
     __call = function(cls, ...)
       return cls.new(...)

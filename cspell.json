@@ -1,0 +1,17 @@
+{
+  "language": "en-US",
+  "dictionaries": ["cspell-dict"],
+  "ignorePaths": [
+    "nvim/plugin/packer_compiled.lua",
+    "nvim/lua/personal/log.lua",
+    "nvim/lua/plugins.lua"
+  ],
+
+  "dictionaryDefinitions": [
+    {
+      "name": "cspell-dict",
+      "path": "./cspell-dict.txt",
+      "addWords": true
+    }
+  ]
+}

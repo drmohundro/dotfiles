@@ -1,0 +1,2 @@
+spellcheck:
+	cspell "**/*.lua"
