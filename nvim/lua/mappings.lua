@@ -61,7 +61,7 @@ else
     f = { '<cmd>Telescope live_grep<cr>', 'Live ripgrep search' },
     r = { '<cmd>Telescope oldfiles<cr>', 'Find recently opened files' },
 
-    d = { '<cmd>NvimTreeToggle<cr>', 'Toggle directory tree' },
+    d = { '<cmd>Neotree reveal right toggle<cr>', 'Toggle directory tree' },
 
     -- Packer
     p = {

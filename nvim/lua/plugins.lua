@@ -24,18 +24,7 @@ return require('packer').startup(function()
     'akinsho/bufferline.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require('bufferline').setup({
-        options = {
-          offsets = {
-            {
-              filetype = 'NvimTree',
-              text = '',
-              padding = 1,
-              text_align = 'right',
-            },
-          },
-        },
-      })
+      require('bufferline').setup({})
     end,
   })
 
@@ -141,15 +130,14 @@ return require('packer').startup(function()
 
   -- like nerd tree
   use({
-    'kyazdani42/nvim-tree.lua',
-    cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
-    requires = 'kyazdani42/nvim-web-devicons',
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v2.x',
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
     config = function()
-      require('nvim-tree').setup({
-        view = {
-          side = 'right',
-        },
-      })
+      require('neo-tree').setup({})
     end,
   })
 
