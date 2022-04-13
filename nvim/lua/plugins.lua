@@ -22,6 +22,7 @@ return require('packer').startup(function()
   -- buffer/tab line
   use({
     'akinsho/bufferline.nvim',
+    branch = 'main',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require('bufferline').setup({})
@@ -95,6 +96,7 @@ return require('packer').startup(function()
   -- toggle terminal
   use({
     'akinsho/toggleterm.nvim',
+    branch = 'main',
     config = function()
       require('toggleterm').setup({
         -- size can be a number or function which is passed the current terminal
