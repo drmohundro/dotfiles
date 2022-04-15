@@ -19,7 +19,8 @@ opt.expandtab = true
 
 opt.cmdheight = 2
 
-opt.listchars = { tab = '»\t', trail = '·', eol = '↲' }
+-- opt.listchars = { tab = '»\t', trail = '·', eol = '↲' }
+vim.cmd('set listchars=tab:»\\ ,trail:·,eol:↲')
 opt.modeline = false
 opt.showbreak = '>\\'
 opt.winaltkeys = 'no'
