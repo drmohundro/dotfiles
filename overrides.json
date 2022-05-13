@@ -12,39 +12,22 @@
     "hammerspoon": "~/.hammerspoon",
     "karabiner.json": "~/.config/karabiner/karabiner.json",
     "config.fish": "~/.config/fish/config.fish",
-    "nvim": [
-      "~/.config/nvim"
-    ],
-    "vimrc": [
-      "~/.vimrc"
-    ],
-    "vim": [
-      "~/.vim"
-    ]
+    "nvim": ["~/.config/nvim"],
+    "vimrc": ["~/.vimrc"],
+    "vim": ["~/.vim"],
+    "kitty": ["~/.config/kitty"]
   },
   "linux": {
     "config.fish": "~/.config/fish/config.fish",
-    "nvim": [
-      "~/.config/nvim"
-    ],
-    "vimrc": [
-      "~/.vimrc"
-    ],
-    "vim": [
-      "~/.vim"
-    ]
+    "nvim": ["~/.config/nvim"],
+    "vimrc": ["~/.vimrc"],
+    "vim": ["~/.vim"]
   },
   "windows": {
     "vsvimrc": "~/.vsvimrc",
     "viemurc": "~/.viemurc",
-    "nvim": [
-      "%LOCALAPPDATA%/nvim/init.vim"
-    ],
-    "vimrc": [
-      "~/.vimrc"
-    ],
-    "vim": [
-      "~/.vim"
-    ]
+    "nvim": ["%LOCALAPPDATA%/nvim/init.vim"],
+    "vimrc": ["~/.vimrc"],
+    "vim": ["~/.vim"]
   }
 }
