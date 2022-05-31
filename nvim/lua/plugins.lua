@@ -6,6 +6,9 @@ return require('packer').startup(function()
   -- plugin management
   use('wbthomason/packer.nvim')
 
+  -- improve the default vim.ui interfaces
+  use('stevearc/dressing.nvim')
+
   -- treesitter (LSP)
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
   use('nvim-treesitter/playground')
@@ -268,4 +271,11 @@ return require('packer').startup(function()
   use('NLKNguyen/papercolor-theme')
   use('navarasu/onedark.nvim')
   use('folke/tokyonight.nvim')
+  use({
+    'catppuccin/nvim',
+    as = 'catppuccin',
+    config = function()
+      require('catppuccin').setup()
+    end,
+  })
 end)
