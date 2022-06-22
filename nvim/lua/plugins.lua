@@ -257,6 +257,7 @@ return require('packer').startup(function()
           diagnostics.eslint,
           diagnostics.luacheck,
           diagnostics.proselint,
+          diagnostics.vale,
         },
         on_attach = function(client)
           if client.resolved_capabilities.document_formatting then
