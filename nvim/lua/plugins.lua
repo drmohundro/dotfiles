@@ -96,6 +96,15 @@ return require('packer').startup(function()
   -- scrollbar in terminal
   use('dstein64/nvim-scrollview')
 
+  -- updated folds support
+  use({
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+    config = function()
+      require('ufo').setup()
+    end,
+  })
+
   -- toggle terminal
   use({
     'akinsho/toggleterm.nvim',
