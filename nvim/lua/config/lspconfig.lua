@@ -65,21 +65,16 @@ local function make_config()
   }
 end
 
-local lsp_installer = require('nvim-lsp-installer')
+local opts = make_config()
+local lspconfig = require('lspconfig')
 
-lsp_installer.on_server_ready(function(server)
-  local opts = make_config()
+local function on_attach(client)
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+end
 
-  -- (optional) Customize the options passed to the server
-  if server.name == 'eslint' or server.name == 'tsserver' or server.name == 'stylelint_lsp' then
-    -- this is to avoid LSP formatting conflicts with null-ls... see https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
-    opts.on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-    end
-  end
+lspconfig.eslint.setup(opts)
+lspconfig.tsserver.setup(opts)
+lspconfig.stylelint_lsp.setup(opts)
 
-  -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-  server:setup(opts)
-  vim.cmd([[ do User LspAttachBuffers ]])
-end)
+vim.cmd([[ do User LspAttachBuffers ]])

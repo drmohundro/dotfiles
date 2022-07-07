@@ -15,6 +15,8 @@ require('options')
 require('mappings')
 
 if not g.vscode then
+  require('nvim-lsp-installer').setup()
+
   require('config.treesitter')
   require('config.lualine')
   require('config.lspconfig')
