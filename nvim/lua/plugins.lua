@@ -232,7 +232,12 @@ return require('packer').startup(function()
   use('tjdevries/vlog.nvim')
 
   -- surround motion
-  use('tpope/vim-surround')
+  use({
+    'kylechui/nvim-surround',
+    config = function()
+      require('nvim-surround').setup()
+    end,
+  })
 
   -- most recently used
   use('yegappan/mru')
