@@ -15,7 +15,14 @@ require('options')
 require('mappings')
 
 if not g.vscode then
-  require('nvim-lsp-installer').setup()
+  require('mason').setup({
+    ensure_installed = {
+      'sumneko_lua',
+      'eslint',
+      'tsserver',
+      'stylelint_lsp',
+    },
+  })
 
   require('config.treesitter')
   require('config.lualine')

@@ -14,10 +14,9 @@ return require('packer').startup(function()
   use('nvim-treesitter/playground')
 
   -- LSP config
-  use({
-    'neovim/nvim-lspconfig',
-    'williamboman/nvim-lsp-installer',
-  })
+  use({ 'neovim/nvim-lspconfig' })
+  use({ 'williamboman/mason.nvim' })
+  use({ 'williamboman/mason-lspconfig.nvim' })
 
   -- faster than built-in filetype.vim (might go to core at some point)
   use('nathom/filetype.nvim')

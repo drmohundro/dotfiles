@@ -126,7 +126,7 @@ else
       },
       f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
       i = { '<cmd>LspInfo<cr>', 'Info' },
-      I = { '<cmd>LspInstallInfo<cr>', 'Installer Info' },
+      I = { '<cmd>Mason<cr>', 'Mason LSP Info' },
       j = {
         '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
         'Next Diagnostic',
