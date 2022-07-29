@@ -171,7 +171,12 @@ return require('packer').startup(function()
   })
 
   -- s plus motion to jump around (like vim-sneak)
-  use('ggandor/lightspeed.nvim')
+  use({
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').set_default_keymaps()
+    end,
+  })
 
   -- colorizer
   use({
