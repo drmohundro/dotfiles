@@ -6,6 +6,9 @@ return require('packer').startup(function()
   -- plugin management
   use('wbthomason/packer.nvim')
 
+  -- improve the default vim.ui interfaces
+  use('stevearc/dressing.nvim')
+
   -- treesitter (LSP)
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
   use('nvim-treesitter/playground')
@@ -92,6 +95,15 @@ return require('packer').startup(function()
 
   -- scrollbar in terminal
   use('dstein64/nvim-scrollview')
+
+  -- updated folds support
+  use({
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+    config = function()
+      require('ufo').setup()
+    end,
+  })
 
   -- toggle terminal
   use({
@@ -220,7 +232,12 @@ return require('packer').startup(function()
   use('tjdevries/vlog.nvim')
 
   -- surround motion
-  use('tpope/vim-surround')
+  use({
+    'kylechui/nvim-surround',
+    config = function()
+      require('nvim-surround').setup()
+    end,
+  })
 
   -- most recently used
   use('yegappan/mru')
@@ -245,6 +262,7 @@ return require('packer').startup(function()
           diagnostics.eslint,
           diagnostics.luacheck,
           diagnostics.proselint,
+          diagnostics.vale,
         },
         on_attach = function(client)
           if client.resolved_capabilities.document_formatting then
@@ -268,4 +286,11 @@ return require('packer').startup(function()
   use('NLKNguyen/papercolor-theme')
   use('navarasu/onedark.nvim')
   use('folke/tokyonight.nvim')
+  use({
+    'catppuccin/nvim',
+    as = 'catppuccin',
+    config = function()
+      require('catppuccin').setup()
+    end,
+  })
 end)

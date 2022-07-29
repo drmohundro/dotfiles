@@ -42,7 +42,7 @@ function determinePath($path) {
 
     if ($config['windows'][$pathName] -ne $null -and $IsWindows) {
         checkConfig -os 'windows' -pathName $pathName
-    } elseif ($config['macos'][$pathName] -ne $null -and $IsMac) {
+    } elseif ($config['macos'][$pathName] -ne $null -and $IsMacOS) {
         checkConfig -os 'macos' -pathName $pathName
     } elseif ($config['linux'][$pathName] -ne $null -and $IsLinux) {
         checkConfig -os 'linux' -pathName $pathName

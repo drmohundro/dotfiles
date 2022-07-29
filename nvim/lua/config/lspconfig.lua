@@ -49,33 +49,62 @@ local on_attach = function(client, bufnr)
   end
 end
 
+-- this is to avoid LSP formatting conflicts with null-ls... see https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+local function nullls_on_attach(client, bufnr, lang)
+  if lang == 'eslint' or lang == 'tsserver' or lang == 'stylelint_lsp' or lang == 'sumneko_lua' then
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+
+  return on_attach(client, bufnr)
+end
+
 -- config that activates keymaps and enables snippet support
-local function make_config()
+local function make_config(lang)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+
+  local settings = {}
+
+  -- TODO: not sure how to just use luacheck for diagnostics instead... I'm still figuring out the latest with null-ls vs lspconfig vs nvim-lsp-installer
+  if lang == 'sumneko_lua' then
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' },
+        },
+      },
+    }
+  end
+
   return {
     -- enable snippet support
     capabilities = capabilities,
+
+    settings = settings,
+
     -- map buffer local keybindings when the language server attaches
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      return nullls_on_attach(client, bufnr, lang)
+    end,
   }
 end
 
-local lsp_installer = require('nvim-lsp-installer')
+local lspconfig = require('lspconfig')
 
-lsp_installer.on_server_ready(function(server)
-  local opts = make_config()
+local servers = {
+  'sumneko_lua',
+  'eslint',
+  'tsserver',
+  'stylelint_lsp',
+}
 
-  -- (optional) Customize the options passed to the server
-  if server.name == 'eslint' or server.name == 'tsserver' or server.name == 'stylelint_lsp' then
-    -- this is to avoid LSP formatting conflicts with null-ls... see https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
-    opts.on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-    end
-  end
+for _, server in pairs(servers) do
+  lspconfig[server].setup(make_config(server))
+end
 
-  -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-  server:setup(opts)
-  vim.cmd([[ do User LspAttachBuffers ]])
-end)
+vim.cmd([[ do User LspAttachBuffers ]])

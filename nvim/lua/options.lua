@@ -31,3 +31,8 @@ opt.completeopt = 'menuone,noselect'
 opt.mouse = 'a'
 
 g.nvim_tree_side = 'right'
+
+-- related to the nvim-ufo plugin
+vim.wo.foldcolumn = '1'
+vim.wo.foldlevel = 99
+vim.wo.foldenable = true
