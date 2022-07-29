@@ -59,6 +59,7 @@
 
 [diff]
 	tool = bc3
+	# optionally, set `external = difft`
 [difftool]
 	prompt = false
 
@@ -113,4 +114,5 @@
 	lineNumber = true
 
 [credential]
-	helper = osxkeychain    # manager on Windows
+	# helper should be manager-core on Windows
+	helper = /usr/local/share/gcm-core/git-credential-manager-core
