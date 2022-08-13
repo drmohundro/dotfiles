@@ -7,10 +7,6 @@ if not g.vscode then
   require('plugins')
 end
 
--- opt in for lua filetype detection
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
-
 require('options')
 require('mappings')
 

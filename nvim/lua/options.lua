@@ -5,6 +5,10 @@ local opt = vim.opt -- to set options
 
 g.mapleader = ','
 
+-- opt in for lua filetype detection
+g.do_filetype_lua = 1
+g.did_load_filetypes = 0
+
 opt.clipboard = 'unnamed'
 opt.hidden = true
 opt.ignorecase = true
