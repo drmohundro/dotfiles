@@ -13,12 +13,12 @@ if test -e /opt/homebrew/bin
   set -gx PATH $BREW_PREFIX/bin $PATH
 end
 
-if test -e ~/dev/flutter
-  set -gx PATH $PATH ~/dev/flutter/bin
-end
-
 if test -e ~/.dotnet/tools
   set -gx PATH $PATH ~/.dotnet/tools
+end
+
+if test -e /usr/local/share/dotnet
+  set -gx PATH $PATH /usr/local/share/dotnet
 end
 
 # use gnu versions of coreutils/findutils

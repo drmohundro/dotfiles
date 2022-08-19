@@ -3,3 +3,9 @@ enable_poshtransientprompt
 
 alias ls="exa --icons --group-directories-first"
 alias tree="exa --long --header --git --icons --tree --level=4 -a -I=.git --git-ignore"
+
+if [ -d /opt/homebrew/bin ]; then
+  PATH=/opt/homebrew/bin:$PATH
+elif [ -d /usr/local/bin ]; then
+  PATH=/usr/local/bin:$PATH
+fi
