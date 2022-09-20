@@ -238,6 +238,9 @@ return require('packer').startup(function()
     end,
   })
 
+  -- diff support
+  use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
+
   -- logging
   use('tjdevries/vlog.nvim')
 
