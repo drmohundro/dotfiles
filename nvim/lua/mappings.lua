@@ -75,7 +75,7 @@ else
   local wk = require('which-key')
 
   wk.register({
-    f = { '<cmd>Telescope live_grep<cr>', 'Live ripgrep search' },
+    f = { '<cmd>Telescope live_grep_args<cr>', 'Live ripgrep search' },
     r = { '<cmd>Telescope oldfiles<cr>', 'Find recently opened files' },
 
     d = { '<cmd>Neotree reveal right toggle<cr>', 'Toggle directory tree' },

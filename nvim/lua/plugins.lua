@@ -195,8 +195,15 @@ return require('packer').startup(function()
   -- find files, buffers, etc.
   use({
     'nvim-telescope/telescope.nvim',
-    requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
+    requires = {
+      { 'nvim-lua/popup.nvim' },
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-telescope/telescope-live-grep-args.nvim' },
+    },
     module_patterns = 'telescope*',
+    config = function()
+      require('telescope').load_extension('live_grep_args')
+    end,
   })
 
   -- use fzf-native matcher instead
