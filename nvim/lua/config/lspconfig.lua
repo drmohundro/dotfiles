@@ -28,14 +28,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  if client.server_capabilities.documentFormattingProvider then
+    vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
+  elseif client.server_capabilities.documentRangeFormattingProvider then
     vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
   end
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     local lspDocumentHighlight = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
     vim.api.nvim_create_autocmd('CursorHold', {
       command = 'lua vim.lsp.buf.document_highlight()',
@@ -52,8 +52,8 @@ end
 -- this is to avoid LSP formatting conflicts with null-ls... see https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
 local function nullls_on_attach(client, bufnr, lang)
   if lang == 'eslint' or lang == 'tsserver' or lang == 'stylelint_lsp' or lang == 'sumneko_lua' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
   return on_attach(client, bufnr)
