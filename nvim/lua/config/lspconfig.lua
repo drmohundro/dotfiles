@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
     vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
   elseif client.server_capabilities.documentRangeFormattingProvider then
-    vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+    vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
   end
 
   -- Set autocommands conditional on server_capabilities

@@ -124,7 +124,7 @@ else
         '<cmd>Telescope lsp_workspace_diagnostics<cr>',
         'Workspace Diagnostics',
       },
-      f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
+      f = { '<cmd>lua vim.lsp.buf.format()<cr>', 'Format' },
       i = { '<cmd>LspInfo<cr>', 'Info' },
       I = { '<cmd>Mason<cr>', 'Mason LSP Info' },
       j = {

@@ -10,7 +10,7 @@
   "dictionaryDefinitions": [
     {
       "name": "cspell-dict",
-      "path": "cspell-dict.txt",
+      "path": ".cspell-dict.txt",
       "addWords": true
     }
   ]
