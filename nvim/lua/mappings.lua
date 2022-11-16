@@ -1,6 +1,8 @@
 local g = vim.g -- a table to access global variables
 local Terminal = require('toggleterm.terminal').Terminal
 
+local M = {}
+
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
   if opts then
@@ -9,13 +11,41 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+M.set_lsp_keymaps = function(bufnr)
+  local fmt = function(cmd)
+    return function(str)
+      return cmd:format(str)
+    end
+  end
+
+  local lsp_map = function(m, lhs, rhs)
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(bufnr, m, lhs, rhs, opts)
+  end
+
+  local lsp = fmt('<cmd>lua vim.lsp.%s<cr>')
+  local diagnostic = fmt('<cmd>lua vim.diagnostic.%s<cr>')
+
+  lsp_map('n', 'gd', lsp('buf.definition()'))
+  lsp_map('n', 'gD', lsp('buf.declaration()'))
+  lsp_map('n', 'gi', lsp('buf.implementation()'))
+  lsp_map('n', 'go', lsp('buf.type_definition()'))
+  lsp_map('n', 'gr', lsp('buf.references()'))
+  lsp_map('n', '<F2>', lsp('buf.rename()'))
+  lsp_map('n', '<F4>', lsp('buf.code_action()'))
+  lsp_map('x', '<F4>', lsp('buf.range_code_action()'))
+  lsp_map('n', '<C-k>', lsp('buf.signature_help()'))
+  lsp_map('n', 'gl', diagnostic('open_float()'))
+  lsp_map('n', '[d', diagnostic('goto_prev()'))
+  lsp_map('n', ']d', diagnostic('goto_next()'))
+end
+
 function _G.set_terminal_keymaps()
-  local opts = { noremap = true }
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
-  vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-  vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-  vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+  map('t', '<esc>', [[<C-\><C-n>]])
+  map('t', '<C-h>', [[<C-\><C-n><C-W>h]])
+  map('t', '<C-j>', [[<C-\><C-n><C-W>j]])
+  map('t', '<C-k>', [[<C-\><C-n><C-W>k]])
+  map('t', '<C-l>', [[<C-\><C-n><C-W>l]])
 end
 
 local lazygit = Terminal:new({
@@ -165,3 +195,5 @@ else
     prefix = '<leader>',
   })
 end
+
+return M

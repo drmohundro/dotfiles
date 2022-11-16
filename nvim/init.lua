@@ -8,7 +8,6 @@ if not g.vscode then
 end
 
 require('options')
-require('mappings')
 
 if not g.vscode then
   require('mason').setup({
@@ -20,12 +19,48 @@ if not g.vscode then
     },
   })
 
-  require('config.treesitter')
   require('config.lualine')
-  require('config.lspconfig')
+
+  local lsp_mapping = require('mappings')
+
+  local lsp = require('lsp-zero')
+  lsp.set_preferences({
+    suggest_lsp_servers = true,
+    setup_servers_on_start = true,
+    set_lsp_keymaps = false,
+    configure_diagnostics = true,
+    cmp_capabilities = true,
+    manage_nvim_cmp = true,
+    call_servers = 'local',
+    sign_icons = {
+      error = '✘',
+      warn = '▲',
+      hint = '⚑',
+      info = '',
+    },
+  })
+
+  lsp.on_attach(function(_, bufnr)
+    lsp_mapping.set_lsp_keymaps(bufnr)
+  end)
+
+  lsp.configure('sumneko_lua', {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim', 'use' },
+        },
+      },
+    },
+  })
+
+  lsp.setup()
+
   require('config.cmp')
   require('config.telescope')
 end
+
+require('mappings')
 
 local yankGrp = api.nvim_create_augroup('HighlightYank', { clear = true })
 api.nvim_create_autocmd('TextYankPost', {

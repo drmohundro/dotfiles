@@ -5,7 +5,7 @@ local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap =
     fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-  vim.cmd([[packadd packer.nvim]])
+  cmd([[packadd packer.nvim]])
 end
 
 return require('packer').startup(function()
@@ -15,14 +15,27 @@ return require('packer').startup(function()
   -- improve the default vim.ui interfaces
   use('stevearc/dressing.nvim')
 
-  -- treesitter (LSP)
-  use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
-  use('nvim-treesitter/playground')
+  use({
+    'VonHeikemen/lsp-zero.nvim',
+    requires = {
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
-  -- LSP config
-  use({ 'neovim/nvim-lspconfig' })
-  use({ 'williamboman/mason.nvim' })
-  use({ 'williamboman/mason-lspconfig.nvim' })
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
+
+      -- Snippets
+      { 'L3MON4D3/LuaSnip' },
+      { 'rafamadriz/friendly-snippets' },
+    },
+  })
 
   -- faster than built-in filetype.vim (might go to core at some point)
   use('nathom/filetype.nvim')
@@ -37,35 +50,7 @@ return require('packer').startup(function()
     end,
   })
 
-  -- completion and snippets
-  use({
-    'rafamadriz/friendly-snippets',
-    event = 'InsertEnter',
-  })
-
-  use('hrsh7th/nvim-cmp')
   use('hrsh7th/cmp-nvim-lsp-signature-help')
-
-  use({
-    'L3MON4D3/LuaSnip',
-    wants = 'friendly-snippets',
-  })
-
-  use({
-    'saadparwaiz1/cmp_luasnip',
-  })
-
-  use({
-    'hrsh7th/cmp-nvim-lua',
-  })
-
-  use({
-    'hrsh7th/cmp-nvim-lsp',
-  })
-
-  use({
-    'hrsh7th/cmp-buffer',
-  })
 
   use({
     'folke/trouble.nvim',
@@ -301,9 +286,6 @@ return require('packer').startup(function()
 
   -- search for visually selected text
   use('bronson/vim-visual-star-search')
-
-  -- rainbow parens
-  use('p00f/nvim-ts-rainbow')
 
   use_rocks('luacheck')
 
