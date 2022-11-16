@@ -8,6 +8,14 @@ set expandtab           " use spaces instead of tabs
 
 set ideamarks
 
+" enable emulated extensions
+set sneak               " enable ideavim-sneak
+set which-key           " enable which-key plugin
+set NERDTree
+set surround
+set commentary
+set highlightedyank
+
 " hide search highlighting with <esc>
 nnoremap <esc> :nohlsearch<cr><esc>
 
