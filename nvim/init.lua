@@ -68,6 +68,10 @@ api.nvim_create_autocmd('TextYankPost', {
   group = yankGrp,
 })
 
+if vim.fn.exists('neovide') then
+  vim.cmd([[set guifont=JetBrains\ Mono:h16]])
+end
+
 if not g.vscode then
   opt.termguicolors = true
 
