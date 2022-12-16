@@ -70,9 +70,9 @@ end
 
 # source versioning
 if begin; type -q brew; and test -d /usr/local/opt/asdf/; end
-  source /usr/local/opt/asdf/asdf.fish
+  source /usr/local/opt/asdf/libexec/asdf.fish
 else if begin; type -q brew; and test -d /opt/homebrew/opt/asdf/; end
-  source /opt/homebrew/opt/asdf/asdf.fish
+  source /opt/homebrew/opt/asdf/libexec/asdf.fish
 else if test -e ~/.asdf
   source ~/.asdf/asdf.fish
 end
