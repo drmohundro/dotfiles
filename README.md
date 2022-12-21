@@ -24,6 +24,13 @@ pwsh check.ps1 -whatIf
 For platform-specific config, you can use the `overrides.json` file. See the
 included version for details.
 
+## NeoVim Specifics
+
+Recommended to also have:
+
+- luarocks
+- luacheck
+
 ## Need help?
 
 Open an issue or visit my [website](https://mohundro.com/) and shoot me a line.
