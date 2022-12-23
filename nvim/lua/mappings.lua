@@ -1,5 +1,4 @@
 local g = vim.g -- a table to access global variables
-local Terminal = require('toggleterm.terminal').Terminal
 
 local M = {}
 
@@ -48,21 +47,25 @@ function _G.set_terminal_keymaps()
   map('t', '<C-l>', [[<C-\><C-n><C-W>l]])
 end
 
-local lazygit = Terminal:new({
-  cmd = 'lazygit',
-  dir = 'git_dir',
-  direction = 'float',
-  float_opts = {
-    border = 'double',
-  },
-  on_open = function(term)
-    vim.cmd('startinsert!')
-    vim.keymap.set('n', 'q', '<cmd>close<CR>', { noremap = true, silent = true, buffer = term.bufnr })
-  end,
-})
+if not g.vscode then
+  local Terminal = require('toggleterm.terminal').Terminal
 
-function _G.lazygit_toggle()
-  lazygit:toggle()
+  local lazygit = Terminal:new({
+    cmd = 'lazygit',
+    dir = 'git_dir',
+    direction = 'float',
+    float_opts = {
+      border = 'double',
+    },
+    on_open = function(term)
+      vim.cmd('startinsert!')
+      vim.keymap.set('n', 'q', '<cmd>close<CR>', { noremap = true, silent = true, buffer = term.bufnr })
+    end,
+  })
+
+  function _G.lazygit_toggle()
+    lazygit:toggle()
+  end
 end
 
 -- toggle showing whitespace
