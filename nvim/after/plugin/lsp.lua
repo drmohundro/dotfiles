@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local lsp = require('lsp-zero')
 
 -- NOTE: I'm not using recommended because it brings in some keybindings I don't want...
