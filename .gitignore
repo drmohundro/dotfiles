@@ -7,12 +7,7 @@ emacs.d/*
 !emacs.d/Cask
 !emacs.d/lisp
 
-config/*
-!config/fish
-config/fish/fish_history
-config/fish/fishd.*
-
 vim/spell
-nvim/plugin/packer_compiled.lua
+vim/undodir
 
 .DS_Store

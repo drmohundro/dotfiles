@@ -1,6 +1,3 @@
-local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn
-
 -- bootstrap plugins
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -18,6 +15,10 @@ vim.opt.runtimepath:prepend(lazypath)
 require('lazy').setup({
   -- improve the default vim.ui interfaces
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
+
+  -- treesitter
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  'nvim-treesitter/playground',
 
   {
     'VonHeikemen/lsp-zero.nvim',
@@ -40,9 +41,6 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-
-  -- faster than built-in filetype.vim (might go to core at some point)
-  'nathom/filetype.nvim',
 
   -- buffer/tab line
   {
@@ -69,8 +67,10 @@ require('lazy').setup({
     end,
   },
 
+  -- undo tree
+  'mbbill/undotree',
+
   -- footer support
-  -- NOTE: using fork for now - original is hoob3rt/lualine.nvim
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true },
@@ -87,7 +87,12 @@ require('lazy').setup({
   },
 
   -- pane showing symbols
-  'simrat39/symbols-outline.nvim',
+  {
+    'simrat39/symbols-outline.nvim',
+    config = function()
+      require('symbols-outline').setup()
+    end,
+  },
 
   -- scrollbar in terminal
   'dstein64/nvim-scrollview',
@@ -106,34 +111,6 @@ require('lazy').setup({
   {
     'akinsho/toggleterm.nvim',
     branch = 'main',
-    config = function()
-      require('toggleterm').setup({
-        -- size can be a number or function which is passed the current terminal
-        size = 20,
-        -- open_mapping = [[<c-\>]],
-        open_mapping = [[<c-t>]],
-        hide_numbers = true, -- hide the number column in toggleterm buffers
-        start_in_insert = true,
-        insert_mappings = true, -- whether or not the open mapping applies in insert mode
-        persist_size = false,
-        direction = 'horizontal',
-        close_on_exit = true, -- close the terminal window when the process exits
-        shell = 'fish', -- change the default shell
-        -- This field is only relevant if direction is set to 'float'
-        float_opts = {
-          -- The border key is *almost* the same as 'nvim_open_win'
-          -- see :h nvim_open_win for details on borders however
-          -- the 'curved' border is a custom border type
-          -- not natively supported but implemented in this plugin.
-          border = 'curved',
-          winblend = 3,
-          highlights = {
-            border = 'Normal',
-            background = 'Normal',
-          },
-        },
-      })
-    end,
   },
 
   -- which key plugin
@@ -209,6 +186,9 @@ require('lazy').setup({
       require('Comment').setup()
     end,
   },
+
+  -- zen/focus mode
+  'folke/zen-mode.nvim',
 
   -- notifications
   {

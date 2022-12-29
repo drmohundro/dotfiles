@@ -10,64 +10,6 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
-M.set_lsp_keymaps = function(bufnr)
-  local fmt = function(cmd)
-    return function(str)
-      return cmd:format(str)
-    end
-  end
-
-  local lsp_map = function(m, lhs, rhs)
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, m, lhs, rhs, opts)
-  end
-
-  local lsp = fmt('<cmd>lua vim.lsp.%s<cr>')
-  local diagnostic = fmt('<cmd>lua vim.diagnostic.%s<cr>')
-
-  lsp_map('n', 'gd', lsp('buf.definition()'))
-  lsp_map('n', 'gD', lsp('buf.declaration()'))
-  lsp_map('n', 'gi', lsp('buf.implementation()'))
-  lsp_map('n', 'go', lsp('buf.type_definition()'))
-  lsp_map('n', 'gr', lsp('buf.references()'))
-  lsp_map('n', '<F2>', lsp('buf.rename()'))
-  lsp_map('n', '<F4>', lsp('buf.code_action()'))
-  lsp_map('x', '<F4>', lsp('buf.range_code_action()'))
-  lsp_map('n', '<C-k>', lsp('buf.signature_help()'))
-  lsp_map('n', 'gl', diagnostic('open_float()'))
-  lsp_map('n', '[d', diagnostic('goto_prev()'))
-  lsp_map('n', ']d', diagnostic('goto_next()'))
-end
-
-function _G.set_terminal_keymaps()
-  map('t', '<esc>', [[<C-\><C-n>]])
-  map('t', '<C-h>', [[<C-\><C-n><C-W>h]])
-  map('t', '<C-j>', [[<C-\><C-n><C-W>j]])
-  map('t', '<C-k>', [[<C-\><C-n><C-W>k]])
-  map('t', '<C-l>', [[<C-\><C-n><C-W>l]])
-end
-
-if not g.vscode then
-  local Terminal = require('toggleterm.terminal').Terminal
-
-  local lazygit = Terminal:new({
-    cmd = 'lazygit',
-    dir = 'git_dir',
-    direction = 'float',
-    float_opts = {
-      border = 'double',
-    },
-    on_open = function(term)
-      vim.cmd('startinsert!')
-      vim.keymap.set('n', 'q', '<cmd>close<CR>', { noremap = true, silent = true, buffer = term.bufnr })
-    end,
-  })
-
-  function _G.lazygit_toggle()
-    lazygit:toggle()
-  end
-end
-
 -- toggle showing whitespace
 map('n', '<leader>s', ':set nolist!<cr>', { silent = true })
 
@@ -87,6 +29,13 @@ map('', 'L', '$')
 
 -- clear search highlighting
 map('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true })
+
+-- move selection up or down in visual mode
+map('v', 'J', ":m '>+1<CR>gv=gv")
+map('v', 'K', ":m '<-2<CR>gv=gv")
+
+map('n', '<C-k>', '<cmd>cnext<CR>zz')
+map('n', '<C-j>', '<cmd>cprev<CR>zz')
 
 if g.vscode then
   -- HACK: get around weird issues with o|O keys in VSCode Neovim... see https://github.com/asvetliakov/vscode-neovim/issues/485#issuecomment-792292205
