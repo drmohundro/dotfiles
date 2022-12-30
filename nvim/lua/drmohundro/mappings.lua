@@ -46,8 +46,10 @@ else
     { silent = true }
   )
 
-  vim.keymap.set('', '<c-l>', ':Telescope buffers<cr>')
-  vim.keymap.set('', '<c-p>', ':Telescope find_files<cr>')
+  local builtin = require('telescope.builtin')
+
+  vim.keymap.set('', '<c-l>', builtin.buffers, {})
+  vim.keymap.set('', '<c-p>', builtin.find_files, {})
 
   vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>')
   vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>')
@@ -56,79 +58,5 @@ else
 
   vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
-  local wk = require('which-key')
-
-  wk.register({
-    f = { '<cmd>Telescope live_grep_args<cr>', 'Live ripgrep search' },
-    r = { '<cmd>Telescope oldfiles<cr>', 'Find recently opened files' },
-
-    d = { '<cmd>Neotree reveal right toggle<cr>', 'Toggle directory tree' },
-
-    -- Git
-    g = {
-      name = 'Git',
-      l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", 'Blame' },
-      o = { '<cmd>Telescope git_status<cr>', 'Open changed file' },
-      b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
-      c = { '<cmd>Telescope git_commits<cr>', 'Checkout commit' },
-      C = {
-        '<cmd>Telescope git_bcommits<cr>',
-        'Checkout commit(for current file)',
-      },
-      d = {
-        '<cmd>Gitsigns diffthis HEAD<cr>',
-        'Git Diff',
-      },
-      t = {
-        '<cmd>lua lazygit_toggle()<cr>',
-        'Toggle lazygit',
-      },
-    },
-
-    -- LSP
-    l = {
-      name = 'LSP',
-      a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code Action' },
-      d = {
-        '<cmd>Telescope diagnostics bufnr=0<cr>',
-        'Document Diagnostics',
-      },
-      w = {
-        '<cmd>Telescope diagnostics<cr>',
-        'Workspace Diagnostics',
-      },
-      f = { '<cmd>lua vim.lsp.buf.format()<cr>', 'Format' },
-      i = { '<cmd>LspInfo<cr>', 'Info' },
-      I = { '<cmd>Mason<cr>', 'Mason LSP Info' },
-      j = {
-        '<cmd>lua vim.diagnostic.goto_next()<cr>',
-        'Next Diagnostic',
-      },
-      k = {
-        '<cmd>lua vim.diagnostic.goto_prev()<cr>',
-        'Prev Diagnostic',
-      },
-      l = { '<cmd>lua vim.lsp.codelens.run()<cr>', 'CodeLens Action' },
-      q = { '<cmd>lua vim.diagnostic.setloclist()<cr>', 'Quickfix' },
-      r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
-      s = { '<cmd>Telescope lsp_document_symbols<cr>', 'Document Symbols' },
-      S = {
-        '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>',
-        'Workspace Symbols',
-      },
-    },
-
-    -- Trouble toggling
-    t = {
-      name = 'Diagnostics',
-      t = { '<cmd>TroubleToggle<cr>', 'trouble' },
-      w = { '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>', 'workspace' },
-      d = { '<cmd>TroubleToggle lsp_document_diagnostics<cr>', 'document' },
-      q = { '<cmd>TroubleToggle quickfix<cr>', 'quickfix' },
-      l = { '<cmd>TroubleToggle loclist<cr>', 'loclist' },
-      r = { '<cmd>TroubleToggle lsp_references<cr>', 'references' },
-    },
-  }, {
-    prefix = '<leader>',
-  })
+  -- NOTE: see also which-maps.lua
 end
