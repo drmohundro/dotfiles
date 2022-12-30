@@ -1,56 +1,58 @@
-local g = vim.g -- a table to access global variables
-
-local M = {}
-
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.keymap.set(mode, lhs, rhs, options)
-end
-
 -- toggle showing whitespace
-map('n', '<leader>s', ':set nolist!<cr>', { silent = true })
+vim.keymap.set('n', '<leader>s', ':set nolist!<cr>', { silent = true })
 
-map('n', 'J', '<c-d>')
-map('x', 'J', '<c-d>')
-map('n', 'K', '<c-u>')
-map('x', 'K', '<c-u>')
+-- use J/K to go half page up/down
+vim.keymap.set('n', 'J', '<C-d>zz')
+vim.keymap.set('x', 'J', '<C-d>zz')
+vim.keymap.set('n', 'K', '<C-u>zz')
+vim.keymap.set('x', 'K', '<C-u>zz')
+
+-- the `zz` is to center results
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+-- keep search results centered
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- up/down work as expected with word wrapping on
-map('n', 'j', 'gj')
-map('n', 'k', 'gk')
-map('n', 'gj', 'j')
-map('n', 'gj', 'j')
-
-map('', 'H', '^')
-map('', 'L', '$')
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('n', 'gj', 'j')
+vim.keymap.set('n', 'gj', 'j')
 
 -- clear search highlighting
-map('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true })
+vim.keymap.set('n', '<esc>', ':nohlsearch<cr><esc>', { silent = true })
 
 -- move selection up or down in visual mode
-map('v', 'J', ":m '>+1<CR>gv=gv")
-map('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv")
 
-map('n', '<C-k>', '<cmd>cnext<CR>zz')
-map('n', '<C-j>', '<cmd>cprev<CR>zz')
+-- quickfix and location list navigation
+vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
+vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
-if g.vscode then
+if vim.g.vscode then
   -- HACK: get around weird issues with o|O keys in VSCode Neovim... see https://github.com/asvetliakov/vscode-neovim/issues/485#issuecomment-792292205
-  map('n', 'o', "<cmd>call VSCodeNotify('editor.action.insertLineAfter')<cr>i", { silent = true })
-  map('n', 'O', "<cmd>call VSCodeNotify('editor.action.insertLineBefore')<cr>i", { silent = true })
+  vim.keymap.set('n', 'o', "<cmd>call VSCodeNotify('editor.action.insertLineAfter')<cr>i", { silent = true })
+  vim.keymap.set('n', 'O', "<cmd>call VSCodeNotify('editor.action.insertLineBefore')<cr>i", { silent = true })
 else
-  map('', '\\\\', '<esc><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', { silent = true })
+  vim.keymap.set(
+    '',
+    '\\\\',
+    '<esc><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>',
+    { silent = true }
+  )
 
-  map('', '<c-l>', ':Telescope buffers<cr>')
-  map('', '<c-p>', ':Telescope find_files<cr>')
+  vim.keymap.set('', '<c-l>', ':Telescope buffers<cr>')
+  vim.keymap.set('', '<c-p>', ':Telescope find_files<cr>')
 
-  map('n', '<S-l>', ':BufferLineCycleNext<CR>')
-  map('n', '<S-h>', ':BufferLineCyclePrev<CR>')
+  vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>')
+  vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>')
 
-  map('', '<F4>', ':SymbolsOutline<CR>')
+  vim.keymap.set('', '<F4>', ':SymbolsOutline<CR>')
 
   vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
@@ -136,5 +138,3 @@ else
     prefix = '<leader>',
   })
 end
-
-return M
