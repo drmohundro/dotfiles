@@ -259,6 +259,7 @@ require('lazy').setup({
           formatting.stylelint,
           formatting.stylua,
           formatting.terraform_fmt,
+          formatting.black,
 
           diagnostics.cspell,
           diagnostics.eslint,
