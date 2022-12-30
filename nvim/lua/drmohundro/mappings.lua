@@ -42,7 +42,7 @@ else
   vim.keymap.set(
     '',
     '\\\\',
-    '<esc><CMD>lua require("Comment.api").locked("comment.linewise")(vim.fn.visualmode())<CR>',
+    '<esc><CMD>lua require("Comment.api").locked("toggle.linewise")(vim.fn.visualmode())<CR>',
     { silent = true }
   )
 
