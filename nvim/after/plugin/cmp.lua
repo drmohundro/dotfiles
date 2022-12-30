@@ -40,7 +40,7 @@ cmp.setup({
       else
         fallback()
       end
-    end, { 'i', 's', 'c' }),
+    end, { 'i', 's' }),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -55,6 +55,7 @@ cmp.setup({
     -- For ultisnips user.
     -- { name = 'ultisnips' },
 
+    { name = 'path' },
     { name = 'buffer' },
     { name = 'nvim_lua' },
   },

@@ -58,13 +58,14 @@
 	autosetuprebase = always
 
 [diff]
-	tool = bc3
+	tool = bc
 	# optionally, set `external = difft`
+	external = difft
 [difftool]
 	prompt = false
 
 [merge]
-	tool = bc3
+	tool = bc
 [mergetool]
 	prompt = false
 
@@ -114,5 +115,5 @@
 	lineNumber = true
 
 [credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
 	# helper should be manager-core on Windows
-	helper = /usr/local/share/gcm-core/git-credential-manager-core
