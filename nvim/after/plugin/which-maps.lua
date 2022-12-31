@@ -69,14 +69,15 @@ wk.register({
       '<cmd>Telescope diagnostics bufnr=0<CR>',
       'Document Diagnostics',
     },
-    w = {
-      builtin.diagnostics,
-      'Workspace Diagnostics',
-    },
+    n = { '<cmd>Telescope notify<CR>', 'Notifications' },
     s = { builtin.lsp_document_symbols, 'Document Symbols' },
     S = {
       builtin.lsp_dynamic_workspace_symbols,
       'Workspace Symbols',
+    },
+    w = {
+      builtin.diagnostics,
+      'Workspace Diagnostics',
     },
   },
 
