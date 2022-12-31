@@ -11,5 +11,10 @@ require('lualine').setup({
   },
   extensions = {
     'nvim-tree',
+    'fugitive',
+    'man',
+    'quickfix',
+    'symbols-outline',
+    'toggleterm',
   },
 })

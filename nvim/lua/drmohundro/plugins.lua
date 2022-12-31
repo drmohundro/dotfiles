@@ -20,6 +20,7 @@ require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   'nvim-treesitter/playground',
 
+  -- lsp
   {
     'VonHeikemen/lsp-zero.nvim',
     dependencies = {
@@ -41,6 +42,7 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
+  'nvim-lua/lsp-status.nvim',
 
   -- buffer/tab line
   {

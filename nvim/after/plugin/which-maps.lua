@@ -1,5 +1,13 @@
 local wk = require('which-key')
 
+wk.setup({
+  plugins = {
+    spelling = {
+      enabled = true,
+    },
+  },
+})
+
 local builtin = require('telescope.builtin')
 
 wk.register({
