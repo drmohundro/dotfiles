@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 require('lualine').setup({
   options = {
     icons_enabled = true,
@@ -7,5 +11,10 @@ require('lualine').setup({
   },
   extensions = {
     'nvim-tree',
+    'fugitive',
+    'man',
+    'quickfix',
+    'symbols-outline',
+    'toggleterm',
   },
 })

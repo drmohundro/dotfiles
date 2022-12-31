@@ -1,20 +1,31 @@
-local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
-local g = vim.g -- a table to access global variables
 local opt = vim.opt -- to set options
 
-g.mapleader = ','
+vim.g.mapleader = ','
 
--- opt in for lua filetype detection
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
+opt.number = true
+opt.relativenumber = true
+
+opt.smartindent = true
+opt.swapfile = false
+opt.backup = false
+opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
+opt.undofile = true
+
+opt.termguicolors = true
+
+opt.scrolloff = 8
+opt.signcolumn = 'yes'
+opt.isfname:append('@-@')
 
 opt.clipboard = 'unnamed'
 opt.hidden = true
 opt.ignorecase = true
-opt.number = true
 opt.smartcase = true
 opt.wildmode = 'longest,list'
+
+opt.updatetime = 750
+
+opt.colorcolumn = '80'
 
 opt.tabstop = 2
 opt.shiftwidth = 2
@@ -34,7 +45,7 @@ opt.completeopt = 'menuone,noselect'
 
 opt.mouse = 'a'
 
-g.nvim_tree_side = 'right'
+vim.g.nvim_tree_side = 'right'
 
 -- related to the nvim-ufo plugin
 vim.wo.foldcolumn = '1'
