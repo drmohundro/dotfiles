@@ -58,11 +58,15 @@
 	autosetuprebase = always
 
 [diff]
-	tool = bc
-	# optionally, set `external = difft`
-	external = difft
+	# tool = bc
+	tool = difftastic
 [difftool]
 	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+	difftool = true
 
 [merge]
 	tool = bc
@@ -76,16 +80,11 @@
 	st = status
 	ci = commit
 	co = checkout
-	br = branch
 	recent = branch --sort=-committerdate
 	current = rev-parse --abbrev-ref HEAD
-	df = diff --word-diff
-	dc = diff --cached --word-diff
-	r = reset
-	rh = reset --hard
-	vdf = difftool --dir-diff
-	vdfc = difftool --dir-diff --cached
-	untrack = rm --cached
+	df = difftool
+	vdf = difftool --tool=bc --dir-diff
+	vdfc = difftool --tool=bc --dir-diff --cached
 
 	# Show files ignored by git:
 	ign = ls-files -o -i --exclude-standard
