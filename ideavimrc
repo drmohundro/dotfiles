@@ -1,12 +1,17 @@
-set clipboard=unnamed,ideaput   " defaults to system clipboard
-set hlsearch               " highlight search results
-set ignorecase             " ignore case when searching
-set number                 " show line numbers
-set smartcase              " override ignore case if searching for mixed case
+set number
+set relativenumber
 
-set expandtab           " use spaces instead of tabs
+set scrolloff=8
+
+set clipboard=unnamed,ideaput
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
 
 set ideamarks
+
+let mapleader=','
 
 " enable emulated extensions
 set sneak               " enable ideavim-sneak
@@ -19,10 +24,13 @@ set highlightedyank
 " hide search highlighting with <esc>
 nnoremap <esc> :nohlsearch<cr><esc>
 
-nnoremap J <c-d>
-vnoremap J <c-d>
-nnoremap K <c-u>
-vnoremap K <c-u>
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+nnoremap J <C-d>zz
+vnoremap J <C-d>zz
+nnoremap K <C-u>zz
+vnoremap K <C-u>zz
 
 " up/down work as expected with word wrapping on
 nnoremap k gk
@@ -34,7 +42,22 @@ nnoremap gj j
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
+nnoremap <S-l> :action NextTab<CR>
+nnoremap <S-h> :action PreviousTab<CR>
+
+nnoremap <leader>r :action RecentFiles<CR>
+
+" NOTE: I could also use SelectInProjectView here... not sure if significant difference
+nnoremap <leader>d :action NERDTreeFind<CR>
+
+nnoremap [d :action GotoNextError<CR>
+nnoremap ]d :action GotoPreviousError<CR>
+
+nnoremap gd :action GotoDeclaration<CR>
+
 " NOTE: I mapped this one directly in Rider so that it works in the Solution
 " Explorer, too
 " map <C-A-i> <Action>(NewElementSamePlace)
 map <A-i> <Action>(NewElement)
+
+nmap <silent> <leader>s <Action>(EditorToggleShowWhitespaces)
