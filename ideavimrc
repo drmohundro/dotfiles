@@ -47,8 +47,7 @@ nnoremap <S-h> :action PreviousTab<CR>
 
 nnoremap <leader>r :action RecentFiles<CR>
 
-" NOTE: I could also use SelectInProjectView here... not sure if significant difference
-nnoremap <leader>d :action NERDTreeFind<CR>
+nnoremap <leader>d :action SelectInProjectView<CR>
 
 nnoremap [d :action GotoNextError<CR>
 nnoremap ]d :action GotoPreviousError<CR>

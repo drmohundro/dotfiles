@@ -82,6 +82,7 @@
 	co = checkout
 	recent = branch --sort=-committerdate
 	current = rev-parse --abbrev-ref HEAD
+	dc = difftool --cached
 	df = difftool
 	vdf = difftool --tool=bc --dir-diff
 	vdfc = difftool --tool=bc --dir-diff --cached
