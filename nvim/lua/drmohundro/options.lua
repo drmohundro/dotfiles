@@ -8,7 +8,7 @@ opt.relativenumber = true
 opt.smartindent = true
 opt.swapfile = false
 opt.backup = false
-opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
+opt.undodir = (os.getenv('HOME') or os.getenv('HOMEPATH')) .. '/.vim/undodir'
 opt.undofile = true
 
 opt.termguicolors = true
