@@ -118,6 +118,9 @@ require('lazy').setup({
   -- which key plugin
   'folke/which-key.nvim',
 
+  -- more keybinding fun
+  'mrjones2014/legendary.nvim',
+
   -- like nerd tree
   {
     'nvim-neo-tree/neo-tree.nvim',

@@ -2,6 +2,8 @@ if vim.g.vscode then
   return
 end
 
+require('legendary').setup({ which_key = { auto_register = true } })
+
 local wk = require('which-key')
 
 wk.setup({
@@ -42,6 +44,9 @@ wk.register({
       'Checkout commit(for current file)',
     },
   },
+
+  -- Key related
+  k = { '<cmd>Legendary<CR>', 'Show all commands' },
 
   -- LSP
   a = {
