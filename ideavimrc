@@ -54,6 +54,20 @@ nnoremap ]d :action GotoPreviousError<CR>
 
 nnoremap gd :action GotoDeclaration<CR>
 
+nnoremap <leader>ve :e ~/.ideavimrc<CR>
+nnoremap <leader>vr :action IdeaVim.ReloadVimRc.reload<CR>
+
+" see also ToggleZenMode (goes FULL screen then, though...)
+nnoremap <leader>zz :action ToggleDistractionFreeMode<CR>
+
+nnoremap <C-t> :action ActivateTerminalToolWindow<CR>
+
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+
+nnoremap <leader>zc :action CollapseAllRegions<CR>
+nnoremap <leader>zo :action ExpandAllRegions<CR>
+
 " NOTE: I mapped this one directly in Rider so that it works in the Solution
 " Explorer, too
 " map <C-A-i> <Action>(NewElementSamePlace)

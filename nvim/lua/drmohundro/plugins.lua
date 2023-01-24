@@ -18,11 +18,12 @@ require('lazy').setup({
 
   -- treesitter
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-  'nvim-treesitter/playground',
+  { 'nvim-treesitter/playground', event = 'VeryLazy' },
 
   -- lsp
   {
     'VonHeikemen/lsp-zero.nvim',
+    branch = 'v1.x',
     dependencies = {
       -- LSP Support
       'neovim/nvim-lspconfig',
@@ -54,7 +55,7 @@ require('lazy').setup({
     end,
   },
 
-  'hrsh7th/cmp-nvim-lsp-signature-help',
+  { 'hrsh7th/cmp-nvim-lsp-signature-help', event = 'VeryLazy' },
 
   {
     'folke/trouble.nvim',
@@ -91,6 +92,7 @@ require('lazy').setup({
   -- pane showing symbols
   {
     'simrat39/symbols-outline.nvim',
+    event = 'VeryLazy',
     config = function()
       require('symbols-outline').setup()
     end,
@@ -112,14 +114,15 @@ require('lazy').setup({
   -- toggle terminal
   {
     'akinsho/toggleterm.nvim',
+    event = 'VeryLazy',
     branch = 'main',
   },
 
   -- which key plugin
-  'folke/which-key.nvim',
+  { 'folke/which-key.nvim', event = 'VeryLazy' },
 
   -- more keybinding fun
-  'mrjones2014/legendary.nvim',
+  { 'mrjones2014/legendary.nvim', event = 'VeryLazy' },
 
   -- like nerd tree
   {
@@ -129,13 +132,14 @@ require('lazy').setup({
       'kyazdani42/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
     },
+    event = 'VeryLazy',
     config = function()
       require('neo-tree').setup({})
     end,
   },
 
   -- close buffers without messing up window layout
-  'moll/vim-bbye',
+  { 'moll/vim-bbye', event = 'VeryLazy' },
 
   'editorconfig/editorconfig-vim',
 
@@ -145,6 +149,7 @@ require('lazy').setup({
   -- autopairs
   {
     'windwp/nvim-autopairs',
+    event = 'VeryLazy',
     config = function()
       require('nvim-autopairs').setup()
     end,
@@ -193,7 +198,7 @@ require('lazy').setup({
   },
 
   -- zen/focus mode
-  'folke/zen-mode.nvim',
+  { 'folke/zen-mode.nvim', event = 'VeryLazy' },
 
   -- notifications
   {
@@ -205,7 +210,7 @@ require('lazy').setup({
   },
 
   -- git support
-  'tpope/vim-fugitive',
+  { 'tpope/vim-fugitive', event = 'VeryLazy' },
   {
     'TimUntersberger/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -235,7 +240,7 @@ require('lazy').setup({
   },
 
   -- logging
-  'tjdevries/vlog.nvim',
+  { 'tjdevries/vlog.nvim', event = 'VeryLazy' },
 
   -- surround motion
   {
@@ -256,21 +261,32 @@ require('lazy').setup({
 
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
+      local code_actions = null_ls.builtins.code_actions
 
       null_ls.setup({
         sources = {
+          code_actions.cspell,
+          code_actions.eslint,
+          code_actions.proselint,
+          code_actions.refactoring,
+
+          diagnostics.actionlint,
+          diagnostics.cspell,
+          diagnostics.eslint,
+          diagnostics.fish,
+          diagnostics.luacheck,
+          diagnostics.proselint,
+          diagnostics.swiftlint,
+          diagnostics.tsc,
+          diagnostics.vale,
+
+          formatting.black,
+          formatting.csharpier,
           formatting.prettier,
           formatting.rustfmt,
           formatting.stylelint,
           formatting.stylua,
           formatting.terraform_fmt,
-          formatting.black,
-
-          diagnostics.cspell,
-          diagnostics.eslint,
-          diagnostics.luacheck,
-          diagnostics.proselint,
-          diagnostics.vale,
         },
         on_attach = function(client)
           if client.server_capabilities.documentFormattingProvider then
