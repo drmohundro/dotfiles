@@ -141,8 +141,6 @@ require('lazy').setup({
   -- close buffers without messing up window layout
   { 'moll/vim-bbye',                            event = 'VeryLazy' },
 
-  'editorconfig/editorconfig-vim',
-
   -- ident lines
   'lukas-reineke/indent-blankline.nvim',
 
