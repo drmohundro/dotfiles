@@ -2,7 +2,9 @@ if vim.g.vscode then
   return
 end
 
-require('zen-mode').setup({
+local zenmode = require('zen-mode')
+
+zenmode.setup({
   window = {
     width = 90,
     options = {
@@ -13,6 +15,6 @@ require('zen-mode').setup({
 })
 
 vim.keymap.set('n', '<leader>zz', function()
-  require('zen-mode').toggle()
+  zenmode.toggle()
   vim.wo.wrap = false
 end)

@@ -14,11 +14,11 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup({
   -- improve the default vim.ui interfaces
-  { 'stevearc/dressing.nvim', event = 'VeryLazy' },
+  { 'stevearc/dressing.nvim',          event = 'VeryLazy' },
 
   -- treesitter
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-  { 'nvim-treesitter/playground', event = 'VeryLazy' },
+  { 'nvim-treesitter/playground',      event = 'VeryLazy' },
 
   -- lsp
   {
@@ -119,10 +119,10 @@ require('lazy').setup({
   },
 
   -- which key plugin
-  { 'folke/which-key.nvim', event = 'VeryLazy' },
+  { 'folke/which-key.nvim',                event = 'VeryLazy' },
 
   -- more keybinding fun
-  { 'mrjones2014/legendary.nvim', event = 'VeryLazy' },
+  { 'mrjones2014/legendary.nvim',          event = 'VeryLazy' },
 
   -- like nerd tree
   {
@@ -139,7 +139,7 @@ require('lazy').setup({
   },
 
   -- close buffers without messing up window layout
-  { 'moll/vim-bbye', event = 'VeryLazy' },
+  { 'moll/vim-bbye',                            event = 'VeryLazy' },
 
   'editorconfig/editorconfig-vim',
 
@@ -179,7 +179,6 @@ require('lazy').setup({
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-live-grep-args.nvim' },
     },
-    module_patterns = 'telescope*',
     config = function()
       require('telescope').load_extension('live_grep_args')
     end,
@@ -210,7 +209,7 @@ require('lazy').setup({
   },
 
   -- git support
-  { 'tpope/vim-fugitive', event = 'VeryLazy' },
+  { 'tpope/vim-fugitive',  event = 'VeryLazy' },
   {
     'TimUntersberger/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -252,7 +251,7 @@ require('lazy').setup({
   },
 
   -- most recently used
-  { 'yegappan/mru', event = 'VeryLazy' },
+  { 'yegappan/mru',        event = 'VeryLazy' },
 
   {
     'jose-elias-alvarez/null-ls.nvim',
