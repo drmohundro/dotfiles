@@ -2,7 +2,7 @@
   "skip_processing": [
     "README.md",
     "LICENSE",
-    "Rakefile",
+    "Makefile",
     "install.ps1",
     "overrides.json",
     "overrides.yaml"
