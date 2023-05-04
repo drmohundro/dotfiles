@@ -1,6 +1,13 @@
 export PATH=$PATH:~/bin
-export PATH=$PATH:~/.node/bin
 export PATH=$PATH:~/.cargo/bin
+
+if [ -d /opt/homebrew/bin ]; then
+  export PATH=/opt/homebrew/bin:$PATH
+  . /usr/local/opt/asdf/libexec/lib/asdf.sh
+elif [ -d /usr/local/bin ]; then
+  export PATH=/usr/local/bin:$PATH
+  . /usr/local/opt/asdf/libexec/lib/asdf.sh
+fi
 
 if hash brew 2>/dev/null; then
   # use gnu versions

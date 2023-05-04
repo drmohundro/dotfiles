@@ -24,5 +24,3 @@ fi
 j() {
     cd $(fasd -d -e 'printf %s' "$1")
 }
-
-. $HOME/.asdf/asdf.sh
