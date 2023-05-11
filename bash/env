@@ -1,9 +1,10 @@
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:/usr/local/share/dotnet
 
 if [ -d /opt/homebrew/bin ]; then
   export PATH=/opt/homebrew/bin:$PATH
-  . /usr/local/opt/asdf/libexec/lib/asdf.sh
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
 elif [ -d /usr/local/bin ]; then
   export PATH=/usr/local/bin:$PATH
   . /usr/local/opt/asdf/libexec/lib/asdf.sh
