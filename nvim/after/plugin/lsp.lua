@@ -57,6 +57,24 @@ cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings,
+  sources = {
+    { name = 'copilot' },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+
+    -- For vsnip user.
+    -- { name = 'vsnip' },
+
+    -- For luasnip user.
+    { name = 'luasnip' },
+
+    -- For ultisnips user.
+    -- { name = 'ultisnips' },
+
+    { name = 'path' },
+    { name = 'buffer' },
+    { name = 'nvim_lua' },
+  },
 })
 
 lsp.set_preferences({
