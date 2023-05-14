@@ -1,5 +1,5 @@
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 
 -- This table will hold the configuration.
 local config = {}
@@ -30,12 +30,12 @@ config.keys = {
   {
     key = 'd',
     mods = 'CMD',
-    action = wezterm.action.SplitHorizontal {}
+    action = wezterm.action.SplitHorizontal({}),
   },
   {
     key = 'd',
     mods = 'CMD|SHIFT',
-    action = wezterm.action.SplitVertical {}
+    action = wezterm.action.SplitVertical({}),
   },
   {
     key = '[',
