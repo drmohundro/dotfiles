@@ -303,6 +303,31 @@ require('lazy').setup({
   -- search for visually selected text
   { 'bronson/vim-visual-star-search', event = 'VeryLazy' },
 
+  -- copilot
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    -- config = function()
+    --   require('copilot').setup({
+    --     -- for cmp, but doesn't seem to work yet
+    --     suggestion = { enabled = false },
+    --     panel = { enabled = false },
+    --
+    --     -- works
+    --     -- suggestion = {
+    --     --   auto_trigger = true,
+    --     -- },
+    --   })
+    -- end,
+  },
+  {
+    'zbirenbaum/copilot-cmp',
+    -- config = function()
+    --   require('copilot_cmp').setup()
+    -- end,
+  },
+
   -- colors
   'fatih/molokai',
   'altercation/vim-colors-solarized',
