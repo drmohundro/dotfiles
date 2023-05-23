@@ -8,6 +8,7 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+set visualbell
 
 set ideamarks
 
@@ -72,5 +73,8 @@ nnoremap <leader>zo :action ExpandAllRegions<CR>
 " Explorer, too
 " map <C-A-i> <Action>(NewElementSamePlace)
 map <A-i> <Action>(NewElement)
+
+nnoremap <S-C-A-j> :action MoveStatementDown<CR>
+nnoremap <S-C-A-k> :action MoveStatementUp<CR>
 
 nmap <silent> <leader>s <Action>(EditorToggleShowWhitespaces)
