@@ -209,7 +209,7 @@ require('lazy').setup({
   -- git support
   { 'tpope/vim-fugitive',  event = 'VeryLazy' },
   {
-    'TimUntersberger/neogit',
+    'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = 'VeryLazy',
     config = function()
