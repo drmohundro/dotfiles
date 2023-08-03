@@ -11,3 +11,7 @@ elif [ -d /usr/local/bin ]; then
   PATH=/usr/local/bin:$PATH
   . /usr/local/opt/asdf/libexec/asdf.sh
 fi
+
+if [ -d /usr/local/share/dotnet ]; then
+  PATH=$PATH:/usr/local/share/dotnet
+fi

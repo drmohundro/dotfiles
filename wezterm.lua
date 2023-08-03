@@ -16,7 +16,7 @@ end
 config.color_scheme = 'tokyonight_night'
 
 config.font_size = 15.0
-config.font = wezterm.font "JetBrainsMono Nerd Font"
+config.font = wezterm.font('JetBrainsMono Nerd Font')
 
 if wezterm.target_triple == 'aarch64-apple-darwin' then
   config.default_prog = { '/opt/homebrew/bin/fish', '-l' }
@@ -40,18 +40,18 @@ config.keys = {
   {
     key = '[',
     mods = 'CMD',
-    action = wezterm.action.ActivatePaneDirection "Prev"
+    action = wezterm.action.ActivatePaneDirection('Prev'),
   },
   {
     key = ']',
     mods = 'CMD',
-    action = wezterm.action.ActivatePaneDirection "Next"
+    action = wezterm.action.ActivatePaneDirection('Next'),
   },
   {
     key = 'w',
     mods = 'CMD',
-    action = wezterm.action.CloseCurrentPane { confirm = false }
-  }
+    action = wezterm.action.CloseCurrentPane({ confirm = false }),
+  },
 }
 
 -- and finally, return the configuration to wezterm

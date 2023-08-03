@@ -21,6 +21,8 @@ if test -e /usr/local/share/dotnet
   set -gx PATH $PATH /usr/local/share/dotnet
 end
 
+set -gx PATH $PATH /usr/local/opt/postgresql@15/bin
+
 # use gnu versions of coreutils/findutils
 if type -q brew
   # via `brew --prefix FORMULA`... hardcoding for speed, though
