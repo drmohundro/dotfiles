@@ -25,7 +25,9 @@ opt.wildmode = 'longest,list'
 
 opt.updatetime = 750
 
-opt.colorcolumn = '80'
+if not vim.g.vscode then
+  opt.colorcolumn = '80'
+end
 
 opt.tabstop = 2
 opt.shiftwidth = 2
