@@ -2,7 +2,11 @@ if vim.g.vscode then
   return
 end
 
-require('legendary').setup({ which_key = { auto_register = true } })
+require('legendary').setup({
+  extensions = {
+    which_key = { auto_register = true },
+  },
+})
 
 local wk = require('which-key')
 
