@@ -70,9 +70,8 @@ nnoremap <leader>zc :action CollapseAllRegions<CR>
 nnoremap <leader>zo :action ExpandAllRegions<CR>
 
 " NOTE: I mapped this one directly in Rider so that it works in the Solution
-" Explorer, too
-" map <C-A-i> <Action>(NewElementSamePlace)
-map <A-i> <Action>(NewElement)
+" Explorer, too (also called "New In This Directory...")
+nnoremap <C-A-i> :action NewElementSamePlace<CR>
 
 nnoremap <S-C-A-j> :action MoveStatementDown<CR>
 nnoremap <S-C-A-k> :action MoveStatementUp<CR>

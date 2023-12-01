@@ -3,8 +3,13 @@ if vim.g.vscode then
 end
 
 -- vim.cmd([[colorscheme tokyonight]])
+
+-- Normal
 vim.g.catppuccin_flavour = 'macchiato' -- latte, frappe, macchiato, mocha
 vim.cmd([[colorscheme catppuccin]])
+
+-- Presentation
+-- vim.cmd([[colorscheme PaperColor]])
 
 -- NOTE: to go back to onedark
 -- require('onedark').load()

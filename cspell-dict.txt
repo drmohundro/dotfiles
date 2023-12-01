@@ -45,6 +45,7 @@ omnifunc
 onedark
 packadd
 proselint
+pulumi
 quickfix
 ripgrep
 rustfmt

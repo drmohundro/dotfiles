@@ -15,8 +15,12 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = 'tokyonight_night'
 
-config.font_size = 15.0
-config.font = wezterm.font('JetBrainsMono Nerd Font')
+-- Light (Presentations)
+-- config.color_scheme = 'PaperColor Light (base16)'
+
+config.font_size = 16
+config.font =
+    wezterm.font_with_fallback({ { family = 'Victor Mono', weight = 'Medium' }, 'JetBrainsMono Nerd Font', 'Iosevka' })
 
 if wezterm.target_triple == 'aarch64-apple-darwin' then
   config.default_prog = { '/opt/homebrew/bin/fish', '-l' }

@@ -60,8 +60,8 @@ if test -e ~/go
 end
 
 # Python 3 binaries
-if test -e ~/Library/Python/3.9/bin
-  set -gx PATH $PATH ~/Library/Python/3.9/bin
+if test -e ~/Library/Python/3.11/bin
+  set -gx PATH $PATH ~/Library/Python/3.11/bin
 end
 
 # android tooling

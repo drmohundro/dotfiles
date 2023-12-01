@@ -2,26 +2,10 @@ if vim.g.vscode then
   return
 end
 
-local lsp = require('lsp-zero')
-
-lsp.preset('minimal')
-
-lsp.set_sign_icons({
-  error = '✘',
-  warn = '▲',
-  hint = '⚑',
-  info = '',
-})
-
-lsp.ensure_installed({
-  'tsserver',
-  'eslint',
-  'lua_ls',
-  'rust_analyzer',
-})
+local lsp_zero = require('lsp-zero')
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
+lsp_zero.configure('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
@@ -31,7 +15,7 @@ lsp.configure('lua_ls', {
   },
 })
 
-lsp.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -47,8 +31,38 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
 end)
 
-lsp.setup()
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {
+    'tsserver',
+    'eslint',
+    'lua_ls',
+    'rust_analyzer',
+  },
+  handlers = {
+    lsp_zero.default_setup,
+    lua_ls = function()
+      local lua_opts = lsp_zero.nvim_lua_ls()
+      require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+  },
+})
+
+lsp_zero.set_sign_icons({
+  error = '✘',
+  warn = '▲',
+  hint = '⚑',
+  info = '',
+})
 
 vim.diagnostic.config({
   virtual_text = true,
+  severity_sort = true,
+  float = {
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
 })
