@@ -120,8 +120,9 @@
 	helper = /usr/local/share/gcm-core/git-credential-manager
 	# helper should be manager-core on Windows
 
-[includeif "gitdir:~/dev/clearfunction/"]
+[includeif "hasconfig:remote.*.url:**/github.com/clearfunction/**"]
   path = ~/dev/dotfiles/gitconfig-cf
 
-[includeif "gitdir:~/dev/clearfunction/client/"]
+# or [includeif "gitdir:~/dev/clearfunction/client/"]
+[includeif "hasconfig:remote.*.url:**/github.com/client/**"]
   path = ~/dev/clearfunction/client/.gitconfig
