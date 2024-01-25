@@ -22,5 +22,5 @@ autocmd('TextYankPost', {
 })
 
 if vim.fn.exists('neovide') then
-  vim.cmd([[set guifont=JetBrains\ Mono:h16]])
+  vim.cmd([[set guifont=Iosevka:h16]])
 end

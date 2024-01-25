@@ -1,5 +1,5 @@
 if has('mac')
-  set guifont=JetBrains\ Mono\ Regular\ Nerd\ Font\ Complete:h16
+  set guifont=Iosevka:h16
 else
   " neovim-qt settings
   if exists(':GuiTabline')
