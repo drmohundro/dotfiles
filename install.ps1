@@ -15,7 +15,7 @@ function Resolve-PathSafe($path) {
 
 function defaultPath($pathName) {
     [PSObject] @{
-        Link = Resolve-PathSafe "~/.$($pathName)"
+        Link   = Resolve-PathSafe "~/.$($pathName)"
         Target = Resolve-PathSafe $pathName
     }
 }
@@ -25,12 +25,13 @@ function checkConfig($os, $pathName) {
         if ($config[$os][$pathName] -ne $null) {
             $config[$os][$pathName] | Foreach-Object {
                 [PSObject] @{
-                    Link = Resolve-PathSafe ([System.Environment]::ExpandEnvironmentVariables($_))
+                    Link   = Resolve-PathSafe ([System.Environment]::ExpandEnvironmentVariables($_))
                     Target = Resolve-PathSafe $pathName
                 }
             }
         }
-    } else {
+    }
+    else {
         defaultPath $pathName
     }
 }
@@ -42,11 +43,14 @@ function determinePath($path) {
 
     if ($config['windows'][$pathName] -ne $null -and $IsWindows) {
         checkConfig -os 'windows' -pathName $pathName
-    } elseif ($config['macos'][$pathName] -ne $null -and $IsMacOS) {
+    }
+    elseif ($config['macos'][$pathName] -ne $null -and $IsMacOS) {
         checkConfig -os 'macos' -pathName $pathName
-    } elseif ($config['linux'][$pathName] -ne $null -and $IsLinux) {
+    }
+    elseif ($config['linux'][$pathName] -ne $null -and $IsLinux) {
         checkConfig -os 'linux' -pathName $pathName
-    } else {
+    }
+    else {
         defaultPath $pathName
     }
 }
@@ -57,12 +61,25 @@ function linkFile($map) {
         return
     }
 
+    # validate that $map.Target's directory exists and create it if it doesn't
+    $targetDirectory = Split-Path $map.Target
+    if (-not (Test-Path $targetDirectory)) {
+        if ($whatIf) {
+            log "Creating directory $targetDirectory"
+        }
+        else {
+            New-Item -ItemType Directory -Path $targetDirectory
+        }
+    }
+
     if ($whatIf) {
-        log "Linking $($_.Link) to $($_.Target)"
-    } else {
+        log "Linking $($map.Link) to $($map.Target)"
+    }
+    else {
         if ((Get-Item $map.Target) -is [System.IO.DirectoryInfo] -and $IsWindows) {
             New-Item -Path $_.Link -ItemType Junction -Value $_.Target
-        } else {
+        }
+        else {
             New-Item -Path $_.Link -ItemType SymbolicLink -Value $_.Target
         }
     }
@@ -88,6 +105,7 @@ function main {
 try {
     Push-Location $PSScriptRoot
     main
-} finally {
+}
+finally {
     Pop-Location
 }
