@@ -97,7 +97,6 @@ FZF-EOF"
 end
 
 alias vim="nvim"
-alias be="bundle exec"
 alias rg="rg --smart-case"
 alias http="xh"
 
@@ -111,8 +110,10 @@ if type -q eza
   alias ls "eza --icons --group-directories-first"
 end
 
-### Prompt using oh-my-posh (ohmyposh.dev)
-if type -q oh-my-posh
+# prefer starship, fallback to oh-my-posh, then default
+if type -q starship
+  starship init fish | source
+else if type -q oh-my-posh
   oh-my-posh --init --shell fish --config ~/dev/dotfiles/oh-my-posh-themes/mo-fish.omp.json | source
 else
   echo "oh-my-posh wasn't found, using default prompt"

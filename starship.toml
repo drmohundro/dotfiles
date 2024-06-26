@@ -1,0 +1,28 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = "[❯](red)[❯](yellow)[❯](green) "
+
+right_format = """$all"""
+
+add_newline = false
+
+[character]
+success_symbol = ''
+error_symbol = '[✗](bold red) '
+
+[directory]
+fish_style_pwd_dir_length = 1
+
+[azure]
+disabled = false
+
+[azure.subscription_aliases]
+"CF EPH (dev/test) (MPN Action Pack $100/mo)" = "eph-dev"
+
+[aws]
+disabled = true
+
+[docker_context]
+disabled = true
+
