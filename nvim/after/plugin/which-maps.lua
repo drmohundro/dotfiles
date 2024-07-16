@@ -20,93 +20,58 @@ wk.setup({
 
 local builtin = require('telescope.builtin')
 
-wk.register({
-  f = { '<cmd>Telescope live_grep_args<CR>', 'Live ripgrep search' },
-  r = { builtin.oldfiles, 'Recent Files' },
+wk.add({
+  { '<leader>f',  '<cmd>Telescope live_grep_args<CR>',                desc = 'Live ripgrep search' },
+  { '<leader>r',  builtin.oldfiles,                                   desc = 'Recent Files' },
 
-  d = { '<cmd>Neotree reveal right toggle<CR>', 'Toggle directory tree' },
+  { '<leader>d',  '<cmd>Neotree reveal right toggle<CR>',             desc = 'Toggle directory tree' },
 
   -- Git
-  g = {
-    name = 'Git',
-    l = { "<cmd>lua require 'gitsigns'.blame_line()<CR>", 'Blame' },
-    d = {
-      '<cmd>Gitsigns diffthis HEAD<CR>',
-      'Git Diff',
-    },
-    t = {
-      '<cmd>lua lazygit_toggle()<CR>',
-      'Toggle lazygit',
-    },
-
-    f = { builtin.git_files, 'Git Files' },
-    o = { builtin.git_status, 'Open changed file' },
-    b = { builtin.git_branches, 'Checkout branch' },
-    c = { builtin.git_commits, 'Checkout commit' },
-    C = {
-      builtin.git_bcommits,
-      'Checkout commit(for current file)',
-    },
-  },
+  { '<leader>g',  group = 'Git' },
+  { '<leader>gl', "<cmd>lua require 'gitsigns'.blame_line()<CR>",     desc = 'Blame' },
+  { '<leader>gd', '<cmd>Gitsigns diffthis HEAD<CR>',                  desc = 'Git Diff' },
+  { '<leader>gt', '<cmd>lua lazygit_toggle()<CR>',                    desc = 'Toggle lazygit' },
+  { '<leader>gf', builtin.git_files,                                  desc = 'Git Files' },
+  { '<leader>go', builtin.git_status,                                 desc = 'Open changed file' },
+  { '<leader>gb', builtin.git_branches,                               desc = 'Checkout branch' },
+  { '<leader>gc', builtin.git_commits,                                desc = 'Checkout commit' },
+  { '<leader>gC', builtin.git_bcommits,                               desc = 'Checkout commit(for current file)' },
 
   -- Key related
-  k = { '<cmd>Legendary<CR>', 'Show all commands' },
+  { '<leader>k',  '<cmd>Legendary<CR>',                               desc = 'Show all commands' },
 
   -- LSP
-  a = {
-    name = 'LSP',
-    a = { vim.lsp.buf.code_action, 'Code Action' },
-    f = { vim.lsp.buf.format, 'Format' },
-    i = { '<cmd>LspInfo<CR>', 'Info' },
-    I = { '<cmd>Mason<CR>', 'Mason LSP Info' },
-    j = {
-      vim.diagnostic.goto_next,
-      'Next Diagnostic',
-    },
-    k = {
-      vim.diagnostic.goto_prev,
-      'Prev Diagnostic',
-    },
-    l = { vim.lsp.codelens.run, 'CodeLens Action' },
-    q = { vim.diagnostic.setloclist, 'Quickfix' },
-    r = { vim.lsp.buf.rename, 'Rename' },
-  },
+  { '<leader>a',  desc = 'LSP' },
+  { '<leader>aa', vim.lsp.buf.code_action,                            desc = 'Code Action' },
+  { '<leader>af', vim.lsp.buf.format,                                 desc = 'Format' },
+  { '<leader>ai', '<cmd>LspInfo<CR>',                                 desc = 'Info' },
+  { '<leader>aI', '<cmd>Mason<CR>',                                   desc = 'Mason LSP Info' },
+  { '<leader>aj', vim.diagnostic.goto_next,                           desc = 'Next Diagnostic' },
+  { '<leader>ak', vim.diagnostic.goto_prev,                           desc = 'Prev Diagnostic' },
+  { '<leader>al', vim.lsp.codelens.run,                               desc = 'CodeLens Action' },
+  { '<leader>aq', vim.diagnostic.setloclist,                          desc = 'Quickfix' },
+  { '<leader>ar', vim.lsp.buf.rename,                                 desc = 'Rename' },
 
   -- Telescope
-  l = {
-    name = 'Telescope',
-    r = { builtin.oldfiles, 'Recent Files' },
-    b = { builtin.buffers, 'Buffers' },
-    f = { builtin.find_files, 'Find Files' },
-    d = {
-      '<cmd>Telescope diagnostics bufnr=0<CR>',
-      'Document Diagnostics',
-    },
-    n = { '<cmd>Telescope notify<CR>', 'Notifications' },
-    s = { builtin.lsp_document_symbols, 'Document Symbols' },
-    S = {
-      builtin.lsp_dynamic_workspace_symbols,
-      'Workspace Symbols',
-    },
-    w = {
-      builtin.diagnostics,
-      'Workspace Diagnostics',
-    },
-  },
+  { '<leader>l',  desc = 'Telescope' },
+  { '<leader>lr', builtin.oldfiles,                                   desc = 'Recent Files' },
+  { '<leader>lb', builtin.buffers,                                    desc = 'Buffers' },
+  { '<leader>lf', builtin.find_files,                                 desc = 'Find Files' },
+  { '<leader>ld', '<cmd>Telescope diagnostics bufnr=0<CR>',           desc = 'Document Diagnostics' },
+  { '<leader>ln', '<cmd>Telescope notify<CR>',                        desc = 'Notifications' },
+  { '<leader>ls', builtin.lsp_document_symbols,                       desc = 'Document Symbols' },
+  { '<leader>lS', builtin.lsp_dynamic_workspace_symbols,              desc = 'Workspace Symbols' },
+  { '<leader>lw', builtin.diagnostics,                                desc = 'Workspace Diagnostics' },
 
   -- Trouble / Diagnostics
-  t = {
-    name = 'Trouble (Diagnostics)',
-    t = { '<cmd>TroubleToggle<CR>', 'Trouble Toggle' },
-    w = { '<cmd>TroubleToggle lsp_workspace_diagnostics<CR>', 'Workspace' },
-    d = { '<cmd>TroubleToggle lsp_document_diagnostics<CR>', 'Document' },
-    q = { '<cmd>TroubleToggle quickfix<CR>', 'QuickFix' },
-    l = { '<cmd>TroubleToggle loclist<CR>', 'LocList' },
-    r = { '<cmd>TroubleToggle lsp_references<CR>', 'References' },
-  },
+  { '<leader>t',  desc = 'Trouble (Diagnostics)' },
+  { '<leader>tt', '<cmd>TroubleToggle<CR>',                           desc = 'Trouble Toggle' },
+  { '<leader>tw', '<cmd>TroubleToggle lsp_workspace_diagnostics<CR>', desc = 'Workspace' },
+  { '<leader>td', '<cmd>TroubleToggle lsp_document_diagnostics<CR>',  desc = 'Document' },
+  { '<leader>tq', '<cmd>TroubleToggle quickfix<CR>',                  desc = 'QuickFix' },
+  { '<leader>tl', '<cmd>TroubleToggle loclist<CR>',                   desc = 'LocList' },
+  { '<leader>tr', '<cmd>TroubleToggle lsp_references<CR>',            desc = 'References' },
 
   -- Undotree
-  u = { vim.cmd.UndotreeToggle, 'Undotree' },
-}, {
-  prefix = '<leader>',
+  { '<leader>u',  vim.cmd.UndotreeToggle,                             desc = 'Undotree' },
 })
