@@ -5,12 +5,14 @@ set -gx EDITOR nvim
 if test -e /usr/local/bin
   set BREW_PREFIX = /usr/local
   set -gx PATH $BREW_PREFIX/bin $PATH
+  set -gx PATH $BREW_PREFIX/sbin $PATH
 end
 
 # m1 homebrew installs here instead
 if test -e /opt/homebrew/bin
   set BREW_PREFIX = /opt/homebrew
   set -gx PATH $BREW_PREFIX/bin $PATH
+  set -gx PATH $BREW_PREFIX/sbin $PATH
 end
 
 if test -e ~/.dotnet/tools
