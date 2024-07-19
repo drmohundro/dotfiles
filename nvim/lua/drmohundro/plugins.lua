@@ -14,11 +14,11 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup({
   -- improve the default vim.ui interfaces
-  { 'stevearc/dressing.nvim',          event = 'VeryLazy' },
+  { 'stevearc/dressing.nvim', event = 'VeryLazy' },
 
   -- treesitter
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-  { 'nvim-treesitter/playground',      event = 'VeryLazy' },
+  { 'nvim-treesitter/playground', event = 'VeryLazy' },
 
   -- lsp
   {
@@ -119,10 +119,10 @@ require('lazy').setup({
   },
 
   -- which key plugin
-  { 'folke/which-key.nvim',                event = 'VeryLazy' },
+  { 'folke/which-key.nvim', event = 'VeryLazy' },
 
   -- more keybinding fun
-  { 'mrjones2014/legendary.nvim',          event = 'VeryLazy' },
+  { 'mrjones2014/legendary.nvim', event = 'VeryLazy' },
 
   -- like nerd tree
   {
@@ -139,7 +139,7 @@ require('lazy').setup({
   },
 
   -- close buffers without messing up window layout
-  { 'moll/vim-bbye',                            event = 'VeryLazy' },
+  { 'moll/vim-bbye', event = 'VeryLazy' },
 
   -- ident lines
   'lukas-reineke/indent-blankline.nvim',
@@ -207,7 +207,7 @@ require('lazy').setup({
   },
 
   -- git support
-  { 'tpope/vim-fugitive',  event = 'VeryLazy' },
+  { 'tpope/vim-fugitive', event = 'VeryLazy' },
   {
     'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -249,55 +249,35 @@ require('lazy').setup({
   },
 
   -- most recently used
-  { 'yegappan/mru',        event = 'VeryLazy' },
+  { 'yegappan/mru', event = 'VeryLazy' },
 
   {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function()
-      local null_ls = require('null-ls')
-
-      local formatting = null_ls.builtins.formatting
-      local diagnostics = null_ls.builtins.diagnostics
-      local code_actions = null_ls.builtins.code_actions
-
-      null_ls.setup({
-        sources = {
-          code_actions.cspell,
-          code_actions.eslint,
-          code_actions.proselint,
-          code_actions.refactoring,
-
-          diagnostics.actionlint,
-          diagnostics.cspell,
-          diagnostics.eslint,
-          diagnostics.fish,
-          diagnostics.luacheck,
-          diagnostics.proselint,
-          diagnostics.swiftlint,
-          diagnostics.tsc,
-          diagnostics.vale,
-
-          formatting.black,
-          formatting.csharpier,
-          formatting.prettier,
-          formatting.rustfmt,
-          formatting.stylelint,
-          formatting.stylua,
-          formatting.terraform_fmt,
+    'stevearc/conform.nvim',
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
+    -- Everything in opts will be passed to setup()
+    opts = {
+      -- Define your formatters
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        python = { 'isort', 'black' },
+        javascript = { { 'prettierd', 'prettier' } },
+        rust = { 'rustfmt' },
+        markdown = { { 'prettierd', 'prettier' } },
+      },
+      -- Set up format-on-save
+      format_on_save = { timeout_ms = 500, lsp_fallback = true },
+      -- Customize formatters
+      formatters = {
+        shfmt = {
+          prepend_args = { '-i', '2' },
         },
-        on_attach = function(client)
-          if client.server_capabilities.documentFormattingProvider then
-            vim.cmd([[
-                augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-                augroup END
-                ]])
-          end
-        end,
-      })
+      },
+    },
+    init = function()
+      -- If you want the formatexpr, here is the place to set it
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   },
 
   -- search for visually selected text
