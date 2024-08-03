@@ -261,9 +261,9 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'isort', 'black' },
-        javascript = { { 'prettierd', 'prettier' } },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
         rust = { 'rustfmt' },
-        markdown = { { 'prettierd', 'prettier' } },
+        markdown = { 'prettierd', 'prettier', stop_after_first = true },
       },
       -- Set up format-on-save
       format_on_save = { timeout_ms = 500, lsp_fallback = true },
