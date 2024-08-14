@@ -1,12 +1,9 @@
--- Pull in the wezterm API
 local wezterm = require('wezterm')
+local appearance = require('appearance')
 
 local config = wezterm.config_builder()
 
--- NOTE: do we want to pull in the appearance library or not?
-local use_dark = true
-
-if use_dark then
+if appearance:is_dark() then
   config.color_scheme = 'tokyonight_night'
 else
   config.color_scheme = 'tokyonight_day'
@@ -32,7 +29,7 @@ config.window_frame = {
 
 config.font_size = 15
 config.font = wezterm.font_with_fallback({
-  -- 'Iosevka', (for some crazy reason, it is super slow)
+  -- 'Iosevka', -- (for some crazy reason, it is super slow... seeing things about TTC fonts being slow)
   'JetBrainsMono Nerd Font',
 })
 
