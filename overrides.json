@@ -25,6 +25,9 @@
     ],
     "starship.toml": [
       "~/.config/starship.toml"
+    ],
+    "wezterm": [
+      "~/.config/wezterm"
     ]
   },
   "linux": {
@@ -37,6 +40,9 @@
     ],
     "vim": [
       "~/.vim"
+    ],
+    "wezterm": [
+      "~/.config/wezterm"
     ]
   },
   "windows": {
@@ -50,6 +56,9 @@
     ],
     "vim": [
       "~/.vim"
+    ],
+    "wezterm": [
+      "~/.config/wezterm"
     ]
   }
 }
