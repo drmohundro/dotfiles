@@ -36,6 +36,8 @@ end
 # local binaries
 set PATH ~/bin $PATH
 
+fzf --fish | source
+
 # tell fzf to use rg to list files
 if type -q fd
   set -gx FZF_DEFAULT_COMMAND 'fd --type f --color=never'
@@ -125,6 +127,9 @@ end
 if type -q direnv
   direnv hook fish | source
 end
+
+# Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
+complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 
 # zoxide (like autojump/fasd/z)
 zoxide init fish --cmd j --hook pwd | source
