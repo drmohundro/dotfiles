@@ -49,7 +49,7 @@
     "vsvimrc": "~/.vsvimrc",
     "viemurc": "~/.viemurc",
     "nvim": [
-      "%LOCALAPPDATA%/nvim/init.vim"
+      "%LOCALAPPDATA%/nvim"
     ],
     "vimrc": [
       "~/.vimrc"
