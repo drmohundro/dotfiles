@@ -229,6 +229,17 @@ require('lazy').setup({
     end,
   },
 
+  -- markdown
+  {
+    'OXY2DEV/markview.nvim',
+    lazy = false, -- Recommended, because the plugin is lazy by default
+
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
+
   -- diff support
   {
     'sindrets/diffview.nvim',
