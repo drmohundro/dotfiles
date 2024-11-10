@@ -35,9 +35,11 @@
 	diffFilter = delta --color-only
 
 [delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = true
 	features = unobtrusive-line-numbers decorations
 	whitespace-error-style = 22 reverse
-
 [delta "unobtrusive-line-numbers"]
 	line-numbers = true
 	line-numbers-minus-style = "#444444"
@@ -47,7 +49,6 @@
 	line-numbers-right-format = "{np:>4}│"
 	line-numbers-left-style = blue
 	line-numbers-right-style = blue
-
 [delta "decorations"]
 	commit-decoration-style = bold yellow box ul
 	file-style = bold yellow ul
@@ -64,6 +65,7 @@
 	# tool = bc
 	tool = difftastic
 	guitool = bc
+	colorMoved = default
 [difftool]
 	prompt = false
 [difftool "difftastic"]
@@ -72,6 +74,7 @@
 [merge]
 	tool = bc
 	guitool = bc
+	conflictStyle = zdiff3
 [mergetool]
 	prompt = false
 
