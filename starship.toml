@@ -20,9 +20,6 @@ disabled = false
 [azure.subscription_aliases]
 "CF EPH (dev/test) (MPN Action Pack $100/mo)" = "eph-dev"
 
-[aws]
-disabled = true
-
 [docker_context]
 disabled = true
 

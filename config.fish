@@ -63,9 +63,8 @@ if test -e ~/go
   set -gx PATH $PATH $GOROOT/bin
 end
 
-# Python 3 binaries
-if test -e ~/Library/Python/3.11/bin
-  set -gx PATH $PATH ~/Library/Python/3.11/bin
+if type -q uv
+  uv generate-shell-completion fish | source
 end
 
 # android tooling

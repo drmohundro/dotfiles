@@ -17,3 +17,7 @@ fi
 if [ -d /usr/local/share/dotnet ]; then
   PATH=$PATH:/usr/local/share/dotnet
 fi
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
