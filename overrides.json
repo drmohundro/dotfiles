@@ -28,6 +28,9 @@
     ],
     "wezterm": [
       "~/.config/wezterm"
+    ],
+    "ghostty": [
+      "~/.config/ghostty"
     ]
   },
   "linux": {

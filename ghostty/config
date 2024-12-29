@@ -1,0 +1,5 @@
+command = /opt/homebrew/bin/fish -l
+theme = catppuccin-macchiato
+
+font-family = Iosevka
+font-size = 16
