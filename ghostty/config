@@ -3,3 +3,14 @@ theme = catppuccin-macchiato
 
 font-family = Iosevka
 font-size = 16
+
+background-opacity = 0.9
+background-blur-radius = 20
+
+copy-on-select = true
+
+shell-integration = fish
+
+# quake mode
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+quick-terminal-animation-duration = 0.1
