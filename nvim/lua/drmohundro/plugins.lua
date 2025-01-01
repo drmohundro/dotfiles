@@ -169,21 +169,31 @@ require('lazy').setup({
     end,
   },
 
-  -- find files, buffers, etc.
+  -- fzf-lua
   {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {
-      { 'nvim-lua/popup.nvim' },
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-live-grep-args.nvim' },
+    'ibhagwan/fzf-lua',
+    -- optional for icon support
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    -- or if using mini.icons/mini.nvim
+    -- dependencies = { "echasnovski/mini.icons" },
+    opts = {
+      oldfiles = {
+        include_current_session = true,
+      },
+      previewers = {
+        builtin = {
+          -- make it faster for bigger files
+          syntax_limit_b = 1024 * 100, -- 100KB
+        },
+      },
+      grep = {
+        -- support adding a -- to add additional filters
+        rg_glob = true, -- enable glob parsing
+        glob_flag = '--iglob', -- case insensitive globs
+        glob_separator = '%s%-%-', -- query separator pattern (lua): ' --'
+      },
     },
-    config = function()
-      require('telescope').load_extension('live_grep_args')
-    end,
   },
-
-  -- use fzf-native matcher instead
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
   -- commenting code
   {

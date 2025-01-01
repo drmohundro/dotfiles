@@ -46,10 +46,8 @@ else
     { silent = true }
   )
 
-  local builtin = require('telescope.builtin')
-
-  vim.keymap.set('', '<c-l>', builtin.buffers, {})
-  vim.keymap.set('', '<c-p>', builtin.find_files, {})
+  vim.keymap.set('', '<c-l>', [[<cmd>FzfLua buffers<CR>]], {})
+  vim.keymap.set('', '<c-p>', [[<cmd>FzfLua files<CR>]], {})
 
   vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>')
   vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>')
