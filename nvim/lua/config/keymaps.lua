@@ -31,11 +31,15 @@ if vim.g.vscode then
   vim.keymap.set("n", "o", "<cmd>call VSCodeNotify('editor.action.insertLineAfter')<cr>i", { silent = true })
   vim.keymap.set("n", "O", "<cmd>call VSCodeNotify('editor.action.insertLineBefore')<cr>i", { silent = true })
 else
-  vim.keymap.set("", "<c-l>", function()
+  vim.keymap.set("", "<C-l>", function()
     Snacks.picker.buffers()
   end, {})
-  vim.keymap.set("", "<c-p>", function()
+  vim.keymap.set("", "<C-p>", function()
     Snacks.picker.files()
+  end, {})
+
+  vim.keymap.set("", "<C-e>", function()
+    Snacks.picker.recent()
   end, {})
 
   vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
