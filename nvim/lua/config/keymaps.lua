@@ -3,8 +3,7 @@
 -- Add any additional keymaps here
 
 -- toggle showing whitespace
--- TOOD: this is overlapping with something else...
-vim.keymap.set("n", "<leader>s", ":set nolist!<cr>", { silent = true })
+vim.keymap.set("n", "<leader>uw", ":setlocal nolist!<cr>", { silent = true, desc = "Toggle whitespace" })
 
 -- use J/K to go half page up/down
 vim.keymap.set("n", "J", "<C-d>zz")
