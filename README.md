@@ -16,7 +16,7 @@ pwsh install.ps1
 To double check what will happen, you can run:
 
 ```sh
-pwsh check.ps1 -whatIf
+pwsh install.ps1 -whatIf
 ```
 
 ## Overrides
