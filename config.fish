@@ -89,10 +89,24 @@ if begin
 else if begin
         type -q brew; and test -d /opt/homebrew/opt/asdf/
     end
-    source /opt/homebrew/opt/asdf/libexec/asdf.fish
+    source /opt/homebrew/opt/asdf/share/fish/vendor_completions.d/asdf.fish
 else if test -e ~/.asdf
     source ~/.asdf/asdf.fish
 end
+
+# ASDF configuration code
+if test -z $ASDF_DATA_DIR
+    set _asdf_shims "$HOME/.asdf/shims"
+else
+    set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+if not contains $_asdf_shims $PATH
+    set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
 
 # add yarn global binaries (directory comes from `yarn global bin`)
 if begin
