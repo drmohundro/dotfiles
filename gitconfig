@@ -119,13 +119,31 @@
 	extendRegexp = true
 	lineNumber = true
 
-[credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
-	# helper should be manager-core on Windows
+[user]
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE+M5Ln9qfysNMJGL6Xlkj3gsvjV6P+OIGiJ/+jgwHtE
 
-[includeif "hasconfig:remote.*.url:**/github.com/clearfunction/**"]
-  path = ~/dev/dotfiles/gitconfig-cf
+[gpg]
+	format = ssh
 
-# or [includeif "gitdir:~/dev/clearfunction/client/"]
-[includeif "hasconfig:remote.*.url:**/github.com/client/**"]
-  path = ~/dev/clearfunction/client/.gitconfig
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+	[commit]
+	gpgsign = true
+
+	[includeif "hasconfig:remote.*.url:**/github.com/clearfunction/**"]
+	path = ~/dev/dotfiles/gitconfig-cf
+
+# good place to include client-specific config (emails, signing or whatever)
+# variations include:
+# - [includeif "gitdir:~/dev/some-client/"]
+# - [includeif "hasconfig:remote.*.url:**/github.com/some-client/**"]
+[include]
+	path = ~/dev/dotfiles/gitconfig-client
+
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential

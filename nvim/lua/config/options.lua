@@ -5,3 +5,6 @@
 vim.g.mapleader = ","
 
 vim.g.snacks_animate = false
+
+vim.cmd("set listchars=tab:»\\ ,trail:·,eol:↲")
+vim.opt.list = false

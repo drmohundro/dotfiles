@@ -2,8 +2,18 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local function toggle_list()
+  if vim.opt.list:get() then
+    vim.cmd("setlocal nolist")
+    Snacks.indent.enable()
+  else
+    vim.cmd("setlocal list")
+    Snacks.indent.disable()
+  end
+end
+
 -- toggle showing whitespace
-vim.keymap.set("n", "<leader>uw", ":setlocal nolist!<cr>", { silent = true, desc = "Toggle whitespace" })
+vim.keymap.set("n", "<leader>uw", toggle_list, { silent = true, desc = "Toggle whitespace" })
 
 -- use J/K to go half page up/down
 vim.keymap.set("n", "J", "<C-d>zz")
@@ -35,6 +45,10 @@ else
   end, {})
   vim.keymap.set("", "<C-p>", function()
     Snacks.picker.files()
+  end, {})
+
+  vim.keymap.set("", "<leader>r", function()
+    Snacks.picker.recent()
   end, {})
 
   vim.keymap.set("", "<C-e>", function()

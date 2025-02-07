@@ -11,3 +11,5 @@ vim/spell
 vim/undodir
 
 .DS_Store
+
+gitconfig-client
