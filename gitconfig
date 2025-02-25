@@ -57,6 +57,7 @@
 
 [branch]
 	autosetuprebase = always
+	sort = -committerdate
 
 [pager]
 	difftool = true
@@ -65,7 +66,10 @@
 	# tool = bc
 	tool = difftastic
 	guitool = bc
-	colorMoved = default
+	colorMoved = plain
+	algorithm = histogram
+	mnemonicPrefix = true
+	renames = true
 [difftool]
 	prompt = false
 [difftool "difftastic"]
@@ -79,7 +83,7 @@
 	prompt = false
 
 [help]
-	autocorrect = 1
+	autocorrect = prompt
 
 [alias]
 	st = status
@@ -130,6 +134,7 @@
 
 	[commit]
 	gpgsign = true
+	verbose = true
 
 	[includeif "hasconfig:remote.*.url:**/github.com/clearfunction/**"]
 	path = ~/dev/dotfiles/gitconfig-cf
@@ -147,3 +152,21 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[column]
+	ui = auto
+[tag]
+	sort = version:refname
+[push]
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
