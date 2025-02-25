@@ -14,8 +14,9 @@
     "lazyvim.plugins.extras.lang.vue",
     "lazyvim.plugins.extras.linting.eslint"
   ],
+  "install_version": 7,
   "news": {
     "NEWS.md": "10960"
   },
-  "version": 7
+  "version": 8
 }
