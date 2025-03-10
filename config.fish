@@ -123,11 +123,6 @@ else
     echo "oh-my-posh wasn't found, using default prompt"
 end
 
-# direnv config
-if type -q direnv
-    direnv hook fish | source
-end
-
 if type -q jj
     jj util completion fish | source
 end
