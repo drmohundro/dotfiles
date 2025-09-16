@@ -1,5 +1,5 @@
 command = /opt/homebrew/bin/fish -l
-theme = catppuccin-macchiato
+theme = Catppuccin Macchiato
 
 font-family = Iosevka
 font-size = 16
@@ -14,3 +14,4 @@ shell-integration = fish
 # quake mode
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 quick-terminal-animation-duration = 0.1
+keybind = shift+enter=text:\n
