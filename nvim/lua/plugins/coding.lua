@@ -17,12 +17,17 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    opts = function()
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- disable K for hover
-      keys[#keys + 1] = { "K", false }
-      -- use C-h instead
-      keys[#keys + 1] = { "<C-h>", vim.lsp.buf.hover }
-    end,
+    opts = {
+      servers = {
+        ["*"] = {
+          keys = {
+            -- { "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", has = "definition"},
+
+            { "K", false },
+            { "<C-h>", vim.lsp.buf.hover },
+          },
+        },
+      },
+    },
   },
 }
