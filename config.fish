@@ -4,45 +4,46 @@ set -gx EDITOR nvim
 # avoid the delay of (brew --prefix)
 if test -e /usr/local/bin
     set BREW_PREFIX = /usr/local
-    set -gx PATH $BREW_PREFIX/bin $PATH
-    set -gx PATH $BREW_PREFIX/sbin $PATH
+    fish_add_path --prepend $BREW_PREFIX/bin
+    fish_add_path --prepend $BREW_PREFIX/sbin
 end
 
 # m1 homebrew installs here instead
 if test -e /opt/homebrew/bin
     set BREW_PREFIX = /opt/homebrew
-    set -gx PATH $BREW_PREFIX/bin $PATH
-    set -gx PATH $BREW_PREFIX/sbin $PATH
+    fish_add_path --prepend $BREW_PREFIX/bin
+    fish_add_path --prepend $BREW_PREFIX/sbin
 end
 
-if test -e ~/.dotnet/tools
-    set -gx PATH $PATH ~/.dotnet/tools
-end
-
-if test -e /usr/local/share/dotnet
-    set -gx PATH $PATH /usr/local/share/dotnet
-end
-
-if test -e ~/.local/bin
-    set -gx PATH $PATH ~/.local/bin
-end
-
-set -gx PATH $PATH /usr/local/opt/postgresql@15/bin
+fish_add_path ~/.dotnet/tools
+fish_add_path /usr/local/share/dotnet
+fish_add_path ~/.local/bin
+fish_add_path /usr/local/opt/postgresql@15/bin
+fish_add_path /Applications/Obsidian.app/Contents/MacOS
 
 # use gnu versions of coreutils/findutils
 if type -q brew
     # via `brew --prefix FORMULA`... hardcoding for speed, though
-    set -gx PATH $BREW_PREFIX/opt/coreutils/libexec/gnubin $PATH
-    set -gx PATH $BREW_PREFIX/opt/findutils/libexec/gnubin $PATH
-    set -gx PATH $BREW_PREFIX/opt/grep/libexec/gnubin $PATH
+
+    fish_add_path --prepend $BREW_PREFIX/opt/coreutils/libexec/gnubin
+    fish_add_path --prepend $BREW_PREFIX/opt/findutils/libexec/gnubin
+    fish_add_path --prepend $BREW_PREFIX/opt/grep/libexec/gnubin
 end
 
-if test -e ~/dev/flutter
-    set -gx PATH $PATH ~/dev/flutter/bin
-end
+fish_add_path ~/dev/flutter/bin
+fish_add_path --prepend ~/bin
 
-# local binaries
-set PATH ~/bin $PATH
+# rust global binaries
+fish_add_path ~/.cargo/bin
+
+# go global binaries
+if test -e ~/go
+    set -x GOPATH ~/go
+    set -x GOROOT /usr/local/opt/go/libexec
+
+    fish_add_path $GOPATH/bin
+    fish_add_path $GOROOT/bin
+end
 
 fzf --fish | source
 
@@ -53,39 +54,19 @@ else
     set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*"'
 end
 
-# rust global binaries
-if test -e ~/.cargo
-    set -gx PATH $PATH ~/.cargo/bin
-end
-
-# krew for kubectl
-if test -e ~/.krew
-    set -gx PATH $PATH ~/.krew/bin
-end
-
-# go global binaries
-if test -e ~/go
-    set -x GOPATH ~/go
-    set -x GOROOT /usr/local/opt/go/libexec
-    set -gx PATH $PATH $GOPATH/bin
-    set -gx PATH $PATH $GOROOT/bin
-end
-
 if type -q uv
     uv generate-shell-completion fish | source
+end
+
+if type -q mani
+    mani completion fish | source
 end
 
 # android tooling
 if test -e ~/Library/Android/sdk
     set -gx ANDROID_SDK ~/Library/Android/sdk
-    set -gx PATH $PATH ~/Library/Android/sdk/platform-tools
-end
 
-# add yarn global binaries (directory comes from `yarn global bin`)
-if begin
-        type -q yarn; and test -e ~/.config/yarn/global/node_modules/.bin
-    end
-    set -gx PATH $PATH ~/.config/yarn/global/node_modules/.bin
+    fish_add_path ~/Library/Android/sdk/platform-tools
 end
 
 # see https://junegunn.kr/2015/03/browsing-git-commits-with-fzf
@@ -133,16 +114,7 @@ complete --command aws --no-files --arguments '(begin; set --local --export COMP
 # zoxide (like autojump/fasd/z)
 zoxide init fish --cmd j --hook pwd | source
 
-### iTerm 2 shell integration
-
-if test -e ~/.iterm2_shell_integration.fish
-    source ~/.iterm2_shell_integration.fish
-end
-
-function iterm2_print_user_vars
-    iterm2_set_user_var rubyVersion (ruby -v | awk '{ print $2 }')
-    iterm2_set_user_var nodeVersion (node -v)
-end
+eval "$(fnox activate fish)"
 
 if status --is-interactive
     atuin init fish --disable-up-arrow | source
