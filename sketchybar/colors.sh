@@ -1,0 +1,14 @@
+#!/bin/bash
+# Catppuccin Mocha
+BASE=0xff1e1e2e
+SURFACE0=0xff313244
+SURFACE1=0xff45475a
+TEXT=0xffcdd6f4
+SUBTEXT0=0xffa6adc8
+BLUE=0xff89b4fa
+TEAL=0xff94e2d5
+GREEN=0xffa6e3a1
+YELLOW=0xfff9e2af
+RED=0xfff38ba8
+MAUVE=0xffcba6f7
+PEACH=0xfffab387

@@ -15,3 +15,8 @@ shell-integration = fish
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 quick-terminal-animation-duration = 0.1
 keybind = shift+enter=text:\n
+
+# Presentation
+
+# theme = DayFox
+# font-size = 24

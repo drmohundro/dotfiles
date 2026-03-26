@@ -1,0 +1,130 @@
+#!/bin/bash
+
+source "$CONFIG_DIR/colors.sh"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar #####
+sketchybar --bar \
+  position=top \
+  height=36 \
+  blur_radius=0 \
+  color=$BASE \
+  padding_left=12 \
+  padding_right=12
+
+##### Defaults #####
+sketchybar --default \
+  padding_left=4 \
+  padding_right=4 \
+  icon.font="Hack Nerd Font:Bold:15.0" \
+  label.font="Hack Nerd Font:Bold:13.0" \
+  icon.color=$TEXT \
+  label.color=$TEXT \
+  icon.padding_left=6 \
+  icon.padding_right=4 \
+  label.padding_left=4 \
+  label.padding_right=6 \
+  background.color=$SURFACE0 \
+  background.corner_radius=8 \
+  background.height=26 \
+  background.drawing=off
+
+##### Spaces #####
+for i in {1..9}; do
+  sketchybar --add space space.$i left \
+    --set space.$i \
+    space=$i \
+    icon="$i" \
+    icon.padding_left=8 \
+    icon.padding_right=8 \
+    background.drawing=on \
+    background.color=$SURFACE0 \
+    background.corner_radius=6 \
+    background.height=24 \
+    label.drawing=off \
+    script="$PLUGIN_DIR/space.sh" \
+    click_script="hs -c 'switchToSpace($i)'"
+done
+
+##### Front App #####
+sketchybar --add item front_app left \
+  --set front_app \
+  icon.drawing=off \
+  label.color=$MAUVE \
+  padding_left=12 \
+  script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched
+
+##### Clock (Right, far right) #####
+sketchybar --add item clock right \
+  --set clock \
+  update_freq=20 \
+  icon=󰥔 \
+  icon.color=$BLUE \
+  background.drawing=on \
+  script="$PLUGIN_DIR/clock.sh"
+
+##### WiFi (Right) #####
+sketchybar --add item wifi right \
+  --set wifi \
+  update_freq=10 \
+  background.drawing=on \
+  script="$PLUGIN_DIR/wifi.sh"
+
+##### Battery (Right) #####
+sketchybar --add item battery right \
+  --set battery \
+  update_freq=120 \
+  background.drawing=on \
+  script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change
+
+##### Volume (Right) #####
+sketchybar --add item volume right \
+  --set volume \
+  icon.color=$YELLOW \
+  background.drawing=on \
+  script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change
+
+##### Memory (Right) #####
+sketchybar --add item memory right \
+  --set memory \
+  update_freq=30 \
+  icon=󰍛 \
+  icon.color=$MAUVE \
+  background.drawing=on \
+  script="$PLUGIN_DIR/memory.sh"
+
+##### CPU (Right) #####
+sketchybar --add item cpu right \
+  --set cpu \
+  update_freq=5 \
+  icon=󰘚 \
+  icon.color=$BLUE \
+  background.drawing=on \
+  script="$PLUGIN_DIR/cpu.sh"
+
+##### Media (Right) #####
+sketchybar --add item media right \
+  --set media \
+  update_freq=5 \
+  icon=󰝚 \
+  icon.color=$GREEN \
+  label.color=$GREEN \
+  drawing=off \
+  background.drawing=on \
+  script="$PLUGIN_DIR/media.sh"
+
+##### Calendar (Right) #####
+sketchybar --add item calendar right \
+  --set calendar \
+  update_freq=60 \
+  icon=󰃭 \
+  icon.color=$PEACH \
+  label.color=$PEACH \
+  drawing=off \
+  background.drawing=on \
+  script="$PLUGIN_DIR/calendar.sh"
+
+sketchybar --update
