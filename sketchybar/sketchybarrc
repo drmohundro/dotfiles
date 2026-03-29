@@ -64,9 +64,16 @@ sketchybar --add item clock right \
   background.drawing=on \
   script="$PLUGIN_DIR/clock.sh"
 
-##### WiFi (Right) #####
+##### WiFi — full (icon + IP, external monitor) #####
 sketchybar --add item wifi right \
   --set wifi \
+  update_freq=10 \
+  background.drawing=on \
+  script="$PLUGIN_DIR/wifi.sh"
+
+##### WiFi — icon only (laptop condensed view) #####
+sketchybar --add item wifi_icon right \
+  --set wifi_icon \
   update_freq=10 \
   background.drawing=on \
   script="$PLUGIN_DIR/wifi.sh"
@@ -127,4 +134,14 @@ sketchybar --add item calendar right \
   background.drawing=on \
   script="$PLUGIN_DIR/calendar.sh"
 
+##### Display setup — runs on start and when displays change #####
+sketchybar --add item display_setup left \
+  --set display_setup \
+  drawing=off \
+  script="$PLUGIN_DIR/display_setup.sh" \
+  --subscribe display_setup display_change system_woke
+
 sketchybar --update
+
+# Run display setup immediately on load
+"$PLUGIN_DIR/display_setup.sh"
