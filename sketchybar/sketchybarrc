@@ -29,31 +29,36 @@ sketchybar --default \
   background.height=26 \
   background.drawing=off
 
-##### Spaces #####
-for i in {1..9}; do
-  sketchybar --add space space.$i left \
+##### Aerospace Workspaces #####
+sketchybar --add event aerospace_workspace_change
+
+declare -A SPACE_ICONS=(
+  [1]="1 󰘐"  # coding
+  [2]="2 󰖟"  # browser
+  [3]="3 󰒱"  # slack
+  [4]="4 󰇮"  # email
+  [5]="5 󰝚"  # music
+  [6]="6 󰆼"  # database
+  [7]="7 󰠦"  # misc
+  [8]="8 󰊖"  # gaming
+)
+
+for i in 1 2 3 4 5 6 7 8; do
+  sketchybar --add item space.$i left \
     --set space.$i \
-    space=$i \
-    icon="$i" \
-    icon.padding_left=8 \
-    icon.padding_right=8 \
-    background.drawing=on \
-    background.color=$SURFACE0 \
-    background.corner_radius=6 \
-    background.height=24 \
-    label.drawing=off \
-    script="$PLUGIN_DIR/space.sh" \
-    click_script="hs -c 'switchToSpace($i)'"
+      icon="${SPACE_ICONS[$i]}" \
+      icon.padding_left=8 \
+      icon.padding_right=8 \
+      label.drawing=off \
+      background.drawing=on \
+      background.color=$SURFACE0 \
+      background.corner_radius=6 \
+      background.height=24 \
+      script="$PLUGIN_DIR/space.sh" \
+      click_script="aerospace workspace $i" \
+    --subscribe space.$i aerospace_workspace_change front_app_switched
 done
 
-##### Front App #####
-sketchybar --add item front_app left \
-  --set front_app \
-  icon.drawing=off \
-  label.color=$MAUVE \
-  padding_left=12 \
-  script="$PLUGIN_DIR/front_app.sh" \
-  --subscribe front_app front_app_switched
 
 ##### Clock (Right, far right) #####
 sketchybar --add item clock right \
@@ -145,3 +150,7 @@ sketchybar --update
 
 # Run display setup immediately on load
 "$PLUGIN_DIR/display_setup.sh"
+
+# Highlight the currently focused aerospace workspace
+FOCUSED=$(aerospace list-workspaces --focused 2>/dev/null)
+[[ -n "$FOCUSED" ]] && sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$FOCUSED"
