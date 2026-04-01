@@ -38,9 +38,8 @@ declare -A SPACE_ICONS=(
   [3]="3 󰒱"  # slack
   [4]="4 󰇮"  # email
   [5]="5 󰝚"  # music
-  [6]="6 󰆼"  # database
-  [7]="7 󰠦"  # misc
-  [8]="8 󰊖"  # gaming
+  [6]="6 󰠦"  # misc
+  [7]="7 󰊖"  # gaming
 )
 
 for i in 1 2 3 4 5 6 7 8; do

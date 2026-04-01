@@ -20,54 +20,62 @@ outer.top        = [{ monitor."Built-in" = 8 }, 40]
 3 = 'built-in'  # slack
 4 = 'built-in'  # email
 5 = 'built-in'  # music
-6 = 'main'      # database
-7 = 'built-in'  # misc
-8 = 'main'      # gaming
+6 = 'built-in'  # misc
+7 = 'main'      # gaming
 
 # --- App Rules ---
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCodeInsiders'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.rider'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.datagrip'
-run = 'move-node-to-workspace 6'
+if.during-aerospace-startup = true
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.intellij'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.webstorm'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.pycharm'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.goland'
+if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.valvesoftware.steam'
-run = 'move-node-to-workspace 8'
+run = 'move-node-to-workspace 7'
 
 [[on-window-detected]]
 if.app-id = 'com.codeweavers.CrossOver'
-run = 'move-node-to-workspace 8'
+run = 'move-node-to-workspace 7'
 
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
@@ -110,7 +118,6 @@ alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
 alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
 
 # Move window to workspace and follow
 alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
@@ -120,7 +127,6 @@ alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
 alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
 alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
 alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 
 # Join
 alt-ctrl-h = 'join-with left'
