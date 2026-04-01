@@ -1,7 +1,16 @@
 #!/bin/bash
 source "$CONFIG_DIR/colors.sh"
 
-FOCUSED="${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused 2>/dev/null)}"
+CACHE="/tmp/aerospace_focused_workspace"
+
+# Keep cache up to date when workspace changes
+if [ "$SENDER" = "aerospace_workspace_change" ]; then
+  echo "$FOCUSED_WORKSPACE" > "$CACHE"
+fi
+
+FOCUSED="${FOCUSED_WORKSPACE:-$(cat "$CACHE" 2>/dev/null)}"
+
+# Workspace items are named space.1 through space.7 (numeric)
 WORKSPACE="${NAME#space.}"
 
 if [ "$WORKSPACE" = "$FOCUSED" ]; then
@@ -10,11 +19,10 @@ if [ "$WORKSPACE" = "$FOCUSED" ]; then
   else
     APP=$(aerospace list-windows --focused --format '%{app-name}' 2>/dev/null | head -1)
   fi
-
   sketchybar --set "$NAME" \
     background.color=$MAUVE \
     icon.color=$BASE \
-    label="${APP}" \
+    label="$APP" \
     label.color=$BASE \
     label.drawing=on
 else

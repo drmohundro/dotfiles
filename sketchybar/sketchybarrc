@@ -29,8 +29,8 @@ sketchybar --default \
   background.height=26 \
   background.drawing=off
 
-##### Aerospace Workspaces #####
-sketchybar --add event aerospace_workspace_change
+##### FlashSpace Workspaces #####
+sketchybar --add event flashspace_workspace_change
 
 declare -A SPACE_ICONS=(
   [1]="1 󰘐"  # coding
@@ -42,7 +42,12 @@ declare -A SPACE_ICONS=(
   [7]="7 󰊖"  # gaming
 )
 
-for i in 1 2 3 4 5 6 7 8; do
+WORKSPACE_NAMES=(coding browser slack email music misc gaming)
+
+for i in 1 2 3 4 5 6 7; do
+  WS_NAME="${WORKSPACE_NAMES[$((i-1))]}"
+  # To use AeroSpace: swap script to aerospace.sh, click_script to "aerospace workspace $i",
+  # and event to aerospace_workspace_change
   sketchybar --add item space.$i left \
     --set space.$i \
       icon="${SPACE_ICONS[$i]}" \
@@ -53,9 +58,9 @@ for i in 1 2 3 4 5 6 7 8; do
       background.color=$SURFACE0 \
       background.corner_radius=6 \
       background.height=24 \
-      script="$PLUGIN_DIR/space.sh" \
-      click_script="aerospace workspace $i" \
-    --subscribe space.$i aerospace_workspace_change front_app_switched
+      script="$PLUGIN_DIR/flashspace.sh" \
+      click_script="flashspace workspace $WS_NAME" \
+    --subscribe space.$i flashspace_workspace_change front_app_switched
 done
 
 
@@ -150,6 +155,6 @@ sketchybar --update
 # Run display setup immediately on load
 "$PLUGIN_DIR/display_setup.sh"
 
-# Highlight the currently focused aerospace workspace
-FOCUSED=$(aerospace list-workspaces --focused 2>/dev/null)
-[[ -n "$FOCUSED" ]] && sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$FOCUSED"
+# Highlight the currently focused FlashSpace workspace
+FOCUSED=$(flashspace get-workspace 2>/dev/null)
+[[ -n "$FOCUSED" ]] && sketchybar --trigger flashspace_workspace_change WORKSPACE="$FOCUSED"
