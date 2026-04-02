@@ -15,7 +15,7 @@ INDEX="${NAME#space.}"
 WORKSPACE_NAME="${WORKSPACE_NAMES[$((INDEX-1))]}"
 
 if [ "$WORKSPACE_NAME" = "$FOCUSED" ]; then
-  APP="${INFO:-$(flashspace get-app 2>/dev/null)}"
+  APP="${INFO:-$(/opt/homebrew/bin/flashspace get-app 2>/dev/null)}"
   sketchybar --set "$NAME" \
     background.color=$MAUVE \
     icon.color=$BASE \
