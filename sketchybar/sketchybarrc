@@ -159,7 +159,75 @@ sketchybar --add item media right \
     label.color=$GREEN \
     drawing=off \
     background.drawing=on \
-    script="$PLUGIN_DIR/media.sh"
+    script="$PLUGIN_DIR/media.sh" \
+    click_script="sketchybar --set media popup.drawing=toggle" \
+    popup.background.drawing=on \
+    popup.background.color=$SURFACE0 \
+    popup.background.corner_radius=10
+
+# Popup: album art (media.sh resizes to 100x100 before setting this)
+sketchybar --add item media.art popup.media \
+  --set media.art \
+    padding_left=8 padding_right=8 \
+    background.drawing=on \
+    background.color=$SURFACE0 \
+    background.image.string="/tmp/sketchybar_album_art.jpg" \
+    background.image.scale=1.0 \
+    background.corner_radius=8 \
+    background.height=200 \
+    width=200 \
+    label.drawing=off \
+    icon.drawing=off
+
+# Popup: track info (tight padding so lines stay close together)
+sketchybar --add item media.title popup.media \
+  --set media.title \
+    padding_left=8 padding_right=8 \
+    label="—" \
+    label.color=$TEXT \
+    label.font="Hack Nerd Font:Bold:14.0" \
+    label.padding_left=0 label.padding_right=0 \
+    icon.drawing=off \
+    background.drawing=off
+
+sketchybar --add item media.artist popup.media \
+  --set media.artist \
+    padding_left=8 padding_right=8 \
+    label="—" \
+    label.color=$BLUE \
+    label.font="Hack Nerd Font:Bold:12.0" \
+    label.padding_left=0 label.padding_right=0 \
+    icon.drawing=off \
+    background.drawing=off
+
+sketchybar --add item media.album popup.media \
+  --set media.album \
+    padding_left=8 padding_right=8 \
+    label="—" \
+    label.color=$SUBTEXT0 \
+    label.font="Hack Nerd Font:Bold:12.0" \
+    label.padding_left=0 label.padding_right=0 \
+    icon.drawing=off \
+    background.drawing=off
+
+# Popup: playback controls
+sketchybar --add item media.playpause popup.media \
+  --set media.playpause \
+    padding_left=8 padding_right=8 \
+    background.height=32 background.drawing=off \
+    icon=󰏤 icon.color=$GREEN icon.font="Hack Nerd Font:Bold:18.0" \
+    icon.padding_left=0 icon.padding_right=0 \
+    label.drawing=off \
+    click_script="osascript -e 'tell application \"Music\" to playpause'"
+
+sketchybar --add item media.next popup.media \
+  --set media.next \
+    padding_left=8 padding_right=8 \
+    background.height=32 background.drawing=off \
+    icon=󰒭 icon.color=$TEXT icon.font="Hack Nerd Font:Bold:18.0" \
+    icon.padding_left=0 icon.padding_right=0 \
+    label.drawing=off \
+    click_script="osascript -e 'tell application \"Music\" to next track'"
 
 ##### Calendar #####
 sketchybar --add item calendar right \
