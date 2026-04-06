@@ -1,6 +1,14 @@
 #!/bin/bash
 source "$CONFIG_DIR/colors.sh"
 
+if [ "$SENDER" = "mouse.entered" ]; then
+  sketchybar --set "$NAME" label.drawing=on
+  exit 0
+elif [ "$SENDER" = "mouse.exited" ]; then
+  sketchybar --set "$NAME" label.drawing=off
+  exit 0
+fi
+
 PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
 CHARGING=$(pmset -g batt | grep 'AC Power')
 
@@ -9,16 +17,25 @@ if [ -z "$PERCENTAGE" ]; then
 fi
 
 if [ -n "$CHARGING" ]; then
-  ICON="󰂄"
+  ICON="􀢋"
   COLOR=$GREEN
 else
-  case "${PERCENTAGE}" in
-    9[0-9]|100) ICON="󰁹"; COLOR=$GREEN ;;
-    [6-8][0-9])  ICON="󰂁"; COLOR=$GREEN ;;
-    [3-5][0-9])  ICON="󰁾"; COLOR=$YELLOW ;;
-    [1-2][0-9])  ICON="󰁻"; COLOR=$YELLOW ;;
-    *)           ICON="󰁺"; COLOR=$RED ;;
-  esac
+  if [ "$PERCENTAGE" -ge 100 ]; then
+    ICON="􀛨"
+    COLOR=$TEXT
+  elif [ "$PERCENTAGE" -ge 75 ]; then
+    ICON="􀺸"
+    COLOR=$TEXT
+  elif [ "$PERCENTAGE" -ge 50 ]; then
+    ICON="􀺶"
+    COLOR=$TEXT
+  elif [ "$PERCENTAGE" -ge 25 ]; then
+    ICON="􀛩"
+    COLOR=$YELLOW
+  else
+    ICON="􀛪"
+    COLOR=$RED
+  fi
 fi
 
 sketchybar --set "$NAME" \

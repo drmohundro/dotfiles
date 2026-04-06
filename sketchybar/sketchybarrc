@@ -29,6 +29,78 @@ sketchybar --default \
   background.height=26 \
   background.drawing=off
 
+##### Apple Menu #####
+sketchybar --add item apple left \
+  --set apple \
+  icon=􀣺 \
+  icon.font="SF Pro:Black:16.0" \
+  icon.color=$TEXT \
+  label.drawing=off \
+  background.drawing=on \
+  click_script="sketchybar --set apple popup.drawing=toggle" \
+  popup.background.drawing=on \
+  popup.background.color=$BASE \
+  popup.background.corner_radius=10 \
+  popup.background.border_width=1 \
+  popup.background.border_color=$SURFACE1 \
+  popup.horizontal=false \
+  popup.y_offset=2
+
+sketchybar --add item apple.preferences popup.apple \
+  --set apple.preferences \
+  icon=􀺽 \
+  icon.color=$BLUE \
+  label="System Settings" \
+  label.color=$TEXT \
+  background.drawing=on \
+  background.color=0x00000000 \
+  background.height=30 \
+  click_script="open -b com.apple.systempreferences; sketchybar --set apple popup.drawing=off"
+
+sketchybar --add item apple.lock popup.apple \
+  --set apple.lock \
+  icon=󰌾 \
+  icon.color=$YELLOW \
+  label="Lock Screen" \
+  label.color=$TEXT \
+  background.drawing=on \
+  background.color=0x00000000 \
+  background.height=30 \
+  click_script="pmset displaysleepnow; sketchybar --set apple popup.drawing=off"
+
+sketchybar --add item apple.sleep popup.apple \
+  --set apple.sleep \
+  icon=󰒲 \
+  icon.color=$TEAL \
+  label="Sleep" \
+  label.color=$TEXT \
+  background.drawing=on \
+  background.color=0x00000000 \
+  background.height=30 \
+  click_script="pmset sleepnow; sketchybar --set apple popup.drawing=off"
+
+sketchybar --add item apple.restart popup.apple \
+  --set apple.restart \
+  icon=󰑓 \
+  icon.color=$PEACH \
+  label="Restart…" \
+  label.color=$TEXT \
+  background.drawing=on \
+  background.color=0x00000000 \
+  background.height=30 \
+  click_script="osascript -e 'tell app \"System Events\" to restart'; sketchybar --set apple popup.drawing=off"
+
+sketchybar --add item apple.shutdown popup.apple \
+  --set apple.shutdown \
+  icon=󰐥 \
+  icon.color=$RED \
+  label="Shut Down…" \
+  label.color=$TEXT \
+  background.drawing=on \
+  background.color=0x00000000 \
+  background.height=30 \
+  click_script="osascript -e 'tell app \"System Events\" to shut down'; sketchybar --set apple popup.drawing=off"
+
 ##### FlashSpace Workspaces #####
 sketchybar --add event flashspace_workspace_change
 
@@ -37,231 +109,232 @@ SPACE_ICONS=("1 󰘐" "2 󰖟" "3 󰒱" "4 󰇮" "5 󰝚" "6 󰠦" "7 󰊖")
 for i in {1..7}; do
   sketchybar --add item "space.$i" left \
     --set "space.$i" \
-      icon="${SPACE_ICONS[$((i-1))]}" \
-      icon.padding_left=8 \
-      icon.padding_right=8 \
-      label.drawing=off \
-      background.drawing=on \
-      background.color=$SURFACE0 \
-      background.corner_radius=6 \
-      background.height=24 \
-      script="$PLUGIN_DIR/flashspace.sh" \
+    icon="${SPACE_ICONS[$((i - 1))]}" \
+    icon.padding_left=8 \
+    icon.padding_right=8 \
+    label.drawing=off \
+    background.drawing=on \
+    background.color=$SURFACE0 \
+    background.corner_radius=6 \
+    background.height=24 \
+    script="$PLUGIN_DIR/flashspace.sh" \
     --subscribe "space.$i" flashspace_workspace_change front_app_switched
 done
 
 # Highlight the focused workspace on startup
 FOCUSED=$(/opt/homebrew/bin/flashspace get-workspace 2>/dev/null)
 if [ -n "$FOCUSED" ]; then
-  echo "$FOCUSED" > /tmp/flashspace_focused_workspace
+  echo "$FOCUSED" >/tmp/flashspace_focused_workspace
   sketchybar --trigger flashspace_workspace_change WORKSPACE="$FOCUSED"
 fi
 
 ##### Clock #####
 sketchybar --add item clock right \
   --set clock \
-    update_freq=20 \
-    icon=󰥔 \
-    icon.color=$BLUE \
-    background.drawing=on \
-    script="$PLUGIN_DIR/clock.sh"
+  update_freq=20 \
+  icon=󰥔 \
+  icon.color=$BLUE \
+  background.drawing=on \
+  script="$PLUGIN_DIR/clock.sh"
 
 ##### Network pill: wifi icon + stacked public/internal IPs #####
 sketchybar --add item net_speed right \
   --set net_speed \
-    update_freq=300 \
-    icon="..." \
-    icon.color=$PEACH \
-    icon.font="Hack Nerd Font:Bold:11.0" \
-    icon.y_offset=7 \
-    icon.padding_left=6 \
-    icon.padding_right=0 \
-    icon.width=115 \
-    label="..." \
-    label.color=$TEXT \
-    label.font="Hack Nerd Font:Bold:11.0" \
-    label.y_offset=-7 \
-    label.padding_left=-109 \
-    label.padding_right=2 \
-    background.drawing=off \
-    script="$PLUGIN_DIR/network.sh"
+  update_freq=300 \
+  icon="..." \
+  icon.color=$PEACH \
+  icon.font="Hack Nerd Font:Bold:11.0" \
+  icon.y_offset=7 \
+  icon.padding_left=6 \
+  icon.padding_right=0 \
+  icon.width=115 \
+  label="..." \
+  label.color=$TEXT \
+  label.font="Hack Nerd Font:Bold:11.0" \
+  label.y_offset=-7 \
+  label.padding_left=-109 \
+  label.padding_right=2 \
+  background.drawing=off \
+  script="$PLUGIN_DIR/network.sh"
 
 sketchybar --add item net_icon right \
   --set net_icon \
-    icon=󰤨 \
-    icon.color=$BLUE \
-    label.drawing=off \
-    padding_right=0 \
-    background.drawing=off
+  icon=󰤨 \
+  icon.color=$BLUE \
+  label.drawing=off \
+  padding_right=0 \
+  background.drawing=off
 
 sketchybar --add bracket net_bracket net_icon net_speed \
   --set net_bracket \
-    background.drawing=on \
-    background.corner_radius=8 \
-    background.height=30
+  background.drawing=on \
+  background.corner_radius=8 \
+  background.height=30
 
 ##### WiFi icon (standalone, shown on laptop screen when external monitor connected) #####
 sketchybar --add item wifi_icon right \
   --set wifi_icon \
-    update_freq=10 \
-    background.drawing=on \
-    script="$PLUGIN_DIR/wifi.sh"
+  update_freq=10 \
+  background.drawing=on \
+  script="$PLUGIN_DIR/wifi.sh"
 
 ##### Battery #####
 sketchybar --add item battery right \
   --set battery \
-    update_freq=120 \
-    background.drawing=on \
-    script="$PLUGIN_DIR/battery.sh" \
-  --subscribe battery system_woke power_source_change
+  update_freq=120 \
+  label.drawing=off \
+  background.drawing=on \
+  script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change mouse.entered mouse.exited
 
 ##### Volume #####
 sketchybar --add item volume right \
   --set volume \
-    icon.color=$YELLOW \
-    background.drawing=on \
-    script="$PLUGIN_DIR/volume.sh" \
-  --subscribe volume volume_change
+  label.drawing=off \
+  background.drawing=on \
+  script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change mouse.entered mouse.exited
 
 ##### Memory graph #####
 sketchybar --add graph memory right 45 \
   --set memory \
-    update_freq=5 \
-    icon=󰍛 \
-    icon.color=$MAUVE \
-    label="ram 0%" \
-    label.color=$TEXT \
-    background.drawing=on \
-    graph.color=$MAUVE \
-    graph.fill_color=0x44cba6f7 \
-    graph.line_width=1.5 \
-    script="$PLUGIN_DIR/memory.sh"
+  update_freq=5 \
+  icon=󰍛 \
+  icon.color=$MAUVE \
+  label="ram 0%" \
+  label.color=$TEXT \
+  background.drawing=on \
+  graph.color=$MAUVE \
+  graph.fill_color=0x44cba6f7 \
+  graph.line_width=1.5 \
+  script="$PLUGIN_DIR/memory.sh"
 
 ##### CPU graph #####
 sketchybar --add graph cpu right 45 \
   --set cpu \
-    update_freq=5 \
-    icon=󰘚 \
-    icon.color=$BLUE \
-    label="cpu 0%" \
-    label.color=$TEXT \
-    background.drawing=on \
-    graph.color=$BLUE \
-    graph.fill_color=0x4489b4fa \
-    graph.line_width=1.5 \
-    script="$PLUGIN_DIR/cpu.sh"
+  update_freq=5 \
+  icon=󰘚 \
+  icon.color=$BLUE \
+  label="cpu 0%" \
+  label.color=$TEXT \
+  background.drawing=on \
+  graph.color=$BLUE \
+  graph.fill_color=0x4489b4fa \
+  graph.line_width=1.5 \
+  script="$PLUGIN_DIR/cpu.sh"
 
 ##### Media #####
 sketchybar --add item media right \
   --set media \
-    update_freq=5 \
-    icon=󰝚 \
-    icon.color=$GREEN \
-    label.color=$GREEN \
-    drawing=off \
-    background.drawing=on \
-    script="$PLUGIN_DIR/media.sh" \
-    click_script="sketchybar --set media popup.drawing=toggle" \
-    popup.background.drawing=on \
-    popup.background.color=$SURFACE0 \
-    popup.background.corner_radius=10
+  update_freq=5 \
+  icon=󰝚 \
+  icon.color=$GREEN \
+  label.color=$GREEN \
+  drawing=off \
+  background.drawing=on \
+  script="$PLUGIN_DIR/media.sh" \
+  click_script="sketchybar --set media popup.drawing=toggle" \
+  popup.background.drawing=on \
+  popup.background.color=$SURFACE0 \
+  popup.background.corner_radius=10
 
 # Popup: album art (media.sh resizes to 100x100 before setting this)
 sketchybar --add item media.art popup.media \
   --set media.art \
-    padding_left=8 padding_right=8 \
-    background.drawing=on \
-    background.color=$SURFACE0 \
-    background.image.string="/tmp/sketchybar_album_art.jpg" \
-    background.image.scale=1.0 \
-    background.corner_radius=8 \
-    background.height=200 \
-    width=200 \
-    label.drawing=off \
-    icon.drawing=off
+  padding_left=8 padding_right=8 \
+  background.drawing=on \
+  background.color=$SURFACE0 \
+  background.image.string="/tmp/sketchybar_album_art.jpg" \
+  background.image.scale=1.0 \
+  background.corner_radius=8 \
+  background.height=200 \
+  width=200 \
+  label.drawing=off \
+  icon.drawing=off
 
 # Popup: track info (tight padding so lines stay close together)
 sketchybar --add item media.title popup.media \
   --set media.title \
-    padding_left=8 padding_right=8 \
-    label="—" \
-    label.color=$TEXT \
-    label.font="Hack Nerd Font:Bold:14.0" \
-    label.padding_left=0 label.padding_right=0 \
-    icon.drawing=off \
-    background.drawing=off
+  padding_left=8 padding_right=8 \
+  label="—" \
+  label.color=$TEXT \
+  label.font="Hack Nerd Font:Bold:14.0" \
+  label.padding_left=0 label.padding_right=0 \
+  icon.drawing=off \
+  background.drawing=off
 
 sketchybar --add item media.artist popup.media \
   --set media.artist \
-    padding_left=8 padding_right=8 \
-    label="—" \
-    label.color=$BLUE \
-    label.font="Hack Nerd Font:Bold:12.0" \
-    label.padding_left=0 label.padding_right=0 \
-    icon.drawing=off \
-    background.drawing=off
+  padding_left=8 padding_right=8 \
+  label="—" \
+  label.color=$BLUE \
+  label.font="Hack Nerd Font:Bold:12.0" \
+  label.padding_left=0 label.padding_right=0 \
+  icon.drawing=off \
+  background.drawing=off
 
 sketchybar --add item media.album popup.media \
   --set media.album \
-    padding_left=8 padding_right=8 \
-    label="—" \
-    label.color=$SUBTEXT0 \
-    label.font="Hack Nerd Font:Bold:12.0" \
-    label.padding_left=0 label.padding_right=0 \
-    icon.drawing=off \
-    background.drawing=off
+  padding_left=8 padding_right=8 \
+  label="—" \
+  label.color=$SUBTEXT0 \
+  label.font="Hack Nerd Font:Bold:12.0" \
+  label.padding_left=0 label.padding_right=0 \
+  icon.drawing=off \
+  background.drawing=off
 
 # Popup: playback controls
 sketchybar --add item media.playpause popup.media \
   --set media.playpause \
-    padding_left=8 padding_right=8 \
-    background.height=32 background.drawing=off \
-    icon=󰏤 icon.color=$GREEN icon.font="Hack Nerd Font:Bold:18.0" \
-    icon.padding_left=0 icon.padding_right=0 \
-    label.drawing=off \
-    click_script="osascript -e 'tell application \"Music\" to playpause'"
+  padding_left=8 padding_right=8 \
+  background.height=32 background.drawing=off \
+  icon=󰏤 icon.color=$GREEN icon.font="Hack Nerd Font:Bold:18.0" \
+  icon.padding_left=0 icon.padding_right=0 \
+  label.drawing=off \
+  click_script="osascript -e 'tell application \"Music\" to playpause'"
 
 sketchybar --add item media.next popup.media \
   --set media.next \
-    padding_left=8 padding_right=8 \
-    background.height=32 background.drawing=off \
-    icon=󰒭 icon.color=$TEXT icon.font="Hack Nerd Font:Bold:18.0" \
-    icon.padding_left=0 icon.padding_right=0 \
-    label.drawing=off \
-    click_script="osascript -e 'tell application \"Music\" to next track'"
+  padding_left=8 padding_right=8 \
+  background.height=32 background.drawing=off \
+  icon=󰒭 icon.color=$TEXT icon.font="Hack Nerd Font:Bold:18.0" \
+  icon.padding_left=0 icon.padding_right=0 \
+  label.drawing=off \
+  click_script="osascript -e 'tell application \"Music\" to next track'"
 
 ##### Calendar #####
 sketchybar --add item calendar right \
   --set calendar \
-    update_freq=60 \
-    icon=󰃭 \
-    icon.color=$PEACH \
-    label.color=$PEACH \
-    drawing=off \
-    background.drawing=on \
-    script="$PLUGIN_DIR/calendar.sh"
+  update_freq=60 \
+  icon=󰃭 \
+  icon.color=$PEACH \
+  label.color=$PEACH \
+  drawing=off \
+  background.drawing=on \
+  script="$PLUGIN_DIR/calendar.sh"
 
 ##### Display setup — apply immediately, then watch for changes #####
 NUM_DISPLAYS=$(system_profiler SPDisplaysDataType 2>/dev/null | grep -c "Resolution:")
 if [ "$NUM_DISPLAYS" -gt 1 ]; then
   sketchybar \
-    --set cpu       display=1 \
-    --set memory    display=1 \
-    --set net_icon  display=1 \
+    --set cpu display=1 \
+    --set memory display=1 \
+    --set net_icon display=1 \
     --set net_speed display=1 \
     --set wifi_icon display=2
 else
   sketchybar \
-    --set net_icon  display=active \
+    --set net_icon display=active \
     --set net_speed display=active \
     --set wifi_icon display=off \
-    --set cpu       display=off \
-    --set memory    display=off
+    --set cpu display=off \
+    --set memory display=off
 fi
 
 sketchybar --add item display_setup left \
   --set display_setup \
-    drawing=off \
-    script="$PLUGIN_DIR/display_setup.sh" \
+  drawing=off \
+  script="$PLUGIN_DIR/display_setup.sh" \
   --subscribe display_setup display_change system_woke
 
 sketchybar --update
