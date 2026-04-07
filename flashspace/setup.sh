@@ -12,13 +12,11 @@
 # NOTE: Use full paths — GUI apps don't inherit shell PATH, so plain `sketchybar` won't be found.
 #
 # Workspaces:
-#   1 coding  → main external monitor
-#   2 browser → main external monitor
-#   3 slack   → built-in
-#   4 email   → built-in
-#   5 music   → built-in
-#   6 misc    → built-in
-#   7 gaming  → main external monitor
+#   1 Coding    → main external monitor
+#   2 Browser   → main external monitor
+#   3 Messaging → built-in
+#   4 Misc      → built-in
+#   5 Gaming    → main external monitor
 
 BUILTIN="Built-in Retina Display"
 MAIN=$(flashspace list-displays | grep -v "Built-in" | head -1)
@@ -42,41 +40,32 @@ done
 # SF Symbols icons: https://developer.apple.com/sf-symbols/
 # NOTE: Keyboard shortcuts must be set manually in FlashSpace → Workspaces settings.
 #       The --activate-key CLI flag does not reliably bind modifier keys in the UI.
-flashspace create-workspace "coding"  --display "$MAIN"    --icon "chevron.left.forwardslash.chevron.right"
-flashspace create-workspace "browser" --display "$MAIN"    --icon "globe"
-flashspace create-workspace "slack"   --display "$BUILTIN" --icon "bubble.left.and.bubble.right.fill"
-flashspace create-workspace "email"   --display "$BUILTIN" --icon "envelope.fill"
-flashspace create-workspace "music"   --display "$BUILTIN" --icon "music.note"
-flashspace create-workspace "misc"    --display "$BUILTIN" --icon "tray.full.fill"
-flashspace create-workspace "gaming"  --display "$MAIN"    --icon "gamecontroller.fill"
+flashspace create-workspace "Coding" --display "$MAIN" --icon "chevron.left.forwardslash.chevron.right"
+flashspace create-workspace "Browser" --display "$MAIN" --icon "globe"
+flashspace create-workspace "Messaging" --display "$BUILTIN" --icon "bubble.left.and.bubble.right.fill"
+flashspace create-workspace "Misc" --display "$BUILTIN" --icon "tray.full.fill"
+flashspace create-workspace "Gaming" --display "$MAIN" --icon "gamecontroller.fill"
 
 echo ""
 echo "Assigning apps..."
 
 # coding
-flashspace assign-app --name "com.mitchellh.ghostty"         --workspace "coding"
-flashspace assign-app --name "com.microsoft.VSCode"          --workspace "coding"
-flashspace assign-app --name "com.microsoft.VSCodeInsiders"  --workspace "coding"
-flashspace assign-app --name "com.jetbrains.rider"           --workspace "coding"
-flashspace assign-app --name "com.jetbrains.datagrip"        --workspace "coding"
-flashspace assign-app --name "com.jetbrains.intellij"        --workspace "coding"
-flashspace assign-app --name "com.jetbrains.webstorm"        --workspace "coding"
-flashspace assign-app --name "com.jetbrains.pycharm"         --workspace "coding"
-flashspace assign-app --name "com.jetbrains.goland"          --workspace "coding"
+flashspace assign-app --name "com.mitchellh.ghostty" --workspace "Coding"
+flashspace assign-app --name "com.microsoft.VSCode" --workspace "Coding"
+flashspace assign-app --name "com.microsoft.VSCodeInsiders" --workspace "Coding"
+flashspace assign-app --name "com.jetbrains.rider" --workspace "Coding"
+flashspace assign-app --name "com.jetbrains.datagrip" --workspace "Coding"
+flashspace assign-app --name "com.jetbrains.intellij" --workspace "Coding"
+flashspace assign-app --name "com.jetbrains.webstorm" --workspace "Coding"
+flashspace assign-app --name "com.jetbrains.pycharm" --workspace "Coding"
+flashspace assign-app --name "com.jetbrains.goland" --workspace "Coding"
 
-# slack
-flashspace assign-app --name "com.tinyspeck.slackmacOS"      --workspace "slack"
-
-# email
-flashspace assign-app --name "com.apple.mail"                --workspace "email"
-flashspace assign-app --name "com.apple.iCal"                --workspace "email"
-
-# music
-flashspace assign-app --name "com.apple.Music"               --workspace "music"
+# messaging
+flashspace assign-app --name "com.tinyspeck.slackmacOS" --workspace "Messaging"
 
 # gaming
-flashspace assign-app --name "com.valvesoftware.steam"        --workspace "gaming"
-flashspace assign-app --name "com.codeweavers.CrossOver"      --workspace "gaming"
+flashspace assign-app --name "com.valvesoftware.steam" --workspace "gaming"
+flashspace assign-app --name "com.codeweavers.CrossOver" --workspace "gaming"
 
 # floating apps (no workspace assignment, managed by FlashSpace floating-apps)
 flashspace floating-apps float --name "com.1password.1password"
