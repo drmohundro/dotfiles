@@ -1,10 +1,7 @@
 local icons = require("icons")
 local colors = require("colors")
 
-local whitelist = { ["Spotify"] = true,
-                    ["Music"] = true    };
-
-local media_cover = sbar.add("item", {
+local media_cover = sbar.add("item", "media.cover", {
   position = "right",
   background = {
     image = {
@@ -16,6 +13,7 @@ local media_cover = sbar.add("item", {
   label = { drawing = false },
   icon = { drawing = false },
   drawing = false,
+  update_freq = 5,
   updates = true,
   popup = {
     align = "center",
@@ -23,7 +21,7 @@ local media_cover = sbar.add("item", {
   }
 })
 
-local media_artist = sbar.add("item", {
+local media_artist = sbar.add("item", "media.artist", {
   position = "right",
   drawing = false,
   padding_left = 3,
@@ -39,7 +37,7 @@ local media_artist = sbar.add("item", {
   },
 })
 
-local media_title = sbar.add("item", {
+local media_title = sbar.add("item", "media.title", {
   position = "right",
   drawing = false,
   padding_left = 3,
@@ -72,47 +70,42 @@ sbar.add("item", {
   click_script = "nowplaying-cli next",
 })
 
-local interrupt = 0
-local function animate_detail(detail)
-  if (not detail) then interrupt = interrupt - 1 end
-  if interrupt > 0 and (not detail) then return end
+local function update()
+  sbar.exec("nowplaying-cli get title artist playbackRate", function(result)
+    local lines = {}
+    for line in result:gmatch("[^\n]+") do
+      table.insert(lines, line)
+    end
 
-  sbar.animate("tanh", 30, function()
-    media_artist:set({ label = { width = detail and "dynamic" or 0 } })
-    media_title:set({ label = { width = detail and "dynamic" or 0 } })
+    local title = lines[1]
+    local artist = lines[2]
+    local rate = lines[3]
+    local playing = rate == "1" and title and title ~= ""
+
+    if playing then
+      media_artist:set({ drawing = true, label = { string = artist or "", width = "dynamic" } })
+      media_title:set({ drawing = true, label = { string = title, width = "dynamic" } })
+      media_cover:set({ drawing = true })
+    else
+      media_artist:set({ drawing = false })
+      media_title:set({ drawing = false })
+      media_cover:set({ drawing = false, popup = { drawing = false } })
+    end
   end)
 end
 
-media_cover:subscribe("media_change", function(env)
-  if whitelist[env.INFO.app] then
-    local drawing = (env.INFO.state == "playing")
-    media_artist:set({ drawing = drawing, label = env.INFO.artist, })
-    media_title:set({ drawing = drawing, label = env.INFO.title, })
-    media_cover:set({ drawing = drawing })
-
-    if drawing then
-      animate_detail(true)
-      interrupt = interrupt + 1
-      sbar.delay(5, animate_detail)
-    else
-      media_cover:set({ popup = { drawing = false } })
-    end
-  end
+media_cover:subscribe({"routine", "system_woke"}, function(_)
+  update()
 end)
 
-media_cover:subscribe("mouse.entered", function(env)
-  interrupt = interrupt + 1
-  animate_detail(true)
-end)
+local function toggle_popup()
+  media_cover:set({ popup = { drawing = "toggle" } })
+end
 
-media_cover:subscribe("mouse.exited", function(env)
-  animate_detail(false)
-end)
+media_cover:subscribe("mouse.clicked", toggle_popup)
+media_title:subscribe("mouse.clicked", toggle_popup)
+media_artist:subscribe("mouse.clicked", toggle_popup)
 
-media_cover:subscribe("mouse.clicked", function(env)
-  media_cover:set({ popup = { drawing = "toggle" }})
-end)
-
-media_title:subscribe("mouse.exited.global", function(env)
-  media_cover:set({ popup = { drawing = false }})
+media_title:subscribe("mouse.exited.global", function(_)
+  media_cover:set({ popup = { drawing = false } })
 end)
