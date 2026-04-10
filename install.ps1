@@ -21,7 +21,7 @@ function defaultPath($pathName) {
 }
 
 function checkConfig($os, $pathName) {
-    if ($config[$os].length -ge 0) {
+    if ($config[$os].length -gt 0) {
         if ($config[$os][$pathName] -ne $null) {
             $config[$os][$pathName] | Foreach-Object {
                 [PSObject] @{
@@ -77,10 +77,10 @@ function linkFile($map) {
     }
     else {
         if ((Get-Item $map.Target) -is [System.IO.DirectoryInfo] -and $IsWindows) {
-            New-Item -Path $_.Link -ItemType Junction -Value $_.Target
+            New-Item -Path $map.Link -ItemType Junction -Value $map.Target
         }
         else {
-            New-Item -Path $_.Link -ItemType SymbolicLink -Value $_.Target
+            New-Item -Path $map.Link -ItemType SymbolicLink -Value $map.Target
         }
     }
 }

@@ -18,5 +18,4 @@ fi
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
 
-# Added by Windsurf
-export PATH="/Users/david/.codeium/windsurf/bin:$PATH"
+eval "$(mise activate zsh)"

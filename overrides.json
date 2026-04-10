@@ -31,6 +31,12 @@
     ],
     "ghostty": [
       "~/.config/ghostty"
+    ],
+    "sketchybar": [
+      "~/.config/sketchybar"
+    ],
+    "borders": [
+      "~/.config/borders"
     ]
   },
   "linux": {
