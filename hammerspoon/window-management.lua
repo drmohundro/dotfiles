@@ -6,7 +6,7 @@ local windowMeta = {}
 window = require('hs.window')
 hs.window.animationDuration = 0
 grid = require('hs.grid')
-grid.setMargins('0, 0')
+grid.setMargins('8, 8')
 
 module = {}
 
@@ -33,18 +33,22 @@ hs.fnutils.each(screenArr, function(e)
   end
 end)
 
+-- Height of sketchybar on external screens where macOS doesn't inset it automatically
+local sketchybarHeight = 37
+
 -- Set screen grid depending on resolution
--- TODO: set grid according to pixels
 for _index, screen in pairs(hs.screen.allScreens()) do
   if screen:frame().w / screen:frame().h > 2 then
-    -- 10 * 4 for ultra wide screen
-    grid.setGrid('10 * 4', screen)
+    -- 10 * 4 for ultra wide screen; manually inset top for sketchybar
+    local sf = screen:frame()
+    local paddedFrame = hs.geometry(sf.x, sf.y + sketchybarHeight, sf.w, sf.h - sketchybarHeight)
+    grid.setGrid('10 * 4', screen, paddedFrame)
   else
     if screen:frame().w < screen:frame().h then
       -- 4 * 8 for vertically aligned screen
       grid.setGrid('4 * 8', screen)
     else
-      -- 8 * 4 for normal screen
+      -- 8 * 4 for normal screen (MacBook notch already accounts for sketchybar)
       grid.setGrid('8 * 4', screen)
     end
   end
