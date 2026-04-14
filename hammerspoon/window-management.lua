@@ -38,19 +38,27 @@ local sketchybarHeight = 37
 
 -- Set screen grid depending on resolution
 for _index, screen in pairs(hs.screen.allScreens()) do
-  if screen:frame().w / screen:frame().h > 2 then
-    -- 10 * 4 for ultra wide screen; manually inset top for sketchybar
-    local sf = screen:frame()
-    local paddedFrame = hs.geometry(sf.x, sf.y + sketchybarHeight, sf.w, sf.h - sketchybarHeight)
-    grid.setGrid('10 * 4', screen, paddedFrame)
+  local sf = screen:frame()
+  local ratio = sf.w / sf.h
+
+  local gridSize
+  if ratio > 2 then
+    gridSize = '10 * 4'
+  elseif sf.w < sf.h then
+    gridSize = '4 * 8'
   else
-    if screen:frame().w < screen:frame().h then
-      -- 4 * 8 for vertically aligned screen
-      grid.setGrid('4 * 8', screen)
-    else
-      -- 8 * 4 for normal screen (MacBook notch already accounts for sketchybar)
-      grid.setGrid('8 * 4', screen)
-    end
+    gridSize = '8 * 4'
+  end
+
+  -- frame() excludes whatever macOS already reserves (notch/menu bar); fullFrame() is the raw display.
+  -- Only add the portion of sketchybarHeight not already accounted for.
+  local alreadyInset = screen:frame().y - screen:fullFrame().y
+  local extraPadding = math.max(0, sketchybarHeight - alreadyInset)
+  if extraPadding > 0 then
+    local paddedFrame = hs.geometry(sf.x, sf.y + extraPadding, sf.w, sf.h - extraPadding)
+    grid.setGrid(gridSize, screen, paddedFrame)
+  else
+    grid.setGrid(gridSize, screen)
   end
 end
 
