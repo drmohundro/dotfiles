@@ -73,14 +73,14 @@ sbar.add("item", {
 local function update()
   sbar.exec("nowplaying-cli get title artist playbackRate", function(result)
     local lines = {}
-    for line in result:gmatch("[^\n]+") do
+    for line in result:gmatch("([^\n]*)\n") do
       table.insert(lines, line)
     end
 
     local title = lines[1]
     local artist = lines[2]
     local rate = lines[3]
-    local playing = rate == "1" and title and title ~= ""
+    local playing = tonumber(rate) == 1 and title and title ~= ""
 
     if playing then
       media_artist:set({ drawing = true, label = { string = artist or "", width = "dynamic" } })
