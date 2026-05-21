@@ -1,6 +1,7 @@
 *.swp
 .netrwhist
 vim/plugged
+tmux/plugins
 
 emacs.d/*
 !emacs.d/init.el

@@ -14,12 +14,5 @@ error_symbol = '[✗](bold red) '
 [directory]
 fish_style_pwd_dir_length = 1
 
-[azure]
-disabled = false
-
-[azure.subscription_aliases]
-"CF EPH (dev/test) (MPN Action Pack $100/mo)" = "eph-dev"
-
 [docker_context]
 disabled = true
-

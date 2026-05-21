@@ -32,6 +32,9 @@
     "ghostty": [
       "~/.config/ghostty"
     ],
+    "tmux": [
+      "~/.config/tmux"
+    ],
     "sketchybar": [
       "~/.config/sketchybar"
     ],
