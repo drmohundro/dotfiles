@@ -39,10 +39,7 @@ fish_add_path ~/.cargo/bin
 # go global binaries
 if test -e ~/go
     set -x GOPATH ~/go
-    set -x GOROOT /usr/local/opt/go/libexec
-
     fish_add_path $GOPATH/bin
-    fish_add_path $GOROOT/bin
 end
 
 fzf --fish | source
