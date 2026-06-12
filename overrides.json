@@ -11,66 +11,30 @@
     "hammerspoon": "~/.hammerspoon",
     "karabiner.json": "~/.config/karabiner/karabiner.json",
     "config.fish": "~/.config/fish/config.fish",
-    "nvim": [
-      "~/.config/nvim"
-    ],
-    "vimrc": [
-      "~/.vimrc"
-    ],
-    "vim": [
-      "~/.vim"
-    ],
-    "kitty": [
-      "~/.config/kitty"
-    ],
-    "starship.toml": [
-      "~/.config/starship.toml"
-    ],
-    "wezterm": [
-      "~/.config/wezterm"
-    ],
-    "ghostty": [
-      "~/.config/ghostty"
-    ],
-    "tmux": [
-      "~/.config/tmux"
-    ],
-    "sketchybar": [
-      "~/.config/sketchybar"
-    ],
-    "borders": [
-      "~/.config/borders"
-    ]
+    "nvim": ["~/.config/nvim"],
+    "vimrc": ["~/.vimrc"],
+    "vim": ["~/.vim"],
+    "kitty": ["~/.config/kitty"],
+    "starship.toml": ["~/.config/starship.toml"],
+    "wezterm": ["~/.config/wezterm"],
+    "ghostty": ["~/.config/ghostty"],
+    "tmux": ["~/.config/tmux"],
+    "sketchybar": ["~/.config/sketchybar"],
+    "borders": ["~/.config/borders"]
   },
   "linux": {
     "config.fish": "~/.config/fish/config.fish",
-    "nvim": [
-      "~/.config/nvim"
-    ],
-    "vimrc": [
-      "~/.vimrc"
-    ],
-    "vim": [
-      "~/.vim"
-    ],
-    "wezterm": [
-      "~/.config/wezterm"
-    ]
+    "nvim": ["~/.config/nvim"],
+    "vimrc": ["~/.vimrc"],
+    "vim": ["~/.vim"],
+    "wezterm": ["~/.config/wezterm"]
   },
   "windows": {
     "vsvimrc": "~/.vsvimrc",
     "viemurc": "~/.viemurc",
-    "nvim": [
-      "%LOCALAPPDATA%/nvim"
-    ],
-    "vimrc": [
-      "~/.vimrc"
-    ],
-    "vim": [
-      "~/.vim"
-    ],
-    "wezterm": [
-      "~/.config/wezterm"
-    ]
+    "nvim": ["%LOCALAPPDATA%/nvim"],
+    "vimrc": ["~/.vimrc"],
+    "vim": ["~/.vim"],
+    "wezterm": ["~/.config/wezterm"]
   }
 }

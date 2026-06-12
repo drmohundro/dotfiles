@@ -20,6 +20,7 @@ fish_add_path /usr/local/share/dotnet
 fish_add_path ~/.local/bin
 fish_add_path /usr/local/opt/postgresql@15/bin
 fish_add_path /Applications/Obsidian.app/Contents/MacOS
+fish_add_path ~/Library/pnpm
 
 # use gnu versions of coreutils/findutils
 if type -q brew
