@@ -14,3 +14,6 @@ vim/undodir
 .DS_Store
 
 gitconfig-client
+zellij/plugins/*.wasm
+zellij/layouts/*.kdl
+!zellij/layouts/*.tmpl.kdl
