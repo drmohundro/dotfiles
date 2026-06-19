@@ -8,6 +8,14 @@
 
 keybinds clear-defaults=true {
     locked {
+        // Escape hatch into zellij's full modal command set
+        bind "Ctrl g" { SwitchToMode "normal"; }
+    }
+    normal {
+        // Return to pass-through mode
+        bind "Ctrl g" { SwitchToMode "locked"; }
+    }
+    shared_among "locked" "normal" {
         // ─── No-prefix bindings (mirror the ghostty Cmd shortcuts) ─────────
 
         // New tab                  — Cmd+T
@@ -33,9 +41,6 @@ keybinds clear-defaults=true {
 
         // Close pane               — Cmd+W
         bind "Alt w" { CloseFocus; }
-
-        // Escape hatch into zellij's full modal command set
-        bind "Ctrl g" { SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -187,8 +192,6 @@ keybinds clear-defaults=true {
         bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Alt i" { MoveTab "left"; }
@@ -361,7 +364,6 @@ theme "dracula"
 // Choose the base input mode of zellij.
 // Default: normal
 //
-default_mode "locked"
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
@@ -376,6 +378,7 @@ default_shell "fish"
 // Default: "default"
 //
 // default_layout "compact"
+default_layout "mo"
 
 // The folder in which Zellij will look for layouts
 // (Requires restart)
