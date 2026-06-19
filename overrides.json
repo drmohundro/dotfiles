@@ -20,7 +20,8 @@
     "ghostty": ["~/.config/ghostty"],
     "tmux": ["~/.config/tmux"],
     "sketchybar": ["~/.config/sketchybar"],
-    "borders": ["~/.config/borders"]
+    "borders": ["~/.config/borders"],
+    "zellij": ["~/.config/zellij"]
   },
   "linux": {
     "config.fish": "~/.config/fish/config.fish",
