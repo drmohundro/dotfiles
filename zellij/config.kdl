@@ -344,17 +344,10 @@ web_client {
 //
 // osc8_hyperlinks true
 
-// Choose the theme that is specified in the themes section.
-// Default: default
-// Match the Ghostty terminal theme (../ghostty/config: Catppuccin Macchiato).
-// This is a built-in zellij theme — no download needed. Bar/frame colors and
-// the theme-relative color NAMES used in layouts (magenta/blue/…) follow it.
-theme "dracula"
-
 // Theme to use when the host terminal reports a dark color palette.
 // Requires `theme_light` to also be set; otherwise `theme` is used.
 //
-// theme_dark "dracula"
+theme_dark "catppuccin-macchiato"
 
 // Theme to use when the host terminal reports a light color palette.
 // Requires `theme_dark` to also be set; otherwise `theme` is used.
@@ -487,7 +480,7 @@ default_layout "mo"
 //   - true (default)
 //   - false
 //
-// session_serialization false
+session_serialization false
 
 // Whether pane viewports are serialized along with the session, default is false
 // Options:

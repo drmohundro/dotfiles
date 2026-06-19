@@ -29,6 +29,9 @@ if type -q brew
     fish_add_path --prepend $BREW_PREFIX/opt/coreutils/libexec/gnubin
     fish_add_path --prepend $BREW_PREFIX/opt/findutils/libexec/gnubin
     fish_add_path --prepend $BREW_PREFIX/opt/grep/libexec/gnubin
+
+    # I'm still used to it just upgrading
+    set -gx HOMEBREW_NO_ASK true
 end
 
 fish_add_path ~/dev/flutter/bin

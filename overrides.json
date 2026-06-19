@@ -19,6 +19,7 @@
     "wezterm": ["~/.config/wezterm"],
     "ghostty": ["~/.config/ghostty"],
     "tmux": ["~/.config/tmux"],
+    "zellij": ["~/.config/zellij"],
     "sketchybar": ["~/.config/sketchybar"],
     "borders": ["~/.config/borders"],
     "zellij": ["~/.config/zellij"]

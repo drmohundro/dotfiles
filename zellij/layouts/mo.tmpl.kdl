@@ -4,7 +4,7 @@ layout {
       plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
         format_left   "{mode}#[bg=#${base00}] {tabs}"
         format_center ""
-        format_right  "#[bg=#${base00},fg=#${base0D}]#[bg=#${base0D},fg=#${base01},bold] {command_git_branch}#[bg=#${base02},fg=#${base05},bold] {session} #[bg=#${base03},fg=#${base05},bold]"
+        format_right  "#[bg=#${base00},fg=#${base0D}]#[bg=#${base0D},fg=#${base01},bold] {command_gwh_statusline}#[bg=#${base02},fg=#${base05},bold] {session} #[bg=#${base03},fg=#${base05},bold]"
         format_space  ""
         format_hide_on_overlength "true"
         format_precedence "crl"
@@ -43,14 +43,13 @@ layout {
         tab_fullscreen_indicator " 󰊓"
         tab_floating_indicator   " 󰹙"
 
-        command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-        command_git_branch_format      "#[bg=#${base02},fg=#${base0D},bold]  {stdout} "
-        command_git_branch_interval    "10"
-        command_git_branch_rendermode  "static"
+        command_gwh_statusline_command             "bash -lc '~/.config/zellij/helpers/statusline-git.sh \"$PWD\"'"
+        command_gwh_statusline_format              "{stdout} "
+        command_gwh_statusline_interval            "10"
+        command_gwh_statusline_rendermode          "dynamic"
+        command_gwh_statusline_cwd                 "{focused_pane_cwd}"
+        command_gwh_statusline_hideonemptystdout   "true"
 
-        datetime          "#[fg=#${border},bold] {format} "
-        datetime_format   "%A, %d %b %Y %H:%M"
-        datetime_timezone "America/Chicago"
       }
     }
 
@@ -60,7 +59,7 @@ layout {
       plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
         format_left   "{mode}"
         format_center ""
-        format_right  ""
+        format_right  "{datetime}"
         format_space  ""
         format_hide_on_overlength "true"
         format_precedence "lcr"
@@ -84,6 +83,10 @@ layout {
         mode_move          "#[bg=#${base0F},fg=#${base02},bold] MOVE #[bg=#${base00},fg=#${base05}] hjkl move pane | n move | p move back | w floating | s stacked | Tab move | Esc normal "
         mode_prompt        "#[bg=#${base0D},fg=#${base02},bold] PROMPT #[bg=#${base00},fg=#${base05}] Enter accept | Esc cancel "
         mode_tmux          "#[bg=#${base09},fg=#${base02},bold] TMUX #[bg=#${base00},fg=#${base05}] c tab | % split → | \" split ↓ | hjkl focus | [ scroll | d detach | Ctrl b send prefix "
+
+        datetime          "#[fg=#${border},bold] {format} "
+        datetime_format   "%A, %d %b %Y %H:%M"
+        datetime_timezone "America/Chicago"
       }
     }
   }
