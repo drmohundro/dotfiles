@@ -35,22 +35,33 @@ function Get-ConfiguredPath($Os, $PathName) {
     }
 }
 
+function Get-CurrentOsName {
+    if ($IsWindows) { return 'windows' }
+    if ($IsMacOS) { return 'macos' }
+    if ($IsLinux) { return 'linux' }
+}
+
 function Get-DotfilePath($Path) {
     Write-DotfilesLog "Checking $Path..."
 
     $pathName = $Path.Name
+    $osName = Get-CurrentOsName
 
-    if ($IsWindows -and $null -ne $config['windows'][$pathName]) {
-        Get-ConfiguredPath -Os 'windows' -PathName $pathName
-    }
-    elseif ($IsMacOS -and $null -ne $config['macos'][$pathName]) {
-        Get-ConfiguredPath -Os 'macos' -PathName $pathName
-    }
-    elseif ($IsLinux -and $null -ne $config['linux'][$pathName]) {
-        Get-ConfiguredPath -Os 'linux' -PathName $pathName
+    if ($null -ne $osName -and $null -ne $config[$osName][$pathName]) {
+        Get-ConfiguredPath -Os $osName -PathName $pathName
     }
     else {
         Get-DefaultPath $pathName
+    }
+}
+
+function Get-ExplicitConfiguredPaths {
+    $osName = Get-CurrentOsName
+    if ($null -eq $osName -or $null -eq $config[$osName]) { return }
+
+    $config[$osName].Keys | Where-Object { $_ -match '[/\\]' } | ForEach-Object {
+        Write-DotfilesLog "Checking $_..."
+        Get-ConfiguredPath -Os $osName -PathName $_
     }
 }
 
@@ -97,6 +108,10 @@ function Invoke-DotfilesInstall {
 
             New-DotfileLink $_
         }
+    }
+
+    Get-ExplicitConfiguredPaths | ForEach-Object {
+        New-DotfileLink $_
     }
 }
 
