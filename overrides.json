@@ -19,8 +19,10 @@
     "wezterm": ["~/.config/wezterm"],
     "ghostty": ["~/.config/ghostty"],
     "tmux": ["~/.config/tmux"],
+    "zellij": ["~/.config/zellij"],
     "sketchybar": ["~/.config/sketchybar"],
-    "borders": ["~/.config/borders"]
+    "borders": ["~/.config/borders"],
+    "zellij": ["~/.config/zellij"]
   },
   "linux": {
     "config.fish": "~/.config/fish/config.fish",
