@@ -1,0 +1,48 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    // "shift shift": "file_finder::Toggle"
+    // {
+    "bindings": {
+      "cmd-p": [
+        // Or `ctrl-p`
+        "task::Spawn",
+        { "task_name": "Television File Finder", "reveal_target": "center" },
+      ],
+    },
+  },
+  {
+    // JetBrains-style "Recent Files" — this project's MRU (see tasks.json)
+    // It is here vs. workspace, because Zed already has a default Cmd-E default of UseSelectionForFind / MoveToEndOfLine
+    "context": "Editor && mode == full",
+    "bindings": {
+      "cmd-e": [
+        "task::Spawn",
+        { "task_name": "Television Recent Files", "reveal_target": "center" },
+      ],
+    },
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "J": "editor::HalfPageDown",
+      "K": "editor::HalfPageUp",
+      "g e": "editor::GoToDiagnostic",
+      ", f": "file_finder::Toggle",
+      ", r": [
+        "task::Spawn",
+        {
+          "task_name": "Television Recent Files",
+          "reveal_target": "center",
+        },
+      ],
+    },
+  },
+]

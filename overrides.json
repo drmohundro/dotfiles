@@ -2,10 +2,14 @@
   "skip_processing": [
     "README.md",
     "LICENSE",
+    "AGENTS.md",
+    "CLAUDE.md",
     "Makefile",
     "install.ps1",
     "overrides.json",
-    "overrides.yaml"
+    "overrides.yaml",
+    "tests",
+    "zed"
   ],
   "macos": {
     "hammerspoon": "~/.hammerspoon",
@@ -22,7 +26,9 @@
     "zellij": ["~/.config/zellij"],
     "sketchybar": ["~/.config/sketchybar"],
     "borders": ["~/.config/borders"],
-    "zellij": ["~/.config/zellij"]
+    "zed/settings.json": "~/.config/zed/settings.json",
+    "zed/keymap.json": "~/.config/zed/keymap.json",
+    "zed/tasks.json": "~/.config/zed/tasks.json"
   },
   "linux": {
     "config.fish": "~/.config/fish/config.fish",
