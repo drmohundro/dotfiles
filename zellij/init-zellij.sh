@@ -28,6 +28,7 @@ export base0D="89b4fa" # blue
 export base0E="cba6f7" # mauve
 export base0F="f2cdcd" # flamingo
 export border="6c7086" # overlay0
+export home="$HOME"
 
 if [[ ! -f "$mo_template" ]]; then
   printf 'Missing template: %s\n' "$mo_template" >&2
