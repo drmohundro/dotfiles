@@ -1,110 +1,108 @@
-param (
-    [switch]
-    $whatIf
-)
+[CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
+param()
 
-$config = Get-Content ./overrides.json | ConvertFrom-Json -AsHashtable
+$configPath = Join-Path $PSScriptRoot 'overrides.json'
+$config = Get-Content $configPath -Raw | ConvertFrom-Json -AsHashtable
 
-function log($msg) {
-    Write-Host "💡 $msg"
+function Write-DotfilesLog($Message) {
+    Write-Information $Message -InformationAction Continue
 }
 
-function Resolve-PathSafe($path) {
+function Resolve-PathSafe($Path) {
     $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Path)
 }
 
-function defaultPath($pathName) {
-    [PSObject] @{
-        Link   = Resolve-PathSafe "~/.$($pathName)"
-        Target = Resolve-PathSafe $pathName
+function Get-DefaultPath($PathName) {
+    [pscustomobject] @{
+        Link   = Resolve-PathSafe "~/.$($PathName)"
+        Target = Resolve-PathSafe $PathName
     }
 }
 
-function checkConfig($os, $pathName) {
-    if ($config[$os].length -gt 0) {
-        if ($config[$os][$pathName] -ne $null) {
-            $config[$os][$pathName] | Foreach-Object {
-                [PSObject] @{
-                    Link   = Resolve-PathSafe ([System.Environment]::ExpandEnvironmentVariables($_))
-                    Target = Resolve-PathSafe $pathName
-                }
+function Get-ConfiguredPath($Os, $PathName) {
+    $osConfig = $config[$Os]
+
+    if ($null -ne $osConfig -and $null -ne $osConfig[$PathName]) {
+        $osConfig[$PathName] | ForEach-Object {
+            [pscustomobject] @{
+                Link   = Resolve-PathSafe ([System.Environment]::ExpandEnvironmentVariables($_))
+                Target = Resolve-PathSafe $PathName
             }
         }
     }
     else {
-        defaultPath $pathName
+        Get-DefaultPath $PathName
     }
 }
 
-function determinePath($path) {
-    log "Checking $path..."
+function Get-DotfilePath($Path) {
+    Write-DotfilesLog "Checking $Path..."
 
-    $pathName = $path.Name
+    $pathName = $Path.Name
 
-    if ($config['windows'][$pathName] -ne $null -and $IsWindows) {
-        checkConfig -os 'windows' -pathName $pathName
+    if ($IsWindows -and $null -ne $config['windows'][$pathName]) {
+        Get-ConfiguredPath -Os 'windows' -PathName $pathName
     }
-    elseif ($config['macos'][$pathName] -ne $null -and $IsMacOS) {
-        checkConfig -os 'macos' -pathName $pathName
+    elseif ($IsMacOS -and $null -ne $config['macos'][$pathName]) {
+        Get-ConfiguredPath -Os 'macos' -PathName $pathName
     }
-    elseif ($config['linux'][$pathName] -ne $null -and $IsLinux) {
-        checkConfig -os 'linux' -pathName $pathName
+    elseif ($IsLinux -and $null -ne $config['linux'][$pathName]) {
+        Get-ConfiguredPath -Os 'linux' -PathName $pathName
     }
     else {
-        defaultPath $pathName
+        Get-DefaultPath $pathName
     }
 }
 
-function linkFile($map) {
-    if (Test-Path $map.Link) {
-        log "Skipping $($map.Link) as it already exists"
+function New-DotfileLink {
+    [CmdletBinding(SupportsShouldProcess)]
+    param($Map)
+
+    if (Test-Path $Map.Link) {
+        Write-DotfilesLog "Skipping $($Map.Link) as it already exists"
         return
     }
 
-    # validate that $map.Target's directory exists and create it if it doesn't
-    $targetDirectory = Split-Path $map.Target
-    if (-not (Test-Path $targetDirectory)) {
-        if ($whatIf) {
-            log "Creating directory $targetDirectory"
-        }
-        else {
-            New-Item -ItemType Directory -Path $targetDirectory
+    $linkDirectory = Split-Path $Map.Link
+    if (-not (Test-Path $linkDirectory)) {
+        if ($PSCmdlet.ShouldProcess($linkDirectory, 'Create directory')) {
+            Write-DotfilesLog "Creating directory $linkDirectory"
+            New-Item -ItemType Directory -Path $linkDirectory | Out-Null
         }
     }
 
-    if ($whatIf) {
-        log "Linking $($map.Link) to $($map.Target)"
+    if ((Get-Item $Map.Target) -is [System.IO.DirectoryInfo] -and $IsWindows) {
+        if ($PSCmdlet.ShouldProcess($Map.Link, "Create junction to $($Map.Target)")) {
+            New-Item -Path $Map.Link -ItemType Junction -Value $Map.Target | Out-Null
+        }
     }
     else {
-        if ((Get-Item $map.Target) -is [System.IO.DirectoryInfo] -and $IsWindows) {
-            New-Item -Path $map.Link -ItemType Junction -Value $map.Target
-        }
-        else {
-            New-Item -Path $map.Link -ItemType SymbolicLink -Value $map.Target
+        if ($PSCmdlet.ShouldProcess($Map.Link, "Create symbolic link to $($Map.Target)")) {
+            New-Item -Path $Map.Link -ItemType SymbolicLink -Value $Map.Target | Out-Null
         }
     }
 }
 
-function main {
-    Get-ChildItem | Foreach-Object {
+function Invoke-DotfilesInstall {
+    Get-ChildItem | ForEach-Object {
         $file = $_
 
         if ($config.skip_processing -contains $file.Name) { return }
         if ($file.Name.StartsWith('.')) { return }
 
-        determinePath $file | Foreach-Object {
-            if ((Test-Path $_.Target) -and (Get-Item $file).LinkType -ne $null) {
+        Get-DotfilePath $file | ForEach-Object {
+            if ((Test-Path $_.Target) -and $null -ne (Get-Item $file).LinkType) {
                 return
             }
 
-            linkFile $_
+            New-DotfileLink $_
         }
     }
 }
 
 try {
     Push-Location $PSScriptRoot
-    main
+    Invoke-DotfilesInstall
 }
 finally {
     Pop-Location
