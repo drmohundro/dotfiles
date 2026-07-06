@@ -85,6 +85,13 @@
     },
   },
   "languages": {
+    "Markdown": {
+      "colorize_brackets": true,
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": true,
+      },
+    },
     "CSharp": {
       "language_servers": ["csharp-ls", "!omnisharp", "!roslyn"],
     },

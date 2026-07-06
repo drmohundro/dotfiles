@@ -60,6 +60,9 @@
     "label": "Television File Finder",
     "command": "sel=\"$(tv files)\"; [ -n \"$sel\" ] && { \"$HOME/dev/zed-recent-files/bin/zed-recent\" record \"$ZED_WORKTREE_ROOT\" \"$sel\"; zed \"$sel\"; }",
     "hide": "always",
+    "shell": {
+      "program": "/bin/sh"
+    },
     "allow_concurrent_runs": true,
     "use_new_terminal": true,
   },
@@ -68,6 +71,9 @@
     "label": "Television Recent Files",
     "command": "ROOT=\"$ZED_WORKTREE_ROOT\"; sel=\"$(\"$HOME/dev/zed-recent-files/bin/zed-recent\" list \"$ROOT\" | tv)\"; [ -n \"$sel\" ] && { \"$HOME/dev/zed-recent-files/bin/zed-recent\" record \"$ROOT\" \"$sel\"; zed \"$sel\"; }",
     "hide": "always",
+    "shell": {
+      "program": "/bin/sh"
+    },
     "allow_concurrent_runs": true,
     "use_new_terminal": true,
   },
