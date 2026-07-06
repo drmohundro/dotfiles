@@ -43,6 +43,9 @@
     "nvim": ["%LOCALAPPDATA%/nvim"],
     "vimrc": ["~/.vimrc"],
     "vim": ["~/.vim"],
-    "wezterm": ["~/.config/wezterm"]
+    "wezterm": ["~/.config/wezterm"],
+    "zed/keymap.json": "%APPDATA%/zed/keymap.json",
+    "zed/settings.json": "%APPDATA%/zed/settings.json",
+    "zed/tasks.json": "%APPDATA%/zed/tasks.json"
   }
 }
