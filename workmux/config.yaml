@@ -1,0 +1,10 @@
+nerdfont: true
+worktree_dir: ~/dev/worktrees/
+
+panes:
+  - command: <agent>
+    focus: true
+  - split: horizontal
+
+agents:
+  claude-yolo: "claude --dangerously-skip-permissions"

@@ -1,6 +1,17 @@
 set -gx MANPAGER 'nvim +Man!'
 set -gx EDITOR nvim
 
+# Autoload version-controlled fish functions and completions from dotfiles.
+set -l dotfiles_functions ~/dev/dotfiles/fish-functions
+if test -d $dotfiles_functions
+    contains -- $dotfiles_functions $fish_function_path; or set -g fish_function_path $dotfiles_functions $fish_function_path
+end
+
+set -l dotfiles_completions ~/dev/dotfiles/fish-completions
+if test -d $dotfiles_completions
+    contains -- $dotfiles_completions $fish_complete_path; or set -g fish_complete_path $dotfiles_completions $fish_complete_path
+end
+
 # avoid the delay of (brew --prefix)
 if test -e /usr/local/bin
     set BREW_PREFIX = /usr/local
@@ -46,7 +57,13 @@ if test -e ~/go
     fish_add_path $GOPATH/bin
 end
 
-fzf --fish | source
+if type -q fzf
+    fzf --fish | source
+end
+
+if type -q workmux
+    workmux completions fish | source
+end
 
 # tell fzf to use rg to list files
 if type -q fd

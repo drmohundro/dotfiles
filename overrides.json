@@ -26,6 +26,7 @@
     "zellij": ["~/.config/zellij"],
     "sketchybar": ["~/.config/sketchybar"],
     "borders": ["~/.config/borders"],
+    "workmux": ["~/.config/workmux"],
     "zed/settings.json": "~/.config/zed/settings.json",
     "zed/keymap.json": "~/.config/zed/keymap.json",
     "zed/tasks.json": "~/.config/zed/tasks.json"
