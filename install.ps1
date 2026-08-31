@@ -42,12 +42,16 @@ function Get-CurrentOsName {
 }
 
 function Get-DotfilePath($Path) {
-    Write-DotfilesLog "Checking $Path..."
-
     $pathName = $Path.Name
     $osName = Get-CurrentOsName
+    $osConfig = if ($null -ne $osName) { $config[$osName] } else { $null }
+    $hasConfiguredPath = $null -ne $osConfig -and $osConfig.ContainsKey($pathName)
 
-    if ($null -ne $osName -and $null -ne $config[$osName][$pathName]) {
+    if ($Path.PSIsContainer -and -not $hasConfiguredPath) { return }
+
+    Write-DotfilesLog "Checking $Path..."
+
+    if ($hasConfiguredPath) {
         Get-ConfiguredPath -Os $osName -PathName $pathName
     }
     else {
@@ -98,7 +102,7 @@ function Invoke-DotfilesInstall {
     Get-ChildItem | ForEach-Object {
         $file = $_
 
-        if ($config.skip_processing -contains $file.Name) { return }
+        if (-not $file.PSIsContainer -and $config.skip_processing -contains $file.Name) { return }
         if ($file.Name.StartsWith('.')) { return }
 
         Get-DotfilePath $file | ForEach-Object {

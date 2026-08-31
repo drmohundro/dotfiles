@@ -7,9 +7,7 @@
     "Makefile",
     "install.ps1",
     "overrides.json",
-    "overrides.yaml",
-    "tests",
-    "zed"
+    "overrides.yaml"
   ],
   "macos": {
     "hammerspoon": "~/.hammerspoon",
@@ -27,6 +25,8 @@
     "sketchybar": ["~/.config/sketchybar"],
     "borders": ["~/.config/borders"],
     "workmux": ["~/.config/workmux"],
+    "herdr/config.toml": "~/.config/herdr/config.toml",
+    "worktrunk/config.toml": "~/.config/worktrunk/config.toml",
     "zed/settings.json": "~/.config/zed/settings.json",
     "zed/keymap.json": "~/.config/zed/keymap.json",
     "zed/tasks.json": "~/.config/zed/tasks.json"
@@ -36,7 +36,9 @@
     "nvim": ["~/.config/nvim"],
     "vimrc": ["~/.vimrc"],
     "vim": ["~/.vim"],
-    "wezterm": ["~/.config/wezterm"]
+    "wezterm": ["~/.config/wezterm"],
+    "herdr/config.toml": "~/.config/herdr/config.toml",
+    "worktrunk/config.toml": "~/.config/worktrunk/config.toml"
   },
   "windows": {
     "vsvimrc": "~/.vsvimrc",

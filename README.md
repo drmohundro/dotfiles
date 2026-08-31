@@ -21,8 +21,10 @@ pwsh install.ps1 -whatIf
 
 ## Overrides
 
-For platform-specific config, you can use the `overrides.json` file. See the
-included version for details.
+For platform-specific config, you can use the `overrides.json` file. Top-level
+files are linked by default unless listed in `skip_processing`. Directories are
+linked only when they have a mapping in the current platform block. A mapping
+may target an entire directory or an individual file inside one.
 
 ## NeoVim Specifics
 
