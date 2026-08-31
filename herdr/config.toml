@@ -1,0 +1,38 @@
+onboarding = false
+
+[terminal]
+default_shell = "fish"
+shell_mode = "login"
+
+[worktrees]
+directory = "~/dev/worktrees"
+
+# Match tmux: Ctrl+A prefix plus the same direct Alt/Ctrl shortcuts.
+# Prefix bindings remain available as fallbacks.
+[keys]
+prefix = "ctrl+a"
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+new_tab = ["prefix+c", "alt+t"]
+switch_tab = ["prefix+1..9", "ctrl+1..9"]
+split_vertical = ["prefix+v", "alt+d"]
+split_horizontal = ["prefix+minus", "alt+shift+d"]
+cycle_pane_previous = ["prefix+shift+tab", "alt+["]
+cycle_pane_next = ["prefix+tab", "alt+]"]
+focus_pane_left = ["prefix+h", "alt+h"]
+focus_pane_down = ["prefix+j", "alt+j"]
+focus_pane_up = ["prefix+k", "alt+k"]
+focus_pane_right = ["prefix+l", "alt+l"]
+previous_tab = ["prefix+p", "alt+shift+["]
+next_tab = ["prefix+n", "alt+shift+]"]
+close_pane = ["prefix+x", "alt+w"]
+
+[ui]
+status_indicators = "symbols"
+
+[ui.toast]
+delivery = "herdr"
+
+[theme]
+name = "catppuccin"
+auto_switch = false

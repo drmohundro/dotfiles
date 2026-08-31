@@ -1,10 +1,11 @@
 nerdfont: true
 worktree_dir: ~/dev/worktrees/
+agent: pi
 
 panes:
   - command: <agent>
     focus: true
-  - split: horizontal
+  - split: vertical
 
 agents:
   claude-yolo: "claude --dangerously-skip-permissions"

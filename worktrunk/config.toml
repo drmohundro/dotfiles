@@ -1,0 +1,2 @@
+# Keep Worktrunk worktrees alongside Herdr and Workmux worktrees.
+worktree-path = "~/dev/worktrees/{{ repo }}/{{ branch | sanitize }}"
