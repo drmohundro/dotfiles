@@ -7,10 +7,14 @@ local battery = sbar.add("item", "widgets.battery", {
   icon = {
     font = {
       style = settings.font.style_map["Regular"],
-      size = 19.0,
-    }
+      size = 15.0,
+    },
+    padding_left = 10,
   },
-  label = { font = { family = settings.font.numbers }, drawing = false },
+  label = {
+    font = { style = settings.font.style_map["Semibold"], size = 12.0 },
+    padding_right = 10,
+  },
   update_freq = 180,
   popup = { align = "center" }
 })
@@ -41,11 +45,12 @@ battery:subscribe({"routine", "power_source_change", "system_woke"}, function()
       label = charge .. "%"
     end
 
-    local color = colors.green
+    local color = colors.white
     local charging, _, _ = batt_info:find("AC Power")
 
     if charging then
       icon = icons.battery.charging
+      color = colors.accent
     else
       if found and charge > 80 then
         icon = icons.battery._100
@@ -62,27 +67,14 @@ battery:subscribe({"routine", "power_source_change", "system_woke"}, function()
       end
     end
 
-    local lead = ""
-    if found and charge < 10 then
-      lead = "0"
-    end
-
     battery:set({
       icon = {
         string = icon,
         color = color
       },
-      label = { string = lead .. label },
+      label = { string = label },
     })
   end)
-end)
-
-battery:subscribe("mouse.entered", function(_)
-  battery:set({ label = { drawing = true } })
-end)
-
-battery:subscribe("mouse.exited", function(_)
-  battery:set({ label = { drawing = false } })
 end)
 
 battery:subscribe("mouse.clicked", function(env)

@@ -34,7 +34,7 @@ local weather = sbar.add("item", "weather", {
   scroll_texts = false,
   update_freq = 900,
   icon = {
-    color = colors.blue,
+    color = colors.accent,
     font = { size = 14.0 },
     padding_left = 8,
     padding_right = 4,
@@ -48,13 +48,7 @@ local weather = sbar.add("item", "weather", {
     },
     padding_right = 8,
   },
-  background = {
-    color = colors.bg1,
-    border_color = colors.black,
-    border_width = 1,
-    corner_radius = 9,
-    height = 26,
-  },
+  background = { color = colors.bg1 },
   padding_left = 1,
   padding_right = 1,
   popup = { align = "right" },

@@ -4,12 +4,13 @@ local settings = require("settings")
 
 -- Execute the event provider binary which provides the event "network_update"
 -- for the network interface "en0", which is fired every 2.0 seconds.
-sbar.exec("killall network_load >/dev/null; $CONFIG_DIR/helpers/event_providers/network_load/bin/network_load en0 network_update 2.0")
+sbar.exec("killall network_load >/dev/null")
 
 local popup_width = 250
 
 local wifi_up = sbar.add("item", "widgets.wifi1", {
   position = "right",
+  drawing = false,
   padding_left = -5,
   width = 0,
   icon = {
@@ -34,6 +35,7 @@ local wifi_up = sbar.add("item", "widgets.wifi1", {
 
 local wifi_down = sbar.add("item", "widgets.wifi2", {
   position = "right",
+  drawing = false,
   padding_left = -5,
   icon = {
     padding_right = 0,
@@ -57,6 +59,7 @@ local wifi_down = sbar.add("item", "widgets.wifi2", {
 
 local wifi = sbar.add("item", "widgets.wifi.padding", {
   position = "right",
+  icon = { padding_left = 10, padding_right = 10 },
   label = { drawing = false },
 })
 

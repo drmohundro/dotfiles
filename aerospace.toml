@@ -1,140 +1,51 @@
-# --- Global Settings ---
+# AeroSpace is used only for its virtual workspaces: every window floats, there are
+# no app rules, and a window opens in whichever workspace is focused.
+config-version = 2
+
 start-at-login = true
+auto-reload-config = true
 after-startup-command = ['exec-and-forget ~/.config/borders/bordersrc']
 exec-on-workspace-change = ['/bin/bash', '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
+  '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE']
 
-[gaps]
-inner.horizontal = 8
-inner.vertical   = 8
-outer.left       = 8
-outer.bottom     = 8
-outer.right      = 8
-outer.top        = [{ monitor."Built-in" = 8 }, 40]
+[[on-window-detected]]
+if = 'true'
+run = 'layout floating'
 
-# --- Monitor Assignment ---
-# 'built-in' = MacBook screen, 'main' = primary external (set in macOS Display prefs)
+# Fixed screens so each shortcut always lands in the same place. With one screen
+# connected, every workspace falls back to it.
 [workspace-to-monitor-force-assignment]
-1 = 'main'      # coding
-2 = 'main'      # browser
-3 = 'built-in'  # slack
-4 = 'built-in'  # email
-5 = 'built-in'  # music
-6 = 'built-in'  # misc
-7 = 'main'      # gaming
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+6 = 'main'
+7 = ['built-in', 'main']
+8 = ['built-in', 'main']
+9 = ['built-in', 'main']
 
-# --- App Rules ---
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCodeInsiders'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.rider'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.datagrip'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.intellij'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.webstorm'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.pycharm'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.goland'
-if.during-aerospace-startup = true
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.valvesoftware.steam'
-run = 'move-node-to-workspace 7'
-
-[[on-window-detected]]
-if.app-id = 'com.codeweavers.CrossOver'
-run = 'move-node-to-workspace 7'
-
-[[on-window-detected]]
-if.app-id = 'com.1password.1password'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.culturedcode.ThingsMac'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Music'
-run = ['layout floating', 'move-node-to-workspace 5']
-
-[[on-window-detected]]
-if.app-id = 'com.apple.iCal'
-run = ['layout floating', 'move-node-to-workspace 4']
-
-# --- Keybindings ---
 [mode.main.binding]
-alt-slash = 'layout tiles horizontal vertical'
-alt-comma = 'layout accordion horizontal vertical'
+# Switch workspace
+ctrl-alt-1 = 'workspace 1'
+ctrl-alt-2 = 'workspace 2'
+ctrl-alt-3 = 'workspace 3'
+ctrl-alt-4 = 'workspace 4'
+ctrl-alt-5 = 'workspace 5'
+ctrl-alt-6 = 'workspace 6'
+ctrl-alt-7 = 'workspace 7'
+ctrl-alt-8 = 'workspace 8'
+ctrl-alt-9 = 'workspace 9'
 
-# Focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+# Move the focused window to a workspace and follow it
+ctrl-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+ctrl-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+ctrl-alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+ctrl-alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+ctrl-alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+ctrl-alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+ctrl-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+ctrl-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+ctrl-alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 
-# Move
-alt-shift-h = 'move left'
-alt-shift-j = 'move down'
-alt-shift-k = 'move up'
-alt-shift-l = 'move right'
-
-# Workspaces
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-
-# Move window to workspace and follow
-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
-alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
-alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
-alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
-alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
-
-# Join
-alt-ctrl-h = 'join-with left'
-alt-ctrl-j = 'join-with down'
-alt-ctrl-k = 'join-with up'
-alt-ctrl-l = 'join-with right'
-
-# Resize
-alt-shift-r = 'reload-config'
-alt-minus   = 'resize smart -50'
-alt-equal   = 'resize smart +50'
+ctrl-alt-shift-r = 'reload-config'
