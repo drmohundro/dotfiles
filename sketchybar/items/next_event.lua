@@ -8,14 +8,14 @@ local next_event = sbar.add("item", "next_event", {
   update_freq = 60,
   icon = {
     string = "􀉉",  -- calendar SF symbol
-    color = colors.yellow,
+    color = colors.accent,
     font = { size = 12.0 },
     padding_left = 8,
     padding_right = 4,
   },
   label = {
     string = "...",
-    color = colors.yellow,
+    color = colors.white,
     font = {
       family = settings.font.text,
       style = settings.font.style_map["Semibold"],
@@ -24,13 +24,7 @@ local next_event = sbar.add("item", "next_event", {
     padding_right = 8,
     max_chars = 30,
   },
-  background = {
-    color = colors.bg1,
-    border_color = colors.black,
-    border_width = 1,
-    corner_radius = 9,
-    height = 26,
-  },
+  background = { color = colors.bg1 },
   padding_left = 1,
   padding_right = 1,
   click_script = "open -a Calendar",

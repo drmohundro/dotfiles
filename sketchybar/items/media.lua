@@ -1,111 +1,155 @@
+-- Now playing (via nowplaying-cli)
+--   wide displays:  centered chip  [ Title · Artist  ◀ (▶) ▶ ]
+--   notch display:  compact note icon on the right with a popup (call add_compact
+--                   after the other right-side items so it sits leftmost)
+
 local icons = require("icons")
 local colors = require("colors")
+local settings = require("settings")
+local displays = require("helpers.displays")
 
-local media_cover = sbar.add("item", "media.cover", {
-  position = "right",
-  background = {
-    image = {
-      string = "media.artwork",
-      scale = 0.85,
+local PLAY, PAUSE = "\u{100284}", "\u{100286}"
+
+local M = {}
+
+local wide = {}
+local compact = nil
+local compact_items = {}
+
+local function control(name, position, icon, cmd, extra)
+  local item = sbar.add("item", name, {
+    position = position,
+    drawing = false,
+    padding_left = 0,
+    padding_right = 0,
+    icon = {
+      string = icon,
+      color = colors.white,
+      font = { size = 11.0 },
+      padding_left = 6,
+      padding_right = 6,
     },
-    color = colors.transparent,
-  },
-  label = { drawing = false },
-  icon = { drawing = false },
-  drawing = false,
-  update_freq = 5,
-  updates = true,
-  popup = {
-    align = "center",
-    horizontal = true,
-  }
-})
+    label = { drawing = false },
+    click_script = "nowplaying-cli " .. cmd,
+  })
+  if extra then item:set(extra) end
+  return item
+end
 
-local media_artist = sbar.add("item", "media.artist", {
-  position = "right",
-  drawing = false,
-  padding_left = 3,
-  padding_right = 0,
-  width = 0,
-  icon = { drawing = false },
-  label = {
-    width = 0,
-    font = { size = 9 },
-    color = colors.with_alpha(colors.white, 0.6),
-    max_chars = 18,
-    y_offset = 6,
-  },
-})
+-- Wide (center) chip ------------------------------------------------------------
 
-local media_title = sbar.add("item", "media.title", {
-  position = "right",
+wide.label = sbar.add("item", "media.label", {
+  position = "center",
   drawing = false,
-  padding_left = 3,
+  padding_left = 4,
   padding_right = 0,
   icon = { drawing = false },
   label = {
-    font = { size = 11 },
-    width = 0,
-    max_chars = 16,
-    y_offset = -5,
+    color = colors.white,
+    max_chars = 40,
+    font = { style = settings.font.style_map["Semibold"], size = 12.0 },
+    padding_left = 8,
+    padding_right = 6,
   },
 })
 
-sbar.add("item", {
-  position = "popup." .. media_cover.name,
-  icon = { string = icons.media.back },
-  label = { drawing = false },
-  click_script = "nowplaying-cli previous",
+wide.back = control("media.back", "center", icons.media.back, "previous")
+wide.play = control("media.play", "center", PLAY, "togglePlayPause", {
+  icon = { color = colors.on_accent, padding_left = 8, padding_right = 8 },
+  background = { color = colors.accent, height = 20, corner_radius = 10 },
 })
-sbar.add("item", {
-  position = "popup." .. media_cover.name,
-  icon = { string = icons.media.play_pause },
-  label = { drawing = false },
-  click_script = "nowplaying-cli togglePlayPause",
+wide.forward = control("media.forward", "center", icons.media.forward, "next", {
+  padding_right = 4,
 })
-sbar.add("item", {
-  position = "popup." .. media_cover.name,
-  icon = { string = icons.media.forward },
-  label = { drawing = false },
-  click_script = "nowplaying-cli next",
+
+local bracket = sbar.add("bracket", "media.bracket", {
+  wide.label.name, wide.back.name, wide.play.name, wide.forward.name,
+}, {
+  background = { color = colors.bg1 },
 })
+sbar.add("item", "media.gap", { position = "center", width = settings.group_paddings })
+
+displays.register("wide", wide.label, wide.back, wide.play, wide.forward, bracket)
+
+-- State -------------------------------------------------------------------------
+
+local function render(title, artist, playing)
+  local has_track = title ~= nil and title ~= ""
+  local text = has_track and title or ""
+  if has_track and artist and artist ~= "" then text = title .. "  ·  " .. artist end
+
+  for _, item in pairs(wide) do item:set({ drawing = has_track }) end
+  if has_track then
+    wide.label:set({ label = { string = text } })
+    wide.play:set({ icon = { string = playing and PAUSE or PLAY } })
+  end
+
+  if compact then
+    compact:set({
+      drawing = has_track,
+      icon = { color = playing and colors.accent or colors.grey },
+    })
+    if not has_track then compact:set({ popup = { drawing = false } }) end
+    compact_items.title:set({ label = { string = text } })
+    compact_items.play:set({ icon = { string = playing and PAUSE or PLAY } })
+  end
+end
 
 local function update()
   sbar.exec("nowplaying-cli get title artist playbackRate", function(result)
     local lines = {}
-    for line in result:gmatch("([^\n]*)\n") do
-      table.insert(lines, line)
-    end
-
-    local title = lines[1]
-    local artist = lines[2]
-    local rate = lines[3]
-    local playing = tonumber(rate) == 1 and title and title ~= ""
-
-    if playing then
-      media_artist:set({ drawing = true, label = { string = artist or "", width = "dynamic" } })
-      media_title:set({ drawing = true, label = { string = title, width = "dynamic" } })
-      media_cover:set({ drawing = true })
-    else
-      media_artist:set({ drawing = false })
-      media_title:set({ drawing = false })
-      media_cover:set({ drawing = false, popup = { drawing = false } })
-    end
+    for line in tostring(result):gmatch("([^\n]*)\n") do table.insert(lines, line) end
+    local title, artist, rate = lines[1], lines[2], tonumber(lines[3])
+    if title == "null" then title = nil end
+    if artist == "null" then artist = nil end
+    render(title, artist, rate == 1)
   end)
 end
 
-media_cover:subscribe({"routine", "system_woke"}, function(_)
-  update()
-end)
+local watcher = sbar.add("item", "media.watcher", { drawing = false, updates = true, update_freq = 5 })
+watcher:subscribe({ "routine", "forced", "system_woke" }, update)
 
-local function toggle_popup()
-  media_cover:set({ popup = { drawing = "toggle" } })
+-- Compact (notch display) -------------------------------------------------------
+
+function M.add_compact()
+  compact = sbar.add("item", "media.compact", {
+    position = "right",
+    drawing = false,
+    icon = {
+      string = ":music:",
+      color = colors.grey,
+      font = "sketchybar-app-font:Regular:14.0",
+      padding_left = 10,
+      padding_right = 10,
+    },
+    label = { drawing = false },
+    background = { color = colors.bg1 },
+    popup = { align = "center", horizontal = true },
+  })
+  local popup = "popup." .. compact.name
+  compact_items.title = sbar.add("item", "media.compact.title", {
+    position = popup,
+    icon = { drawing = false },
+    label = { max_chars = 40, padding_left = 10, padding_right = 6 },
+  })
+  control("media.compact.back", popup, icons.media.back, "previous", { drawing = true })
+  compact_items.play = control("media.compact.play", popup, PLAY, "togglePlayPause", {
+    drawing = true,
+    icon = { color = colors.on_accent, padding_left = 8, padding_right = 8 },
+    background = { color = colors.accent, height = 20, corner_radius = 10 },
+  })
+  control("media.compact.forward", popup, icons.media.forward, "next", { drawing = true, padding_right = 6 })
+  sbar.add("item", "media.compact.gap", { position = "right", width = settings.group_paddings })
+
+  compact:subscribe("mouse.clicked", function()
+    compact:set({ popup = { drawing = "toggle" } })
+  end)
+  compact:subscribe("mouse.exited.global", function()
+    compact:set({ popup = { drawing = false } })
+  end)
+
+  displays.register("notch", compact)
+  update()
 end
 
-media_cover:subscribe("mouse.clicked", toggle_popup)
-media_title:subscribe("mouse.clicked", toggle_popup)
-media_artist:subscribe("mouse.clicked", toggle_popup)
-
-media_title:subscribe("mouse.exited.global", function(_)
-  media_cover:set({ popup = { drawing = false } })
-end)
+return M

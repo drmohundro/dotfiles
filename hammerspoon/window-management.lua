@@ -127,16 +127,28 @@ module.centerOnScreen = function()
   this.window:centerOnScreen(this.screen)
 end
 
+-- AeroSpace owns which screen a window's workspace is on and reverts direct moves,
+-- so screen changes go through it. Falls back to a plain move if it isn't running.
+local AEROSPACE = "/opt/homebrew/bin/aerospace"
+local function moveToMonitor(window, args, fallback)
+  local _, ok = hs.execute(AEROSPACE .. " move-node-to-monitor --window-id " .. window:id() .. " " .. args)
+  if ok then
+    window:focus()
+  elseif fallback then
+    fallback()
+  end
+end
+
 module.throwLeft = function()
   local this = windowMeta.new()
   if not this then return end
-  this.window:moveToScreen(this.screen:toWest())
+  moveToMonitor(this.window, "left", function() this.window:moveToScreen(this.screen:toWest()) end)
 end
 
 module.throwRight = function()
   local this = windowMeta.new()
   if not this then return end
-  this.window:moveToScreen(this.screen:toEast())
+  moveToMonitor(this.window, "right", function() this.window:moveToScreen(this.screen:toEast()) end)
 end
 
 module.leftHalf = function()
@@ -161,7 +173,7 @@ module.cycleLeft = function()
   if this.windowGrid.x == 0 then
     local currentIndex = hs.fnutils.indexOf(screenArr, this.screen)
     local previousScreen = screenArr[(currentIndex - indexDiff - 1) % #hs.screen.allScreens() + indexDiff]
-    this.window:moveToScreen(previousScreen)
+    moveToMonitor(this.window, "--wrap-around prev", function() this.window:moveToScreen(previousScreen) end)
     module.rightHalf()
   else
     module.leftHalf()
@@ -178,7 +190,7 @@ module.cycleRight = function()
   else
     local currentIndex = hs.fnutils.indexOf(screenArr, this.screen)
     local nextScreen = screenArr[(currentIndex - indexDiff + 1) % #hs.screen.allScreens() + indexDiff]
-    this.window:moveToScreen(nextScreen)
+    moveToMonitor(this.window, "--wrap-around next", function() this.window:moveToScreen(nextScreen) end)
     module.leftHalf()
   end
 end
