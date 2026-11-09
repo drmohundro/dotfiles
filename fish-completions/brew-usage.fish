@@ -1,0 +1,11 @@
+complete -c brew-usage -f
+complete -c brew-usage -s a -l all -d 'Include dependency-only formulae'
+complete -c brew-usage -s l -l leaves -d 'Only packages nothing depends on'
+complete -c brew-usage -s u -l unused -d 'Only packages with no recorded use'
+complete -c brew-usage -s k -l kind -x -a 'formula cask' -d 'Only formulae or casks'
+complete -c brew-usage -s s -l sort -x -a 'name used uses installed upstream' -d 'Sort column'
+complete -c brew-usage -s r -l reverse -d 'Reverse the sort'
+complete -c brew-usage -s g -l github -d 'Fetch upstream last push via gh'
+complete -c brew-usage -s w -l wide -d 'Show repo/homepage column'
+complete -c brew-usage -l json -d 'Print JSON'
+complete -c brew-usage -s h -l help -d 'Show help'
