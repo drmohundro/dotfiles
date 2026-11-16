@@ -9,13 +9,15 @@ elif [ -d /usr/local/bin ]; then
   PATH=/usr/local/sbin:$PATH
 fi
 
-if [ -d /usr/local/share/dotnet ]; then
-  PATH=$PATH:/usr/local/share/dotnet
-fi
-
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
-
 eval "$(mise activate zsh)"
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+export PATH="/Users/david/bin:$PATH"
+
+# Hermes Agent command
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac

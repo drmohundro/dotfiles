@@ -27,7 +27,6 @@ if test -e /opt/homebrew/bin
 end
 
 fish_add_path ~/.dotnet/tools
-fish_add_path /usr/local/share/dotnet
 fish_add_path ~/.local/bin
 fish_add_path /usr/local/opt/postgresql@15/bin
 fish_add_path /Applications/Obsidian.app/Contents/MacOS
